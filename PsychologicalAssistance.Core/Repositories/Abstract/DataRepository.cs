@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Abstract
 {
-    public abstract class DataRepository<EntityType> : IDataRepository<EntityType> where EntityType : BaseEntity
+    public class DataRepository<EntityType> : IDataRepository<EntityType> where EntityType : BaseEntity
     {
         protected ApplicationDbContext DbContext { get; set; }
 
         protected DbSet<EntityType> DbSet { get; set; }
 
-        protected DataRepository(ApplicationDbContext dbContext)
+        public DataRepository(ApplicationDbContext dbContext)
         {
             DbContext = dbContext;
             DbSet = DbContext.Set<EntityType>();

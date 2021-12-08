@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Abstract
 {
-    public abstract class BaseService<EntityType> where EntityType : BaseEntity
+    public class BaseService<EntityType> where EntityType : BaseEntity
     {
         protected IDataRepository<EntityType> DataRepository { get; set; }
 
-        protected BaseService(IDataRepository<EntityType> dataRepository)
+        public BaseService(IDataRepository<EntityType> dataRepository)
         {
             DataRepository = dataRepository;
         }
@@ -23,7 +23,7 @@ namespace PsychologicalAssistance.Services.Abstract
         public async Task<EntityType> GetItemByIdAsync(int id)
             => await DataRepository.GetItemByIdAsync(id);
 
-        public async Task<IEnumerable<EntityType>> GetListOfItemsAsync()
+        public async Task<IEnumerable<EntityType>> GetAllItemsAsync()
             => await DataRepository.GetAllItemsAsync();
 
         public async Task UpdateAsync(EntityType item)
