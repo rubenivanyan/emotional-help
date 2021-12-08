@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using PsychologicalAssistance.Core.Data.Enitities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 namespace PsychologicalAssistance.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -17,7 +16,7 @@ namespace PsychologicalAssistance.Web.Controllers
             _userService = userService;
         }
 
-        [HttpGet("/api/getallusers")]
+        [HttpGet]
         public async Task<ActionResult<string>> GetAllUser()
         {
             var users = await _userService.GetAllItemsAsync();
@@ -26,11 +25,10 @@ namespace PsychologicalAssistance.Web.Controllers
                 return NotFound();
             }
 
-            var json = JsonSerializer.Serialize(users);
-            return json;
+            return users is not null ? Ok(users) : NotFound();
         }
 
-        [HttpGet("/api/getuserbyid/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<string>> GetUserById(int id)
         {
             var user = await _userService.GetItemByIdAsync(id);
@@ -39,49 +37,41 @@ namespace PsychologicalAssistance.Web.Controllers
                 return NotFound();
             }
 
-            var json = JsonSerializer.Serialize(user);
-            return json;
+            return user is not null ? Ok(user) : NotFound();
         }
 
-        [HttpPost("/api/createuser/{json}")]
-        public async Task<ActionResult<User>> CreateUser(string json)
+        [HttpPost]
+        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
         {
-            if (json == null)
+            if (user is null)
             {
                 return NotFound();
             }
 
             //TODO Check if object already exists
 
-            var user = JsonSerializer.Deserialize<User>(json);
             await _userService.CreateAsync(user);
             return Ok();
         }
 
-        [HttpPut("/api/updateuser/{json}")]
-        public async Task<ActionResult<User>> UpdateUser(string json)
+        [HttpPut]
+        public async Task<ActionResult<User>> UpdateUser([FromBody] User user)
         {
-            if (json == null)
+            if (user is null)
             {
                 return NotFound();
             }
 
-            var user = JsonSerializer.Deserialize<User>(json);
             await _userService.UpdateAsync(user);
-            return Ok();
+            return NoContent();
         }
 
-        [HttpDelete("/api/deleteuser/{json}")]
-        public async Task<ActionResult<User>> DeleteUser(string json)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
         {
-            if (json == null)
-            {
-                return NotFound();
-            }
 
-            var user = JsonSerializer.Deserialize<User>(json);
-            await _userService.DeleteAsync(user);
-            return Ok();
+            //await _userService.DeleteAsync(id);
+            return NoContent();
         }
     }
 }
