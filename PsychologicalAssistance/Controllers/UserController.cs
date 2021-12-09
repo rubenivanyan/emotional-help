@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PsychologicalAssistance.Core.Data.Enitities;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
 
@@ -17,9 +17,9 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<string>> GetAllUser()
+        public async Task<ActionResult<UserDto>> GetAllUser()
         {
-            var users = await _userService.GetAllItemsAsync();
+            var users = await _userService.GetAllUsersAsync();
             if (users == null)
             {
                 return NotFound();
@@ -29,9 +29,9 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<string>> GetUserById(int id)
+        public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
-            var user = await _userService.GetItemByIdAsync(id);
+            var user = await _userService.GetUserByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
+        public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto user)
         {
             if (user is null)
             {
@@ -50,27 +50,26 @@ namespace PsychologicalAssistance.Web.Controllers
 
             //TODO Check if object already exists
 
-            await _userService.CreateAsync(user);
+            await _userService.CreateUserAsync(user);
             return Ok();
         }
 
         [HttpPut]
-        public async Task<ActionResult<User>> UpdateUser([FromBody] User user)
+        public async Task<ActionResult<UserDto>> UpdateUser([FromBody] UserDto user)
         {
             if (user is null)
             {
                 return NotFound();
             }
 
-            await _userService.UpdateAsync(user);
+            await _userService.UpdateUserAsync(user);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
-
-            //await _userService.DeleteAsync(id);
+            await _userService.DeleteUserAsync(id);
             return NoContent();
         }
     }
