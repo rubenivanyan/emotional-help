@@ -1,17 +1,17 @@
 import path from 'path';
-import { Configuration, DefinePlugin } from 'webpack';
+import {Configuration, DefinePlugin} from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const webpackConfig = (): Configuration => ({
   entry: `./src/index.tsx`,
-  ...(process.env.production || !process.env.development ?
-    {} :
-    { devtool: `eval-source-map` }),
+  ...(process.env.production || !process.env.development
+    ? {}
+    : {devtool: `eval-source-map`}),
   resolve: {
-    extensions: [`.ts`, `.tsx`, `.js`],
-    plugins: [new TsconfigPathsPlugin({ configFile: `./tsconfig.json` })],
+    extensions: [`.ts`, `.tsx`, `.js`, `.scss`, `.css`],
+    plugins: [new TsconfigPathsPlugin({configFile: `./tsconfig.json`})],
   },
   output: {
     path: path.join(__dirname, `/build`),
@@ -29,7 +29,16 @@ const webpackConfig = (): Configuration => ({
       },
       {
         test: /\.s?css$/,
-        use: [`style-loader`, `css-loader`],
+        use: [
+          `style-loader`,
+          `css-loader`,
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
       },
     ],
   },
