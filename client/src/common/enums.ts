@@ -1,3 +1,3 @@
-export enum SOME_ENUM {
-  TEMP = 'temp'
-};
+// export enum SOME_ENUM {
+//   TEMP = `temp`
+// };

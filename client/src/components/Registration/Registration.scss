@@ -1,0 +1,53 @@
+.reg-buttons-container {
+  position: absolute;
+  right: 30px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sign-in {
+  padding: 10px 10px;
+  height: 100%;
+  width: 90px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  &:hover {
+    color: #80d0c7;
+    background-color: white;
+    transition: background-color 300ms linear;
+  }
+}
+
+.sign-up {
+  padding: 10px 10px;
+  height: 100%;
+  width: 100px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(91, 189, 45);
+  &:hover {
+    color: #80d0c7;
+    background-color: white;
+    transition: background-color 300ms linear;
+  }
+}
