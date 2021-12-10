@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211210160734_Added Test table")]
+    partial class AddedTesttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-                
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Enitities.Application", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Applications");
-                });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Enitities.Question", b =>
                 {
@@ -40,7 +27,7 @@ namespace PsychologicalAssistance.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-                        
+
                     b.Property<int>("Category")
                         .HasColumnType("int");
 
@@ -76,13 +63,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
-                    
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Enitities.User", b =>
