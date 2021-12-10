@@ -41,7 +41,11 @@ namespace PsychologicalAssistance.Web
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<IUserService, UserService>();
             #endregion
-            
+
+            #region UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            #endregion
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

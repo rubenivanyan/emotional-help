@@ -29,23 +29,17 @@ namespace PsychologicalAssistance.Core.Repositories.Abstract
         public async Task CreateAsync(EntityType item)
         {
             item.Id = 0;
-            DbSet.Add(item);
-            await SaveAsync();
+            await DbSet.AddAsync(item);
         }
 
         public async Task DeleteAsync(EntityType item)
         {
-            DbSet.Remove(item);
-            await SaveAsync();
+             await Task.Run(() => DbSet.Remove(item));
         }
 
         public async Task UpdateAsync(EntityType item)
         {
-            DbSet.Update(item);
-            await SaveAsync();
+            await Task.Run(() => DbSet.Update(item));
         }
-
-        public async Task SaveAsync()
-            => await DbContext.SaveChangesAsync();
     }
 }
