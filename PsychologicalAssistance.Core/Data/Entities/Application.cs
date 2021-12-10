@@ -1,4 +1,4 @@
-﻿namespace PsychologicalAssistance.Core.Data.Enitities
+﻿namespace PsychologicalAssistance.Core.Data.Entities
 {
     public class Application : BaseEntity
     {

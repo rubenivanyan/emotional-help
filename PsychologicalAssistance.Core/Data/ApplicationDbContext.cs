@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PsychologicalAssistance.Core.Data.Enitities;
+using PsychologicalAssistance.Core.Data.Entities;
 
 namespace PsychologicalAssistance.Core.Data
 {

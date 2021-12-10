@@ -1,9 +1,6 @@
 ﻿using PsychologicalAssistance.Core.Data.DTOs;
-using PsychologicalAssistance.Core.Data.Enitities;
-using System;
+using PsychologicalAssistance.Core.Data.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Interfaces

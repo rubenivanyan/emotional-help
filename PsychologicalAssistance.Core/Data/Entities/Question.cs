@@ -1,7 +1,7 @@
 ﻿using PsychologicalAssistance.Core.Enums;
 
 
-namespace PsychologicalAssistance.Core.Data.Enitities
+namespace PsychologicalAssistance.Core.Data.Entities
 {
     public class Question : BaseEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PsychologicalAssistance.Core.Data;
-using PsychologicalAssistance.Core.Data.Enitities;
+using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;

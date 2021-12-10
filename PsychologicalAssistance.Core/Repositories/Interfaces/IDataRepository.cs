@@ -1,4 +1,4 @@
-﻿using PsychologicalAssistance.Core.Data.Enitities;
+﻿using PsychologicalAssistance.Core.Data.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

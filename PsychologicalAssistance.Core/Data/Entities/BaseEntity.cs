@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PsychologicalAssistance.Core.Data.Enitities
+namespace PsychologicalAssistance.Core.Data.Entities
 {
     public abstract class BaseEntity
     {

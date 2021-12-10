@@ -1,4 +1,4 @@
-﻿using PsychologicalAssistance.Core.Data.Enitities;
+﻿using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Interfaces;
 using System;

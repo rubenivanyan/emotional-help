@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
-using PsychologicalAssistance.Core.Data.Enitities;
+using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
 
