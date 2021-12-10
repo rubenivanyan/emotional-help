@@ -36,12 +36,14 @@ namespace PsychologicalAssistance.Web
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
             #endregion
 
             #region Services
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITestService, TestService>();
+            services.AddScoped<IApplicationService, ApplicationService>();
             #endregion
 
             #region UnitOfWork

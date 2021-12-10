@@ -18,6 +18,21 @@ namespace PsychologicalAssistance.Core.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
+                
+            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Enitities.Application", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Applications");
+                });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Enitities.Question", b =>
                 {
@@ -25,7 +40,7 @@ namespace PsychologicalAssistance.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
+                        
                     b.Property<int>("Category")
                         .HasColumnType("int");
 
@@ -61,6 +76,13 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
+                    
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Enitities.User", b =>
