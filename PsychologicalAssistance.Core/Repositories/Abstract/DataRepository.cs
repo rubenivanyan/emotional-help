@@ -23,8 +23,8 @@ namespace PsychologicalAssistance.Core.Repositories.Abstract
             => await DbSet.ToListAsync<EntityType>();
 
 
-        public async Task<EntityType> GetItemByIdAsync(int id)
-            => await DbSet.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<EntityType> GetItemByIdAsync(object id)
+            => await DbSet.FindAsync(id);
 
         public async Task CreateAsync(EntityType item)
         {

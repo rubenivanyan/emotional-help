@@ -26,16 +26,28 @@ namespace PsychologicalAssistance.Services.Abstract
         {
             var item = await DataRepository.GetItemByIdAsync(id);
             if (item == null)
-                throw new ArgumentException("Item not found"); //TODO Try to create ExceptionHandlingMiddleware Later and own exceptions
+                throw new ArgumentNullException(nameof(EntityType), "Item is not found"); //TODO Try to create ExceptionHandlingMiddleware Later and own exceptions
 
             await DataRepository.DeleteAsync(item);
         }
 
         public async Task<EntityType> GetItemByIdAsync(int id)
-            => await DataRepository.GetItemByIdAsync(id);
+        {
+            var item = await DataRepository.GetItemByIdAsync(id);
+            if (item is null)
+                throw new ArgumentNullException(nameof(item), "Item is not found");
+
+            return item;
+        }
 
         public async Task<IEnumerable<EntityType>> GetAllItemsAsync()
-            => await DataRepository.GetAllItemsAsync();
+        {
+            var items = await DataRepository.GetAllItemsAsync();
+            if (items is null)
+                throw new ArgumentNullException(nameof(items), "Items are not found");
+
+            return items;
+        }
 
         public async Task UpdateAsync(EntityType item)
             => await DataRepository.UpdateAsync(item);

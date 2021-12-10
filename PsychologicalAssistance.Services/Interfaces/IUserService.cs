@@ -1,15 +1,13 @@
 ﻿using PsychologicalAssistance.Core.Data.DTOs;
+using PsychologicalAssistance.Core.Data.Enitities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Interfaces
 {
-    public interface IUserService
+    public interface IUserService : IBaseService<User>
     {
         //TODO Add unique methods' signatures for service
-        Task CreateUserAsync(UserDto userDto);
-        Task UpdateUserAsync(UserDto userDto);
-        Task DeleteUserAsync(int id);
         Task<UserDto> GetUserByIdAsync(int id);
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
     }

@@ -7,10 +7,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Repositories.Abstract;
+using PsychologicalAssistance.Core.Repositories.Implementation;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Implementation;
 using PsychologicalAssistance.Services.Interfaces;
+using System;
 
 namespace PsychologicalAssistance.Web
 {
@@ -28,9 +30,18 @@ namespace PsychologicalAssistance.Web
         {
             services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient(typeof(IDataRepository<>), typeof(DataRepository<>));
-            services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
-            services.AddTransient<IUserService, UserService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            #region Repositories
+            services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
+            #endregion
+            
+            #region Services
+            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+            services.AddScoped<IUserService, UserService>();
+            #endregion
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
