@@ -1,9 +1,9 @@
-﻿using PsychologicalAssistance.Core.Data;
+﻿using AutoMapper;
+using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Enitities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,33 +11,39 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 {
     public class ApplicationRepository : DataRepository<Application>, IApplicationRepository
     {
-        public ApplicationRepository(ApplicationDbContext dbContext) : base (dbContext) { }
+        private readonly IMapper _mapper;
 
-        public Task<IEnumerable<ApplicationDto>> GetAllApplicationsDtoAsync()
+        public ApplicationRepository(ApplicationDbContext dbContext, IMapper mapper) : base (dbContext)
         {
-            return null;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<ApplicationDto>> GetAllApplicationsDtoAsync()
+        {
+            var applications = await GetAllItemsAsync();
+            if (applications == null)
+            {
+                return null;
+            }
+
+            var applicationsDto = new List<ApplicationDto>();
+            foreach (var application in applications)
+            {
+                applicationsDto.Add(_mapper.Map<ApplicationDto>(application));
+            }
+
+            return applicationsDto;
         }
 
         public async Task<ApplicationDto> GetApplicationByIdDtoAsync(int id)
         {
-            //TODO After adding application into db finish this method
-            //var application = await Task.Run(() => DbSet.Select(application => new ApplicationDto()) as ApplicationDto);
-
-            //For testing
-            var applicationDto = new ApplicationDto
+            var application = await GetItemByIdAsync(id);
+            if (application == null)
             {
-                Id = 1,
-                FullName = "Name Surname",
-                MailAddress = "some@address.com",
-                Date = new DateTime(2021, 12, 10),
-                TestTitle = "Test Title",
-                QuestionsAndAnswers = new Dictionary<string, string> 
-                {
-                    {"Question 1", "Answer 1" },
-                    {"Question 2", "Answer 2" }
-                },
-                IsArchived = true
-            };
+                return null;
+            }
+
+            var applicationDto = _mapper.Map<ApplicationDto>(application);
             return applicationDto;
         }
     }

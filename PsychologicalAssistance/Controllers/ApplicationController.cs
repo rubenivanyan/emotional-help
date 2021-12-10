@@ -23,12 +23,12 @@ namespace PsychologicalAssistance.Web.Controllers
             _mapper = mapper;
         }
 
-        /*[HttpGet]
+        [HttpGet]
         public async Task<ActionResult> GetAllApplications()
         {
             var applications = await _applicationService.GetAllApplicationsAsync();
             return applications is not null ? Ok(applications) : NotFound();
-        }*/
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetApplicationById(int id)
@@ -37,27 +37,27 @@ namespace PsychologicalAssistance.Web.Controllers
             return application is not null ? Ok(application) : NotFound();
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public async Task<ActionResult> CreateApplication([FromBody] ApplicationDto applicationDto)
         {
             var application = _mapper.Map<Application>(applicationDto);
             await _applicationService.CreateAsync(application);
             return Ok();
-        }*/
+        }
 
-        /*[HttpPut]
+        [HttpPut]
         public async Task<ActionResult> UpdateApplication([FromBody] ApplicationDto applicationDto)
         {
             var application = _mapper.Map<Application>(applicationDto);
             await _applicationService.UpdateAsync(application);
             return NoContent();
-        }*/
+        }
 
-        /*[HttpDelete("{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteApplication(int id)
         {
             await _applicationService.DeleteAsync(id);
             return NoContent();
-        }*/
+        }
     }
 }
