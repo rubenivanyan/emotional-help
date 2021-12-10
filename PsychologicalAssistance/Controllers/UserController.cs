@@ -37,11 +37,6 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateUser([FromBody] UserDto userDto)
         {
-            if (userDto is null)
-            {
-                return NotFound();
-            }
-
             //TODO Check if object already exists
             var user = _mapper.Map<User>(userDto);
             await _userService.CreateAsync(user);
@@ -51,11 +46,6 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser([FromBody] UserDto userDto)
         {
-            if (userDto is null)
-            {
-                return NotFound(userDto);
-            }
-
             var user = _mapper.Map<User>(userDto);
             await _userService.UpdateAsync(user);
             return NoContent();
