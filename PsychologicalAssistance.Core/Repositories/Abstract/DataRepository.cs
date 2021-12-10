@@ -28,6 +28,7 @@ namespace PsychologicalAssistance.Core.Repositories.Abstract
 
         public async Task CreateAsync(EntityType item)
         {
+            item.Id = 0;
             DbSet.Add(item);
             await SaveAsync();
         }
