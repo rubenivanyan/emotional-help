@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PsychologicalAssistance.Core.Data.Enitities
+namespace PsychologicalAssistance.Core.Data.Entities
 {
     public class User : BaseEntity
     {

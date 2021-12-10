@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace PsychologicalAssistance.Core.Data.Enitities
+namespace PsychologicalAssistance.Core.Data.Entities
 {
-    public class TestResults:BaseEntity
+    public class TestResults : BaseEntity
     {
         public DateTime ResultsDate { get; set; }
         

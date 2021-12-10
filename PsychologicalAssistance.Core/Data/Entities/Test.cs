@@ -1,7 +1,7 @@
 ﻿using PsychologicalAssistance.Core.Enums;
 using System.Collections.Generic;
 
-namespace PsychologicalAssistance.Core.Data.Enitities
+namespace PsychologicalAssistance.Core.Data.Entities
 {
     public class Test:BaseEntity
     {

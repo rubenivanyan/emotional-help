@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
-using PsychologicalAssistance.Core.Data.Enitities;
+using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Web.Controllers
