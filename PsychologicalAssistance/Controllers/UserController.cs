@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Enitities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
@@ -10,58 +12,51 @@ namespace PsychologicalAssistance.Web.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<string>> GetAllUser()
+        public async Task<ActionResult> GetAllUser()
         {
-            var users = await _userService.GetAllItemsAsync();
-            if (users == null)
-            {
-                return NotFound();
-            }
-
+            var users = await _userService.GetAllUsersAsync();
             return users is not null ? Ok(users) : NotFound();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<string>> GetUserById(int id)
+        public async Task<ActionResult> GetUserById(int id)
         {
-            var user = await _userService.GetItemByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
+            var user = await _userService.GetUserByIdAsync(id);
             return user is not null ? Ok(user) : NotFound();
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
+        public async Task<ActionResult> CreateUser([FromBody] UserDto userDto)
         {
-            if (user is null)
+            if (userDto is null)
             {
                 return NotFound();
             }
 
             //TODO Check if object already exists
-
+            var user = _mapper.Map<User>(userDto);
             await _userService.CreateAsync(user);
             return Ok();
         }
 
         [HttpPut]
-        public async Task<ActionResult<User>> UpdateUser([FromBody] User user)
+        public async Task<ActionResult> UpdateUser([FromBody] UserDto userDto)
         {
-            if (user is null)
+            if (userDto is null)
             {
-                return NotFound();
+                return NotFound(userDto);
             }
 
+            var user = _mapper.Map<User>(userDto);
             await _userService.UpdateAsync(user);
             return NoContent();
         }
@@ -69,8 +64,7 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
-
-            //await _userService.DeleteAsync(id);
+            await _userService.DeleteAsync(id);
             return NoContent();
         }
     }
