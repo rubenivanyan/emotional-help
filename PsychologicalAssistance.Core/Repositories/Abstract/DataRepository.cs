@@ -9,43 +9,37 @@ namespace PsychologicalAssistance.Core.Repositories.Abstract
 {
     public class DataRepository<EntityType> : IDataRepository<EntityType> where EntityType : BaseEntity
     {
-        protected ApplicationDbContext DbContext { get; set; }
-
-        protected DbSet<EntityType> DbSet { get; set; }
+        private readonly DbSet<EntityType> dbSet;
 
         public DataRepository(ApplicationDbContext dbContext)
         {
-            DbContext = dbContext;
-            DbSet = DbContext.Set<EntityType>();
+            dbSet = dbContext.Set<EntityType>();
         }
 
         public async Task<IEnumerable<EntityType>> GetAllItemsAsync()
-            => await DbSet.ToListAsync<EntityType>();
+        {
+            return dbSet.AsNoTracking();
+        }
 
-
-        public async Task<EntityType> GetItemByIdAsync(object id)
-            => await DbSet.FindAsync(id);
+        public async Task<EntityType> GetItemByIdAsync(int id)
+        {
+            return await dbSet.FindAsync(id);
+        }
 
         public async Task CreateAsync(EntityType item)
         {
-            item.Id = 0;
-            DbSet.Add(item);
-            await SaveAsync();
+            //item.Id = 0;
+            await dbSet.AddAsync(item);
         }
 
         public async Task DeleteAsync(EntityType item)
         {
-            DbSet.Remove(item);
-            await SaveAsync();
+            dbSet.Remove(item);
         }
 
         public async Task UpdateAsync(EntityType item)
         {
-            DbSet.Update(item);
-            await SaveAsync();
+            dbSet.Update(item);
         }
-
-        public async Task SaveAsync()
-            => await DbContext.SaveChangesAsync();
     }
 }

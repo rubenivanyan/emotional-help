@@ -1,6 +1,5 @@
-﻿using AutoMapper;
+﻿using Microsoft.EntityFrameworkCore;
 using PsychologicalAssistance.Core.Data;
-using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Enitities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
@@ -11,13 +10,17 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 {
     public class UserRepository : DataRepository<User>, IUserRepository
     {
-        private readonly IMapper _mapper;
-        public UserRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext)
+        //private readonly IMapper _mapper;
+
+        private readonly DbSet<User> dbSet;
+
+        public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            _mapper = mapper;
+            //_mapper = mapper;
+            dbSet = dbContext.Set<User>();
         }
 
-        public async Task<UserDto> GetUserByIdDtoAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
             var user = await GetItemByIdAsync(id);
             if (user == null)
@@ -25,11 +28,23 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var userDto = _mapper.Map<UserDto>(user);
-            return userDto;
+            //var userDto = _mapper.Map<UserDto>(user);
+            return user;
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersDtoAsync()
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            var user = await dbSet.FindAsync(email);
+
+            if (user is not null)
+            {
+                return user;
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
             var users = await GetAllItemsAsync();
             if (users == null)
@@ -37,13 +52,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var usersDto = new List<UserDto>();
-            foreach (var user in users)
-            {
-                usersDto.Add(_mapper.Map<User, UserDto>(user));
-            }
-
-            return usersDto;
+            return users;
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
-using PsychologicalAssistance.Core.Data.Enitities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
 
@@ -12,12 +10,10 @@ namespace PsychologicalAssistance.Web.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -38,16 +34,14 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateUser([FromBody] UserDto userDto)
         {
             //TODO Check if object already exists
-            var user = _mapper.Map<User>(userDto);
-            await _userService.CreateAsync(user);
+            await _userService.CreateAsync(userDto);
             return Ok();
         }
 
         [HttpPut]
         public async Task<ActionResult> UpdateUser([FromBody] UserDto userDto)
         {
-            var user = _mapper.Map<User>(userDto);
-            await _userService.UpdateAsync(user);
+            await _userService.UpdateAsync(userDto);
             return NoContent();
         }
 

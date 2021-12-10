@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PsychologicalAssistance.Core.Data;
+using PsychologicalAssistance.Core.Data.Helpers.AutoMapper;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Implementation;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
-using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Implementation;
 using PsychologicalAssistance.Services.Interfaces;
 using System;
@@ -30,15 +30,13 @@ namespace PsychologicalAssistance.Web
         {
             services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             #endregion
-            
+
             #region Services
-            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<IUserService, UserService>();
             #endregion
             
@@ -47,6 +45,9 @@ namespace PsychologicalAssistance.Web
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PsychologicalAssistance", Version = "v1" });
             });
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(UserProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
