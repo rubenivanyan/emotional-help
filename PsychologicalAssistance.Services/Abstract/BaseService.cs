@@ -9,17 +9,21 @@ namespace PsychologicalAssistance.Services.Abstract
 {
     public class BaseService<EntityType> : IBaseService<EntityType> where EntityType : BaseEntity
     {
-        protected IDataRepository<EntityType> DataRepository { get; set; }
 
-        public BaseService(IDataRepository<EntityType> dataRepository)
+        protected IDataRepository<EntityType> DataRepository { get; set; }
+        protected IUnitOfWork _unitOfWork { get; set; }
+
+        public BaseService(IDataRepository<EntityType> dataRepository, IUnitOfWork unitOfWork)
         {
             DataRepository = dataRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task CreateAsync(EntityType item)
         {
             //TODO Create method in repository, which we can use for checking, if this object already exists
             await DataRepository.CreateAsync(item);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -29,6 +33,7 @@ namespace PsychologicalAssistance.Services.Abstract
                 throw new ArgumentNullException(nameof(EntityType), "Item is not found"); //TODO Try to create ExceptionHandlingMiddleware Later and own exceptions
 
             await DataRepository.DeleteAsync(item);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task<EntityType> GetItemByIdAsync(int id)
@@ -50,6 +55,9 @@ namespace PsychologicalAssistance.Services.Abstract
         }
 
         public async Task UpdateAsync(EntityType item)
-            => await DataRepository.UpdateAsync(item);
+        {
+            await DataRepository.UpdateAsync(item);
+            await _unitOfWork.CommitAsync();
+        }
     }
 }
