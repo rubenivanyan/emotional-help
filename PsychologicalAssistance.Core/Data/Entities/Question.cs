@@ -1,11 +1,10 @@
-﻿using PsychologicalAssistance.Core.Enums;
-
+﻿using System.Collections.Generic;
 
 namespace PsychologicalAssistance.Core.Data.Entities
 {
     public class Question : BaseQuestion
     {
         public string ImageUrl { get; set; }
-        //public List<Variant> Variants { get; set; }
+        public ICollection<Variant> Variants { get; set; }
     }
 }
