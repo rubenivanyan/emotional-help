@@ -37,6 +37,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
             #endregion
 
             #region Services
@@ -44,6 +45,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IQuestionService, QuestionService>();
             #endregion
 
             #region UnitOfWork

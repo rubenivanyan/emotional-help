@@ -25,7 +25,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var testDto = _mapper.Map<TestDto>(test);
+            var testDto = _mapper.Map<Test, TestDto>(test);
             return testDto;
         }
 
