@@ -1,5 +1,6 @@
 ﻿using PsychologicalAssistance.Core.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PsychologicalAssistance.Core.Data.Entities
@@ -15,5 +16,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
         [Required]
         public DateTime BirthDate { get; set; }
         public Roles Role { get; set; }
+        
+        public List<TestResults> TestResults { get; set; }
     }
 }

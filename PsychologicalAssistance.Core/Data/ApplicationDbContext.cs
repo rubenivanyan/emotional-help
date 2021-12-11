@@ -13,13 +13,26 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Variant> Variants { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<TestResults> TestResults { get; set; }
         public DbSet<Book> Books { get; set; }
-         
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Answer>()
-                .HasOne<Question>()
+                .HasOne(q => q.Question)
                 .WithMany();
+
+            modelBuilder.Entity<TestResults>()
+                .HasOne(u => u.User)
+                .WithMany(t => t.TestResults);
+
+            modelBuilder.Entity<TestResults>()
+                .HasOne(t => t.Test)
+                .WithMany();
+
+            modelBuilder.Entity<Answer>()
+                .HasOne(t => t.TestResults)
+                .WithMany(a => a.Answers);
 
             base.OnModelCreating(modelBuilder);
         }
