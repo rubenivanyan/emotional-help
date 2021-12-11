@@ -41,6 +41,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IVariantRepository, VariantRepository>();
             services.AddScoped<ITestResultsRepository, TestResultsRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IFilmRepository, FilmRepository>();
             #endregion
 
             #region Services
@@ -52,6 +53,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IVariantService, VariantService>();
             services.AddScoped<ITestResultsService, TestResultsService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IFilmService, FilmService>();
             #endregion
 
             #region UnitOfWork
