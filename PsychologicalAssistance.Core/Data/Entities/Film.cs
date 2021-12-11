@@ -9,7 +9,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
     {
         public DateTime Year { get; set; }
         public string Producer { get; set; }
-        public List<string> MainRoles { get; set; }
+       // public List<string> MainRoles { get; set; }
         
         public int FilmDuraction { get; set; }
         public string Country { get; set; }
