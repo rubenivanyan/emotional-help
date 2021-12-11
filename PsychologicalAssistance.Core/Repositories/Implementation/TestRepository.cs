@@ -25,7 +25,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var testDto = _mapper.Map<TestDto>(test);
+            var testDto = _mapper.Map<Test, TestDto>(test);
             return testDto;
         }
 
@@ -37,12 +37,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var testsDto = new List<TestDto>();
-            foreach (var test in tests)
-            {
-                testsDto.Add(_mapper.Map<Test, TestDto>(test));
-            }
-
+            var testsDto = _mapper.Map<IEnumerable<Test>, IEnumerable<TestDto>>(tests);
             return testsDto;
         }
     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211211023655_AddedAnswers")]
+    partial class AddedAnswers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,12 +31,7 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Property<string>("Formulation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
 
                     b.ToTable("Answers");
                 });
@@ -74,7 +71,7 @@ namespace PsychologicalAssistance.Core.Migrations
 
                     b.HasIndex("TestId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Test", b =>
@@ -140,50 +137,11 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.ToTable("Variants");
                 });
 
-            modelBuilder.Entity("QuestionVariant", b =>
-                {
-                    b.Property<int>("QuestionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VariantsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionsId", "VariantsId");
-
-                    b.HasIndex("VariantsId");
-
-                    b.ToTable("QuestionVariant");
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Answer", b =>
-                {
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Question", b =>
                 {
                     b.HasOne("PsychologicalAssistance.Core.Data.Entities.Test", null)
                         .WithMany("Questions")
                         .HasForeignKey("TestId");
-                });
-
-            modelBuilder.Entity("QuestionVariant", b =>
-                {
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Variant", null)
-                        .WithMany()
-                        .HasForeignKey("VariantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Test", b =>

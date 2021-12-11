@@ -26,12 +26,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var applicationsDto = new List<ApplicationDto>();
-            foreach (var application in applications)
-            {
-                applicationsDto.Add(_mapper.Map<ApplicationDto>(application));
-            }
-
+            var applicationsDto = _mapper.Map<IEnumerable<Application>, IEnumerable<ApplicationDto>>(applications);
             return applicationsDto;
         }
 
@@ -43,7 +38,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var applicationDto = _mapper.Map<ApplicationDto>(application);
+            var applicationDto = _mapper.Map<Application, ApplicationDto>(application);
             return applicationDto;
         }
     }

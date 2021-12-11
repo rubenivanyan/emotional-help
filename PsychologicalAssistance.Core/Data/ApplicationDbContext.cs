@@ -10,5 +10,17 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Variant> Variants { get; set; }
+        public DbSet<Question> Questions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Answer>()
+                .HasOne<Question>()
+                .WithMany();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
