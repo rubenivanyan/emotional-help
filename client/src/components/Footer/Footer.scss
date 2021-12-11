@@ -1,0 +1,12 @@
+$footer-background: #545150;
+
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $footer-background;
+}
