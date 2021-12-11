@@ -2,7 +2,6 @@
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Data.Helpers.AutoMapper;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using System.Collections.Generic;
@@ -27,7 +26,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var questionsDto = MapCollections.MapCollection<Question, QuestionDto>(questions, _mapper);
+            var questionsDto = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionDto>>(questions);
             return questionsDto;
         }
 
