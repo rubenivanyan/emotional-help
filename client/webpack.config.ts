@@ -14,6 +14,7 @@ const webpackConfig = (): Configuration => ({
     plugins: [new TsconfigPathsPlugin({configFile: `./tsconfig.json`})],
   },
   output: {
+    publicPath: '/',
     path: path.join(__dirname, `/build`),
     filename: `build.js`,
   },
