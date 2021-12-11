@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PsychologicalAssistance.Core.Data.Entities
 {
@@ -6,10 +8,14 @@ namespace PsychologicalAssistance.Core.Data.Entities
     {
         public DateTime ResultsDate { get; set; }
         
-        public int TestId { get; set; } //FK
-        public Test Test { get; set; } //Навигационное свойство
+        [ForeignKey("Test")]
+        public int TestId { get; set; }
+        public Test Test { get; set; }
        
-        public int UserId { get; set; }//FK
-        public User User { get; set; } //Навигационное свойство
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        public List<Answer> Answers { get; set; }
     }
 }

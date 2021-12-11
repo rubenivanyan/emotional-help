@@ -13,6 +13,7 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Variant> Variants { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<TestResults> TestResults { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
