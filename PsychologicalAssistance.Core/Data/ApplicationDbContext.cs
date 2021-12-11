@@ -15,6 +15,7 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<TestResults> TestResults { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<ComputerGame> ComputerGames { get; set; }
         public DbSet<Music> Musics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

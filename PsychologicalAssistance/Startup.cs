@@ -41,6 +41,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IVariantRepository, VariantRepository>();
             services.AddScoped<ITestResultsRepository, TestResultsRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IComputerGameRepository, ComputerGameRepository>();
             services.AddScoped<IMusicRepository, MusicRepository>();
             #endregion
 
@@ -53,6 +54,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IVariantService, VariantService>();
             services.AddScoped<ITestResultsService, TestResultsService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IComputerGameService, ComputerGameService>();
             services.AddScoped<IMusicService, MusicService>();
             #endregion
 
