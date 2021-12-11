@@ -18,8 +18,20 @@ namespace PsychologicalAssistance.Core.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Answer>()
-                .HasOne<Question>()
+                .HasOne(q => q.Question)
                 .WithMany();
+
+            modelBuilder.Entity<TestResults>()
+                .HasOne(u => u.User)
+                .WithMany(t => t.TestResults);
+
+            modelBuilder.Entity<TestResults>()
+                .HasOne(t => t.Test)
+                .WithMany();
+
+            modelBuilder.Entity<Answer>()
+                .HasOne(t => t.TestResults)
+                .WithMany(a => a.Answers);
 
             base.OnModelCreating(modelBuilder);
         }
