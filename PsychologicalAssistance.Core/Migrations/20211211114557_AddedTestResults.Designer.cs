@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211211114557_AddedTestResults")]
+    partial class AddedTestResults
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,7 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TestResultsId")
+                    b.Property<int?>("TestResultsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -58,30 +60,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Applications");
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Book", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Question", b =>
@@ -214,21 +192,15 @@ namespace PsychologicalAssistance.Core.Migrations
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Answer", b =>
                 {
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Question", "Question")
+                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Question", null)
                         .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.TestResults", "TestResults")
+                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.TestResults", null)
                         .WithMany("Answers")
-                        .HasForeignKey("TestResultsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-
-                    b.Navigation("TestResults");
+                        .HasForeignKey("TestResultsId");
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Question", b =>
@@ -247,7 +219,7 @@ namespace PsychologicalAssistance.Core.Migrations
                         .IsRequired();
 
                     b.HasOne("PsychologicalAssistance.Core.Data.Entities.User", "User")
-                        .WithMany("TestResults")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -280,11 +252,6 @@ namespace PsychologicalAssistance.Core.Migrations
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.TestResults", b =>
                 {
                     b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.User", b =>
-                {
-                    b.Navigation("TestResults");
                 });
 #pragma warning restore 612, 618
         }
