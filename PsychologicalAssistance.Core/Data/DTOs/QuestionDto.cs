@@ -2,10 +2,8 @@
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class QuestionDto : BaseDto
+    public class QuestionDto : BaseQuestionDto
     {
-        [Required]
-        public string Formulation { get; set; }
         public string ImageUrl { get; set; }        
     }
 }

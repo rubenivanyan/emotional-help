@@ -27,7 +27,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             }
 
             var questionsDto = new List<QuestionDto>();
-            foreach(var question in questions)
+            foreach (var question in questions)
             {
                 questionsDto.Add(_mapper.Map<Question, QuestionDto>(question));
             }

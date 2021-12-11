@@ -12,7 +12,8 @@ namespace PsychologicalAssistance.Services.Implementation
     {
         private readonly IUserRepository _userRepository;
         
-        public UserService(IDataRepository<User> dataRepository, IUserRepository userRepository, IUnitOfWork unitOfWork) : base(dataRepository, unitOfWork) 
+        public UserService(IDataRepository<User> dataRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
+            : base(dataRepository, unitOfWork) 
         {
             _userRepository = userRepository;
         }

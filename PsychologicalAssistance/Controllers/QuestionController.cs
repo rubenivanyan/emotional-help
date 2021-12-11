@@ -50,7 +50,7 @@ namespace PsychologicalAssistance.Web.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
             await _questionService.DeleteAsync(id);
