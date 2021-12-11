@@ -10,5 +10,6 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Variant> Variants { get; set; }
     }
 }

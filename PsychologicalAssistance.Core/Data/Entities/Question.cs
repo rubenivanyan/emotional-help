@@ -3,11 +3,9 @@
 
 namespace PsychologicalAssistance.Core.Data.Entities
 {
-    public class Question : BaseEntity
+    public class Question : BaseQuestion
     {
-
-        public string Formulation { get; set; }
-        public Categories Category { get; set; }
-        public Seniorities Seniority { get; set; }
+        public string ImageUrl { get; set; }
+        //public List<Variant> Variants { get; set; }
     }
 }
