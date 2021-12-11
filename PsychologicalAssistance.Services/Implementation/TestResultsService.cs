@@ -3,6 +3,7 @@ using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
@@ -16,6 +17,10 @@ namespace PsychologicalAssistance.Services.Implementation
         {
             _testResultsRepository = testResultsRepository;
         }
+
+        public async Task<IEnumerable<TestResultsDto>> GetAllTestsResultsAsync()
+            => await _testResultsRepository.GetAllTestsResultsDtoAsync();
+
         public async Task<TestResultsDto> GetTestResultsByIdAsync(int id)
             => await _testResultsRepository.GetTestResultsByIdDtoAsync(id);
     }
