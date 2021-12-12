@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211211135747_Added Music")]
+    partial class AddedMusic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,103 +84,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "Imbolo Mbue",
-                            Genre = 5,
-                            Language = "EN",
-                            Title = "How Beautiful We Were"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "Katie Kitamura",
-                            Genre = 5,
-                            Language = "EN",
-                            Title = "Intimacies"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "Michael Connelly",
-                            Genre = 0,
-                            Language = "EN",
-                            Title = "The Dark Hours"
-                        });
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Film", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FilmDuraction")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Producer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Films");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Country = "USA",
-                            FilmDuraction = 0,
-                            Genre = 4,
-                            Language = "EN",
-                            Title = "The Godfather",
-                            VideoUrl = "google.com",
-                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1972)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Country = "USA",
-                            FilmDuraction = 0,
-                            Genre = 4,
-                            Language = "EN",
-                            Title = "The Shawshank Redemption",
-                            VideoUrl = "www.facebook.com",
-                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1994)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Country = "USA",
-                            FilmDuraction = 0,
-                            Genre = 1,
-                            Language = "EN",
-                            Title = "The Dark Knight",
-                            VideoUrl = "www.twitter.com",
-                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2008)
-                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Music", b =>
@@ -204,33 +109,6 @@ namespace PsychologicalAssistance.Core.Migrations
 
                     b.ToTable("Musics");
                 });
-                
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.ComputerGame", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Company")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Review")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ComputerGames");
-                });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Question", b =>
                 {
@@ -254,26 +132,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasIndex("TestId");
 
                     b.ToTable("Questions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Formulation = "How are you? Your mood?",
-                            ImageUrl = "dasddsa@fsfdss"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Formulation = "What is your emotion now?",
-                            ImageUrl = "dasddsa@fsfdss"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Formulation = "How do you feel now?",
-                            ImageUrl = "dasddsa@fsfdss"
-                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Test", b =>
@@ -347,35 +205,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BirthDate = new DateTime(2021, 12, 12, 10, 54, 49, 155, DateTimeKind.Local).AddTicks(1450),
-                            MailAddress = "123123@sad",
-                            Name = "Tom",
-                            Role = 3,
-                            Surname = "Ivanov"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BirthDate = new DateTime(2021, 12, 12, 10, 54, 49, 155, DateTimeKind.Local).AddTicks(8575),
-                            MailAddress = "dasdas@sad",
-                            Name = "Alice",
-                            Role = 1,
-                            Surname = "Denisov"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BirthDate = new DateTime(2021, 12, 12, 10, 54, 49, 155, DateTimeKind.Local).AddTicks(8586),
-                            MailAddress = "asdsadas3123@sad",
-                            Name = "Sam",
-                            Role = 0,
-                            Surname = "Donikas"
-                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Variant", b =>
