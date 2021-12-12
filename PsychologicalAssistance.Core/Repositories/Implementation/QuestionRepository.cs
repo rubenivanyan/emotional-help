@@ -5,6 +5,7 @@ using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -40,6 +41,32 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             var questionDto = _mapper.Map<Question, QuestionDto>(question);
             return questionDto;
+        }
+
+        public async Task<IEnumerable<FullQuestionDto>> GetAllQuestionsAndVariantsDtoAsync()
+        {
+            var questions = await Task.Run(() => DbSet.Select(question => new FullQuestionDto
+            {
+                Id = question.Id,
+                Formulation = question.Formulation,
+                ImageUrl = question.ImageUrl,
+                VariantsFormulations = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
+            }));
+
+            return questions;
+        }
+
+        public async Task<FullQuestionDto> GetQuestionAndVariantsByIdDtoAsync(int id)
+        {
+            var question = await Task.Run(() => DbSet.FirstOrDefault(question => question.Id == id).Select(question => new FullQuestionDto
+            {
+                Id = question.Id,
+                Formulation = question.Formulation,
+                ImageUrl = question.ImageUrl,
+                VariantsFormulations = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
+            }));
+
+            return question;
         }
     }
 }

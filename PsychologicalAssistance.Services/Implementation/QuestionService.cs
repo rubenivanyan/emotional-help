@@ -23,5 +23,11 @@ namespace PsychologicalAssistance.Services.Implementation
 
         public async Task<QuestionDto> GetQuestionByIdAsync(int id)
             => await _questionRepository.GetQuestionByIdDtoAsync(id);
+
+        public async Task<IEnumerable<FullQuestionDto>> GetAllQuestionsAndVariants()
+            => await _questionRepository.GetAllQuestionsAndVariantsDtoAsync();
+
+        public async Task<FullQuestionDto> GetQuestionAndVariantsByIdAsync(int id)
+            => await _questionRepository.GetQuestionAndVariantsByIdDtoAsync(id);
     }
 }

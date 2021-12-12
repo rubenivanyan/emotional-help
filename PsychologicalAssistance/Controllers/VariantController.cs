@@ -42,6 +42,13 @@ namespace PsychologicalAssistance.Web.Controllers
             return Ok();
         }
 
+        [HttpPost("{questionId} {variantId}")]
+        public async Task<ActionResult> AddVariantToQuestion(int questionId, int variantId)
+        {
+            await _variantService.AddVariantToQuestion(questionId, variantId);
+            return Ok();
+        }
+
         [HttpPut]
         public async Task<ActionResult> UpdateVariant([FromBody] VariantDto variantDto)
         {

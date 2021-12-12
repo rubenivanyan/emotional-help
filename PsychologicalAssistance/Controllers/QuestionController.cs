@@ -34,6 +34,20 @@ namespace PsychologicalAssistance.Web.Controllers
             return question is not null ? Ok(question) : NotFound();
         }
 
+        [HttpGet("all/with-variants")]
+        public async Task<ActionResult> GetAllQuestionsWithVariants()
+        {
+            var questions = await _questionService.GetAllQuestionsAndVariants();
+            return questions is not null ? Ok(questions) : NotFound();
+        }
+
+        [HttpGet("{id}/with-variants")]
+        public async Task<ActionResult> GetQuestionWithVariants(int id)
+        {
+            var question = await _questionService.GetQuestionAndVariantsByIdAsync(id);
+            return question is not null ? Ok(question) : NotFound();
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateQuestion([FromBody] QuestionDto questionDto)
         {
