@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
 {
-    public class UserRepository : DataRepository<User>, IUserRepository
+    /*public class UserRepository : DataRepository<User>, IUserRepository
     {
         private readonly IMapper _mapper;
         public UserRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext)
@@ -40,5 +40,5 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             var usersDto = _mapper.Map<IEnumerable<User>, IEnumerable<UserDto>>(users);
             return usersDto;
         }
-    }
+    }*/
 }

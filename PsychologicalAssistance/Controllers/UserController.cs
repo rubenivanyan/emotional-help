@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
@@ -57,5 +57,5 @@ namespace PsychologicalAssistance.Web.Controllers
             await _userService.DeleteAsync(id);
             return NoContent();
         }
-    }
+    }*/
 }

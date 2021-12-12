@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PsychologicalAssistance.Core.Data.Entities;
 
 namespace PsychologicalAssistance.Core.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -25,9 +26,9 @@ namespace PsychologicalAssistance.Core.Data
                 .HasOne(q => q.Question)
                 .WithMany();
 
-            modelBuilder.Entity<TestResults>()
+            /*modelBuilder.Entity<TestResults>()
                 .HasOne(u => u.User)
-                .WithMany(t => t.TestResults);
+                .WithMany(t => t.TestResults);*/
 
             modelBuilder.Entity<TestResults>()
                 .HasOne(t => t.Test)
@@ -39,11 +40,11 @@ namespace PsychologicalAssistance.Core.Data
 
             //Наполнения базы данними
             // User
-            modelBuilder.Entity<User>().HasData(
+            /*modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "Tom", Surname = "Ivanov", BirthDate = System.DateTime.Now, Role = Enums.Roles.Administrator, MailAddress = "123123@sad" },
                 new User { Id = 2, Name = "Alice", Surname = "Denisov", BirthDate = System.DateTime.Now, Role = Enums.Roles.Client, MailAddress = "dasdas@sad" },
                 new User { Id = 3, Name = "Sam", Surname = "Donikas", BirthDate = System.DateTime.Now, Role = Enums.Roles.Guest, MailAddress = "asdsadas3123@sad" }
-            );
+            );*/
             //Film
             modelBuilder.Entity<Film>().HasData(
                 new Film { Id = 1, Title = "The Godfather", Genre = Enums.FilmGenres.drama, Country = "USA", Year = new System.DateTime(1972), Language = "EN", VideoUrl = "google.com" },

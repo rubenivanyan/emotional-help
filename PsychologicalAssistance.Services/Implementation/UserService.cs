@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
 {
-    public class UserService : BaseService<User>, IUserService
+    /*public class UserService : BaseService<User>, IUserService
     {
         private readonly IUserRepository _userRepository;
         
@@ -23,5 +23,5 @@ namespace PsychologicalAssistance.Services.Implementation
 
         public async Task<UserDto> GetUserByIdAsync(int id)
             => await _userRepository.GetUserByIdDtoAsync(id);
-    }
+    }*/
 }
