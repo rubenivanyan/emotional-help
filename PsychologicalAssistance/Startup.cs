@@ -32,8 +32,13 @@ namespace PsychologicalAssistance.Web
         {
             services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<User, IdentityRole>(opts => {
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireDigit = true;
+                opts.Password.RequireUppercase = true;
+                opts.Password.RequireLowercase = true;
+                opts.Password.RequireNonAlphanumeric = true;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories
@@ -52,7 +57,7 @@ namespace PsychologicalAssistance.Web
 
             #region Services
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-            //services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IQuestionService, QuestionService>();

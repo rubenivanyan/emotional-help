@@ -8,7 +8,8 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
     {
         public UserProfile()
         {
-            //CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<UserRegistrationDto, User>()
+                .ForMember(user => user.UserName, opt => opt.MapFrom(x => x.Name));
         }
     }
 }

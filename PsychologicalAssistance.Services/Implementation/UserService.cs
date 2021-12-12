@@ -1,4 +1,5 @@
-﻿using PsychologicalAssistance.Core.Data.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
@@ -8,20 +9,25 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
 {
-    /*public class UserService : BaseService<User>, IUserService
+    public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly UserManager<User> _userManager;
         
-        public UserService(IDataRepository<User> dataRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
-            : base(dataRepository, unitOfWork) 
+        public UserService(UserManager<User> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
-            => await _userRepository.GetAllUsersDtoAsync();
+        public async Task<IEnumerable<IdentityError>> RegisterUser(User user, string password)
+        {
+            var result = await _userManager.CreateAsync(user, password);
+            if(!result.Succeeded)
+            {
+                return result.Errors;
+            }
 
-        public async Task<UserDto> GetUserByIdAsync(int id)
-            => await _userRepository.GetUserByIdDtoAsync(id);
-    }*/
+            await _userManager.AddToRoleAsync(user, "Client");
+            return null;
+        }
+    }
 }

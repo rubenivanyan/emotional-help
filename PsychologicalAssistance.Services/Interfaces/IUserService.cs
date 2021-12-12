@@ -1,14 +1,13 @@
-﻿using PsychologicalAssistance.Core.Data.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Interfaces
 {
-    /*public interface IUserService : IBaseService<User>
+    public interface IUserService
     {
-        //TODO Add unique methods' signatures for service
-        Task<UserDto> GetUserByIdAsync(int id);
-        Task<IEnumerable<UserDto>> GetAllUsersAsync();
-    }*/
+        Task<IEnumerable<IdentityError>> RegisterUser(User user, string password); 
+    }
 }
