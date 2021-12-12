@@ -8,9 +8,9 @@ namespace PsychologicalAssistance.Core.Enums
 {
     public enum FilmGenres
     {
-        actions = 1,
+        action = 1,
         thrillers = 2,
-        comedy = 3
-
+        comedy = 3,
+        drama = 4
     }
 }
