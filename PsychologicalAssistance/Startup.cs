@@ -39,6 +39,7 @@ namespace PsychologicalAssistance.Web
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireNonAlphanumeric = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.ConfigureApplicationCookie(o => o.LoginPath = "/User/Login");
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories
@@ -93,6 +94,8 @@ namespace PsychologicalAssistance.Web
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

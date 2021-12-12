@@ -1,5 +1,4 @@
-﻿using PsychologicalAssistance.Core.Enums;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PsychologicalAssistance.Core.Data.DTOs

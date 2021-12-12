@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Repositories.Interfaces;
-using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
@@ -18,7 +16,21 @@ namespace PsychologicalAssistance.Services.Implementation
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<IdentityError>> RegisterUser(User user, string password)
+        public async Task<ClaimsIdentity> LoginUserAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null && await _userManager.CheckPasswordAsync(user, password))
+            {
+                var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+                return identity;
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<IdentityError>> RegisterUserAsync(User user, string password)
         {
             var result = await _userManager.CreateAsync(user, password);
             if(!result.Succeeded)
