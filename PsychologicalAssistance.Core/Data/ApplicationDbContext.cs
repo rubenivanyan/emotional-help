@@ -7,8 +7,8 @@ namespace PsychologicalAssistance.Core.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            /*Database.EnsureDeleted();
+            Database.EnsureCreated();*/
         }
 
         public DbSet<User> Users { get; set; }
@@ -41,7 +41,7 @@ namespace PsychologicalAssistance.Core.Data
 
             //Наполнения базы данними
             // User
-            modelBuilder.Entity<User>().HasData(
+            /*modelBuilder.Entity<User>().HasData(
             new User[]
             {
                 new User { Id=1, Name="Tom", Surname = "Ivanov", BirthDate = System.DateTime.Now, Role = Enums.Roles.Administrator, MailAddress = "123123@sad"},
@@ -76,7 +76,7 @@ namespace PsychologicalAssistance.Core.Data
             //Возможный вариант наполнения вариантов ответа, но база данных не создает почему-то
             //Variants = new Variant[]{new Variant{Formulation = "Nice"},
             //new Variant{Formulation = "NotGooD"},
-            //new Variant{Formulation = "Perfect"}}
+            //new Variant{Formulation = "Perfect"}}*/
 
             base.OnModelCreating(modelBuilder);
         }
