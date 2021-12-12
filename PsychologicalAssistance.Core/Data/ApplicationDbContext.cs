@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PsychologicalAssistance.Core.Data.Configurations;
 using PsychologicalAssistance.Core.Data.Entities;
 
 namespace PsychologicalAssistance.Core.Data
@@ -70,6 +71,8 @@ namespace PsychologicalAssistance.Core.Data
             //new Variant{Formulation = "Perfect"}}
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
     }
 }

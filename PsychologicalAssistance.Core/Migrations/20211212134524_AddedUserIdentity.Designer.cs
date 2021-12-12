@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211212134524_AddedUserIdentity")]
+    partial class AddedUserIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,29 +46,6 @@ namespace PsychologicalAssistance.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "25ed601e-8113-41ec-96a5-d0a4fe90bc67",
-                            ConcurrencyStamp = "98b3c26b-af2b-4ae6-b648-c09da8abd160",
-                            Name = "Client",
-                            NormalizedName = "CLIENT"
-                        },
-                        new
-                        {
-                            Id = "5ec82d2b-e6ac-43e1-b5aa-78e5626d5f48",
-                            ConcurrencyStamp = "23c4993c-3c2d-4c0e-abcb-2664757ae031",
-                            Name = "Mentor",
-                            NormalizedName = "MENTOR"
-                        },
-                        new
-                        {
-                            Id = "9b8d0dd6-491a-4132-9a44-fbd3bf242a3b",
-                            ConcurrencyStamp = "faf18343-a79f-4c98-9d2c-3a55465c54f9",
-                            Name = "Administrator",
-                            NormalizedName = "ADMIN ISTRATOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
