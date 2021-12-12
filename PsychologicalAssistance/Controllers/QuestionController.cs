@@ -42,7 +42,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-variants")]
-        public async Task<ActionResult> GetQuestionWithVariants(int id)
+        public async Task<ActionResult> GetQuestionWithVariantsById(int id)
         {
             var question = await _questionService.GetQuestionAndVariantsByIdAsync(id);
             return question is not null ? Ok(question) : NotFound();
