@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -58,14 +59,13 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
         public async Task<FullQuestionDto> GetQuestionAndVariantsByIdDtoAsync(int id)
         {
-            var question = await Task.Run(() => DbSet.FirstOrDefault(question => question.Id == id).Select(question => new FullQuestionDto
+            var question = await Task.Run(() => DbSet.Where(question => question.Id == id).Include(v => v.Variants).Select(question => new FullQuestionDto
             {
                 Id = question.Id,
                 Formulation = question.Formulation,
                 ImageUrl = question.ImageUrl,
                 VariantsFormulations = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
-            }));
-
+            }).FirstOrDefaultAsync());
             return question;
         }
     }
