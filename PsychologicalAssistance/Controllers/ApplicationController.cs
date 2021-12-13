@@ -22,7 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Client")]
         public async Task<ActionResult> GetAllApplications()
         {
             var applications = await _applicationService.GetAllApplicationsAsync();
@@ -30,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Mentor")]
         public async Task<ActionResult> GetApplicationById(int id)
         {
             var application = await _applicationService.GetApplicationByIdAsync(id);

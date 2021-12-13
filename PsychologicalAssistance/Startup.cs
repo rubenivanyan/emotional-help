@@ -38,13 +38,12 @@ namespace PsychologicalAssistance.Web
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireNonAlphanumeric = true;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.ConfigureApplicationCookie(o => o.LoginPath = "/User/Login");
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
-            //services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();

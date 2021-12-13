@@ -21,9 +21,15 @@ namespace PsychologicalAssistance.Services.Implementation
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
+                var roles = await _userManager.GetRolesAsync(user);
                 var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
                 identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+                foreach (var role in roles)
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                }
+
                 return identity;
             }
 
