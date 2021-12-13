@@ -10,13 +10,13 @@ export const SearchBar = () => {
     <Paper
       className="search-bar-container"
       component="form"
-      sx={{display: 'flex', alignItems: 'center', width: 200}}>
+      sx={{ display: 'flex', alignItems: 'center', width: 200 }}>
       <InputBase
-        sx={{ml: 1, flex: 1}}
+        sx={{ ml: 1, flex: 1 }}
         placeholder="Search"
-        inputProps={{'aria-label': 'search'}}
+        inputProps={{ 'aria-label': 'search' }}
       />
-      <IconButton type="submit" sx={{p: '10px'}} aria-label="search">
+      <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
         <SearchIcon />
       </IconButton>
     </Paper>

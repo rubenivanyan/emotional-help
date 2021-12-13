@@ -9,15 +9,15 @@ import './UserCard.scss';
 
 export const UserCard = () => {
   return (
-    <Card sx={{width: 400}}>
+    <Card sx={{ width: 400 }}>
       <CardContent>
         <div className="user-avatar-name">
           <Avatar
             alt="John Krasinski"
             src="/static/images/avatar/1.jpg"
-            sx={{width: 56, height: 56}}
+            sx={{ width: 56, height: 56 }}
           />
-          <Typography sx={{mb: 1.5}} color="text.secondary">
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
             John Krasinski
           </Typography>
         </div>
