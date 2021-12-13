@@ -1,11 +1,7 @@
-﻿using PsychologicalAssistance.Core.Enums;
-using System.Collections.Generic;
-
-namespace PsychologicalAssistance.Core.Data.DTOs
+﻿namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class TestDto : BaseDto
+    public class TestDto : BaseTestDto
     {
-        public string Title { get; set; }
-        public TypeOfTests TypeOfTest { get; set; }
+
     }
 }
