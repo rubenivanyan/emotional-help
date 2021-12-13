@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211213042938_ReturnFieldsForUser")]
+    partial class ReturnFieldsForUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,22 +50,22 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "05650395-37b6-4124-8e6e-665d6597cf37",
-                            ConcurrencyStamp = "cc9c914e-bc1a-4d38-9a08-2138fc3cba35",
+                            Id = "303f2f9e-02be-4ffc-a32d-ccb732544ae7",
+                            ConcurrencyStamp = "52fbef8d-b31d-4533-a4a8-66efdf4620bc",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "e583dea9-c00e-41bd-b585-53dda77683d0",
-                            ConcurrencyStamp = "6351c4f2-b6a0-46aa-83ff-bb1a1a8ecd5a",
+                            Id = "1b49b724-0ae8-4067-a65b-0b1b5ced026c",
+                            ConcurrencyStamp = "000f263c-4689-4401-9bba-b5eeebdb3a6d",
                             Name = "Mentor",
                             NormalizedName = "MENTOR"
                         },
                         new
                         {
-                            Id = "ac307142-42c1-42c1-8899-568aa9d398f3",
-                            ConcurrencyStamp = "d668ba8c-d3ce-4f01-829e-321751e3e6a4",
+                            Id = "13d692e4-6b5d-4b5c-85c4-e4d4783ed1c2",
+                            ConcurrencyStamp = "b451ffa5-17ba-4f1f-96af-1da70c12af59",
                             Name = "Administrator",
                             NormalizedName = "ADMIN ISTRATOR"
                         });
@@ -461,14 +463,9 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Property<int>("TestId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TestId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TestResults");
                 });
@@ -661,13 +658,7 @@ namespace PsychologicalAssistance.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.User", "User")
-                        .WithMany("TestResults")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Test");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("QuestionVariant", b =>
@@ -693,11 +684,6 @@ namespace PsychologicalAssistance.Core.Migrations
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.TestResults", b =>
                 {
                     b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.User", b =>
-                {
-                    b.Navigation("TestResults");
                 });
 #pragma warning restore 612, 618
         }

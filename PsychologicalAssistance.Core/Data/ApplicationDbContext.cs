@@ -9,7 +9,6 @@ namespace PsychologicalAssistance.Core.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        //public DbSet<User> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -27,9 +26,9 @@ namespace PsychologicalAssistance.Core.Data
                 .HasOne(q => q.Question)
                 .WithMany();
 
-            /*modelBuilder.Entity<TestResults>()
+            modelBuilder.Entity<TestResults>()
                 .HasOne(u => u.User)
-                .WithMany(t => t.TestResults);*/
+                .WithMany(t => t.TestResults);
 
             modelBuilder.Entity<TestResults>()
                 .HasOne(t => t.Test)
@@ -42,9 +41,9 @@ namespace PsychologicalAssistance.Core.Data
             //Наполнения базы данними
             // User
             /*modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Tom", Surname = "Ivanov", BirthDate = System.DateTime.Now, Role = Enums.Roles.Administrator, MailAddress = "123123@sad" },
-                new User { Id = 2, Name = "Alice", Surname = "Denisov", BirthDate = System.DateTime.Now, Role = Enums.Roles.Client, MailAddress = "dasdas@sad" },
-                new User { Id = 3, Name = "Sam", Surname = "Donikas", BirthDate = System.DateTime.Now, Role = Enums.Roles.Guest, MailAddress = "asdsadas3123@sad" }
+                new User { Id = "1", UserName = "Tom", UserSurname = "Ivanov", BirthDate = System.DateTime.Now, Email = "123123@sad" },
+                new User { Id = "2", UserName = "Alice", UserSurname = "Denisov", BirthDate = System.DateTime.Now, Email = "dasdas@sad" },
+                new User { Id = "3", UserName = "Sam", UserSurname = "Donikas", BirthDate = System.DateTime.Now, Email = "asdsadas3123@sad" }
             );*/
             //Film
             modelBuilder.Entity<Film>().HasData(

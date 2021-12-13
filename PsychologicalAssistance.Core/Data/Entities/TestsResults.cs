@@ -12,9 +12,9 @@ namespace PsychologicalAssistance.Core.Data.Entities
         public int TestId { get; set; }
         public Test Test { get; set; }
        
-        /*[ForeignKey("User")]
-        public int UserId { get; set; }
-        public User User { get; set; }*/
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public User User { get; set; }
 
         public List<Answer> Answers { get; set; }
     }
