@@ -3,14 +3,17 @@ import './app.scss';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Outlet } from 'react-router-dom';
+import { Main } from '../Main/Main';
 
 const App: React.FC = () => {
   return (
-    <div className="wrapper">
+    <>
       <Header />
-      <Outlet />
+      <Main>
+        <Outlet />
+      </Main>
       <Footer />
-    </div>
+    </>
   );
 };
 export default App;

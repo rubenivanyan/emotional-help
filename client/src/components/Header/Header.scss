@@ -7,8 +7,16 @@ header {
 
   padding: 0 55px;
 
-  background-color: black;
+  background-color: white;
 
   font-weight: bold;
   align-items: center;
+
+  .search-reg-wrapper {
+    display: flex;
+
+    &>form {
+      margin: 0 10px 0 0 !important;
+    }
+  }
 }

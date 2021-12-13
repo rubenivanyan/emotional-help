@@ -4,10 +4,11 @@ import App from './components/app/app';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './index.scss';
 import { AdminPage } from './pages/AdminPage/AdminPage';
-import { RequestsList } from './components/RequestsList/RequestsList';
-import { UserCard } from './components/UserCard/UserCard';
-import { UsersGrid } from './components/UsersGrid/UsersGrid';
-import { PsychoGrid } from './components/PsychologistsGrid/PsychologistsGrid';
+import { RequestsList } from './components/AdminPage/RequestsList/RequestsList';
+import { UsersGrid } from './components/AdminPage/UsersGrid/UsersGrid';
+import {
+  PsychoGrid,
+} from './components/AdminPage/PsychologistsGrid/PsychologistsGrid';
 import { Quiz } from './pages/QuizPage/QuizPage';
 
 ReactDOM.render(
@@ -23,9 +24,9 @@ ReactDOM.render(
             <Route path="viewed-requests" element={<RequestsList />} />
             <Route path="deleted-requests" element={<RequestsList />} />
           </Route>
-          <Route path="about" element={<UserCard />} />
-          <Route path="help" element={<Quiz />} />
-          <Route path="team" element={<div>---Our team---</div>} />
+          <Route path="testing" element={<Quiz />} />
+          <Route path="training" element={<Quiz />} />
+          <Route path="consulting" element={<div>---Our team---</div>} />
         </Route>
       </Routes>
     </Router>
