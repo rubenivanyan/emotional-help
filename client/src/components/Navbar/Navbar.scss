@@ -28,12 +28,16 @@
   &:hover {
     box-shadow: inset 0 -5px 0 #91bdb0;
 
-    transition: box-shadow 300ms linear;
+    transition: box-shadow 300ms linear ease-in-out;
   }
 }
 
 .active {
   box-shadow: inset 0 -5px 0 #91bdb0;
 
-  font-weight: 700;
+  background-color: #91bdb0;
+
+  color: white;
+
+  transition: background-color 300ms linear ease-in-out, color 300ms linear ease-in-out;
 }
