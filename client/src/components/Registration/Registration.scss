@@ -31,7 +31,7 @@
 
     color: white;
 
-    transition: background-color 300ms linear, color 300ms linear;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
   }
 }
 
@@ -51,6 +51,6 @@
   &:hover {
     color: #91bdb0;
     background-color: white;
-    transition: background-color 300ms linear, color 300ms linear;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
   }
 }
