@@ -4,7 +4,7 @@ import './Logo.scss';
 export const Logo: React.FC = () => {
   return (
     <div className="logo">
-      <a href="/main">
+      <a href="/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
