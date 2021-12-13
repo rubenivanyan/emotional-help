@@ -34,6 +34,20 @@ namespace PsychologicalAssistance.Web.Controllers
             return test is not null ? Ok(test) : NotFound();
         }
 
+        [HttpGet("all/with-questions")]
+        public async Task<ActionResult> GetAllTestsWithQuestions()
+        {
+            var tests = await _testService.GetAllTestsWithQuestion();
+            return tests is not null ? Ok(tests) : NotFound();
+        }
+
+        [HttpGet("{id}/with-questions")]
+        public async Task<ActionResult> GetTestWithQuestionsById(int id)
+        {
+            var test = await _testService.GetTestWithQuestionsById(id);
+            return test is not null ? Ok(test) : NotFound();
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateTest([FromBody] TestDto testDto)
         {

@@ -56,6 +56,13 @@ namespace PsychologicalAssistance.Web.Controllers
             return Ok();
         }
 
+        [HttpPost("{questionId} {testId}")]
+        public async Task<ActionResult> AddQuestionToTest(int questionId, int testId)
+        {
+            await _questionService.AddQuestionToTest(questionId, testId);
+            return Ok();
+        }
+
         [HttpPut]
         public async Task<ActionResult> UpdateQuestion([FromBody] QuestionDto questionDto)
         {

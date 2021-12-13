@@ -7,6 +7,10 @@ namespace PsychologicalAssistance.Core.Data.Entities
     {
         public string Title { get; set; }
         public TypeOfTests TypeOfTest { get; set; }
-        public virtual List<Question> Questions { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
+        public Test()
+        {
+            Questions = new List<Question>();
+        }
    }
 }
