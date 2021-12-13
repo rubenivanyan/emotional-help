@@ -17,7 +17,7 @@ export const AdminPage: React.FC = () => {
       1. Block with APPLICATION info
       2. That block is showed when one of New and Archived
       applications is chosen.
-      3. Show users in separate block, not 'aplications' like it is doing now.
+      3. Show users in separate block, not 'applications' like it is doing now.
        */}
     </section>
   );
