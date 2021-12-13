@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './index.scss';
-import {AdminPage} from './pages/AdminPage/AdminPage';
-import {RequestsList} from './components/RequestsList/RequestsList';
-import {UserCard} from './components/UserCard/UserCard';
-import {UsersGrid} from './components/UsersGrid/UsersGrid';
-import {PsychoGrid} from './components/PsychologistsGrid/PsychologistsGrid';
+import { AdminPage } from './pages/AdminPage/AdminPage';
+import { RequestsList } from './components/RequestsList/RequestsList';
+import { UserCard } from './components/UserCard/UserCard';
+import { UsersGrid } from './components/UsersGrid/UsersGrid';
+import { PsychoGrid } from './components/PsychologistsGrid/PsychologistsGrid';
 
 ReactDOM.render(
   <React.StrictMode>

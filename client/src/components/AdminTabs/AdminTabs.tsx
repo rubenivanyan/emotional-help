@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import GroupIcon from '@mui/icons-material/Group';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './AdminTabs.scss';
 
 export const AdminTabs = () => {
@@ -35,7 +35,7 @@ export const AdminTabs = () => {
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
-        <Typography sx={{mt: 4, mb: 2}} variant="h6" component="div">
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
           CATEGORIES
         </Typography>
       }>
@@ -65,7 +65,7 @@ export const AdminTabs = () => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <Link className="tab-link" to="pending-requests">
-            <ListItemButton sx={{pl: 4}}>
+            <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <AccessTimeIcon />
               </ListItemIcon>
@@ -73,7 +73,7 @@ export const AdminTabs = () => {
             </ListItemButton>
           </Link>
           <Link className="tab-link" to="viewed-requests">
-            <ListItemButton sx={{pl: 4}}>
+            <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <CheckCircleOutlineIcon />
               </ListItemIcon>
@@ -81,7 +81,7 @@ export const AdminTabs = () => {
             </ListItemButton>
           </Link>
           <Link className="tab-link" to="deleted-requests">
-            <ListItemButton sx={{pl: 4}}>
+            <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <DeleteOutlineIcon />
               </ListItemIcon>
