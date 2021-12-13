@@ -57,7 +57,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost("{questionId} {testId}")]
-        public async Task<ActionResult> AddVariantToQuestion(int questionId, int testId)
+        public async Task<ActionResult> AddQuestionToTest(int questionId, int testId)
         {
             await _questionService.AddQuestionToTest(questionId, testId);
             return Ok();
