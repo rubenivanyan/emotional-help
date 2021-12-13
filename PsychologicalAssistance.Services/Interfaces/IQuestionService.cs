@@ -11,5 +11,6 @@ namespace PsychologicalAssistance.Services.Interfaces
         Task<QuestionDto> GetQuestionByIdAsync(int id);
         Task<IEnumerable<FullQuestionDto>> GetAllQuestionsAndVariants();
         Task<FullQuestionDto> GetQuestionAndVariantsByIdAsync(int id);
+        Task AddQuestionToTest(int questionId, int testId);
     }
 }

@@ -9,6 +9,7 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
         public QuestionProfile()
         {
             CreateMap<Question, QuestionDto>().ReverseMap();
+            CreateMap<Question, FullQuestionDto>().ReverseMap();
         }
     }
 }

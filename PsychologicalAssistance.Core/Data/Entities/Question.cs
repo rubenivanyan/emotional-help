@@ -7,9 +7,11 @@ namespace PsychologicalAssistance.Core.Data.Entities
         public string ImageUrl { get; set; }
         
         public ICollection<Variant> Variants { get; set; }
+        public ICollection<Test> Tests { get; set; }
         public Question()
         {
             Variants = new List<Variant>();
+            Tests = new List<Test>();
         }
     }
 }

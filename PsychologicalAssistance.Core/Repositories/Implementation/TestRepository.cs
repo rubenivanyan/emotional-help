@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -39,6 +41,32 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             var testsDto = _mapper.Map<IEnumerable<Test>, IEnumerable<TestDto>>(tests);
             return testsDto;
+        }
+
+        public async Task<IEnumerable<FullTestDto>> GetAllTestsWithQuestionsDtoAsync()
+        {
+            var tests = await Task.Run(() => DbSet.Select(test => new FullTestDto
+            {
+                Id = test.Id,
+                Title = test.Title,
+                TypeOfTest = test.TypeOfTest,
+                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<FullQuestionDto>>(test.Questions).ToList()
+            }));
+
+            return tests;
+        }
+
+        public async Task<FullTestDto> GetTestWithQuestionsByIdDtoAsync(int id)
+        {
+            var test = await Task.Run(() => DbSet.Where(t => t.Id == id).Include(t => t.Questions).Select(t => new FullTestDto
+            {
+                Id = t.Id,
+                Title = t.Title,
+                TypeOfTest = t.TypeOfTest,
+                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<FullQuestionDto>>(t.Questions).ToList()
+            }).FirstOrDefaultAsync());
+
+            return test;
         }
     }
 }
