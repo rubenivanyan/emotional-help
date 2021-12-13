@@ -17,7 +17,7 @@ sans-serif;
   font-family: 'Open Sans', sans-serif;
 }
 
-body {
+BODY {
   position: relative;
   min-height: 100vh;
   margin: 0;
@@ -25,4 +25,8 @@ body {
   font-family: $body-font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+A {
+  text-decoration: none;
 }

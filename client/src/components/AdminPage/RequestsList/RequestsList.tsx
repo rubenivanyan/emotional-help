@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EmailIcon from '@mui/icons-material/Email';
 import CheckIcon from '@mui/icons-material/Check';
-import { AdminPagination } from '../../components/Pagination/Pagination';
+import { AdminPagination } from '../../Pagination/Pagination';
 
 const generate = (element: React.ReactElement) => {
   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) =>

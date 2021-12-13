@@ -4,9 +4,11 @@ import App from './components/app/app';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './index.scss';
 import { AdminPage } from './pages/AdminPage/AdminPage';
-import { RequestsList } from './components/RequestsList/RequestsList';
-import { UsersGrid } from './components/UsersGrid/UsersGrid';
-import { PsychoGrid } from './components/PsychologistsGrid/PsychologistsGrid';
+import { RequestsList } from './components/AdminPage/RequestsList/RequestsList';
+import { UsersGrid } from './components/AdminPage/UsersGrid/UsersGrid';
+import {
+  PsychoGrid,
+} from './components/AdminPage/PsychologistsGrid/PsychologistsGrid';
 import { Quiz } from './pages/QuizPage/QuizPage';
 
 ReactDOM.render(
