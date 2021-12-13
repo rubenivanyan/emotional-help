@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Block } from '../../Block/Block';
-import { TABS_TITLES } from '../../../common/enums';
+import { BLOCKS_TITLES } from '../../../common/enums';
 import { List } from '../../List/List';
 import { ListItem } from '../../ListItem/ListItem';
 
@@ -19,10 +19,10 @@ import { ListItem } from '../../ListItem/ListItem';
 // import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 // // import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 // import { Link } from 'react-router-dom';
-import './AdminTabs.scss';
+import './Tabs.scss';
 
 
-export const AdminTabs = () => {
+export const Tabs = () => {
   //   const [open, setOpen] = React.useState(true);
 
   //   // const handleClick = () => {
@@ -30,7 +30,7 @@ export const AdminTabs = () => {
   //   // };
 
   return (
-    <Block title={TABS_TITLES.NAVIGATION} percentWidth={100}>
+    <Block title={BLOCKS_TITLES.NAVIGATION} percentWidth={25}>
       <List>
         <ListItem link="pending-requests">
           New applications

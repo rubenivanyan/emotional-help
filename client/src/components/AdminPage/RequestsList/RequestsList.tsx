@@ -8,7 +8,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EmailIcon from '@mui/icons-material/Email';
 import CheckIcon from '@mui/icons-material/Check';
@@ -28,11 +27,8 @@ const ListContainer = styled('div')(({ theme }) => ({
 
 export const RequestsList = () => {
   return (
-    <Box sx={{ flexGrow: 1, minWidth: 900, width: '50%' }}>
+    <Box sx={{ flexGrow: 1, width: '100%' }}>
       <Grid item md={12}>
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          REQUESTS
-        </Typography>
         <ListContainer>
           <List dense={false}>
             {generate(

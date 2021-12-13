@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-export enum TABS_TITLES {
+export enum BLOCKS_TITLES {
   NAVIGATION = 'navigation',
   APPLICATIONS = 'applications',
   INFORMATION = 'information'
