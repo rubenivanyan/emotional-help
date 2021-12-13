@@ -1,31 +1,39 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  width: 600px;
+
+  height: 100%;
+  max-width: 600px;
 }
 
 .link {
-  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 100%;
-  width: 110px;
+
+  padding: 0 15px;
+
+  box-shadow: none;
+
+  color: #91bdb0;
   font-weight: 500;
   line-height: 20px;
-  color: white;
   text-decoration: none;
-  text-align: center;
-  position: relative;
+
   overflow: hidden;
   transition: 0.3s;
-  border-radius: 8px;
-  border: 2px solid white;
+
   &:hover {
-    color: #0094e9cc;
-    background-color: white;
-    transition: background-color 300ms linear;
+    box-shadow: inset 0 -5px 0 #91bdb0;
+
+    transition: box-shadow 300ms linear;
   }
 }
 
 .active {
-  color: #0094e9cc;
-  background-color: white;
+  font-weight: 800;
+
+  box-shadow: inset 0 -5px 0 #91bdb0;
 }
