@@ -1,3 +1,7 @@
-export enum SOME_ENUM {
-  TEMP = 'temp'
+/* eslint-disable no-unused-vars */
+
+export enum BLOCKS_TITLES {
+  NAVIGATION = 'navigation',
+  APPLICATIONS = 'applications',
+  INFORMATION = 'information'
 };

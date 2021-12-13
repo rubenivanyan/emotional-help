@@ -1,0 +1,56 @@
+.reg-buttons-container {
+  display: flex;
+  justify-content: space-between;
+
+  &>* {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-decoration: none;
+
+    cursor: pointer;
+  }
+}
+
+.sign-in {
+  height: 100%;
+
+  padding: 10px 10px;
+  margin: 0 10px 0 0;
+
+  background: none;
+  border-radius: 8px;
+  border: none;
+
+  color: #91bdb0;
+
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #91bdb0;
+
+    color: white;
+
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  }
+}
+
+.sign-up {
+  height: 100%;
+
+  padding: 10px 10px;
+
+  color: white;
+
+  background-color: #91bdb0;
+  border-radius: 8px;
+  border: none;
+
+  transition: 0.3s;
+
+  &:hover {
+    color: #91bdb0;
+    background-color: white;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  }
+}

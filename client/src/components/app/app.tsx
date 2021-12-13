@@ -1,11 +1,19 @@
 import React from 'react';
 import './app.scss';
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
+import { Outlet } from 'react-router-dom';
+import { Main } from '../Main/Main';
 
 const App: React.FC = () => {
   return (
-    <div className="wrapper">
-      <h1>React 17 and TypeScript 4 App!🚀</h1>
-    </div>
+    <>
+      <Header />
+      <Main>
+        <Outlet />
+      </Main>
+      <Footer />
+    </>
   );
 };
 export default App;
