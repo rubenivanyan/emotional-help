@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './QuizPage.scss';
 
 export const Quiz: React.FC = () => {
   const answerOptions = [
-    {answerText: '😀 Not at all', value: 0},
-    {answerText: '🙂 Rarely', value: 1},
-    {answerText: '😐 Sometimes', value: 2},
-    {answerText: '🙁 Often', value: 3},
-    {answerText: '😢 Constantly', value: 4},
+    { answerText: '😀 Not at all', value: 0 },
+    { answerText: '🙂 Rarely', value: 1 },
+    { answerText: '😐 Sometimes', value: 2 },
+    { answerText: '🙁 Often', value: 3 },
+    { answerText: '😢 Constantly', value: 4 },
   ];
   const questions = [
     {
