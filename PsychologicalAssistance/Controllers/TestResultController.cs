@@ -42,8 +42,8 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var user = await _userManager.GetUserAsync(User);
-            await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
-            return Ok();
+            var isSuccessfull = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
+            return isSuccessfull ? Ok() : BadRequest();
         }
 
         [HttpPut]

@@ -21,7 +21,7 @@ namespace PsychologicalAssistance.Services.Implementation
             _testRepository = testRepository;
         }
 
-        public async Task CreateTestResultsAsync(TestResultsDto testResultsDto, User user)
+        public async Task<bool> CreateTestResultsAsync(TestResultsDto testResultsDto, User user)
         {
             var testResults = new TestResults
             {
@@ -30,6 +30,11 @@ namespace PsychologicalAssistance.Services.Implementation
                 UserId = user.Id
             };
             var test = await _testRepository.GetTestWithQuestionsByIdDtoAsync(testResultsDto.TestId);
+            if (test == null)
+            {
+                return false;
+            }
+
             var answers = new List<Answer>();
             for(int i = 0; i < test.Questions.Count; i++)
             {
@@ -43,6 +48,7 @@ namespace PsychologicalAssistance.Services.Implementation
             testResults.Answers = answers;
             await _testResultsRepository.CreateAsync(testResults);
             await _unitOfWork.CommitAsync();
+            return true;
         }
 
         public async Task<IEnumerable<TestResultsDto>> GetAllTestsResultsAsync()
