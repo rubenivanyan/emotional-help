@@ -17,7 +17,7 @@ button.button {
   text-transform: uppercase;
 
   cursor: pointer;
-  transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, opacity 300ms ease-in-out;
 
   &.default {
     background-color: #71bded;
@@ -46,6 +46,17 @@ button.button {
       background-color: white;
 
       color: #34cf05;
+    }
+  }
+
+  &.submit {
+    opacity: .66;
+    background-color: lightgray;
+
+    &:hover {
+      background-color: lightgray;
+
+      color: white;
     }
   }
 }
