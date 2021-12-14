@@ -3,10 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Data.Configurations
 {
@@ -45,7 +41,7 @@ namespace PsychologicalAssistance.Core.Data.Configurations
                     Language = "EN",
                     VideoUrl = "www.twitter.com"
                 }
-                );
+            );
         }
     }
 }

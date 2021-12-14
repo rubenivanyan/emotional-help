@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Enums;
 
 namespace PsychologicalAssistance.Core.Data.Configurations
 {

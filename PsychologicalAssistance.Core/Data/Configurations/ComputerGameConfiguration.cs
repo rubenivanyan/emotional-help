@@ -28,7 +28,7 @@ namespace PsychologicalAssistance.Core.Data.Configurations
                     Language = "EN",
                     Review = "97/100"
                 }
-                );
+            );
         }
     }
 }
