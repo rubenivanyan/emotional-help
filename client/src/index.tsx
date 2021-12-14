@@ -10,6 +10,7 @@ import {
   PsychoGrid,
 } from './components/AdminPage/PsychologistsGrid/PsychologistsGrid';
 import { Quiz } from './pages/QuizPage/QuizPage';
+import { MainPage } from './pages/MainPage/MainPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.render(
             <Route path="viewed-requests" element={<RequestsList />} />
             <Route path="deleted-requests" element={<RequestsList />} />
           </Route>
+          <Route path="" element={<MainPage />} />
           <Route path="testing" element={<Quiz />} />
           <Route path="training" element={<Quiz />} />
           <Route path="consulting" element={<div>---Our team---</div>} />
