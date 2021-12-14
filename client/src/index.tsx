@@ -11,6 +11,10 @@ import {
 } from './components/AdminPage/PsychologistsGrid/PsychologistsGrid';
 import { Quiz } from './pages/QuizPage/QuizPage';
 import { MainPage } from './pages/MainPage/MainPage';
+import {
+  TrainingPage,
+  ConsultingPage,
+} from './pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,8 +31,8 @@ ReactDOM.render(
           </Route>
           <Route path="" element={<MainPage />} />
           <Route path="testing" element={<Quiz />} />
-          <Route path="training" element={<Quiz />} />
-          <Route path="consulting" element={<div>---Our team---</div>} />
+          <Route path="training" element={<TrainingPage />} />
+          <Route path="consulting" element={<ConsultingPage />} />
         </Route>
       </Routes>
     </Router>

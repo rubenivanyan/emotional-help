@@ -1,0 +1,15 @@
+.training-page-container,
+.consulting-page-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  .block-wrapper {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    text-align: justify;
+  }
+}
