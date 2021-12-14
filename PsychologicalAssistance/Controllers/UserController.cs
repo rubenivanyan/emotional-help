@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
@@ -14,48 +17,42 @@ namespace PsychologicalAssistance.Web.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IMapper mapper, IUserService userService)
         {
             _userService = userService;
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetAllUser()
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
-            var users = await _userService.GetAllUsersAsync();
-            return users is not null ? Ok(users) : NotFound();
+            var identity = await _userService.LoginUserAsync(userLoginDto.Email, userLoginDto.Password);
+            if (identity != null)
+            {
+                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity));
+                return Ok();
+            }
+
+            return BadRequest("Invalid UserName or Password");
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetUserById(int id)
+        [HttpPost("register")]
+        public async Task<ActionResult> Register([FromBody] UserRegistrationDto userRegistrationDto)
         {
-            var user = await _userService.GetUserByIdAsync(id);
-            return user is not null ? Ok(user) : NotFound();
+            var user = _mapper.Map<UserRegistrationDto, User>(userRegistrationDto);
+            var result = await _userService.RegisterUserAsync(user, userRegistrationDto.Password);
+            return result is null ? Ok() : BadRequest(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateUser([FromBody] UserDto userDto)
+        [HttpPost("logout")]
+        public async Task Logout()
         {
-            //TODO Check if object already exists
-            var user = _mapper.Map<User>(userDto);
-            await _userService.CreateAsync(user);
-            return Ok();
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> UpdateUser([FromBody] UserDto userDto)
-        {
-            var user = _mapper.Map<User>(userDto);
-            await _userService.UpdateAsync(user);
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUser(int id)
-        {
-            await _userService.DeleteAsync(id);
-            return NoContent();
+            var cookies = HttpContext.Request.Cookies.Keys;
+            foreach(var cookie in cookies)
+            {
+                HttpContext.Response.Cookies.Delete(cookie);
+            }
+            await HttpContext.SignOutAsync();
         }
     }
 }

@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PsychologicalAssistance.Core.Data;
+using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Implementation;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
@@ -30,11 +32,18 @@ namespace PsychologicalAssistance.Web
         {
             services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<User, IdentityRole>(opts => {
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireDigit = true;
+                opts.Password.RequireUppercase = true;
+                opts.Password.RequireLowercase = true;
+                opts.Password.RequireNonAlphanumeric = true;
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.ConfigureApplicationCookie(o => o.LoginPath = "/User/Login");
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
@@ -84,6 +93,8 @@ namespace PsychologicalAssistance.Web
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

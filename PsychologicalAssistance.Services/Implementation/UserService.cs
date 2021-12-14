@@ -1,27 +1,51 @@
-﻿using PsychologicalAssistance.Core.Data.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Repositories.Interfaces;
-using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
 {
-    public class UserService : BaseService<User>, IUserService
+    public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly UserManager<User> _userManager;
         
-        public UserService(IDataRepository<User> dataRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
-            : base(dataRepository, unitOfWork) 
+        public UserService(UserManager<User> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
-            => await _userRepository.GetAllUsersDtoAsync();
+        public async Task<ClaimsIdentity> LoginUserAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null && await _userManager.CheckPasswordAsync(user, password))
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+                foreach (var role in roles)
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                }
 
-        public async Task<UserDto> GetUserByIdAsync(int id)
-            => await _userRepository.GetUserByIdDtoAsync(id);
+                return identity;
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<IdentityError>> RegisterUserAsync(User user, string password)
+        {
+            var result = await _userManager.CreateAsync(user, password);
+            if(!result.Succeeded)
+            {
+                return result.Errors;
+            }
+
+            await _userManager.AddToRoleAsync(user, "Client");
+            return null;
+        }
     }
 }

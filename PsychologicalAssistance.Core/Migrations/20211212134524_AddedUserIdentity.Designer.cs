@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211212134524_AddedUserIdentity")]
+    partial class AddedUserIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,29 +46,6 @@ namespace PsychologicalAssistance.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "05650395-37b6-4124-8e6e-665d6597cf37",
-                            ConcurrencyStamp = "cc9c914e-bc1a-4d38-9a08-2138fc3cba35",
-                            Name = "Client",
-                            NormalizedName = "CLIENT"
-                        },
-                        new
-                        {
-                            Id = "e583dea9-c00e-41bd-b585-53dda77683d0",
-                            ConcurrencyStamp = "6351c4f2-b6a0-46aa-83ff-bb1a1a8ecd5a",
-                            Name = "Mentor",
-                            NormalizedName = "MENTOR"
-                        },
-                        new
-                        {
-                            Id = "ac307142-42c1-42c1-8899-568aa9d398f3",
-                            ConcurrencyStamp = "d668ba8c-d3ce-4f01-829e-321751e3e6a4",
-                            Name = "Administrator",
-                            NormalizedName = "ADMIN ISTRATOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -400,7 +379,12 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TestId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TestId");
 
                     b.ToTable("Questions");
 
@@ -456,14 +440,9 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Property<int>("TestId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TestId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TestResults");
                 });
@@ -475,9 +454,6 @@ namespace PsychologicalAssistance.Core.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -523,15 +499,11 @@ namespace PsychologicalAssistance.Core.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserSurname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
-                        
+
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
@@ -554,21 +526,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Variants");
-                });
-
-            modelBuilder.Entity("QuestionTest", b =>
-                {
-                    b.Property<int>("QuestionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionsId", "TestsId");
-
-                    b.HasIndex("TestsId");
-
-                    b.ToTable("QuestionTest");
                 });
 
             modelBuilder.Entity("QuestionVariant", b =>
@@ -656,6 +613,13 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Navigation("TestResults");
                 });
 
+            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Question", b =>
+                {
+                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Test", null)
+                        .WithMany("Questions")
+                        .HasForeignKey("TestId");
+                });
+
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.TestResults", b =>
                 {
                     b.HasOne("PsychologicalAssistance.Core.Data.Entities.Test", "Test")
@@ -664,28 +628,7 @@ namespace PsychologicalAssistance.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.User", "User")
-                        .WithMany("TestResults")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Test");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("QuestionTest", b =>
-                {
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.Test", null)
-                        .WithMany()
-                        .HasForeignKey("TestsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("QuestionVariant", b =>
@@ -703,14 +646,14 @@ namespace PsychologicalAssistance.Core.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Test", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.TestResults", b =>
                 {
                     b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.User", b =>
-                {
-                    b.Navigation("TestResults");
                 });
 #pragma warning restore 612, 618
         }

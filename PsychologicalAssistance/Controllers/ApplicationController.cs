@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Client")]
         public async Task<ActionResult> GetAllApplications()
         {
             var applications = await _applicationService.GetAllApplicationsAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Mentor")]
         public async Task<ActionResult> GetApplicationById(int id)
         {
             var application = await _applicationService.GetApplicationByIdAsync(id);
