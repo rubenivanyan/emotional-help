@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Block } from '../../Block/Block';
-import { BLOCK_TITLES } from '../../../common/block-titles';
+import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { List } from '../../List/List';
 import { ListItem } from '../../ListItem/ListItem';
 

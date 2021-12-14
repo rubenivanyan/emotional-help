@@ -1,4 +1,4 @@
-import { BLOCK_TITLES } from '../../../common/block-titles';
+import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import React, { PropsWithChildren } from 'react';
 import './Applications.scss';
