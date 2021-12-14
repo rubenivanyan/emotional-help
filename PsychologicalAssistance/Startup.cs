@@ -15,6 +15,7 @@ using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Implementation;
 using PsychologicalAssistance.Services.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Web
 {
@@ -83,7 +84,7 @@ namespace PsychologicalAssistance.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -91,6 +92,8 @@ namespace PsychologicalAssistance.Web
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PsychologicalAssistance v1"));
             }
+
+            CreateDefaultAdmin(serviceProvider);
 
             app.UseHttpsRedirection();
 
@@ -104,6 +107,27 @@ namespace PsychologicalAssistance.Web
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void CreateDefaultAdmin(IServiceProvider serviceProvider)
+        {
+            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();            
+            var user = Task.Run(() => UserManager.FindByEmailAsync("admin@email.com")).Result;
+            if (user == null)
+            {
+                var admin = new User
+                {
+                    UserName = "Admin",
+                    UserSurname = "Admin",
+                    Email = "admin@email.com",
+                };
+                string adminPassword = "Admin1!";
+                var result = Task.Run(() => UserManager.CreateAsync(admin, adminPassword)).Result;
+                if (result.Succeeded)
+                {
+                    Task.Run(() => UserManager.AddToRoleAsync(admin, "Administrator"));
+                }
+            }
         }
     }
 }

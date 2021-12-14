@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PsychologicalAssistance.Core.Enums
+﻿namespace PsychologicalAssistance.Core.Enums
 {
     public enum ComputerGameGenres
     {
@@ -12,6 +6,8 @@ namespace PsychologicalAssistance.Core.Enums
         Survival = 1,
         Horror = 2,
         Adventure = 3,
-        Puzzle = 4
+        Puzzle = 4,
+        ActionAdventure = 5,
+        ActionRolePlaying = 6
     }
 }
