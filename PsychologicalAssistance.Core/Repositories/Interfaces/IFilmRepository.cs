@@ -7,7 +7,8 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
 {
     public interface IFilmRepository : IDataRepository<Film>
     {
-        public Task<IEnumerable<FilmDto>> GetAllFilmsDtoAsync();
-        public Task<FilmDto> GetFilmByIdDtoAsync(int id);
+        Task<IEnumerable<FilmDto>> GetAllFilmsDtoAsync();
+        Task<FilmDto> GetFilmByIdDtoAsync(int id);
+        Task<IEnumerable<FilmDto>> GetFilmsByGenreDtoAsync(List<string> genres);
     }
 }

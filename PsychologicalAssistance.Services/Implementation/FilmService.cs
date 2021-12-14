@@ -24,26 +24,5 @@ namespace PsychologicalAssistance.Services.Implementation
 
         public async Task<FilmDto> GetFilmByIdAsync(int id)
             => await _filmRepository.GetFilmByIdDtoAsync(id);
-
-
-
-
-
-
-
-
-
-
-
-
-        public Task<IEnumerable<FilmDto>> GetAllTestsAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<FilmDto> GetTestByIdAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

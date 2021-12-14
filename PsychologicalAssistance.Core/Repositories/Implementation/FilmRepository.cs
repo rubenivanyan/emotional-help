@@ -2,9 +2,12 @@
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
+using PsychologicalAssistance.Core.Enums;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -40,6 +43,15 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             }
 
             var filmsDto = _mapper.Map<Film, FilmDto>(films);
+            return filmsDto;
+        }
+
+        public async Task<IEnumerable<FilmDto>> GetFilmsByGenreDtoAsync(List<string> genres)
+        {
+            var films = await Task.Run(() => DbSet.AsEnumerable<Film>()
+                .Where(film => genres.Contains(Enum.GetName<FilmGenres>(film.Genre)))
+                .Select(film => film).ToList());
+            var filmsDto = _mapper.Map<IEnumerable<Film>, IEnumerable<FilmDto>>(films);
             return filmsDto;
         }
     }

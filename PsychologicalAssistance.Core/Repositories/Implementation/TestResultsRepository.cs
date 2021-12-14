@@ -58,5 +58,15 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             return testResults;
         }
+
+        public async Task<List<AnswerDto>> GetAnswersByUserIdAsync(int testResultsId, string userId)
+        {
+            var answers = await Task.Run(() => DbSet
+                .Where(testResults => testResults.Id == testResultsId && testResults.User.Id == userId)
+                .Select(testResults => _mapper.Map<IEnumerable<Answer>, IEnumerable<AnswerDto>>(testResults.Answers).ToList())
+                .FirstOrDefault());
+
+            return answers;
+        }
     }
 }

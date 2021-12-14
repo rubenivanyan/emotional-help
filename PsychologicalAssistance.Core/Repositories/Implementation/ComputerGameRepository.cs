@@ -2,9 +2,12 @@
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
+using PsychologicalAssistance.Core.Enums;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -40,6 +43,15 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             var gameDto = _mapper.Map<ComputerGame, ComputerGameDto>(game);
             return gameDto;
+        }
+
+        public async Task<IEnumerable<ComputerGameDto>> GetComputerGamesByGenreDtoAsync(List<string> genres)
+        {
+            var computerGames = await Task.Run(() => DbSet.AsEnumerable<ComputerGame>()
+                .Where(computerGame => genres.Contains(Enum.GetName<ComputerGameGenres>(computerGame.Genre)))
+                .Select(computerGame => computerGame).ToList());
+            var computerGamesDto = _mapper.Map<IEnumerable<ComputerGame>, IEnumerable<ComputerGameDto>>(computerGames);
+            return computerGamesDto;
         }
     }
 }

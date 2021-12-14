@@ -19,6 +19,7 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<Film> Films { get; set; }
         public DbSet<ComputerGame> ComputerGames { get; set; }
         public DbSet<Music> Musics { get; set; }
+        public DbSet<EmotionGenre> EmotionsGenres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
