@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PsychologicalAssistance.Core.Data.Entities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PsychologicalAssistance.Core.Data.DTOs
@@ -8,9 +10,12 @@ namespace PsychologicalAssistance.Core.Data.DTOs
         public DateTime DateOfResults { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         public int TestId { get; set; }
+        
+        [Required]
+        public List<VariantDto> ChosenVariants { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
         public TestResultsProfile()
         {
             CreateMap<TestResults, TestResultsDto>().ReverseMap();
+            CreateMap<TestResults, TestResultsForUserDto>()
+                .ForMember(u => u.UserFullName, opts => opts.MapFrom(s => s.User.UserName + s.User.UserSurname))
+                .ForMember(t => t.Questions, opts => opts.MapFrom(s => s.Test.Questions));
         }
     }
 }

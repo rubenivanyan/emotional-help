@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
-using System.Linq;
 
 namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
 {
-    public class TestProfile : Profile
+    public class AnswerProfile : Profile
     {
-        public TestProfile()
+        public AnswerProfile()
         {
-            CreateMap<Test, TestDto>().ReverseMap();
-
-            CreateMap<Test, FullTestDto>().ReverseMap();
+            CreateMap<Answer, AnswerDto>().ReverseMap();
         }
     }
 }
