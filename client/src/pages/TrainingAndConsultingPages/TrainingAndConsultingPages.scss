@@ -1,15 +1,31 @@
-.training-page-container,
-.consulting-page-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.training-page,
+.consulting-page {
+  &-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-  transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
-  .block-wrapper {
-    padding-right: 15px;
-    padding-left: 15px;
+    .block-wrapper {
+      padding-right: 15px;
+      padding-left: 15px;
 
-    text-align: justify;
+      text-align: justify;
+    }
+
+    .attention {
+      color: #91bdb0;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+
+  &-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
