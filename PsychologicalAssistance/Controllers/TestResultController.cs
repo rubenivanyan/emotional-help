@@ -34,7 +34,7 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetTestResultsById(int id)
         {
-            var testResults = await _testResultsService.GetTestResultsByIdAsync(id);
+            var testResults = await _testResultsService.GetTestResultsForUserByIdAsync(id);
             return testResults is not null ? Ok(testResults) : NotFound();
         }
 

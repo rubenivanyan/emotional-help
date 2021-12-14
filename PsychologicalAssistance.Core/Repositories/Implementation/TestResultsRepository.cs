@@ -5,6 +5,7 @@ using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -40,6 +41,22 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             var testResultsDto = _mapper.Map<TestResults, TestResultsDto>(testResults);
             return testResultsDto;
+        }
+
+        public async Task<TestResultsForUserDto> GetTestResultsForUserByIdAsync(int id)
+        {
+            var testResults = await Task.Run(() => DbSet.Where(testResults => testResults.Id == id).Select(testResults => new TestResultsForUserDto
+            {
+                Id = testResults.Id,
+                TestId = testResults.TestId,
+                UserId = testResults.UserId,
+                UserFullName = testResults.User.UserName + testResults.User.UserSurname,
+                ResultsDate = testResults.ResultsDate,
+                Answers = _mapper.Map<IEnumerable<Answer>, IEnumerable<AnswerDto>>(testResults.Answers).ToList(),
+                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionDto>>(testResults.Test.Questions).ToList()
+            }).FirstOrDefault());
+
+            return testResults;
         }
     }
 }
