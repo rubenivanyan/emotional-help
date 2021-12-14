@@ -5,6 +5,7 @@ import { BLOCK_TITLES } from '../../common/block-titles';
 import { TRAINING_AND_CONSULTING_TEXT } from '../../common/texts';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/button-types';
+import { Input } from '../../components/Input/Input';
 
 const ParentComponent = ({ title, text, children }:
   PropsWithChildren<{ title: string, text: string }>) => {
@@ -38,7 +39,8 @@ export const TrainingPage = () => {
       title={BLOCK_TITLES.TRAINING}
       text={TRAINING_AND_CONSULTING_TEXT.TRAINING_TEXT}
     >
-
+      <Input label={'E-mail'} />
+      <Input label={'Name'} />
     </ParentComponent>
   );
 };

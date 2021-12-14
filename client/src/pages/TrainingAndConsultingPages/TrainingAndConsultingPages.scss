@@ -27,5 +27,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+
+      & input {
+        margin-bottom: 10px;
+      }
+    }
   }
 }
