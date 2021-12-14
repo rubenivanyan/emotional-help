@@ -39,8 +39,8 @@ export const TrainingPage = () => {
       title={BLOCK_TITLES.TRAINING}
       text={TRAINING_AND_CONSULTING_TEXT.TRAINING_TEXT}
     >
-      <Input label={'E-mail'} />
       <Input label={'Name'} />
+      <Input label={'E-mail'} />
     </ParentComponent>
   );
 };
@@ -51,7 +51,9 @@ export const ConsultingPage = () => {
       title={BLOCK_TITLES.CONSULTING}
       text={TRAINING_AND_CONSULTING_TEXT.CONSULTING_TEXT}
     >
-
+      <Input label={'Name'} />
+      <Input label={'E-mail'} />
+      <Input label={'Convenient day'} />
     </ParentComponent>
   );
 };
