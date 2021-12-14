@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Block } from '../../Block/Block';
-import { BLOCKS_TITLES } from '../../../common/enums';
+import { BLOCK_TITLES } from '../../../common/block-titles';
 import { List } from '../../List/List';
 import { ListItem } from '../../ListItem/ListItem';
 
@@ -30,7 +30,7 @@ export const Tabs = () => {
   //   // };
 
   return (
-    <Block title={BLOCKS_TITLES.NAVIGATION} percentWidth={25}>
+    <Block title={BLOCK_TITLES.NAVIGATION} percentWidth={25}>
       <List>
         <ListItem link="pending-requests">
           New applications

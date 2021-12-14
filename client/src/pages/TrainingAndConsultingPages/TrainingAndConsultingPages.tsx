@@ -1,10 +1,8 @@
 import { Block } from '../../components/Block/Block';
 import React, { PropsWithChildren } from 'react';
 import './TrainingAndConsultingPages.scss';
-import {
-  BLOCKS_TITLES,
-  TRAINING_AND_CONSULTING_TEXT,
-} from '../../common/enums';
+import { BLOCK_TITLES } from '../../common/block-titles';
+import { TRAINING_AND_CONSULTING_TEXT } from '../../common/texts';
 
 const ParentComponent = ({ title, text, children }:
   PropsWithChildren<{ title: string, text: string }>) => {
@@ -21,7 +19,7 @@ const ParentComponent = ({ title, text, children }:
 export const TrainingPage = () => {
   return (
     <ParentComponent
-      title={BLOCKS_TITLES.TRAINING}
+      title={BLOCK_TITLES.TRAINING}
       text={TRAINING_AND_CONSULTING_TEXT.TRAINING_TEXT}
     >
 
@@ -32,7 +30,7 @@ export const TrainingPage = () => {
 export const ConsultingPage = () => {
   return (
     <ParentComponent
-      title={BLOCKS_TITLES.CONSULTING}
+      title={BLOCK_TITLES.CONSULTING}
       text={TRAINING_AND_CONSULTING_TEXT.CONSULTING_TEXT}
     >
 
