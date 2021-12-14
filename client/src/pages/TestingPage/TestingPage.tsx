@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './QuizPage.scss';
 
-export const Quiz: React.FC = () => {
+export const TestingPage: React.FC = () => {
   const answerOptions = [
     { answerText: '😀 Not at all', value: 0 },
     { answerText: '🙂 Rarely', value: 1 },
