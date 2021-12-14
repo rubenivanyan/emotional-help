@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -13,11 +15,13 @@ namespace PsychologicalAssistance.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ITestResultsService _testResultsService;
+        private readonly UserManager<User> _userManager;
 
-        public TestResultController(ITestResultsService testResultsService, IMapper mapper)
+        public TestResultController(ITestResultsService testResultsService, IMapper mapper, UserManager<User> userManager)
         {
             _mapper = mapper;
             _testResultsService = testResultsService;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -37,8 +41,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
-            var testResults = _mapper.Map<TestResultsDto, TestResults>(testResultsDto);
-            await _testResultsService.CreateAsync(testResults);
+            var user = await _userManager.GetUserAsync(User);
+            await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
             return Ok();
         }
 

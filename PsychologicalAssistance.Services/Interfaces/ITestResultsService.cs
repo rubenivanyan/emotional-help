@@ -9,5 +9,6 @@ namespace PsychologicalAssistance.Services.Interfaces
     {
         Task<IEnumerable<TestResultsDto>> GetAllTestsResultsAsync();
         Task<TestResultsDto> GetTestResultsByIdAsync(int id);
+        Task CreateTestResultsAsync(TestResultsDto testResultsDto, User user);
     }
 }

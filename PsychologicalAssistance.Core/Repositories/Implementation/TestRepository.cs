@@ -58,7 +58,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
         public async Task<FullTestDto> GetTestWithQuestionsByIdDtoAsync(int id)
         {
-            var test = await Task.Run(() => DbSet.Where(t => t.Id == id).Include(t => t.Questions).Select(t => new FullTestDto
+            var test = await Task.Run(() => DbSet.Where(t => t.Id == id).Include(t => t.Questions).ThenInclude(v => v.Variants).Select(t => new FullTestDto
             {
                 Id = t.Id,
                 Title = t.Title,

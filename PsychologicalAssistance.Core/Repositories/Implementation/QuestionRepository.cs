@@ -51,7 +51,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 Id = question.Id,
                 Formulation = question.Formulation,
                 ImageUrl = question.ImageUrl,
-                VariantsFormulations = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
+                Variants = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
             }));
 
             return questions;
@@ -64,7 +64,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 Id = question.Id,
                 Formulation = question.Formulation,
                 ImageUrl = question.ImageUrl,
-                VariantsFormulations = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
+                Variants = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(question.Variants).ToList()
             }).FirstOrDefaultAsync());
             return question;
         }
