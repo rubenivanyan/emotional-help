@@ -1,4 +1,4 @@
-import { BUTTON_TYPES } from '../../common/button-types';
+import { BUTTON_TYPES } from '../../common/enums/button-types';
 import React from 'react';
 import './Button.scss';
 
