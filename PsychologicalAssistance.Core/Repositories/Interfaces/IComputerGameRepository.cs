@@ -9,5 +9,6 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
     {
         Task<IEnumerable<ComputerGameDto>> GetAllComputerGamesDtoAsync();
         Task<ComputerGameDto> GetComputerGameByIdDtoAsync(int id);
+        Task<IEnumerable<ComputerGameDto>> GetComputerGamesByGenreDtoAsync(List<string> genres);
     }
 }

@@ -9,5 +9,6 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
     {
         Task<IEnumerable<MusicDto>> GetAllMusicsDtoAsync();
         Task<MusicDto> GetMusicByIdDtoAsync(int id);
+        Task<IEnumerable<MusicDto>> GetMusicByGenreDtoAsync(List<string> genres);
     }
 }

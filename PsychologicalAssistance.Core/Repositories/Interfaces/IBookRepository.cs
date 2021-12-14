@@ -9,5 +9,6 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
     {
         Task<IEnumerable<BookDto>> GetAllBooksDtoAsync();
         Task<BookDto> GetBookByIdDtoAsync(int id);
+        Task<IEnumerable<BookDto>> GetBooksByGenreDtoAsync(List<string> genres);
     }
 }
