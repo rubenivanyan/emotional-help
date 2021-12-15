@@ -34,6 +34,20 @@ namespace PsychologicalAssistance.Web.Controllers
             return variant is not null ? Ok(variant) : NotFound();
         }
 
+        [HttpGet("with-genres")]
+        public async Task<ActionResult> GetAllVariantsWithGenres()
+        {
+            var variants = await _variantService.GetAllVariantsWithGenresAsync();
+            return variants is not null ? Ok(variants) : NotFound();
+        }
+
+        [HttpGet("{id}/with-genres")]
+        public async Task<ActionResult> GetVariantWithGenresById(int id)
+        {
+            var variant = await _variantService.GetVariantWithGenresByIdAsync(id);
+            return variant is not null ? Ok(variant) : NotFound();
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateVariant([FromBody] VariantDto variantDto)
         {

@@ -31,5 +31,12 @@ namespace PsychologicalAssistance.Web.Controllers
             var genre = await _genreService.GetGenreByIdAsync(id);
             return genre is not null ? Ok(genre) : NotFound();
         }
+
+        [HttpPost("{variantId} {genreId}")]
+        public async Task<ActionResult> AddGenreToVariant(int variantId, int genreId)
+        {
+            await _genreService.AddGenreToVariant(variantId, genreId);
+            return Ok();
+        }
     }
 }

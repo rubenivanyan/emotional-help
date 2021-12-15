@@ -9,5 +9,6 @@ namespace PsychologicalAssistance.Services.Interfaces
     {
         Task<GenreDto> GetGenreByIdAsync(int id);
         Task<IEnumerable<GenreDto>> GetAllGenresAsync();
+        Task AddGenreToVariant(int variantId, int genreId);
     }
 }

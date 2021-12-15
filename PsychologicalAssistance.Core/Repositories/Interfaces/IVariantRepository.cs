@@ -10,5 +10,7 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
         Task<IEnumerable<VariantDto>> GetAllVariantsDtoAsync();
         Task<VariantDto> GetVariantDtoAsync(int id);
         Task<List<string>> GetGenresTitlesByVariantTitleAsync(string formulation);
+        Task<List<VariantGenresDto>> GetAllVariantsWithGenresDtoAsync();
+        Task<VariantGenresDto> GetVariantWithGenresByIdDtoAsync(int id);
     }
 }
