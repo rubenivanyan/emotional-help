@@ -3,24 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
-    public partial class ChangedSeedingApproach : Migration
+    public partial class FixDuplicateRoles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "1175641b-f945-4458-8ef2-c12feb6ed6ae");
+                keyValue: "16983d08-8957-4e3b-8c64-9bbccd439ffa");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "dd365bfa-0691-4f56-9be3-3ecaa8365e35");
+                keyValue: "5b71fd6e-753c-497d-9159-b45c02560bce");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "eb8657fd-767e-4a49-bd89-0f45b97e29b5");
+                keyValue: "eee6b5df-88b5-429c-b4d0-41f12dd60498");
 
             migrationBuilder.DeleteData(
                 table: "Books",
@@ -140,17 +140,17 @@ namespace PsychologicalAssistance.Core.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e301ea7f-9436-4690-8792-2bfe42eeaa7e", "931193f3-0155-4a7d-beb7-f847aec5e794", "Client", "CLIENT" });
+                values: new object[] { "49282e03-d1a3-4842-bb8c-b4a131949e2a", "2eb94be4-4ba6-496a-840b-6342a67b7531", "Client", "CLIENT" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "706fcc69-1215-48a5-b3f3-7125ce064448", "1fa68a82-d9fd-4403-88bb-27630c1a77ea", "Mentor", "MENTOR" });
+                values: new object[] { "5336cb0a-ea0d-4125-bef2-0f4bba687db1", "19f062b9-9684-4b28-bad7-a9fc469318bb", "Mentor", "MENTOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "59e8170c-63c8-496c-934a-657da92a53ad", "ecb195ac-b2d9-45d3-ae04-71e50ccc5dfc", "Administrator", "ADMIN ISTRATOR" });
+                values: new object[] { "51ad33c3-2ffc-4d56-8df4-f9435318e1d1", "a3569d9c-95cd-465b-8a4e-0baefb0f0c4a", "Administrator", "ADMIN ISTRATOR" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -158,26 +158,26 @@ namespace PsychologicalAssistance.Core.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "59e8170c-63c8-496c-934a-657da92a53ad");
+                keyValue: "49282e03-d1a3-4842-bb8c-b4a131949e2a");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "706fcc69-1215-48a5-b3f3-7125ce064448");
+                keyValue: "51ad33c3-2ffc-4d56-8df4-f9435318e1d1");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "e301ea7f-9436-4690-8792-2bfe42eeaa7e");
+                keyValue: "5336cb0a-ea0d-4125-bef2-0f4bba687db1");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "dd365bfa-0691-4f56-9be3-3ecaa8365e35", "5d90b520-070f-4190-a3fe-73419b3506b0", "Client", "CLIENT" },
-                    { "1175641b-f945-4458-8ef2-c12feb6ed6ae", "9335db0f-2677-4aee-af9f-f4796d73e55a", "Mentor", "MENTOR" },
-                    { "eb8657fd-767e-4a49-bd89-0f45b97e29b5", "62bd2583-a5c1-44f3-89e6-f4d4a946f250", "Administrator", "ADMIN ISTRATOR" }
+                    { "16983d08-8957-4e3b-8c64-9bbccd439ffa", "b6679a39-f478-4d8e-958b-2219659e5663", "Client", "CLIENT" },
+                    { "eee6b5df-88b5-429c-b4d0-41f12dd60498", "e1745295-237c-4430-a09f-35b4e8f29fc8", "Mentor", "MENTOR" },
+                    { "5b71fd6e-753c-497d-9159-b45c02560bce", "0939cf5b-bf71-4076-92f4-e0cb3e85fa60", "Administrator", "ADMIN ISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
