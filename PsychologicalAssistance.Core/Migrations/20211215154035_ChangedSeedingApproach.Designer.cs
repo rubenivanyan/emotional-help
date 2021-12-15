@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211215154035_ChangedSeedingApproach")]
+    partial class ChangedSeedingApproach
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,15 +226,7 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Property<bool>("IsArchived")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TestResultsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TestResultsId");
 
                     b.ToTable("Applications");
                 });
@@ -624,17 +618,6 @@ namespace PsychologicalAssistance.Core.Migrations
                         .IsRequired();
 
                     b.Navigation("Question");
-
-                    b.Navigation("TestResults");
-                });
-
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Application", b =>
-                {
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.TestResults", "TestResults")
-                        .WithMany()
-                        .HasForeignKey("TestResultsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("TestResults");
                 });

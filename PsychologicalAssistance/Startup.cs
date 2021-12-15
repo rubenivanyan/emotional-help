@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.Entities;
+using PsychologicalAssistance.Core.Data.Seeding;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Implementation;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
@@ -87,6 +88,16 @@ namespace PsychologicalAssistance.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            var seedingConfig = Configuration.GetSection("SeedingConfig").Get<SeedingConfig>();
+            if (seedingConfig != null && seedingConfig.IsOn)
+            {
+                using (var serviceScope = serviceProvider.CreateScope())
+                {
+                    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    Initializer.Initialize(dbContext);
+                }
+            }
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
