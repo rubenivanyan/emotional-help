@@ -1,8 +1,18 @@
-.quiz-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.testing-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  .block-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &.sending {
+    opacity: .66;
+  }
 }
 
 .quiz-info {
@@ -13,28 +23,66 @@
 
 .quiz-info-text {
   padding-left: 20px;
-  max-width: 400px;
   text-align: justify;
 }
 
 .question-container {
   margin-top: 50px;
   background-color: #dadbdd;
-  width: 450px;
-  min-height: 300px;
   height: min-content;
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: space-evenly;
 }
 
 .score-section {
   display: flex;
-  flex-direction: column;
-  font-size: 24px;
   align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  .score-list {
+    margin-top: 0;
+
+    font-size: 24px;
+  }
+
+  .sending-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & form {
+      &>* {
+        margin-bottom: 10px;
+      }
+
+      & input {
+        background-color: white;
+      }
+    }
+  }
+
+
+  .link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    a.button {
+      font-size: 24px;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+  }
+
+
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
@@ -64,27 +112,39 @@
 }
 
 .answer-button {
-  width: 100%;
-  font-size: 25px;
-  color: #ffffff;
-  background-color: #4db6d5;
-  border-radius: 15px;
   display: flex;
-  padding: 5px;
-  justify-content: flex-start;
   align-items: center;
-  border: 5px solid #234668;
+  justify-content: flex-start;
+
+  width: 100%;
+
+  padding: 5px;
+  margin-bottom: 10px;
+
+  background-color: #71bded;
+  border: none;
+  border-radius: 15px;
+
+  color: #ffffff;
+  font-size: 24px;
+
   cursor: pointer;
-}
 
-.answer-button:hover {
-  background-color: #555e7d;
-}
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
-.answer-button:focus {
-  outline: none;
-}
+  &:hover {
+    background-color: white;
 
-.answer-button svg {
-  margin-right: 5px;
+    color: #71bded;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  & svg {
+    margin-right: 5px;
+  }
 }

@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import './QuizPage.scss';
+import './TestingPage.scss';
+import { Block } from '../../components/Block/Block';
+import { BLOCK_TITLES } from '../../common/enums/block-titles';
+import { Input } from '../../components/Input/Input';
+import { Button } from '../../components/Button/Button';
+import { BUTTON_TYPES } from '../../common/enums/button-types';
+import {
+  Success,
+  Error,
+} from '../TrainingAndConsultingPages/TrainingAndConsultingPages';
 
 export const TestingPage: React.FC = () => {
   const answerOptions = [
@@ -84,8 +93,7 @@ export const TestingPage: React.FC = () => {
       questionGroup: 'Asthenia',
     },
     {
-      // eslint-disable-next-line
-      questionText: "You can't regain your strength even after good rest",
+      questionText: 'You can\'t regain your strength even after good rest',
       questionGroup: 'Asthenia',
     },
     {
@@ -114,10 +122,25 @@ export const TestingPage: React.FC = () => {
   const [scoreGroupFour, setScoreGroupFour] = useState(0);
   const [scoreGroupFive, setScoreGroupFive] = useState(0);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
+    setIsSubmitting(true);
+    event.preventDefault();
+    const random = Math.round(Math.random());
+    setTimeout(() => {
+      random ? setSuccess(true) : setError(true);
+      setIsSubmitting(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    if (error) setTimeout(() => setError(false), 3000);
+  }, [error]);
+
   const handleAnswerOptionClick = (value, group) => {
-    console.log(group);
-    console.log(value);
-    console.log(scoreGroupOne);
     switch (group) {
       case 'Depression':
         setScoreGroupOne(scoreGroupOne + value);
@@ -142,61 +165,93 @@ export const TestingPage: React.FC = () => {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      setShowScore(true);
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setShowScore(true);
+        setIsSubmitting(false);
+      }, 2000);
     }
   };
   return (
-    <div className="quiz-container">
-      <div className="quiz-info">
-        <InfoOutlinedIcon fontSize="large" color="info" />
-        <div className="quiz-info-text">
-          <h2>EMOTIONAL STATE TEST</h2>
-          <p>
-            This test will help you to understand your emotional state. The test
-            does not allow diagnosis, nor does it provide medical evaluations. A
-            psychiatrist or clinical psychologist should be consulted to obtain
-            an appropriate assessment.
-          </p>
-        </div>
-      </div>
-      <div className="question-container">
-        {showScore ? (
-          <div className="score-section">
-            Results:
-            <p>Depression: {scoreGroupOne}</p>
-            <p>Neurosis: {scoreGroupTwo}</p>
-            <p>Social anxiety: {scoreGroupThree}</p>
-            <p>Asthenia: {scoreGroupFour}</p>
-            <p>Insomnia: {scoreGroupFive}</p>
+    <section
+      className={
+        'testing-container' +
+        (isSubmitting && !showScore ? ' sending' : '')
+      }>
+      <Block title={BLOCK_TITLES.TESTING} percentWidth={100}>
+        <head className="quiz-info">
+          <InfoOutlinedIcon fontSize="large" color="info" />
+          <div className="quiz-info-text">
+            <h2>EMOTIONAL STATE TEST</h2>
+            <p>
+              This test will help you to understand your emotional state.
+              The test does not allow diagnosis, nor does it provide medical
+              evaluations. A psychiatrist or clinical psychologist should be
+              consulted to obtain an appropriate assessment.
+            </p>
           </div>
-        ) : (
-          <>
-            <div className="question-section">
-              <div className="question-count">
-                <span>Question {currentQuestion + 1}</span>/{questions.length}
+        </head>
+        <section className="question-container">
+          {showScore ? (
+            <div className="score-section">
+              <ul className="score-list">
+                Your results:
+                <li>Depression: {scoreGroupOne}</li>
+                <li>Neurosis: {scoreGroupTwo}</li>
+                <li>Social anxiety: {scoreGroupThree}</li>
+                <li>Asthenia: {scoreGroupFour}</li>
+                <li>Insomnia: {scoreGroupFive}</li>
+              </ul>
+              <div className="sending-container">
+                {success ?
+                  <Success /> :
+                  error ?
+                    <Error /> :
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                      <Input label={'Name'}></Input>
+                      <Input label={'E-mail'}></Input>
+                      <Button
+                        title={isSubmitting ? 'sending...' : 'send'}
+                        type={BUTTON_TYPES.DEFAULT}
+                        submitting={isSubmitting}
+                      />
+                    </form>
+                }
               </div>
-              <div className="question-text">
-                {questions[currentQuestion].questionText}
+              <div className="link-container">
+                <a className="button" href="/training">Join training</a>
+                <a className="button" href="/consulting">Order consulting</a>
               </div>
             </div>
-            <div className="answer-section">
-              {answerOptions.map((answerOption) => (
-                <button
-                  className="answer-button"
-                  key={answerOption.answerText}
-                  onClick={() =>
-                    handleAnswerOptionClick(
-                      answerOption.value,
-                      questions[currentQuestion].questionGroup,
-                    )
-                  }>
-                  {answerOption.answerText}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+          ) : (
+            <>
+              <div className="question-section">
+                <div className="question-count">
+                  <span>Question {currentQuestion + 1}</span>/{questions.length}
+                </div>
+                <div className="question-text">
+                  {questions[currentQuestion].questionText}
+                </div>
+              </div>
+              <div className="answer-section">
+                {answerOptions.map((answerOption) => (
+                  <button
+                    className="answer-button"
+                    key={answerOption.answerText}
+                    onClick={() =>
+                      handleAnswerOptionClick(
+                        answerOption.value,
+                        questions[currentQuestion].questionGroup,
+                      )
+                    }>
+                    {answerOption.answerText}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </section>
+      </Block>
+    </section>
   );
 };
