@@ -37,6 +37,14 @@ namespace PsychologicalAssistance.Web.Controllers
             return application is not null ? Ok(application) : NotFound();
         }
 
+        [HttpGet("{id}/full")]
+        [Authorize(Roles = "Mentor")]
+        public async Task<ActionResult> GetFullApplicationById(int id)
+        {
+            var fullApplication = await _applicationService.GetFullApplicationDtoByIdAsync(id);
+            return fullApplication is not null ? Ok(fullApplication) : NotFound();
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateApplication([FromBody] ApplicationDto applicationDto)
         {

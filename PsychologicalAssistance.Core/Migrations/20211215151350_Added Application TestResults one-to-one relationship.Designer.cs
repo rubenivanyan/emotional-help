@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211215151350_Added Application TestResults one-to-one relationship")]
+    partial class AddedApplicationTestResultsonetoonerelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,22 +65,22 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e301ea7f-9436-4690-8792-2bfe42eeaa7e",
-                            ConcurrencyStamp = "931193f3-0155-4a7d-beb7-f847aec5e794",
+                            Id = "16983d08-8957-4e3b-8c64-9bbccd439ffa",
+                            ConcurrencyStamp = "b6679a39-f478-4d8e-958b-2219659e5663",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "706fcc69-1215-48a5-b3f3-7125ce064448",
-                            ConcurrencyStamp = "1fa68a82-d9fd-4403-88bb-27630c1a77ea",
+                            Id = "eee6b5df-88b5-429c-b4d0-41f12dd60498",
+                            ConcurrencyStamp = "e1745295-237c-4430-a09f-35b4e8f29fc8",
                             Name = "Mentor",
                             NormalizedName = "MENTOR"
                         },
                         new
                         {
-                            Id = "59e8170c-63c8-496c-934a-657da92a53ad",
-                            ConcurrencyStamp = "ecb195ac-b2d9-45d3-ae04-71e50ccc5dfc",
+                            Id = "5b71fd6e-753c-497d-9159-b45c02560bce",
+                            ConcurrencyStamp = "0939cf5b-bf71-4076-92f4-e0cb3e85fa60",
                             Name = "Administrator",
                             NormalizedName = "ADMIN ISTRATOR"
                         });
@@ -259,6 +261,32 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Author = "Imbolo Mbue",
+                            Genre = 5,
+                            Language = "EN",
+                            Title = "How Beautiful We Were"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Author = "Katie Kitamura",
+                            Genre = 5,
+                            Language = "EN",
+                            Title = "Intimacies"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Author = "Michael Connelly",
+                            Genre = 0,
+                            Language = "EN",
+                            Title = "The Dark Hours"
+                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.ComputerGame", b =>
@@ -286,6 +314,26 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ComputerGames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Company = "CDProjectRed",
+                            Genre = 6,
+                            Language = "RU",
+                            Review = "93/100",
+                            Title = "The Witcher 3: Wild Hunt"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Company = "Rockstar",
+                            Genre = 5,
+                            Language = "EN",
+                            Review = "97/100",
+                            Title = "Red Dead Redemption 2"
+                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Film", b =>
@@ -322,6 +370,41 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Films");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Country = "USA",
+                            FilmDuration = 0,
+                            Genre = 4,
+                            Language = "EN",
+                            Title = "The Godfather",
+                            VideoUrl = "google.com",
+                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1972)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Country = "USA",
+                            FilmDuration = 0,
+                            Genre = 4,
+                            Language = "EN",
+                            Title = "The Shawshank Redemption",
+                            VideoUrl = "www.facebook.com",
+                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(1994)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Country = "USA",
+                            FilmDuration = 0,
+                            Genre = 1,
+                            Language = "EN",
+                            Title = "The Dark Knight",
+                            VideoUrl = "www.twitter.com",
+                            Year = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2008)
+                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Genre", b =>
@@ -337,6 +420,33 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "ActionRolePlaying"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "ActionAdventure"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Action"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Title = "Fantasy"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Title = "Jazz"
+                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Music", b =>
@@ -361,6 +471,16 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Musics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Executor = "Frank Sinatra",
+                            Genre = 1,
+                            Language = "EN",
+                            Title = "A Jolly Christmas from Frank Sinatra"
+                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Question", b =>
@@ -380,6 +500,26 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Formulation = "How are you? Your mood?",
+                            ImageUrl = "dasddsa@fsfdss"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Formulation = "What is your emotion now?",
+                            ImageUrl = "dasddsa@fsfdss"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Formulation = "How do you feel now?",
+                            ImageUrl = "dasddsa@fsfdss"
+                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Test", b =>
@@ -511,6 +651,38 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Variants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Formulation = "Happiness"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Formulation = "Boredom"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Formulation = "Certainty"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Formulation = "Compassion"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Formulation = "Disappointment"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Formulation = "Embarrassment"
+                        });
                 });
 
             modelBuilder.Entity("QuestionTest", b =>
