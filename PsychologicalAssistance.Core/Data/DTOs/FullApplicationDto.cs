@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class FullApplicationDto : BaseDto
+    public class FullApplicationDto : ApplicationDto
     {
-        public string FullName { get; set; }
-        public string MailAddress { get; set; }
-        public string TestTitle { get; set; }
-        public DateTime Date { get; set; }
-        public Dictionary<string, string> QuestionsAndAnswers { get; set; }
-        public bool IsArchived { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Message { get; set; }
+        public List<string> QuestionsFormulations { get; set; }
+        public List<string> AnswersFormulations { get; set; }
+        public DateTime DateOfResults { get; set; }
     }
 }
