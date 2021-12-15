@@ -42,13 +42,6 @@ namespace PsychologicalAssistance.Core.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            /*modelBuilder.ApplyConfiguration(new FilmConfiguration());
-            modelBuilder.ApplyConfiguration(new BookConfiguration());
-            modelBuilder.ApplyConfiguration(new QuestionConfiguration());
-            modelBuilder.ApplyConfiguration(new ComputerGameConfiguration());
-            modelBuilder.ApplyConfiguration(new GenreConfiguration());
-            modelBuilder.ApplyConfiguration(new MusicConfiguration());
-            modelBuilder.ApplyConfiguration(new VariantConfiguration());*/
         }
     }
 }
