@@ -26,25 +26,25 @@
 
     font-size: 36px;
   }
+}
 
-  a.button {
-    padding: 5px 10px;
-    margin: 0 5px;
+a.button {
+  padding: 5px 10px;
+  margin: 0 5px;
 
-    background-color: #71bded;
-    border-radius: 10px;
+  background-color: #71bded;
+  border-radius: 10px;
 
-    color: white;
-    text-decoration: none;
-    line-height: 100px;
-    white-space: nowrap;
+  color: white;
+  text-decoration: none;
+  line-height: 100px;
+  white-space: nowrap;
 
-    transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
 
-    &:hover {
-      background-color: white;
+  &:hover {
+    background-color: white;
 
-      color: #71bded;
-    }
+    color: #71bded;
   }
 }

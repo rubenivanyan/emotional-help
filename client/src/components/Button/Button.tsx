@@ -2,10 +2,10 @@ import { BUTTON_TYPES } from '../../common/enums/button-types';
 import React from 'react';
 import './Button.scss';
 
-export const Button = ({ title, type, submiting, onClick }:
-  { title: string, type: BUTTON_TYPES, submiting?: boolean, onClick?}) => {
+export const Button = ({ title, type, submitting, onClick }:
+  { title: string, type: BUTTON_TYPES, submitting?: boolean, onClick?}) => {
   return <button
-    className={'button ' + type + (submiting ? ' submit ' : '')}
+    className={'button ' + type + (submitting ? ' submit ' : '')}
     onClick={onClick}
   >
     {title}

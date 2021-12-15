@@ -1,0 +1,150 @@
+.testing-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  .block-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &.sending {
+    opacity: .66;
+  }
+}
+
+.quiz-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.quiz-info-text {
+  padding-left: 20px;
+  text-align: justify;
+}
+
+.question-container {
+  margin-top: 50px;
+  background-color: #dadbdd;
+  height: min-content;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.score-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  .score-list {
+    margin-top: 0;
+
+    font-size: 24px;
+  }
+
+  .sending-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & form {
+      &>* {
+        margin-bottom: 10px;
+      }
+
+      & input {
+        background-color: white;
+      }
+    }
+  }
+
+
+  .link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    a.button {
+      font-size: 24px;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+  }
+
+
+}
+
+/* QUESTION/TIMER/LEFT SECTION */
+.question-section {
+  width: 100%;
+  position: relative;
+}
+
+.question-count {
+  margin-bottom: 20px;
+}
+
+.question-count span {
+  font-size: 28px;
+}
+
+.question-text {
+  margin-bottom: 12px;
+}
+
+/* ANSWERS/RIGHT SECTION */
+.answer-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.answer-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+
+  padding: 5px;
+  margin-bottom: 10px;
+
+  background-color: #71bded;
+  border: none;
+  border-radius: 15px;
+
+  color: #ffffff;
+  font-size: 24px;
+
+  cursor: pointer;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    background-color: white;
+
+    color: #71bded;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  & svg {
+    margin-right: 5px;
+  }
+}

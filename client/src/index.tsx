@@ -9,7 +9,7 @@ import { UsersGrid } from './components/AdminPage/UsersGrid/UsersGrid';
 import {
   PsychoGrid,
 } from './components/AdminPage/PsychologistsGrid/PsychologistsGrid';
-import { Quiz } from './pages/QuizPage/QuizPage';
+import { TestingPage } from './pages/TestingPage/TestingPage';
 import { MainPage } from './pages/MainPage/MainPage';
 import {
   TrainingPage,
@@ -30,7 +30,7 @@ ReactDOM.render(
             <Route path="deleted-requests" element={<RequestsList />} />
           </Route>
           <Route path="" element={<MainPage />} />
-          <Route path="testing" element={<Quiz />} />
+          <Route path="testing" element={<TestingPage />} />
           <Route path="training" element={<TrainingPage />} />
           <Route path="consulting" element={<ConsultingPage />} />
         </Route>
