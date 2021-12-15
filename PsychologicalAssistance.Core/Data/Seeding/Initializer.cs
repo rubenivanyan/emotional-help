@@ -7,7 +7,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding
     {
         public static void Initialize(ApplicationDbContext dbContext)
         {
-            var type = typeof(IComplexDbInitializers);
+            var type = typeof(IDbInitializers);
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract);
@@ -17,7 +17,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             foreach(var item in types)
             {
                 var method = item.GetMethod("Initialize", parametersTypes);
-                IComplexDbInitializers complexDbInitializers = (IComplexDbInitializers)Activator.CreateInstance(item);
+                IDbInitializers complexDbInitializers = (IDbInitializers)Activator.CreateInstance(item);
                 method.Invoke(complexDbInitializers, arguments);
             }
         }

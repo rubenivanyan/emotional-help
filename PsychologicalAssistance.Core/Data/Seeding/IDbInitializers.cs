@@ -1,6 +1,6 @@
 ﻿namespace PsychologicalAssistance.Core.Data.Seeding
 {
-    public interface IComplexDbInitializers
+    public interface IDbInitializers
     {
         void Initialize(ApplicationDbContext dbContext);
     }

@@ -2,12 +2,12 @@
 
 namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
 {
-    public class QuestionVariantsInitializers : IComplexDbInitializers
+    public class QuestionVariantsInitializer : IDbInitializers
     {
         public void Initialize(ApplicationDbContext dbContext)
         {
             var questions = dbContext.Questions.ToList();
-            if (questions.Any(question => question.Variants != null))
+            if (questions.Any(question => question.Variants.Count != 0))
             {
                 return;
             }
