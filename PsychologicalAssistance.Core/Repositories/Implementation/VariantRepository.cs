@@ -5,6 +5,7 @@ using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -40,6 +41,15 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             var variantDto = _mapper.Map<Variant, VariantDto>(variant);
             return variantDto;
+        }
+
+        public async Task<List<string>> GetGenresTitlesByVariantTitleAsync(string formulation)
+        {
+            var genres = await Task.Run(() => DbSet
+                .Where(variant => variant.Formulation == formulation)
+                .Select(variant => variant.Genres.ToList()) as List<Genre>);
+            var genresTitles = genres.Select(genre => genre.Title).ToList();
+            return genresTitles;
         }
     }
 }

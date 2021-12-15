@@ -15,18 +15,18 @@ namespace PsychologicalAssistance.Services.Implementation
         private readonly IMusicRepository _musicRepository;
         private readonly IComputerGameRepository _computerGamesRepository;
         private readonly ITestResultsRepository _testResultsRepository;
-        private readonly IEmotionGenreRepository _emotionGenreRepository;
+        private readonly IVariantRepository _variantRepository;
 
         public MaterialsRecommendationService(IFilmRepository filmRepository, IBookRepository bookRepository,
             IMusicRepository musicRepository, IComputerGameRepository computerGameRepository,
-            ITestResultsRepository testResultsRepository, IEmotionGenreRepository emotionGenreRepository)
+            ITestResultsRepository testResultsRepository, IVariantRepository variantRepository)
         {
             _filmRepository = filmRepository;
             _musicRepository = musicRepository;
             _bookRepository = bookRepository;
             _computerGamesRepository = computerGameRepository;
             _testResultsRepository = testResultsRepository;
-            _emotionGenreRepository = emotionGenreRepository;
+            _variantRepository = variantRepository;
         }
 
         public async Task<MaterialsRecommendationsDto> GetMaterialsRecommendationsForUserAsync(User user, int testResultsId)
@@ -48,11 +48,11 @@ namespace PsychologicalAssistance.Services.Implementation
             }
 
             var basicEmotion = countEmotions.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
-            var genres = await _emotionGenreRepository.GetGenreByEmotionAsync(basicEmotion);
-            var films = await _filmRepository.GetFilmsByGenreDtoAsync(genres);
-            var music = await _musicRepository.GetMusicByGenreDtoAsync(genres);
-            var books = await _bookRepository.GetBooksByGenreDtoAsync(genres);
-            var computerGames = await _computerGamesRepository.GetComputerGamesByGenreDtoAsync(genres);
+            var genresTitles = await _variantRepository.GetGenresTitlesByVariantTitleAsync(basicEmotion);
+            var films = await _filmRepository.GetFilmsByGenreDtoAsync(genresTitles);
+            var music = await _musicRepository.GetMusicByGenreDtoAsync(genresTitles);
+            var books = await _bookRepository.GetBooksByGenreDtoAsync(genresTitles);
+            var computerGames = await _computerGamesRepository.GetComputerGamesByGenreDtoAsync(genresTitles);
 
             var recommendations = new MaterialsRecommendationsDto
             {
