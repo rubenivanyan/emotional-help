@@ -182,13 +182,26 @@ export const TestingPage: React.FC = () => {
         <head className="quiz-info">
           <InfoOutlinedIcon fontSize="large" color="info" />
           <div className="quiz-info-text">
-            <h2>EMOTIONAL STATE TEST</h2>
-            <p>
-              This test will help you to understand your emotional state.
-              The test does not allow diagnosis, nor does it provide medical
-              evaluations. A psychiatrist or clinical psychologist should be
-              consulted to obtain an appropriate assessment.
-            </p>
+            {
+              showScore ?
+                (
+                  <>
+                    <h2>RECOMMENDATIONS</h2>
+                  </>
+                ) : (
+                  <>
+                    <h2>EMOTIONAL STATE TEST</h2>
+                    <p>
+                      This test will help you to understand
+                      your emotional state.
+                      The test does not allow diagnosis,
+                      nor does it provide medical evaluations.
+                      A psychiatrist or clinical psychologist should be
+                      consulted to obtain an appropriate assessment.
+                    </p>
+                  </>
+                )
+            }
           </div>
         </head>
         <section className="question-container">
@@ -251,7 +264,7 @@ export const TestingPage: React.FC = () => {
             </>
           )}
         </section>
-      </Block>
-    </section>
+      </Block >
+    </section >
   );
 };
