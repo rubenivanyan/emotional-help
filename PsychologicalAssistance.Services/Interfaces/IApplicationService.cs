@@ -9,5 +9,6 @@ namespace PsychologicalAssistance.Services.Interfaces
     {
         Task<IEnumerable<ApplicationDto>> GetAllApplicationsAsync();
         Task<ApplicationDto> GetApplicationByIdAsync(int id);
+        Task<FullApplicationDto> GetFullApplicationDtoByIdAsync(int id);
     }
 }
