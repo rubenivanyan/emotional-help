@@ -11,13 +11,11 @@ namespace PsychologicalAssistance.Web.Controllers
     [Route("api/[controller]")]
     public class MaterialsRecommendationController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly IMaterialsRecommendationService _materialsRecommendationService;
         private readonly UserManager<User> _userManager;
 
-        public MaterialsRecommendationController(IMaterialsRecommendationService materialsRecommendationService, IMapper mapper, UserManager<User> userManager)
+        public MaterialsRecommendationController(IMaterialsRecommendationService materialsRecommendationService, UserManager<User> userManager)
         {
-            _mapper = mapper;
             _materialsRecommendationService = materialsRecommendationService;
             _userManager = userManager;
         }

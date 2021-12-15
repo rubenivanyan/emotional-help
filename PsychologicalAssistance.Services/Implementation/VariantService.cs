@@ -34,5 +34,11 @@ namespace PsychologicalAssistance.Services.Implementation
             await _questionRepository.UpdateAsync(question);
             await _unitOfWork.CommitAsync();
         }
+
+        public async Task<List<VariantGenresDto>> GetAllVariantsWithGenresAsync()
+            => await _variantRepository.GetAllVariantsWithGenresDtoAsync();
+
+        public async Task<VariantGenresDto> GetVariantWithGenresByIdAsync(int id)
+            => await _variantRepository.GetVariantWithGenresByIdDtoAsync(id);
     }
 }

@@ -7,7 +7,10 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
 {
     public interface IVariantRepository : IDataRepository<Variant>
     {
-        public Task<IEnumerable<VariantDto>> GetAllVariantsDtoAsync();
-        public Task<VariantDto> GetVariantDtoAsync(int id);
+        Task<IEnumerable<VariantDto>> GetAllVariantsDtoAsync();
+        Task<VariantDto> GetVariantDtoAsync(int id);
+        Task<List<string>> GetGenresTitlesByVariantTitleAsync(string formulation);
+        Task<List<VariantGenresDto>> GetAllVariantsWithGenresDtoAsync();
+        Task<VariantGenresDto> GetVariantWithGenresByIdDtoAsync(int id);
     }
 }

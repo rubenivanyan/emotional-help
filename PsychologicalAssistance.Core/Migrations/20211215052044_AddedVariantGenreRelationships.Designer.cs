@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211215052044_AddedVariantGenreRelationships")]
+    partial class AddedVariantGenreRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,22 +65,22 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dd365bfa-0691-4f56-9be3-3ecaa8365e35",
-                            ConcurrencyStamp = "5d90b520-070f-4190-a3fe-73419b3506b0",
+                            Id = "66c9f390-350d-4120-9d43-7de6649489a6",
+                            ConcurrencyStamp = "0b20887f-3c13-4b02-aa1f-7b3fb4c72873",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "1175641b-f945-4458-8ef2-c12feb6ed6ae",
-                            ConcurrencyStamp = "9335db0f-2677-4aee-af9f-f4796d73e55a",
+                            Id = "3e633c4b-b146-4fee-ad5a-c690d301127d",
+                            ConcurrencyStamp = "f0f2cde7-0a1a-4bc1-a32e-24ee242b1bac",
                             Name = "Mentor",
                             NormalizedName = "MENTOR"
                         },
                         new
                         {
-                            Id = "eb8657fd-767e-4a49-bd89-0f45b97e29b5",
-                            ConcurrencyStamp = "62bd2583-a5c1-44f3-89e6-f4d4a946f250",
+                            Id = "22eb60a9-c6ef-4eb0-8b05-b96dc05f6983",
+                            ConcurrencyStamp = "42b0a12e-7053-46f3-ab8b-b410dec4b9d3",
                             Name = "Administrator",
                             NormalizedName = "ADMIN ISTRATOR"
                         });
@@ -410,33 +412,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Title = "ActionRolePlaying"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Title = "ActionAdventure"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Title = "Action"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Title = "Fantasy"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Title = "Jazz"
-                        });
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Music", b =>

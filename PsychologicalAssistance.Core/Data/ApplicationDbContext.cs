@@ -19,7 +19,7 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<Film> Films { get; set; }
         public DbSet<ComputerGame> ComputerGames { get; set; }
         public DbSet<Music> Musics { get; set; }
-        public DbSet<EmotionGenre> EmotionsGenres { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,7 @@ namespace PsychologicalAssistance.Core.Data
             modelBuilder.ApplyConfiguration(new BookConfiguration());
             modelBuilder.ApplyConfiguration(new QuestionConfiguration());
             modelBuilder.ApplyConfiguration(new ComputerGameConfiguration());
-            modelBuilder.ApplyConfiguration(new EmotionGenreConfiguration());
+            modelBuilder.ApplyConfiguration(new GenreConfiguration());
             modelBuilder.ApplyConfiguration(new MusicConfiguration());
             modelBuilder.ApplyConfiguration(new VariantConfiguration());
         }
