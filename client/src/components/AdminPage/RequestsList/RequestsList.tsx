@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -12,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EmailIcon from '@mui/icons-material/Email';
 import CheckIcon from '@mui/icons-material/Check';
 import { AdminPagination } from '../../Pagination/Pagination';
+import { RootState } from '../../../store/reducers/rootReducer';
 
 const generate = (element: React.ReactElement) => {
   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) =>
@@ -26,6 +28,9 @@ const ListContainer = styled('div')(({ theme }) => ({
 }));
 
 export const RequestsList = () => {
+  const applicationsState = useSelector(
+    (state: RootState) => state.applications,
+  );
   return (
     <Box sx={{ flexGrow: 1, width: '100%' }}>
       <Grid item md={12}>
@@ -49,8 +54,8 @@ export const RequestsList = () => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="Single-line item"
-                  secondary="Secondary text"
+                  primary={applicationsState.name}
+                  secondary={applicationsState.email}
                 />
               </ListItem>,
             )}

@@ -21,7 +21,6 @@ import { ListItem } from '../../ListItem/ListItem';
 // import { Link } from 'react-router-dom';
 import './Tabs.scss';
 
-
 export const Tabs = () => {
   //   const [open, setOpen] = React.useState(true);
 
@@ -32,17 +31,14 @@ export const Tabs = () => {
   return (
     <Block title={BLOCKS_TITLES.NAVIGATION} percentWidth={25}>
       <List>
-        <ListItem link="pending-requests">
-          New applications
-        </ListItem>
-        <ListItem link="deleted-requests">Archive</ListItem>
-        <ListItem link="users">Users</ListItem>
-        <ListItem link="psychologists">Psychologists</ListItem>
+        <ListItem link="requests/pending-requests">New applications</ListItem>
+        <ListItem link="requests/deleted-requests">Archive</ListItem>
+        <ListItem link="users/users">Users</ListItem>
+        <ListItem link="users/psychologists">Psychologists</ListItem>
       </List>
     </Block>
   );
 };
-
 
 //   return (
 //     <List

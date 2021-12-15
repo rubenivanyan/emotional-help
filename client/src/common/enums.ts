@@ -3,5 +3,6 @@
 export enum BLOCKS_TITLES {
   NAVIGATION = 'navigation',
   APPLICATIONS = 'applications',
-  INFORMATION = 'information'
-};
+  INFORMATION = 'information',
+  USERS = 'users',
+}
