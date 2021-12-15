@@ -51,7 +51,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteApplication(int id)
+        public async Task<ActionResult> DeleteFilm(int id)
         {
             await _filmService.DeleteAsync(id);
             return NoContent();
