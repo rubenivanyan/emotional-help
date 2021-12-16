@@ -4,10 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input/Input';
 import { apiFetchPost } from '../../api/fetch';
 import { Block } from '../../components/Block/Block';
-import {
-  Success,
-  Error,
-} from '../TrainingAndConsultingPages/TrainingAndConsultingPages';
+import { Success } from '../../components/Success/Success';
+import { Error } from '../../components/Error/Error';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { UserLogin } from '../../common/types/user-login';
@@ -20,6 +18,7 @@ export const SignInPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setIsRemember(isRemember);
@@ -41,6 +40,9 @@ export const SignInPage = () => {
         setSuccess(true);
       } else {
         setError(true);
+        setErrorMessage(response.status === 400 ?
+          'Invalid e-mail/password' :
+          '');
       }
     })
       .catch((error) => {
@@ -58,7 +60,7 @@ export const SignInPage = () => {
             <Success /> :
             error ?
               <>
-                <Error />
+                <Error error={errorMessage} />
                 <Button title={'retry'}
                   type={BUTTON_TYPES.DEFAULT}
                   onClick={() => setError(false)} />

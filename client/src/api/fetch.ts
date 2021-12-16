@@ -12,11 +12,9 @@ export const apiFetchPost = (path: string, item: any) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(item),
   };
-  return fetch(`${PATH}${path}`, requestOptions)
-    .then((response) => response.json());
+  return fetch(`${PATH}${path}`, requestOptions);
 };
 
 export const apiFetchGet = async (path: string) => {
-  return await fetch(`${PATH}${path}`)
-    .then((response) => response.json());
+  return await fetch(`${PATH}${path}`);
 };

@@ -4,10 +4,8 @@ import { Input } from '../../components/Input/Input';
 import { UserRegistration } from '../../common/types/user-registration';
 import { apiFetchPost } from '../../api/fetch';
 import { Block } from '../../components/Block/Block';
-import {
-  Success,
-  Error,
-} from '../TrainingAndConsultingPages/TrainingAndConsultingPages';
+import { Success } from '../../components/Success/Success';
+import { Error } from '../../components/Error/Error';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 
@@ -22,6 +20,7 @@ export const SignUpPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setBirthDate(birthDate);
@@ -29,6 +28,7 @@ export const SignUpPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
+
     setIsSubmitting(true);
     const userRegistration: UserRegistration = {
       name: name,
@@ -38,16 +38,21 @@ export const SignUpPage = () => {
       password: password,
       confirmationPassword: confirmPassword,
     };
+
     apiFetchPost(
       '/api/User/register',
       userRegistration,
-    ).then((response) => {
-      if (response.ok) {
-        setSuccess(true);
-      } else {
-        setError(true);
-      }
-    })
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          setSuccess(true);
+        } else {
+          setError(true);
+          setErrorMessage(response[0]?.description ||
+            response?.errors?.Email[0]);
+        }
+      })
       .catch((error) => {
         console.log('Fetch Post', error);
         setError(true);
@@ -63,7 +68,7 @@ export const SignUpPage = () => {
             <Success /> :
             error ?
               <>
-                <Error />
+                <Error error={errorMessage} />
                 <Button title={'retry'}
                   type={BUTTON_TYPES.DEFAULT}
                   onClick={() => setError(false)} />

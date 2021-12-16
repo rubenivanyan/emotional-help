@@ -6,10 +6,8 @@ import { BLOCK_TITLES } from '../../common/enums/block-titles';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
-import {
-  Success,
-  Error,
-} from '../TrainingAndConsultingPages/TrainingAndConsultingPages';
+import { Success } from '../../components/Success/Success';
+import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 
 export const TestingPage: React.FC = () => {
