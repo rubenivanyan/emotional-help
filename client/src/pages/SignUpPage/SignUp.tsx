@@ -43,19 +43,16 @@ export const SignUpPage = () => {
       '/api/User/register',
       userRegistration,
     )
-      .then((response) => response.json())
       .then((response) => {
-        if (response.ok) {
+        if (response.status === 200 || response.status === 204) {
           setSuccess(true);
         } else {
           setError(true);
-          setErrorMessage(response[0]?.description ||
-            response?.errors?.Email[0]);
+          setErrorMessage(response[0]?.description);
         }
       })
       .catch((error) => {
         console.log('Fetch Post', error);
-        setError(true);
       })
       .finally(() => setIsSubmitting(false));
   };
