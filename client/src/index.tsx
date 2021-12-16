@@ -13,6 +13,9 @@ import { PsychoGrid } from './components/AdminPage/PsychologistsGrid/Psychologis
 import { Quiz } from './pages/QuizPage/QuizPage';
 import { Applications } from './components/AdminPage/Applications/Applications';
 import { Users } from './components/AdminPage/Users/Users';
+import { Tests } from './components/AdminPage/Tests/Tests';
+import { Library } from './components/AdminPage/Library/Library';
+import { Questions } from './components/AdminPage/Questions/Questions';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -32,13 +35,15 @@ ReactDOM.render(
                 <Route path="users" element={<UsersGrid />} />
                 <Route path="psychologists" element={<PsychoGrid />} />
               </Route>
-              <Route path="library" element={<RequestsList />}>
+              <Route path="library" element={<Library />}>
                 <Route path="music" element={<UsersGrid />} />
                 <Route path="films" element={<PsychoGrid />} />
                 <Route path="books" element={<PsychoGrid />} />
                 <Route path="games" element={<PsychoGrid />} />
               </Route>
-              <Route path="tests" element={<RequestsList />} />
+              <Route path="tests" element={<Tests />}></Route>
+              <Route path="questions" element={<Questions />}></Route>
+              <Route path="questions/:id" element={<Questions />}></Route>
               <Route path="*" element={<p>404</p>} />
             </Route>
             <Route path="testing" element={<Quiz />} />

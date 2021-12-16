@@ -5,4 +5,7 @@ export enum BLOCKS_TITLES {
   APPLICATIONS = 'applications',
   INFORMATION = 'information',
   USERS = 'users',
+  LIBRARY = 'library',
+  TESTS = 'tests',
+  QUESTIONS = 'questions',
 }

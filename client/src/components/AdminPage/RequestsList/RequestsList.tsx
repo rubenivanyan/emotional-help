@@ -31,6 +31,7 @@ export const RequestsList = () => {
   const applicationsState = useSelector(
     (state: RootState) => state.applications,
   );
+  console.log(applicationsState);
   return (
     <Box sx={{ flexGrow: 1, width: '100%' }}>
       <Grid item md={12}>

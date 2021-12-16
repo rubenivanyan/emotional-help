@@ -17,16 +17,16 @@ import { ListItem } from '../../ListItem/ListItem';
 // import Typography from '@mui/material/Typography';
 // import GroupIcon from '@mui/icons-material/Group';
 // import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-// // import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+// import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 // import { Link } from 'react-router-dom';
 import './Tabs.scss';
 
 export const Tabs = () => {
-  //   const [open, setOpen] = React.useState(true);
+  // const [open, setOpen] = React.useState(true);
 
-  //   // const handleClick = () => {
-  //   //   setOpen(!open);
-  //   // };
+  // const handleClick = () => {
+  //   setOpen(!open);
+  // };
 
   return (
     <Block title={BLOCKS_TITLES.NAVIGATION} percentWidth={25}>
@@ -35,6 +35,8 @@ export const Tabs = () => {
         <ListItem link="requests/deleted-requests">Archive</ListItem>
         <ListItem link="users/users">Users</ListItem>
         <ListItem link="users/psychologists">Psychologists</ListItem>
+        <ListItem link="library/">Library</ListItem>
+        <ListItem link="tests/">Tests</ListItem>
       </List>
     </Block>
   );
