@@ -15,3 +15,8 @@ export const apiFetchPost = (path: string, item: any) => {
   return fetch(`${PATH}${path}`, requestOptions)
     .then((response) => response.json());
 };
+
+export const apiFetchGet = async (path: string) => {
+  return await fetch(`${PATH}${path}`)
+    .then((response) => response.json());
+};
