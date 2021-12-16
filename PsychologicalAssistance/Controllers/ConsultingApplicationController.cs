@@ -37,6 +37,20 @@ namespace PsychologicalAssistance.Web.Controllers
             return consultingApplication is not null ? Ok(consultingApplication) : NotFound();
         }
 
+        [HttpGet("all")]
+        public async Task<ActionResult> GetAllConsultingApplicationsWithUserInfo()
+        {
+            var consultingApplications = await _consultingApplicationService.GetAllConsultingApplicationsWithUserInfoAsync();
+            return consultingApplications is not null ? Ok(consultingApplications) : NotFound();
+        }
+
+        [HttpGet("{id}/all")]
+        public async Task<ActionResult> GetConsultingApplicationWithUserInfoById(int id)
+        {
+            var consultingApplication = await _consultingApplicationService.GetConsultingApplicationWithUserInfoByIdAsync(id);
+            return consultingApplication is not null ? Ok(consultingApplication) : NotFound();
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateConsultingApplication([FromBody] ConsultingApplicationDto consultingApplicationDto)
         {

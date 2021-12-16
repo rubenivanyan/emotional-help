@@ -1,13 +1,9 @@
 ﻿using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
@@ -26,7 +22,13 @@ namespace PsychologicalAssistance.Services.Implementation
         public async Task<IEnumerable<ConsultingApplicationDto>> GetAllConsultingApplicationsAsync()
             => await _consultingApplicationRepository.GetAllConsultingApplicationsDtoAsync();
 
+        public async Task<IEnumerable<FullConsultingApplicationDto>> GetAllConsultingApplicationsWithUserInfoAsync()
+            => await _consultingApplicationRepository.GetFullConsultingApplicationsWithUserInfoDtoAsync();
+
         public async Task<ConsultingApplicationDto> GetConsultingApplicationByIdAsync(int id)
             => await _consultingApplicationRepository.GetConsultingApplicationByIdDtoAsync(id);
+
+        public async Task<FullConsultingApplicationDto> GetConsultingApplicationWithUserInfoByIdAsync(int id)
+            => await _consultingApplicationRepository.GetFullConsultingApplicationWithUserInfoByIdDtoAsync(id);
     }
 }

@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PsychologicalAssistance.Core.Data;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Abstract;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
@@ -43,6 +42,39 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             var consultingApplicationDto = _mapper.Map<ConsultingApplication, ConsultingApplicationDto>(consultingApplication);
             return consultingApplicationDto;
+        }
+
+        public async Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationsWithUserInfoDtoAsync()
+        {
+            var consultingApplications = await Task.Run(() => DbSet
+                .Include(consultingApplication => consultingApplication.User)
+                .Select(consultingApplication => new FullConsultingApplicationDto
+                {
+                    Id = consultingApplication.Id,
+                    ConvenientDay = consultingApplication.ConvenientDay.ToShortDateString(),
+                    UserId = consultingApplication.User.Id,
+                    UserFullName = consultingApplication.User.UserName + " " + consultingApplication.User.UserSurname,
+                    Email = consultingApplication.User.Email,
+                }).ToList());
+
+            return consultingApplications;
+        }
+
+        public async Task<FullConsultingApplicationDto> GetFullConsultingApplicationWithUserInfoByIdDtoAsync(int id)
+        {
+            var consultingApplication = await Task.Run(() => DbSet
+                .Where(consultingApplication => consultingApplication.Id == id)
+                .Include(consultingApplication => consultingApplication.User)
+                .Select(consultingApplication => new FullConsultingApplicationDto
+                {
+                    Id = consultingApplication.Id,
+                    ConvenientDay = consultingApplication.ConvenientDay.ToShortDateString(),
+                    UserId = consultingApplication.UserId,
+                    UserFullName = consultingApplication.User.UserName + " " + consultingApplication.User.UserSurname,
+                    Email = consultingApplication.User.Email
+                }).FirstOrDefault());
+
+            return consultingApplication;
         }
     }
 }

@@ -9,5 +9,7 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
     {
         Task<IEnumerable<ConsultingApplicationDto>> GetAllConsultingApplicationsDtoAsync();
         Task<ConsultingApplicationDto> GetConsultingApplicationByIdDtoAsync(int id);
+        Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationsWithUserInfoDtoAsync();
+        Task<FullConsultingApplicationDto> GetFullConsultingApplicationWithUserInfoByIdDtoAsync(int id);
     }
 }
