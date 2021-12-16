@@ -62,7 +62,12 @@ export const SignUpPage = () => {
           success ?
             <Success /> :
             error ?
-              <Error /> :
+              <>
+                <Error />
+                <Button title={'retry'}
+                  type={BUTTON_TYPES.DEFAULT}
+                  onClick={() => setError(false)} />
+              </> :
               <form onSubmit={(event) => handleSubmit(event)}>
                 <Input
                   label={'Name'}
