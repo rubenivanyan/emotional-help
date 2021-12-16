@@ -16,6 +16,7 @@ import {
   ConsultingPage,
 } from './pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
 import { SignUpPage } from './pages/SignUpPage/SignUp';
+import { SignInPage } from './pages/SignInPage/SignInPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -35,6 +36,7 @@ ReactDOM.render(
           <Route path="training" element={<TrainingPage />} />
           <Route path="consulting" element={<ConsultingPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
+          <Route path="sign-in" element={<SignInPage />} />
         </Route>
       </Routes>
     </Router>
