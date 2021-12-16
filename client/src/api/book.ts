@@ -1,7 +1,7 @@
 import { mockedBooks } from '../common/mocks/books';
-import { apiFetch } from './fetch';
+import { apiFetchLibraryItems } from './fetch';
 
 export const getBooks = async () => {
-  const books = await apiFetch('/api/Book');
+  const books = await apiFetchLibraryItems('/api/Book');
   return books.length ? books : mockedBooks;
 };
