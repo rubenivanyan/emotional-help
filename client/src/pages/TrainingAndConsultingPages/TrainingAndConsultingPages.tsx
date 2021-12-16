@@ -66,7 +66,7 @@ export const TrainingPage = () => {
 
   useEffect(() => {
     apiFetchGet('/api/training')
-      .then((res) => res ? setTrainings(res) : console.log('res', res))
+      .then((res) => res.length ? setTrainings(res) : console.log('res', res))
       .finally(() => setIsLoading(false));
   }, []);
 
