@@ -7,7 +7,7 @@ import { Block } from '../../components/Block/Block';
 import {
   Success,
   Error,
-} from '../../pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
+} from '../TrainingAndConsultingPages/TrainingAndConsultingPages';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 

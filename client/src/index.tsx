@@ -15,7 +15,7 @@ import {
   TrainingPage,
   ConsultingPage,
 } from './pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
-import { SignUpPage } from './pages/SignUp/SignUp';
+import { SignUpPage } from './pages/SignUpPage/SignUp';
 
 ReactDOM.render(
   <React.StrictMode>
