@@ -7,6 +7,7 @@ using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
@@ -21,6 +22,14 @@ namespace PsychologicalAssistance.Web.Controllers
         {
             _userService = userService;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> GetAllUsers()
+        {
+            var users = await _userService.GetAllUsersDtoAsync();
+            return users is not null ? Ok(users) : NotFound();
         }
 
         [HttpPost("login")]
