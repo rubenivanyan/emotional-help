@@ -18,6 +18,10 @@ namespace PsychologicalAssistance.Tests.Common
                 where TEntity : BaseEntity
             => new Mock<TRepository>();
 
+        public static Mock<T> CreateMock<T>()
+                where T : class
+            => new Mock<T>();
+
         public static IMapper ConfigMapper(params Profile[] profiles)
         {
             var mappingConfig = new MapperConfiguration(mc =>
