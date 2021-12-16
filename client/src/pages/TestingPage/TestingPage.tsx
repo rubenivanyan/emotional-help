@@ -208,11 +208,25 @@ export const TestingPage: React.FC = () => {
             <div className="score-section">
               <ul className="score-list">
                 Your results:
-                <li>Depression: {scoreGroupOne}</li>
-                <li>Neurosis: {scoreGroupTwo}</li>
-                <li>Social anxiety: {scoreGroupThree}</li>
-                <li>Asthenia: {scoreGroupFour}</li>
-                <li>Insomnia: {scoreGroupFive}</li>
+                <li>
+                  Sadness and/or a loss of
+                  interest in activities: {scoreGroupOne}
+                </li>
+                <li>
+                  Disorders of sense and motion: {scoreGroupTwo}
+                </li>
+                <li>
+                  Intense, persistent fear of being watched
+                  and judged by others: {scoreGroupThree}
+                </li>
+                <li>
+                  Generalized weakness and
+                  usually involving mental
+                  and physical fatigue: {scoreGroupFour}
+                </li>
+                <li>
+                  Sleep disorder: {scoreGroupFive}
+                </li>
               </ul>
               <div className="sending-container">
                 {success ?
