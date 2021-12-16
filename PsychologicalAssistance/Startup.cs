@@ -131,7 +131,7 @@ namespace PsychologicalAssistance.Web
         private void CreateDefaultAdmin(IServiceProvider serviceProvider)
         {
             var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();            
-            var user = Task.Run(() => UserManager.FindByEmailAsync("admin@email.com")).Result;
+            var user = UserManager.FindByEmailAsync("admin@email.com").Result;
             if (user == null)
             {
                 var admin = new User
@@ -144,7 +144,7 @@ namespace PsychologicalAssistance.Web
                 var result = Task.Run(() => UserManager.CreateAsync(admin, adminPassword)).Result;
                 if (result.Succeeded)
                 {
-                    Task.Run(() => UserManager.AddToRoleAsync(admin, "Administrator"));
+                    UserManager.AddToRoleAsync(admin, "Administrator").ConfigureAwait(true);
                 }
             }
         }

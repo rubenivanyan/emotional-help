@@ -22,7 +22,7 @@ namespace PsychologicalAssistance.Core.Data.Configurations
             new IdentityRole
             {
                 Name = "Administrator",
-                NormalizedName = "ADMIN ISTRATOR"
+                NormalizedName = "ADMINISTRATOR"
             });
         }
     }
