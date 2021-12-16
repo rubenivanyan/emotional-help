@@ -58,6 +58,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IMusicRepository, MusicRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<ITrainingRepository, TrainingRepository>();
+            services.AddScoped<IConsultingApplicationRepository, ConsultingApplicationRepository>();
             #endregion
 
             #region Services
@@ -75,6 +76,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped<IMaterialsRecommendationService, MaterialsRecommendationService>();
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<ITrainingService, TrainingService>();
+            services.AddScoped<IConsultingApplicationService, ConsultingApplicationService>();
             #endregion
 
             #region UnitOfWork

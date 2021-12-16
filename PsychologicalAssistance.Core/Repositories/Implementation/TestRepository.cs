@@ -50,7 +50,13 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 Id = test.Id,
                 Title = test.Title,
                 TypeOfTest = test.TypeOfTest,
-                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<FullQuestionDto>>(test.Questions).ToList()
+                Questions = test.Questions.Select(q => new FullQuestionDto
+                {
+                    Id = q.Id,
+                    ImageUrl = q.ImageUrl,
+                    Formulation = q.Formulation,
+                    Variants = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(q.Variants).ToList()
+                }).ToList()
             }));
 
             return tests;
@@ -63,7 +69,13 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 Id = t.Id,
                 Title = t.Title,
                 TypeOfTest = t.TypeOfTest,
-                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<FullQuestionDto>>(t.Questions).ToList()
+                Questions = t.Questions.Select(q => new FullQuestionDto
+                {
+                    Id = q.Id,
+                    ImageUrl = q.ImageUrl,
+                    Formulation = q.Formulation,
+                    Variants = _mapper.Map<IEnumerable<Variant>, IEnumerable<VariantDto>>(q.Variants).ToList()
+                }).ToList()
             }).FirstOrDefaultAsync());
 
             return test;

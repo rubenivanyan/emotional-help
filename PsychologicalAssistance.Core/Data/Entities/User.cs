@@ -14,5 +14,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
         public DateTime BirthDate { get; set; }
         
         public List<TestResults> TestResults { get; set; }
+
+        public List<ConsultingApplication> ConsultingApplications { get; set; }
     }
 }
