@@ -1,9 +1,7 @@
 import { mockedComputerGames } from '../common/mocks/computer-games';
-import { ComputerGame } from '../common/types/computer-game';
 import { apiFetch } from './fetch';
 
-export const getComputerGames = (): ComputerGame[] => {
-  let computerGames: ComputerGame[];
-  apiFetch('/api/computerGame', computerGames);
-  return computerGames ? computerGames : mockedComputerGames;
+export const getComputerGames = async () => {
+  const computerGames = await apiFetch('/api/computerGame');
+  return computerGames.length ? computerGames : mockedComputerGames;
 };
