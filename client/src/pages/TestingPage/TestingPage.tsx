@@ -10,6 +10,7 @@ import {
   Success,
   Error,
 } from '../TrainingAndConsultingPages/TrainingAndConsultingPages';
+import { Recommendation } from '../../components/Recommendation/Recommendation';
 
 export const TestingPage: React.FC = () => {
   const answerOptions = [
@@ -186,7 +187,7 @@ export const TestingPage: React.FC = () => {
               showScore ?
                 (
                   <>
-                    <h2>RECOMMENDATIONS</h2>
+                    <Recommendation />
                   </>
                 ) : (
                   <>
