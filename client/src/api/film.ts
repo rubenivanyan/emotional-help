@@ -1,7 +1,7 @@
 import { mockedFilms } from '../common/mocks/films';
-import { apiFetch } from './fetch';
+import { apiFetchLibraryItems } from './fetch';
 
 export const getFilms = async () => {
-  const films = await apiFetch('/api/Film');
+  const films = await apiFetchLibraryItems('/api/Film');
   return films.length ? films : mockedFilms;
 };
