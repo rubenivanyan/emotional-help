@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211216160609_Added TrainingApplication")]
+    partial class AddedTrainingApplication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +82,7 @@ namespace PsychologicalAssistance.Core.Migrations
                             Id = "3df3e121-5fd1-4bfc-9568-b2cddcb02129",
                             ConcurrencyStamp = "b10760cd-69e5-4a58-900a-bd2feded221d",
                             Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
+                            NormalizedName = "ADMIN ISTRATOR"
                         });
                 });
 

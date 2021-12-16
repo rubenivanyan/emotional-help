@@ -22,6 +22,7 @@ namespace PsychologicalAssistance.Core.Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<ConsultingApplication> Consultings { get; set; }
+        public DbSet<TrainingApplication> TrainingApplications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
