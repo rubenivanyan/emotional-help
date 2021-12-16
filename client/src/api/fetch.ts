@@ -6,7 +6,12 @@ export const apiFetchLibraryItems = (path: string) => {
     .catch((error) => alert('Something went wrong: ' + error));
 };
 
-export const apiFetch = (path: string) => {
-  return fetch(`${PATH}${path}`)
+export const apiFetchPost = (path: string, item: any) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(item),
+  };
+  return fetch(`${PATH}${path}`, requestOptions)
     .then((response) => response.json());
 };
