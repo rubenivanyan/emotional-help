@@ -63,22 +63,22 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d430f63-fb1f-4b19-b776-d2c0d89b726f",
-                            ConcurrencyStamp = "0c3bc3dd-98fb-4647-8ad6-6a525ead3e18",
+                            Id = "206b5875-ce46-4a4d-9605-555ca904d4b5",
+                            ConcurrencyStamp = "4781a85a-ca83-49fb-82a5-71ba0a482fee",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
-                            Id = "1bb7c3d1-d7dd-4d5a-9507-517e628074c4",
-                            ConcurrencyStamp = "f62dc1fa-44a7-4818-879c-a2f95f9141be",
+                            Id = "6cb9a1e2-e7ba-479f-a86c-687933f681e2",
+                            ConcurrencyStamp = "06b66485-4150-4516-bbb0-d484443b08bd",
                             Name = "Mentor",
                             NormalizedName = "MENTOR"
                         },
                         new
                         {
-                            Id = "3df3e121-5fd1-4bfc-9568-b2cddcb02129",
-                            ConcurrencyStamp = "b10760cd-69e5-4a58-900a-bd2feded221d",
+                            Id = "779128cb-2824-4219-beb9-278b47cb16d9",
+                            ConcurrencyStamp = "746b595a-0538-412d-bfdf-842e494505ec",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
