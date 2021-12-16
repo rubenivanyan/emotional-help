@@ -51,7 +51,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTest(int id)
+        public async Task<ActionResult> DeleteTrainingApplication(int id)
         {
             await _trainingApplicationService.DeleteAsync(id);
             return NoContent();
