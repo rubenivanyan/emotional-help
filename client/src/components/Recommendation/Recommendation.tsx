@@ -67,7 +67,7 @@ export const Recommendation = () => {
               </li>
             </ul>
             <Button
-              title={'next'}
+              title={'next collection'}
               type={BUTTON_TYPES.DEFAULT}
               onClick={() => nextRecommendations()}
             />
