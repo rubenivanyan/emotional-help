@@ -4,10 +4,10 @@ import React from 'react';
 export const FilmComponent = ({ film }: { film: Film }) => {
   return (
     <>
-      <h3>Movie:</h3>
-      <p>Title: {film.title}</p>
-      <p>Year: {film.year}</p>
-      <p>Genre: {film.genre}</p>
+      <h3>Movie</h3>
+      <p><b>Title:</b> {film.title}</p>
+      <p><b>Year:</b> {film.year}</p>
+      <p><b>Genre:</b> {film.genre}</p>
     </>
   );
 };

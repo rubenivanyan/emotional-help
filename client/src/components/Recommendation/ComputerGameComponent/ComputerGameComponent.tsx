@@ -5,10 +5,10 @@ export const ComputerGameComponent = ({ computerGame }:
   { computerGame: ComputerGame }) => {
   return (
     <>
-      <h3>Video game:</h3>
-      <p>Title: {computerGame.title}</p>
-      <p>Company: {computerGame.company}</p>
-      <p>Genre: {computerGame.genre}</p>
+      <h3>Video game</h3>
+      <p><b>Title:</b> {computerGame.title}</p>
+      <p><b>Company:</b> {computerGame.company}</p>
+      <p><b>Genre:</b> {computerGame.genre}</p>
     </>
   );
 };
