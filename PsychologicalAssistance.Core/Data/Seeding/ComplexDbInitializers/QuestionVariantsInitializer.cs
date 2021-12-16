@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using PsychologicalAssistance.Core.Data.Entities;
+using System.Linq;
 
 namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
 {
@@ -6,7 +8,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
     {
         public void Initialize(ApplicationDbContext dbContext)
         {
-            var questions = dbContext.Questions.ToList();
+            var questions = dbContext.Questions.Include(v => v.Variants).ToList();
             if (questions.Any(question => question.Variants.Count != 0))
             {
                 return;

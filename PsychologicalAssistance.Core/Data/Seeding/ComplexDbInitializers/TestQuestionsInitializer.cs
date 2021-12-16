@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
 {
@@ -6,7 +7,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
     {
         public void Initialize(ApplicationDbContext dbContext)
         {
-            var tests = dbContext.Tests.ToList();
+            var tests = dbContext.Tests.Include(q => q.Questions).ToList();
             if (tests.Any(test => test.Questions.Count != 0))
             {
                 return;
