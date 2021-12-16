@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
+using System;
 
 namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
 {
@@ -8,7 +9,9 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
     {
         public MusicProfile()
         {
-            CreateMap<Music, MusicDto>().ReverseMap();
+            CreateMap<Music, MusicDto>()
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => Enum.GetName(src.Genre)))
+                .ReverseMap();
         }
     }
 }

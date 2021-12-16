@@ -6,7 +6,7 @@ namespace PsychologicalAssistance.Core.Data.DTOs
 {
     public class TestResultsDto : BaseDto
     {
-        public DateTime DateOfResults { get; set; }
+        public string DateOfResults { get; set; }
 
         [Required]
         public string UserId { get; set; }

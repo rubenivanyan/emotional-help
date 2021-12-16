@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
 {
@@ -6,7 +7,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding.ComplexDbInitializers
     {
         public void Initialize(ApplicationDbContext dbContext)
         {
-            var variants = dbContext.Variants.ToList();
+            var variants = dbContext.Variants.Include(g => g.Genres).ToList();
             if (variants.Any(variant => variant.Genres.Count != 0))
             {
                 return;

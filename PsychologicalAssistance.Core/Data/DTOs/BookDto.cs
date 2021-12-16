@@ -2,7 +2,7 @@
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class BookDto : MaterialsDto<BookGenres>
+    public class BookDto : MaterialsDto
     {
         public string Author { get; set; }
     }

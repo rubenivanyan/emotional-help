@@ -37,7 +37,7 @@ namespace PsychologicalAssistance.Services.Implementation
                 Message = application.Message,
                 QuestionsFormulations = application.TestResults.Answers.Select(i => i.Question.Formulation).ToList(),
                 AnswersFormulations = application.TestResults.Answers.Select(i => i.Formulation).ToList(),
-                DateOfResults = application.TestResults.ResultsDate
+                DateOfResults = application.TestResults.ResultsDate.ToShortDateString()
             };
 
             return fullApplication;

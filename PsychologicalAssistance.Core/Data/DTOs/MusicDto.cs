@@ -2,7 +2,7 @@
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class MusicDto : MaterialsDto<MusicGenres>
+    public class MusicDto : MaterialsDto
     {
         public string Executor { get; set; }       
     }
