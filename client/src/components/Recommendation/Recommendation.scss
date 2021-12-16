@@ -20,9 +20,12 @@
   }
 
   &-item {
+    min-height: 150px;
+    max-width: 280px;
     min-width: 280px;
 
     padding: 5px 15px;
+    margin: 0 10px 10px 0;
 
     background-color: lightgray;
     border-radius: 10px;
