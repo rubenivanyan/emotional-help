@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -14,6 +16,19 @@ namespace PsychologicalAssistance.Services.Implementation
         public UserService(UserManager<User> userManager)
         {
             _userManager = userManager;
+        }
+
+        public async Task<IEnumerable<UserDto>> GetAllUsersDtoAsync()
+        {
+            var users = await Task.Run(() => _userManager.Users.Select(user => new UserDto
+            {
+                Id = user.Id,
+                FullName = user.UserName + " " + user.UserSurname,
+                BirthDate = user.BirthDate.ToShortDateString(),
+                Email = user.Email
+            }).ToList());
+
+            return users;
         }
 
         public async Task<ClaimsIdentity> LoginUserAsync(string email, string password)
