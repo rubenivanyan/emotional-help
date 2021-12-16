@@ -15,11 +15,6 @@ namespace PsychologicalAssistance.Core.Data.Entities
         
         public List<TestResults> TestResults { get; set; }
 
-        public ICollection<Consulting> Consultings { get; set; }
-
-        public User()
-        {
-            Consultings = new List<Consulting>();
-        }
+        public List<ConsultingApplication> ConsultingApplications { get; set; }
     }
 }
