@@ -10,8 +10,12 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
         public FilmProfile()
         {
             CreateMap<Film, FilmDto>()
-                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => Enum.GetName(src.Genre)))
-                .ReverseMap();
+                .ForMember(dest => dest.Year, opt => opt.MapFrom(src => src.Year.ToShortDateString()))
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => Enum.GetName(src.Genre)));
+
+            CreateMap<FilmDto, Film>()
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre))
+                .ForMember(dest => dest.Year, opt => opt.MapFrom(src => DateTime.Parse(src.Year)));
         }
     }
 }
