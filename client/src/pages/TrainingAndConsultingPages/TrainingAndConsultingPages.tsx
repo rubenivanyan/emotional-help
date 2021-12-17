@@ -149,6 +149,7 @@ export const ConsultingPage = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [convenientDay, setConvenientDay] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -158,6 +159,7 @@ export const ConsultingPage = () => {
       fullName: userName,
       email: email,
       convenientDay: convenientDay,
+      message: message,
     };
     apiFetchPost(
       '/api/consultingApplication',
@@ -203,6 +205,10 @@ export const ConsultingPage = () => {
               <Input
                 label={'Convenient day'}
                 onChange={(event) => setConvenientDay(event.target.value)}
+              />
+              <Input
+                label={'Message'}
+                onChange={(event) => setMessage(event.target.value)}
               />
               <Button
                 title={'submit'}
