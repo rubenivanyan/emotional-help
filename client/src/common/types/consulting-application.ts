@@ -1,6 +1,7 @@
 export type ConsultingApplication = {
   id?: number;
-  userName: string;
+  isArchived: boolean;
+  fullName: string;
   email: string;
   convenientDay: string;
 };

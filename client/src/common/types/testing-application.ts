@@ -1,6 +1,6 @@
-export type Application = {
+export type TestingApplication = {
   id: number;
-  isArchived: Boolean;
+  isArchived: boolean;
   message: string;
   testResultsId: number;
 };

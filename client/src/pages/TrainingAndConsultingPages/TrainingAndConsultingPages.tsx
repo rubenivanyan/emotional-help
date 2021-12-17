@@ -58,7 +58,8 @@ export const TrainingPage = () => {
     event.preventDefault();
     setIsSubmitting(true);
     const trainingApplication: TrainingApplication = {
-      userName: userName,
+      isArchived: false,
+      fullName: userName,
       email: email,
       training: training,
     };
@@ -153,7 +154,8 @@ export const ConsultingPage = () => {
     event.preventDefault();
     setIsSubmitting(true);
     const consultingApplication: ConsultingApplication = {
-      userName: userName,
+      isArchived: false,
+      fullName: userName,
       email: email,
       convenientDay: convenientDay,
     };
