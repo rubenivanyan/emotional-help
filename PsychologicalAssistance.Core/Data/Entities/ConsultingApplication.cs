@@ -11,5 +11,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
         [ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }
+        public string UserFullName { get; set; }
+        public string Email { get; set; }
     }
 }

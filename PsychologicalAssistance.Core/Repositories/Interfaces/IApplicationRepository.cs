@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Interfaces
 {
-    public interface IApplicationRepository : IDataRepository<Application>
+    public interface IApplicationRepository : IDataRepository<TestingApplication>
     {
         Task<IEnumerable<ApplicationDto>> GetAllApplicationsDtoAsync();
         Task<ApplicationDto> GetApplicationByIdDtoAsync(int id);
