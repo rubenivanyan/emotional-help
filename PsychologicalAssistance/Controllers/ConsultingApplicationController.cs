@@ -55,8 +55,8 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateConsultingApplication([FromBody] ConsultingApplicationDto consultingApplicationDto)
         {
             var consultingApplication = _mapper.Map<ConsultingApplicationDto, ConsultingApplication>(consultingApplicationDto);
-            var user = await _userManager.GetUserAsync(User);
-            consultingApplication.UserId = user.Id;
+            var userId = _userManager.GetUserId(HttpContext.User);
+            consultingApplication.UserId = userId;
             await _consultingApplicationService.CreateAsync(consultingApplication);
             return Ok();
         }
@@ -65,8 +65,8 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> UpdateConsultingApplication([FromBody] ConsultingApplicationDto consultingApplicationDto)
         {
             var consultingApplication = _mapper.Map<ConsultingApplicationDto, ConsultingApplication>(consultingApplicationDto);
-            var user = await _userManager.GetUserAsync(User);
-            consultingApplication.UserId = user.Id;
+            var userId = _userManager.GetUserId(HttpContext.User);
+            consultingApplication.UserId = userId;
             await _consultingApplicationService.UpdateAsync(consultingApplication);
             return NoContent();
         }
