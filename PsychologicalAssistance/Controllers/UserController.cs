@@ -8,6 +8,8 @@ using PsychologicalAssistance.Services.Interfaces;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
@@ -49,7 +51,13 @@ namespace PsychologicalAssistance.Web.Controllers
             var identity = await _userService.LoginUserAsync(userLoginDto.Email, userLoginDto.Password);
             if (identity != null)
             {
-                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity));
+                var inputTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                var fromTimeOffset = new TimeSpan(1, 0, 0);
+                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = new DateTimeOffset(inputTime, fromTimeOffset)
+                });
                 return Ok();
             }
 
