@@ -48,14 +48,6 @@ namespace PsychologicalAssistance.Web.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateTrainingApplication([FromBody] TrainingApplicationDto trainingApplicationDto)
-        {
-            var trainingApplication = _mapper.Map<TrainingApplication>(trainingApplicationDto);
-            await _trainingApplicationService.UpdateAsync(trainingApplication);
-            return NoContent();
-        }
-
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTrainingApplication(int id)
         {
