@@ -12,5 +12,6 @@ namespace PsychologicalAssistance.Services.Interfaces
         Task<IEnumerable<IdentityError>> RegisterUserAsync(User user, string password);
         Task<ClaimsIdentity> LoginUserAsync(string email, string password);
         Task<IEnumerable<UserDto>> GetAllUsersDtoAsync();
+        Task<UserDto> GetUsersInformationForAccount(string userId);
     }
 }
