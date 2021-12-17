@@ -17,11 +17,13 @@ namespace PsychologicalAssistance.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public UserController(IMapper mapper, IUserService userService)
+        public UserController(IMapper mapper, IUserService userService, UserManager<User> userManager)
         {
             _userService = userService;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -30,6 +32,15 @@ namespace PsychologicalAssistance.Web.Controllers
         {
             var users = await _userService.GetAllUsersDtoAsync();
             return users is not null ? Ok(users) : NotFound();
+        }
+
+        [HttpGet("account")]
+        [Authorize]
+        public async Task<ActionResult> UserInfoForAccount()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var userInfo = await _userService.GetUsersInformationForAccount(userId);
+            return userInfo is not null ? Ok(userInfo) : NotFound();
         }
 
         [HttpPost("login")]

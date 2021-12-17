@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -13,11 +14,14 @@ namespace PsychologicalAssistance.Web.Controllers
     {
         private readonly ITrainingApplicationService _trainingApplicationService;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public TrainingApplicationController(ITrainingApplicationService trainingApplicationService, IMapper mapper)
+
+        public TrainingApplicationController(ITrainingApplicationService trainingApplicationService, IMapper mapper, UserManager<User> userManager)
         {
             _trainingApplicationService = trainingApplicationService;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -38,6 +42,8 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateTrainingApplication([FromBody] TrainingApplicationDto trainingApplicationDto)
         {
             var trainingApplication = _mapper.Map<TrainingApplication>(trainingApplicationDto);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            trainingApplication.UserId = userId;
             await _trainingApplicationService.CreateAsync(trainingApplication);
             return Ok();
         }

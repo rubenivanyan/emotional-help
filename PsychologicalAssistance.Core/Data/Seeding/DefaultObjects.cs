@@ -1,4 +1,5 @@
-﻿using PsychologicalAssistance.Core.Data.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Enums;
 using System;
 using System.Collections.Generic;
@@ -165,7 +166,6 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "Check you emotions"
             }
         };
-
         public static List<Training> TrainingsObjects { get; set; } = new()
         {
             new Training
@@ -203,6 +203,24 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "Mistakes in relationships",
                 Description = "Each of us wants his relationships with people, especially with one and only loved one, to bring joy and pleasure, not stress, but wings. But have you seen many people who are completely satisfied with their relationship (unless, of course, they have already passed the stage of love, when the charm of novelty and hope for a better future illuminate everything around with pink light)? According to my observations, people who know how to build a harmonious relationship with their other half are a happy exception to the rule. But we can improve our relationships with our loved ones if we stop making mistakes in relationships that poison and destroy them.",
                 StartDate = new DateTime(19 / 12 / 2021)
+            }
+        };
+        public static List<IdentityRole> IdentityRoles { get; set; } = new()
+        {
+            new IdentityRole
+            {
+                Name = "Client",
+                NormalizedName = "CLIENT"
+            },
+            new IdentityRole
+            {
+                Name = "Mentor",
+                NormalizedName = "MENTOR"
+            },
+            new IdentityRole
+            {
+                Name = "Administrator",
+                NormalizedName = "ADMINISTRATOR"
             }
         };
     }

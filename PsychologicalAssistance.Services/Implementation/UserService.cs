@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
@@ -12,10 +13,12 @@ namespace PsychologicalAssistance.Services.Implementation
     public class UserService : IUserService
     {
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
         
-        public UserService(UserManager<User> userManager)
+        public UserService(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<UserDto>> GetAllUsersDtoAsync()
@@ -29,6 +32,13 @@ namespace PsychologicalAssistance.Services.Implementation
             }).ToList());
 
             return users;
+        }
+
+        public async Task<UserDto> GetUsersInformationForAccount(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var userDto = _mapper.Map<User, UserDto>(user);
+            return userDto;
         }
 
         public async Task<ClaimsIdentity> LoginUserAsync(string email, string password)
