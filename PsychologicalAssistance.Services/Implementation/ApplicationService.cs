@@ -9,11 +9,11 @@ using System.Linq;
 
 namespace PsychologicalAssistance.Services.Implementation
 {
-    public class ApplicationService : BaseService<Application>, IApplicationService
+    public class ApplicationService : BaseService<TestingApplication>, IApplicationService
     {
         private readonly IApplicationRepository _applicationRepository;
 
-        public ApplicationService(IDataRepository<Application> dataRepository, IUnitOfWork unitOfWork, IApplicationRepository applicationRepository)
+        public ApplicationService(IDataRepository<TestingApplication> dataRepository, IUnitOfWork unitOfWork, IApplicationRepository applicationRepository)
             : base (dataRepository, unitOfWork)
         {
             _applicationRepository = applicationRepository;

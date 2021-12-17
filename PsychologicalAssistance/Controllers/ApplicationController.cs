@@ -45,7 +45,7 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateApplication([FromBody] ApplicationDto applicationDto)
         {
-            var application = _mapper.Map<Application>(applicationDto);
+            var application = _mapper.Map<TestingApplication>(applicationDto);
             await _applicationService.CreateAsync(application);
             return Ok();
         }
@@ -53,7 +53,7 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateApplication([FromBody] ApplicationDto applicationDto)
         {
-            var application = _mapper.Map<Application>(applicationDto);
+            var application = _mapper.Map<TestingApplication>(applicationDto);
             await _applicationService.UpdateAsync(application);
             return NoContent();
         }

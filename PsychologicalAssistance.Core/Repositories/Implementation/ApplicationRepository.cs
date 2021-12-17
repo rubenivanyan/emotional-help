@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Core.Repositories.Implementation
 {
-    public class ApplicationRepository : DataRepository<Application>, IApplicationRepository
+    public class ApplicationRepository : DataRepository<TestingApplication>, IApplicationRepository
     {
         private readonly IMapper _mapper;
 
@@ -26,7 +26,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var applicationsDto = _mapper.Map<IEnumerable<Application>, IEnumerable<ApplicationDto>>(applications);
+            var applicationsDto = _mapper.Map<IEnumerable<TestingApplication>, IEnumerable<ApplicationDto>>(applications);
             return applicationsDto;
         }
 
@@ -38,7 +38,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 return null;
             }
 
-            var applicationDto = _mapper.Map<Application, ApplicationDto>(application);
+            var applicationDto = _mapper.Map<TestingApplication, ApplicationDto>(application);
             return applicationDto;
         }
     }

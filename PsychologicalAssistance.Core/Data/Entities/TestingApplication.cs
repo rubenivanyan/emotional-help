@@ -2,7 +2,7 @@
 
 namespace PsychologicalAssistance.Core.Data.Entities
 {
-    public class Application : BaseEntity
+    public class TestingApplication : BaseEntity
     {
         public bool IsArchived { get; set; } = false;
         public string Message { get; set; }

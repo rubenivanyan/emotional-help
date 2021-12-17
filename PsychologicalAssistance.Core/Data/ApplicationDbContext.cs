@@ -9,7 +9,7 @@ namespace PsychologicalAssistance.Core.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Test> Tests { get; set; }
-        public DbSet<Application> Applications { get; set; }
+        public DbSet<TestingApplication> Applications { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Variant> Variants { get; set; }
         public DbSet<Question> Questions { get; set; }

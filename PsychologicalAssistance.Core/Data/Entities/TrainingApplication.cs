@@ -10,5 +10,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
         [ForeignKey("Training")]
         public int TrainingId { get; set; }
         public Training Training { get; set; }
+        public string UserFullName { get; set; }
+        public string Email { get; set; }
     }
 }
