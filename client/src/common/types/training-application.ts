@@ -1,8 +1,9 @@
 import { Training } from './training';
 
 export type TrainingApplication = {
-  id?: number,
-  userName: string;
+  id?: number;
+  isArchived: boolean;
+  fullName: string;
   email: string;
   training: Training
 };
