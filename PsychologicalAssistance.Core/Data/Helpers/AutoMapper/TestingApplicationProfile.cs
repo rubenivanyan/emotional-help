@@ -4,11 +4,11 @@ using PsychologicalAssistance.Core.Data.Entities;
 
 namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
 {
-    public class ApplicationProfile : Profile
+    public class TestingApplicationProfile : Profile
     {
-        public ApplicationProfile()
+        public TestingApplicationProfile()
         {
-            CreateMap<TestingApplication, ApplicationDto>().ReverseMap();
+            CreateMap<TestingApplication, TestingApplicationDto>().ReverseMap();
         }
     }
 }

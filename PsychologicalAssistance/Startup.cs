@@ -48,7 +48,7 @@ namespace PsychologicalAssistance.Web
             #region Repositories
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
             services.AddScoped<ITestRepository, TestRepository>();
-            services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<ITestingApplicationRepository, TestingApplicationRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IVariantRepository, VariantRepository>();
             services.AddScoped<ITestResultsRepository, TestResultsRepository>();
@@ -66,7 +66,7 @@ namespace PsychologicalAssistance.Web
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITestService, TestService>();
-            services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<ITestingApplicationService, TestingApplicationService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IVariantService, VariantService>();
             services.AddScoped<ITestResultsService, TestResultsService>();
