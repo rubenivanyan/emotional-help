@@ -165,5 +165,45 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "Check you emotions"
             }
         };
+
+        public static List<Training> TrainingsObjects { get; set; } = new()
+        {
+            new Training
+            {
+                Title = "Time management: effective time management tools",
+                Description = "The training is designed for a wide range of listeners and is recommended for anyone who wants to increase personal efficiency.",
+                StartDate = new DateTime(20 / 12 / 2021)
+            },
+            new Training
+            {
+                Title = "Emotional intelligence. Emotion control and management",
+                Description = "The training will be useful for everyone who communicates with clients, partners and visitors of the company; who works in conditions of emotional pressure, who needs to be able to regulate their own emotional state in the course of complex communications.",
+                StartDate = new DateTime(21 / 12 / 2021)
+            },
+            new Training
+            {
+                Title = "Conflictology: conflict situations and conflict personalities. Ways to manage conflicts",
+                Description = "The training is designed for a wide range of listeners and is recommended to all those who face conflict situations and want to learn how to manage them.",
+                StartDate = new DateTime(22 / 12 / 2021)
+            },
+            new Training
+            {
+                Title = "How to get rid of resentment and learn to forgive",
+                Description = "Why are we offended? This question is not easy to answer. To do this, you need to see yourself from the side. By causing another person to feel guilty, we involuntarily and unconsciously increase our self-esteem. A person with a decent self-esteem does not feel the need to blame another, because he is so good! Feelings of resentment and dissatisfaction often go hand in hand. We invite you to understand these intricacies and get closer to the feeling of inner harmony in our personal group.",
+                StartDate = new DateTime(23 / 12 / 2021)
+            },
+            new Training
+            {
+                Title = "Psychological counseling for adolescents and young people",
+                Description = "The training seminar is designed for school psychologists, counseling psychologists, career guidance and counseling specialists, social workers and educators engaged in counseling work with adolescents and young people, as well as senior students studying psychological and pedagogical specialties.",
+                StartDate = new DateTime(18 / 12 / 2021)
+            },
+            new Training
+            {
+                Title = "Mistakes in relationships",
+                Description = "Each of us wants his relationships with people, especially with one and only loved one, to bring joy and pleasure, not stress, but wings. But have you seen many people who are completely satisfied with their relationship (unless, of course, they have already passed the stage of love, when the charm of novelty and hope for a better future illuminate everything around with pink light)? According to my observations, people who know how to build a harmonious relationship with their other half are a happy exception to the rule. But we can improve our relationships with our loved ones if we stop making mistakes in relationships that poison and destroy them.",
+                StartDate = new DateTime(19 / 12 / 2021)
+            }
+        };
     }
 }
