@@ -1,6 +1,6 @@
 ﻿namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class TrainingApplicationDto
+    public class TrainingApplicationDto : BaseDto
     {
         public int TrainingId { get; set; }
     }
