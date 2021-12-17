@@ -1,4 +1,4 @@
-import { BLOCKS_TITLES } from '../../../common/enums';
+import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import React from 'react';
 import './Library.scss';
@@ -20,7 +20,7 @@ export const Library = () => {
     setValue(newValue);
   };
   return (
-    <Block title={BLOCKS_TITLES.LIBRARY} percentWidth={60}>
+    <Block title={BLOCK_TITLES.LIBRARY} percentWidth={60}>
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

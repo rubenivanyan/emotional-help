@@ -1,4 +1,4 @@
-import { BLOCKS_TITLES } from '../../../common/enums';
+import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import React from 'react';
 import './Info.scss';
@@ -9,7 +9,7 @@ export const Info = () => {
   const appInfo = useSelector((state: RootState) => state.applicationInfo);
   console.log('APP INFO', appInfo);
   return (
-    <Block title={BLOCKS_TITLES.INFORMATION} percentWidth={50}>
+    <Block title={BLOCK_TITLES.INFORMATION} percentWidth={50}>
       <div className="application-info">
         Full name: {appInfo.applicationInfo.userName}
       </div>

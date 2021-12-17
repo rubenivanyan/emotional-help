@@ -1,4 +1,4 @@
-import { BLOCKS_TITLES } from '../../../common/enums';
+import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import React, { useEffect, useState } from 'react';
 import './Questions.scss';
@@ -23,7 +23,7 @@ export const Questions = () => {
       });
   }, []);
   return (
-    <Block title={BLOCKS_TITLES.QUESTIONS} percentWidth={60}>
+    <Block title={BLOCK_TITLES.QUESTIONS} percentWidth={60}>
       <div className="questions-wrapper">
         {data.map((question, index) => {
           return <QuestionCard key={question.id} question={question} />;
