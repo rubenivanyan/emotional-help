@@ -1,24 +1,21 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import './QuestionCard.scss';
 import { useState } from 'react';
 import { TextField } from '@mui/material';
-import PropTypes from 'prop-types';
 import axios from 'axios';
+import AddIcon from '@mui/icons-material/Add';
 
-export const QuestionCard = (props) => {
+export const AddQuestionCard = () => {
   const [showForm, setShowForm] = useState(false);
-  const [formulation, setFormulation] = useState(props.question.formulation);
-  const [url, setUrl] = useState(props.question.imageUrl);
-  const [id, setId] = useState(props.question.id);
+  const [formulation, setFormulation] = useState('');
+  const [url, setUrl] = useState('');
+  const [id, setId] = useState('');
 
   const body = {
     imageUrl: url,
     formulation: formulation,
-    id: id,
+    id: Number.parseInt(id),
   };
 
   const handleChangeFormulation = (
@@ -56,22 +53,8 @@ export const QuestionCard = (props) => {
     }, 1000);
   };
 
-  const handleDelete = () => {
-    axios
-      .delete(`https://emotionalhelptest.azurewebsites.net/api/Question/${id}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-  };
-
   return (
-    <Card sx={{ width: 250, margin: 1 }}>
+    <Card sx={{ width: 250, margin: 1, minHeight: 135 }}>
       {showForm ? (
         <>
           <TextField
@@ -106,29 +89,11 @@ export const QuestionCard = (props) => {
         </>
       ) : (
         <>
-          {' '}
-          <CardContent>
-            <div className="card-info">
-              <Typography variant="body2">Question: {formulation}</Typography>
-              <Typography variant="body2">ID: {id}</Typography>
-              <Typography variant="body2">Image URL: {url}</Typography>
-            </div>
-          </CardContent>
-          <CardActions>
-            <button onClick={handleShowForm}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
-          </CardActions>
+          <button className="add-button" onClick={handleShowForm}>
+            <AddIcon sx={{ fontSize: 80 }} />
+          </button>
         </>
       )}
     </Card>
   );
-};
-
-QuestionCard.propTypes = {
-  question: PropTypes.shape({
-    formulation: PropTypes.string,
-    id: PropTypes.number,
-    variants: PropTypes.array,
-    imageUrl: PropTypes.string,
-  }),
 };

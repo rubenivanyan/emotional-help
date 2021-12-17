@@ -2,9 +2,10 @@ import { BLOCKS_TITLES } from '../../../common/enums';
 import { Block } from '../../Block/Block';
 import React, { useEffect, useState } from 'react';
 import './Questions.scss';
-import { Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { QuestionCard } from '../QuestionCard/QuestionCard';
 import axios from 'axios';
+import { AddQuestionCard } from '../QuestionCard/AddQuestionCard';
 
 export const Questions = () => {
   const { id } = useParams();
@@ -23,11 +24,12 @@ export const Questions = () => {
   }, []);
   return (
     <Block title={BLOCKS_TITLES.QUESTIONS} percentWidth={60}>
-      {data.map((question, index) => {
-        return <QuestionCard key={question.id} question={question} />;
-      })}
-
-      <Outlet />
+      <div className="questions-wrapper">
+        {data.map((question, index) => {
+          return <QuestionCard key={question.id} question={question} />;
+        })}
+        <AddQuestionCard />
+      </div>
     </Block>
   );
 };

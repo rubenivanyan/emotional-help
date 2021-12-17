@@ -1,10 +1,11 @@
-import { APPLICATIONS_FETCH_SUCCEEDED } from '../actions';
+import { APPLICATIONS_FETCH_SUCCEEDED, SET_INFO } from '../actions';
 
 const initState = {
   id: null,
   name: '',
   email: '',
   message: '',
+  applicationInfo: '',
 };
 
 export const applicationsReducer = (state = initState, action) => {
@@ -16,6 +17,9 @@ export const applicationsReducer = (state = initState, action) => {
         applications,
       };
     }
+    case SET_INFO:
+      console.log(action.payload);
+      return { ...state, applicationInfo: action.payload };
     default:
       return state;
   }

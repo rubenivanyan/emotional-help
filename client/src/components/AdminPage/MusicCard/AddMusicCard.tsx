@@ -1,21 +1,41 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import './TestCard.scss';
+import './MusicCard.scss';
 import { useState } from 'react';
 import { TextField } from '@mui/material';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 
-export const AddTestCard = () => {
+export const AddMusicCard = () => {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [id, setId] = useState('');
-  const [type, setType] = useState('');
+  const [language, setLanguage] = useState('');
+  const [genre, setGenre] = useState('');
+  const [executor, setExecutor] = useState('');
 
   const body = {
     id: Number.parseInt(id),
     title: title,
-    typeOfTest: Number.parseInt(type),
+    language: language,
+    genre: genre,
+    executor: executor,
+  };
+
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+  const handleChangeId = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setId(event.target.value);
+  };
+  const handleChangeLanguage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLanguage(event.target.value);
+  };
+  const handleChangeGenre = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGenre(event.target.value);
+  };
+  const handleChangeExecutor = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setExecutor(event.target.value);
   };
 
   const handleShowForm = () => {
@@ -23,21 +43,11 @@ export const AddTestCard = () => {
     console.log(showForm);
   };
 
-  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-  const handleChangeId = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setId(event.target.value);
-  };
-  const handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setType(event.target.value);
-  };
-
   const handleSubmitTest = () => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .post('https://emotionalhelptest.azurewebsites.net/api/Test', body)
+      .put('https://emotionalhelptest.azurewebsites.net/api/Music', body)
       .then((response) => {
         console.log(response);
       })
@@ -51,14 +61,41 @@ export const AddTestCard = () => {
   };
 
   return (
-    <Card sx={{ width: 250, margin: 1 }}>
+    <Card sx={{ width: 250, margin: 1, minHeight: 135 }}>
       {showForm ? (
         <>
           <TextField
             id="outlined-basic"
-            label="Title"
+            label="Song"
             value={title}
-            onChange={handleChangeName}
+            onChange={handleChangeTitle}
+            size="small"
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Artist"
+            value={executor}
+            onChange={handleChangeExecutor}
+            size="small"
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Language"
+            value={language}
+            onChange={handleChangeLanguage}
+            size="small"
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Genre"
+            value={genre}
+            onChange={handleChangeGenre}
             size="small"
             variant="outlined"
             margin="dense"
@@ -72,15 +109,7 @@ export const AddTestCard = () => {
             variant="outlined"
             margin="dense"
           />
-          <TextField
-            id="outlined-basic"
-            label="Type of test"
-            value={type}
-            onChange={handleChangeType}
-            size="small"
-            variant="outlined"
-            margin="dense"
-          />
+
           <button onClick={handleSubmitTest}>Submit</button>
         </>
       ) : (

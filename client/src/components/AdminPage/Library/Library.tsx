@@ -8,6 +8,10 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import { Music } from '../Music/Music';
+import { Films } from '../Films/Films';
+import { Books } from '../Books/Books';
+import { Games } from '../Games/Games';
 
 export const Library = () => {
   const [value, setValue] = React.useState('1');
@@ -20,20 +24,25 @@ export const Library = () => {
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList
-              onChange={handleChange}
-              sx={{ color: 'success.main' }}
-              aria-label="lab API tabs example">
+            <TabList onChange={handleChange} sx={{ color: 'success.main' }}>
               <Tab label="Music" value="1" />
               <Tab label="Films" value="2" />
               <Tab label="Books" value="3" />
               <Tab label="Games" value="4" />
             </TabList>
           </Box>
-          <TabPanel value="1">Item One</TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
-          <TabPanel value="4">Item Four</TabPanel>
+          <TabPanel value="1">
+            <Music />
+          </TabPanel>
+          <TabPanel value="2">
+            <Films />
+          </TabPanel>
+          <TabPanel value="3">
+            <Books />
+          </TabPanel>
+          <TabPanel value="4">
+            <Games />
+          </TabPanel>
         </TabContext>
       </Box>
       <Outlet />

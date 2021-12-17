@@ -3,34 +3,42 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import './TestCard.scss';
+import './BookCard.scss';
 import { useState } from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-export const TestCard = (props) => {
-  const navigate = useNavigate();
+export const BookCard = (props) => {
   const [showForm, setShowForm] = useState(false);
-  const [title, setTitle] = useState(props.test.title);
-  const [id, setId] = useState(props.test.id);
-  const [type, setType] = useState(props.test.typeOfTest);
+  const [title, setTitle] = useState(props.book.title);
+  const [id, setId] = useState(props.book.id);
+  const [language, setLanguage] = useState(props.book.language);
+  const [genre, setGenre] = useState(props.book.genre);
+  const [author, setAuthor] = useState(props.book.author);
 
   const body = {
     id: id,
     title: title,
-    typeOfTest: type,
+    language: language,
+    genre: genre,
+    author: author,
   };
 
-  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
   const handleChangeId = (event: React.ChangeEvent<HTMLInputElement>) => {
     setId(event.target.value);
   };
-  const handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setType(event.target.value);
+  const handleChangeLanguage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLanguage(event.target.value);
+  };
+  const handleChangeGenre = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGenre(event.target.value);
+  };
+  const handleChangeAuthor = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAuthor(event.target.value);
   };
 
   const handleShowForm = () => {
@@ -42,7 +50,7 @@ export const TestCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/Test', body)
+      .put('https://emotionalhelptest.azurewebsites.net/api/Film', body)
       .then((response) => {
         console.log(response);
       })
@@ -55,12 +63,9 @@ export const TestCard = (props) => {
     }, 1000);
   };
 
-  const handleViewQuestions = () => {
-    navigate(`/admin/questions/${id}`);
-  };
   const handleDelete = () => {
     axios
-      .delete(`https://emotionalhelptest.azurewebsites.net/api/Test/${id}`)
+      .delete(`https://emotionalhelptest.azurewebsites.net/api/Book/${id}`)
       .then((response) => {
         console.log(response);
       })
@@ -80,7 +85,34 @@ export const TestCard = (props) => {
             id="outlined-basic"
             label="Title"
             value={title}
-            onChange={handleChangeName}
+            onChange={handleChangeTitle}
+            size="small"
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Author"
+            value={author}
+            onChange={handleChangeAuthor}
+            size="small"
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Language"
+            value={language}
+            onChange={handleChangeLanguage}
+            size="small"
+            variant="outlined"
+            margin="dense"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Genre"
+            value={genre}
+            onChange={handleChangeGenre}
             size="small"
             variant="outlined"
             margin="dense"
@@ -94,30 +126,21 @@ export const TestCard = (props) => {
             variant="outlined"
             margin="dense"
           />
-          <TextField
-            id="outlined-basic"
-            label="Type of test"
-            value={type}
-            onChange={handleChangeType}
-            size="small"
-            variant="outlined"
-            margin="dense"
-          />
 
           <button onClick={handleSubmitTest}>Submit</button>
         </>
       ) : (
         <>
-          {' '}
           <CardContent>
             <div className="card-info">
-              <Typography variant="body2">TITLE: {title}</Typography>
+              <Typography variant="body2">Title: {title}</Typography>
+              <Typography variant="body2">Author: {author}</Typography>
+              <Typography variant="body2">Language: {language}</Typography>
+              <Typography variant="body2">Genre: {genre}</Typography>
               <Typography variant="body2">ID: {id}</Typography>
-              <Typography variant="body2">Type of test: {type}</Typography>
             </div>
           </CardContent>
           <CardActions>
-            <button onClick={handleViewQuestions}>View questions</button>
             <button onClick={handleShowForm}>Edit</button>
             <button onClick={handleDelete}>Delete</button>
           </CardActions>
@@ -127,10 +150,12 @@ export const TestCard = (props) => {
   );
 };
 
-TestCard.propTypes = {
-  test: PropTypes.shape({
-    title: PropTypes.string,
+BookCard.propTypes = {
+  book: PropTypes.shape({
     id: PropTypes.number,
-    typeOfTest: PropTypes.number,
+    title: PropTypes.string,
+    language: PropTypes.string,
+    genre: PropTypes.string,
+    author: PropTypes.string,
   }),
 };

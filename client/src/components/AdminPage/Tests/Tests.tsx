@@ -2,7 +2,6 @@ import { BLOCKS_TITLES } from '../../../common/enums';
 import { Block } from '../../Block/Block';
 import React, { useEffect, useState } from 'react';
 import './Tests.scss';
-import { Outlet } from 'react-router-dom';
 import { TestCard } from '../TestCard/TestCard';
 import axios from 'axios';
 import { AddTestCard } from '../TestCard/AddTestCard';
@@ -22,11 +21,12 @@ export const Tests = () => {
   }, []);
   return (
     <Block title={BLOCKS_TITLES.TESTS} percentWidth={60}>
-      {data.map((test, index) => {
-        return <TestCard key={test.id} test={test} />;
-      })}
-      <AddTestCard />
-      <Outlet />
+      <div className="tests-wrapper">
+        {data.map((test, index) => {
+          return <TestCard key={test.id} test={test} />;
+        })}
+        <AddTestCard />
+      </div>
     </Block>
   );
 };
