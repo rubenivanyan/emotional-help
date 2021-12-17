@@ -19,6 +19,7 @@
     "react",
     "@typescript-eslint"
   ],
+  "ignoreDuringBuilds": "true",
   "rules": {
     "linebreak-style": [
       "error",
