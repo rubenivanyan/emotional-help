@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class FullApplicationDto : ApplicationDto
+    public class FullTestingApplicationDto : TestingApplicationDto
     {
         public string UserName { get; set; }
         public string Email { get; set; }
