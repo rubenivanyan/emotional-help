@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { BLOCKS_TITLES } from '../../../common/enums';
+import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import { Info } from '../Info/Info';
 import { appFetchRequest } from '../../../store/actions';
@@ -33,7 +33,7 @@ export const Applications = () => {
 
   return (
     <>
-      <Block title={BLOCKS_TITLES.APPLICATIONS} percentWidth={25}>
+      <Block title={BLOCK_TITLES.APPLICATIONS} percentWidth={25}>
         <Outlet />
       </Block>
       <Info />

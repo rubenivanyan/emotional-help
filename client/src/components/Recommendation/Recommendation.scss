@@ -1,0 +1,42 @@
+.recommendation {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    width: 100%;
+
+    margin: 0 0 10px 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  &-item {
+    min-height: 150px;
+    max-width: 280px;
+    min-width: 280px;
+
+    padding: 5px 15px;
+    margin: 0 10px 10px 0;
+
+    background-color: lightgray;
+    border-radius: 10px;
+
+    h3,
+    p {
+      margin: 5px 0;
+    }
+
+    h3 {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+button.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 50px;
+  min-width: 200px;
+
+  padding: 10px;
+
+  border: 0;
+  border-radius: 15px;
+
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, opacity 300ms ease-in-out;
+
+  &.default {
+    background-color: #71bded;
+
+    &:hover {
+      background-color: white;
+
+      color: #71bded;
+    }
+  }
+
+  &.red {
+    background-color: #ff3b3b;
+
+    &:hover {
+      background-color: white;
+
+      color: #ff3b3b;
+    }
+  }
+
+  &.green {
+    background-color: #34cf05;
+
+    &:hover {
+      background-color: white;
+
+      color: #34cf05;
+    }
+  }
+
+  &.submit {
+    opacity: .66;
+    background-color: lightgray;
+
+    &:hover {
+      background-color: lightgray;
+
+      color: white;
+    }
+  }
+}

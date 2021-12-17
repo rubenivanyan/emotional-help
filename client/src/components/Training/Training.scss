@@ -1,0 +1,33 @@
+.training {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 10px;
+
+    background-color: lightgray;
+    border-radius: 15px;
+
+    h3 {
+      margin: 0;
+
+      text-align: center;
+    }
+  }
+
+  &-list {
+    margin: 0;
+    padding: 0;
+
+    text-align: justify;
+
+    list-style: none;
+  }
+
+  &-item {
+    margin: 5px 0;
+  }
+}

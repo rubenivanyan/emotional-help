@@ -10,12 +10,19 @@ import { RequestsList } from './components/AdminPage/RequestsList/RequestsList';
 import { UsersGrid } from './components/AdminPage/UsersGrid/UsersGrid';
 // eslint-disable-next-line
 import { PsychoGrid } from './components/AdminPage/PsychologistsGrid/PsychologistsGrid';
-import { Quiz } from './pages/QuizPage/QuizPage';
 import { Applications } from './components/AdminPage/Applications/Applications';
 import { Users } from './components/AdminPage/Users/Users';
 import { Tests } from './components/AdminPage/Tests/Tests';
 import { Library } from './components/AdminPage/Library/Library';
 import { Questions } from './components/AdminPage/Questions/Questions';
+import { TestingPage } from './pages/TestingPage/TestingPage';
+import { MainPage } from './pages/MainPage/MainPage';
+import {
+  TrainingPage,
+  ConsultingPage,
+} from './pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
+import { SignUpPage } from './pages/SignUpPage/SignUp';
+import { SignInPage } from './pages/SignInPage/SignInPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -46,10 +53,13 @@ ReactDOM.render(
               <Route path="questions/:id" element={<Questions />}></Route>
               <Route path="*" element={<p>404</p>} />
             </Route>
-            <Route path="testing" element={<Quiz />} />
-            <Route path="training" element={<Quiz />} />
-            <Route path="consulting" element={<div>---Our team---</div>} />
             <Route path="*" element={<p>404</p>} />
+            <Route path="" element={<MainPage />} />
+            <Route path="testing" element={<TestingPage />} />
+            <Route path="training" element={<TrainingPage />} />
+            <Route path="consulting" element={<ConsultingPage />} />
+            <Route path="sign-up" element={<SignUpPage />} />
+            <Route path="sign-in" element={<SignInPage />} />
           </Route>
         </Routes>
       </Router>
