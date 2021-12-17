@@ -108,11 +108,11 @@ export const TrainingPage = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
               <Input
                 label={'Name'}
-                onChange={(event) => setUserName(event.target.value)}
+                onChange={(event) => setUserName(event.target.value || null)}
               />
               <Input
                 label={'E-mail'}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value || null)}
               />
               {
                 isLoading ?
@@ -154,6 +154,7 @@ export const ConsultingPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
+
     const consultingApplication: ConsultingApplication = {
       isArchived: false,
       fullName: userName,
@@ -161,6 +162,7 @@ export const ConsultingPage = () => {
       convenientDay: convenientDay,
       message: message,
     };
+
     apiFetchPost(
       '/api/consultingApplication',
       consultingApplication,
@@ -196,11 +198,11 @@ export const ConsultingPage = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
               <Input
                 label={'Name'}
-                onChange={(event) => setUserName(event.target.value)}
+                onChange={(event) => setUserName(event.target.value || null)}
               />
               <Input
                 label={'E-mail'}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value || null)}
               />
               <Input
                 label={'Convenient day'}
