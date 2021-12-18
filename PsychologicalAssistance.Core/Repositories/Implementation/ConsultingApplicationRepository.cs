@@ -76,5 +76,22 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
 
             return consultingApplication;
         }
+
+        public async Task<FullConsultingApplicationDto> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string UserId)
+        {
+            var consultingApplication = await Task.Run(() => DbSet
+                .Where(consultingApplication => consultingApplication.UserId == UserId)
+                .Include(consultingApplication => consultingApplication.User)
+                .Select(consultingApplication => new FullConsultingApplicationDto
+                {
+                    Id = consultingApplication.Id,
+                    ConvenientDay = consultingApplication.ConvenientDay.ToShortDateString(),
+                    UserId = consultingApplication.UserId,
+                    UserFullName = consultingApplication.User.UserName + " " + consultingApplication.User.UserSurname,
+                    Email = consultingApplication.User.Email
+                }).FirstOrDefault());
+
+            return consultingApplication;
+        }
     }
 }

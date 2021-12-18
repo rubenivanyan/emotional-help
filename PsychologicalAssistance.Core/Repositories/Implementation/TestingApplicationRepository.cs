@@ -62,6 +62,37 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return fullTestingApplicationDtoWithUserInfo;
         }
 
+        public async Task<FullTestingApplicationDto> GetFullTestingApplicationDtoByUserIdAsync(string UserId)
+        {
+            var fullTestingApplicationDtoWithUserIdInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
+                .ThenInclude(testingResults => testingResults.User)
+                .Where(testingApplication => testingApplication.TestResults.UserId == UserId)
+                .Select(testingApplication => new FullTestingApplicationDto
+                {
+                    Id = testingApplication.Id,
+                    IsArchived = testingApplication.IsArchived,
+                    TestResultsId = testingApplication.TestResultsId,
+                    DateOfResults = testingApplication.TestResults.ResultsDate.ToShortDateString(),
+                    UserName = testingApplication.TestResults.User.Id,
+                    Email = testingApplication.TestResults.User.Email
+                }).FirstOrDefault());
+
+            var fullTestingApplicationDtoWithAnswerInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
+                .ThenInclude(testingResults => testingResults.Answers)
+                .ThenInclude(answers => answers.Question)
+                .Where(testingApplication => testingApplication.TestResults.UserId == UserId)
+                .Select(testingApplication => new FullTestingApplicationDto
+                {
+                    AnswersFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Formulation).ToList(),
+                    QuestionsFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Question.Formulation).ToList()
+                }).FirstOrDefault());
+
+            fullTestingApplicationDtoWithUserIdInfo.AnswersFormulations = fullTestingApplicationDtoWithAnswerInfo.AnswersFormulations;
+            fullTestingApplicationDtoWithUserIdInfo.QuestionsFormulations = fullTestingApplicationDtoWithAnswerInfo.QuestionsFormulations;
+            return fullTestingApplicationDtoWithUserIdInfo;
+        }
+
+
         public async Task<TestingApplicationDto> GetTestingApplicationByIdDtoAsync(int id)
         {
             var testingApplication = await GetItemByIdAsync(id);

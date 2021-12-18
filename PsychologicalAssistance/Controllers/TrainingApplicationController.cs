@@ -38,6 +38,15 @@ namespace PsychologicalAssistance.Web.Controllers
             return trainingApplication is not null ? Ok(trainingApplication) : NotFound();
         }
 
+        [HttpGet("userId")]
+        public async Task<ActionResult> GetTrainingApplicationByUserId()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var trainingApplication = await _trainingApplicationService.GetTrainingApplicationByUserIdAsync(userId);
+            return trainingApplication is not null ? Ok(trainingApplication) : NotFound();
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> CreateTrainingApplication([FromBody] TrainingApplicationDto trainingApplicationDto)
         {

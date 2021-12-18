@@ -15,7 +15,7 @@ namespace PsychologicalAssistance.Web.Controllers
         private readonly IConsultingApplicationService _consultingApplicationService;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-
+                
         public ConsultingApplicationController(IConsultingApplicationService consultingApplicationService, IMapper mapper, UserManager<User> userManager)
         {
             _consultingApplicationService = consultingApplicationService;
@@ -48,6 +48,14 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> GetConsultingApplicationWithUserInfoById(int id)
         {
             var consultingApplication = await _consultingApplicationService.GetConsultingApplicationWithUserInfoByIdAsync(id);
+            return consultingApplication is not null ? Ok(consultingApplication) : NotFound();
+        }
+
+        [HttpGet("userId")]
+        public async Task<ActionResult> GetConsultingApplicationWithUserInfoByUserId()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var consultingApplication = await _consultingApplicationService.GetConsultingApplicationWithUserInfoByUserIdAsync(userId);
             return consultingApplication is not null ? Ok(consultingApplication) : NotFound();
         }
 
