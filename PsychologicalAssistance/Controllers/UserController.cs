@@ -10,6 +10,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
@@ -70,12 +72,17 @@ namespace PsychologicalAssistance.Web.Controllers
             {
                 var inputTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 var fromTimeOffset = new TimeSpan(1, 0, 0);
-                await HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
                 {
                     IsPersistent = true,
                     ExpiresUtc = new DateTimeOffset(inputTime, fromTimeOffset)
                 });
-                return Ok();
+
+                var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
+                var resp = new System.Net.Http.HttpResponseMessage();
+                var cookie = new CookieHeaderValue(".AspNetCore.Identity.Application", user.Id);
+                resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+                return Ok(resp);
             }
 
             return BadRequest("Invalid UserName or Password");
@@ -106,5 +113,28 @@ namespace PsychologicalAssistance.Web.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             await _userService.UpdateUserAsync(userModifyDto, userId);
         }
+
+        /*public String ObtenerCookie(System.Net.Http.HttpResponseMessage resp)
+        {
+
+            String strUserId = "";
+            System.Net.Http.Headers.CookieHeaderValue cookie = Request.HttpContext.GetCookies("cosmohitsuserid").FirstOrDefault();
+            if (cookie != null)
+            {
+                strUserId = cookie["cosmohitsuserid"].Value;
+            }
+            else
+            {
+                strUserId = Guid.NewGuid().ToString();
+                cookie = new CookieHeaderValue("cosmohitsuserid", strUserId);
+                cookie.Domain = Request.RequestUri.Host;
+                cookie.Expires = DateTime.Now.AddYears(1);
+                cookie.Path = "/";
+                resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+
+            }
+
+            return strUserId;
+        }*/
     }
 }
