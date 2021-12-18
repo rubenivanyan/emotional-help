@@ -200,7 +200,8 @@ export const ConsultingPage = () => {
     <ParentComponent
       title={BLOCK_TITLES.CONSULTING}
       text={TRAINING_AND_CONSULTING_TEXT.CONSULTING_TEXT}
-    >      {
+    >
+      {
         success ?
           <Success /> :
           error ?
