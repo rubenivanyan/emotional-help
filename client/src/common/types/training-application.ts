@@ -1,9 +1,8 @@
-import { Training } from './training';
-
 export type TrainingApplication = {
   id?: number;
   isArchived: boolean;
+  userId?: string;
   fullName?: string;
   email?: string;
-  training: Training
+  trainingId: number
 };

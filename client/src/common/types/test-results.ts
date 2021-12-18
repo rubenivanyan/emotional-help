@@ -1,10 +1,9 @@
 import { Variant } from './variant';
 
 export type TestResults = {
-  id: number;
+  id?: number;
   dateOfResults: string;
   userId: string;
-  userFullName: string;
-  TestId: number;
+  testId: number;
   chosenVariants: Variant[];
 };

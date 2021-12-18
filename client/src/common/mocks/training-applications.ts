@@ -9,20 +9,20 @@ export const mockedTrainingApplications: TrainingApplication[] = [
     isArchived: false,
     fullName: 'Example 1',
     email: 'example1@mail.com',
-    training: mockedTrainings[0],
+    trainingId: mockedTrainings[0].id,
   },
   {
     id: 1,
     isArchived: false,
     fullName: 'Example 2',
     email: 'example1@mail.com',
-    training: mockedTrainings[1],
+    trainingId: mockedTrainings[1].id,
   },
   {
     id: 2,
     isArchived: true,
     fullName: 'Example 3 Archived',
     email: 'example3@mail.com',
-    training: mockedTrainings[2],
+    trainingId: mockedTrainings[2].id,
   },
 ];

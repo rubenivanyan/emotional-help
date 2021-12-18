@@ -1,5 +1,5 @@
 export type Question = {
-  id: number;
+  id?: number;
   formulation: string;
   imageUrl?: string;
 };
