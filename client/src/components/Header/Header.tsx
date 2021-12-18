@@ -4,12 +4,21 @@ import { Logo } from '../Logo/Logo';
 import { Navbar } from '../Navbar/Navbar';
 import { Registration } from '../Registration/Registration';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { LocalStorage } from '../../api/local-storage';
 
 const SearchRegWrapper = () => {
+  const isUserLocal = LocalStorage
+    .getLocalStorage()
+    .getItem('fullName');
+
   return (
     <div className="search-reg-wrapper">
       <SearchBar />
-      <Registration />
+      {
+        isUserLocal ?
+        :
+          <Registration />
+      }
     </div>
   );
 };
