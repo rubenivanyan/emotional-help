@@ -47,7 +47,7 @@ namespace PsychologicalAssistance.Web
                 .AddCookie(options =>
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/User/Login");
-                    options.Cookie.Domain = "azurewebsites.net";
+                    options.Cookie.Domain = "emotionalhelptest.azurewebsites.net";
                 });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
