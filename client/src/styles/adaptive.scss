@@ -94,6 +94,39 @@
 }
 
 @media (max-width: 768px) {
+  header {
+    z-index: 200;
+  }
+
+  input {
+    height: 70px !important;
+    font-size: 24px !important;
+  }
+
+  p,
+  li {
+    font-size: 20px;
+  }
+
+  .training-page-container .training-page-inner {
+
+    .next-training {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 70px;
+      width: 100%;
+
+      background-color: #91bdb0;
+      border-radius: 15px;
+
+      color: white;
+      font-size: 26px;
+      text-decoration: none;
+    }
+  }
+
   .header .navbar .link {
     &:first-child {
       display: none;
@@ -129,20 +162,51 @@
       margin-bottom: 25px;
     }
   }
+
+  header .navigation-wrapper {
+    display: none;
+
+    transition: transform 500s ease-in-out;
+
+    &.opened {
+      box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
+      transform: translateY(0px);
+
+      animation: translate 500ms ease-in-out;
+
+      .link {
+        height: 80px;
+
+        padding: 0 25px;
+        margin-right: 10px;
+
+        border-radius: 20px;
+      }
+    }
+  }
+
+  header .menu-opener {
+    display: flex;
+  }
+}
+
+@keyframes translate {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 720px) {
-
-  p,
-  li {
-    font-size: 18px;
-  }
-
-  input {
-    height: 70px !important;
-    font-size: 24px !important;
-  }
-
   .recommendation-list {
     .recommendation-item {
       width: 100%;
@@ -162,31 +226,25 @@
     }
   }
 
+  .testing-buttons {
+    flex-wrap: wrap;
+
+    &>* {
+      margin: 5px 0;
+    }
+  }
+
+  .testing-buttons .button {
+    flex-grow: 1;
+  }
+
   button.button.default,
   .score-section .sending-container form input {
+    flex-grow: 1;
+
     height: 70px;
 
     font-size: 26px;
-  }
-
-  .training-page-container .training-page-inner,
-  .consulting-page-container .consulting-page-inner {
-
-    .next-training {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      height: 70px;
-      width: 100%;
-
-      background-color: #91bdb0;
-      border-radius: 15px;
-
-      color: white;
-      font-size: 26px;
-      text-decoration: none;
-    }
   }
 
   .main-wrapper .sign-up-container,
@@ -198,4 +256,11 @@
     transform: translate(0, 0);
   }
 
+  .question-text {
+    padding-right: 20px;
+
+    font-size: 26px;
+  }
 }
+
+@media (max-width: 425px) {}
