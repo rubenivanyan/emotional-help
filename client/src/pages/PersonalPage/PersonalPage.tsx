@@ -69,7 +69,7 @@ export const PersonalPage = () => {
 
   return (
     <section className="personal-page-container">
-      <Block title={BLOCK_TITLES.EDIT_PROFILE} percentWidth={33}>
+      <Block title={BLOCK_TITLES.EDIT_PROFILE} percentWidth={30}>
         {isSuccess ?
           <Success message={'Saved successfully!'} /> :
           isError ?
@@ -100,7 +100,7 @@ export const PersonalPage = () => {
             </form>
         }
       </Block>
-      <Block title={BLOCK_TITLES.HISTORY} percentWidth={66}>
+      <Block title={BLOCK_TITLES.HISTORY} percentWidth={60}>
         <Button
           title={isGetting ? 'getting...' : 'get history'}
           type={BUTTON_TYPES.DEFAULT}
