@@ -70,7 +70,7 @@ namespace PsychologicalAssistance.Web.Controllers
             {
                 var inputTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
                 var fromTimeOffset = new TimeSpan(1, 0, 0);
-                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                await HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
                 {
                     IsPersistent = true,
                     ExpiresUtc = new DateTimeOffset(inputTime, fromTimeOffset)
