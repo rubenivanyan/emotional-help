@@ -35,7 +35,7 @@ export const PersonalPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    if (isError) setTimeout(() => setError(false), 2000);
+    if (isError) setTimeout(() => setError(false), 3000);
   }, [isError]);
 
   const changedUser: User = {
@@ -62,12 +62,12 @@ export const PersonalPage = () => {
   };
 
   return (
-    isSuccess ?
-      <Success message={'Saved successfully!'} /> :
-      isError ?
-        <Error error={errorMessage} /> :
-        <section className="personal-page-container">
-          <Block title={BLOCK_TITLES.PERSONAL_PAGE} percentWidth={100}>
+    <section className="personal-page-container">
+      <Block title={BLOCK_TITLES.PERSONAL_PAGE} percentWidth={100}>
+        {isSuccess ?
+          <Success message={'Saved successfully!'} /> :
+          isError ?
+            <Error error={errorMessage} /> :
             <form onSubmit={(e) => handleSubmit(e)}>
               <Input label={'Name'}
                 onChange={(e) => setFullName(e.target.value)}
@@ -92,7 +92,8 @@ export const PersonalPage = () => {
                 submitting={isSubmitting}
               />
             </form>
-          </Block>
-        </section>
+        }
+      </Block>
+    </section>
   );
 };
