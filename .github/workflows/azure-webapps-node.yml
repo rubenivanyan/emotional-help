@@ -29,7 +29,7 @@ env:
   NODE_VERSION: '14.x'                # set this to the node version to use
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
