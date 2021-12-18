@@ -49,12 +49,12 @@ namespace PsychologicalAssistance.Services.Implementation
             var questionGroupsValues = new List<QuestionGroupsValues>();
             questionGroupsValues.Add(new QuestionGroupsValues
             {
-                QuestionGroup = Enum.Parse<QuestionGroups>(testResultsDto.Questions[0].QuestionGroup),
+                QuestionGroup = Enum.Parse<QuestionGroups>(testResultsDto.QuestionsGroups[0]),
                 Value = testResultsDto.ChosenVariants[0].Value
             });
             for (int i = 1; i < testResultsDto.ChosenVariants.Count; i++)
             {
-                var group = Enum.Parse<QuestionGroups>(testResultsDto.Questions[i].QuestionGroup);
+                var group = Enum.Parse<QuestionGroups>(testResultsDto.QuestionsGroups[i]);
                 var isGroupAdded = false;
                 for (int j = 0; j < questionGroupsValues.Count; j++)
                 {
