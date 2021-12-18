@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -32,6 +33,18 @@ namespace PsychologicalAssistance.Services.Implementation
             }).ToList());
 
             return users;
+        }
+
+        public async Task<UserModifyDto> GetUserForModification(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userModifyDto = _mapper.Map<User, UserModifyDto>(user);
+            return userModifyDto;
         }
 
         public async Task<UserDto> GetUsersInformationForAccount(string userId)
@@ -71,6 +84,16 @@ namespace PsychologicalAssistance.Services.Implementation
 
             await _userManager.AddToRoleAsync(user, "Client");
             return null;
+        }
+
+        public async Task UpdateUserAsync(UserModifyDto userModifyDto, string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            user.UserName = userModifyDto.UserName;
+            user.UserSurname = userModifyDto.UserSurname;
+            user.Email = userModifyDto.Email;
+            user.BirthDate = DateTime.Parse(userModifyDto.BirthDate);
+            await _userManager.UpdateAsync(user);
         }
     }
 }

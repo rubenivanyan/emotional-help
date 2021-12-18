@@ -14,6 +14,9 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
 
             CreateMap<User, UserDto>()
                 .ForMember(user => user.FullName, opt => opt.MapFrom(src => src.UserName + " " + src.UserSurname));
+
+            CreateMap<User, UserModifyDto>()
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate.ToShortDateString()));
         }
     }
 }
