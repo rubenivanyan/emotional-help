@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +50,11 @@ namespace PsychologicalAssistance.Web
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/User/Login");
                     options.Cookie.Domain = "emotionalhelptest.azurewebsites.net";
                 });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories
