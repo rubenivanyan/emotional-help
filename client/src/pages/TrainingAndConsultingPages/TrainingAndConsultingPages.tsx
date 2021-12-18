@@ -37,20 +37,23 @@ export const TrainingPage = () => {
   const [error, setError] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [counter, setCounter] = useState(0);
 
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
-  const [training, setTraining] = useState<Training | null>(null);
-  const [trainings, setTrainings] = useState<Training[]>(mockedTrainings);
-  const [counter, setCounter] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [trainingId, setTrainingId] = useState(0);
+  const [trainings, setTrainings] = useState<Training[]>([]);
+
 
   useEffect(() => {
     apiFetchGet('/api/training')
       .then((response) => response.json())
-      .then((result) => result.length ?
-        setTrainings(result) :
-        console.log('res', result))
+      .then((result) => setTrainings(
+        result.length ?
+          result :
+          mockedTrainings,
+      ))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -61,7 +64,7 @@ export const TrainingPage = () => {
       isArchived: false,
       fullName: userName,
       email: email,
-      training: training,
+      trainingId: trainingId,
     };
     apiFetchPost(
       '/api/trainingApplication',
@@ -86,7 +89,7 @@ export const TrainingPage = () => {
     } else {
       setCounter(counter + 1);
     }
-    setTraining(trainings[counter]);
+    setTrainingId(trainings[counter].id);
   };
 
   return (

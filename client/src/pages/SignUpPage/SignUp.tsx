@@ -13,7 +13,7 @@ export const SignUpPage = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
-  const [birthDate, setBirthDate] = useState('2021-12-16T06:17:14.099Z');
+  const [birthDate, setBirthDate] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -78,6 +78,10 @@ export const SignUpPage = () => {
                 <Input
                   label={'Surname'}
                   onChange={(event) => setSurname(event.target.value)}
+                />
+                <Input
+                  label={'Birth date'}
+                  onChange={(event) => setBirthDate(event.target.value)}
                 />
                 <Input
                   label={'E-mail'}
