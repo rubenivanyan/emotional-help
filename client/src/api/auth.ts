@@ -3,7 +3,7 @@ import { apiFetchGet } from './fetch';
 import { LocalStorage } from './local-storage';
 
 export class Auth {
-  private static user: User | null;
+  private static user: User | null = null;
 
   private constructor() { };
 

@@ -12,7 +12,7 @@ const SearchRegWrapper = () => {
     <div className="search-reg-wrapper">
       <SearchBar />
       {
-        Auth.isLogged ?
+        Auth.isLogged() ?
           <UserPanel /> :
           <Registration />
       }

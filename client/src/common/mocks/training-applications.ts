@@ -1,7 +1,6 @@
 import {
   TrainingApplication,
 } from '../types/training-application';
-import { mockedTrainings } from './trainings';
 
 export const mockedTrainingApplications: TrainingApplication[] = [
   {
@@ -9,20 +8,20 @@ export const mockedTrainingApplications: TrainingApplication[] = [
     isArchived: false,
     fullName: 'Example 1',
     email: 'example1@mail.com',
-    trainingId: mockedTrainings[0].id,
+    trainingId: 0,
   },
   {
     id: 1,
     isArchived: false,
     fullName: 'Example 2',
     email: 'example1@mail.com',
-    trainingId: mockedTrainings[1].id,
+    trainingId: 1,
   },
   {
     id: 2,
     isArchived: true,
     fullName: 'Example 3 Archived',
     email: 'example3@mail.com',
-    trainingId: mockedTrainings[2].id,
+    trainingId: 2,
   },
 ];
