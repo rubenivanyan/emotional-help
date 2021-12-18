@@ -10,9 +10,11 @@ import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import { Auth } from '../../api/auth';
-import { apiFetchGet } from '../../api/fetch';
+import { apiFetchGet, apiFetchPost } from '../../api/fetch';
 import { TestWithQuestions } from '../../common/types/test-with-questions';
 import { Variant } from '../../common/types/variant';
+import { TestResults } from '../../common/types/test-results';
+import { TestingApplication } from '../../common/types/testing-application';
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -25,17 +27,42 @@ export const TestingPage: React.FC = () => {
   const [error, setError] = useState(false);
 
   const [isInProgress, setIsInProgress] = useState(false);
+  const [isTestFinished, setIsTestFinished] = useState(false);
   const [tests, setTests] = useState<TestWithQuestions[]>([]);
   const [chosenVariants, setChosenVariants] = useState<Variant[]>([]);
 
+  const [fullName, setFullName] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+
+  const [testResultId, setTestResultId] = useState<number | null>(null);
+
+
+  const testResults: TestResults = {
+    testId: tests[currentTest]?.id,
+    chosenVariants: chosenVariants,
+  };
+
+  const testingApplication: TestingApplication = {
+    isArchived: false,
+    fullName: fullName,
+    email: email,
+    testResultsId: testResultId,
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
-    setIsSubmitting(true);
     event.preventDefault();
-    const random = Math.round(Math.random());
-    setTimeout(() => {
-      random ? setSuccess(true) : setError(true);
-      setIsSubmitting(false);
-    }, 2000);
+    setIsSubmitting(true);
+
+    apiFetchPost('/api/TestingApplication', testingApplication)
+      .then((response) => {
+        if (response.status === 200) {
+          setSuccess(true);
+        } else {
+          setError(true);
+        }
+      })
+      .catch((error) => alert('/api/TestingApplication' + error))
+      .finally(() => setIsSubmitting(false));
   };
 
   useEffect(() => {
@@ -46,8 +73,26 @@ export const TestingPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (isTestFinished) {
+      console.log(testResults);
+      apiFetchPost('/api/TestResult', testResults)
+        .then<TestResults>((response) => response.json())
+        .then((testResult) => setTestResultId(testResult.id))
+        .catch((error) => alert('/api/TestResult' + error));
+    }
+  }, [isTestFinished]);
+
+  useEffect(() => {
     if (error) setTimeout(() => setError(false), 3000);
   }, [error]);
+
+  const nextTest = () => {
+    if (currentTest + 1 < tests.length) {
+      setCurrentTest(currentTest + 1);
+    } else {
+      setCurrentTest(0);
+    }
+  };
 
   const handleVariantClick = (variant: Variant) => {
     const questions = tests[currentTest]?.questions;
@@ -59,19 +104,12 @@ export const TestingPage: React.FC = () => {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
+      setIsTestFinished(true);
       setIsSubmitting(true);
       setTimeout(() => {
         setShowScore(true);
         setIsSubmitting(false);
       }, 2000);
-    }
-  };
-
-  const nextTest = () => {
-    if (currentTest + 1 < tests.length) {
-      setCurrentTest(currentTest + 1);
-    } else {
-      setCurrentTest(0);
     }
   };
 
@@ -158,8 +196,18 @@ export const TestingPage: React.FC = () => {
                             }.
                           </p> :
                           <>
-                            <Input label={'Name'}></Input>
-                            <Input label={'E-mail'}></Input>
+                            <Input
+                              label={'Name'}
+                              onChange={
+                                (event) => setFullName(event.target.value)
+                              }
+                            />
+                            <Input
+                              label={'E-mail'}
+                              onChange={
+                                (event) => setEmail(event.target.value)
+                              }
+                            />
                           </>
                       }
 
