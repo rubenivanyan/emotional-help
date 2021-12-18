@@ -30,6 +30,7 @@ export const PersonalPage = () => {
   const [birthDateState, setBirthDate] = useState(birthDate);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGetting, setIsGetting] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const [isError, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -61,9 +62,14 @@ export const PersonalPage = () => {
       .finally(() => setIsSubmitting(false));
   };
 
+  const getHistory = () => {
+    setIsGetting(true);
+    // TO DO: need a BE endpoint
+  };
+
   return (
     <section className="personal-page-container">
-      <Block title={BLOCK_TITLES.EDIT_PROFILE} percentWidth={100}>
+      <Block title={BLOCK_TITLES.EDIT_PROFILE} percentWidth={33}>
         {isSuccess ?
           <Success message={'Saved successfully!'} /> :
           isError ?
@@ -94,7 +100,14 @@ export const PersonalPage = () => {
             </form>
         }
       </Block>
-      <Block title={BLOCK_TITLES.HISTORY} percentWidth={100} />
+      <Block title={BLOCK_TITLES.HISTORY} percentWidth={66}>
+        <Button
+          title={isGetting ? 'getting...' : 'get history'}
+          type={BUTTON_TYPES.DEFAULT}
+          onClick={() => getHistory()}
+          submitting={isGetting}
+        />
+      </Block>
     </section>
   );
 };
