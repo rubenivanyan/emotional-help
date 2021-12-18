@@ -35,7 +35,7 @@ export class LocalStorage {
   }
 
   public static getObject(keys: string[]): Object {
-    let object: Object;
+    const object: Object = {};
     for (const key of keys) {
       object[key] = LocalStorage.getItem(key);
     }

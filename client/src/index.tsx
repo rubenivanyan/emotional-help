@@ -23,6 +23,9 @@ import {
 } from './pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
 import { SignUpPage } from './pages/SignUpPage/SignUp';
 import { SignInPage } from './pages/SignInPage/SignInPage';
+import { PersonalPage } from './pages/PersonalPage/PersonalPage';
+import { NotFound } from './components/NotFound/NotFound';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -51,15 +54,16 @@ ReactDOM.render(
               <Route path="tests" element={<Tests />}></Route>
               <Route path="questions" element={<Questions />}></Route>
               <Route path="questions/:id" element={<Questions />}></Route>
-              <Route path="*" element={<p>404</p>} />
+              <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="*" element={<p>404</p>} />
+            <Route path="*" element={<NotFound />} />
             <Route path="" element={<MainPage />} />
             <Route path="testing" element={<TestingPage />} />
             <Route path="training" element={<TrainingPage />} />
             <Route path="consulting" element={<ConsultingPage />} />
             <Route path="sign-up" element={<SignUpPage />} />
             <Route path="sign-in" element={<SignInPage />} />
+            <Route path="personal-page" element={<PersonalPage />} />
           </Route>
         </Routes>
       </Router>
