@@ -19,8 +19,11 @@ sans-serif;
 
 BODY {
   position: relative;
+
   min-height: 100vh;
+
   margin: 0;
+
   background-color: $body-background;
   font-family: $body-font;
   -webkit-font-smoothing: antialiased;
