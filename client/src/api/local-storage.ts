@@ -1,12 +1,11 @@
 import { apiFetchGet } from './fetch';
 
 export class LocalStorage {
-  private static localStorage: Storage;
+  private static localStorage: Storage = window.localStorage;
 
   private constructor() { };
 
   public static getLocalStorage(): Storage {
-    if (!LocalStorage.localStorage) LocalStorage.localStorage = new Storage;
     return LocalStorage.localStorage;
   }
 
