@@ -1,4 +1,4 @@
-import { Answer } from './answer';
+import { Variant } from './variant';
 import { Question } from './question';
 
 export type TestResultsForUser = {
@@ -8,5 +8,5 @@ export type TestResultsForUser = {
   userFullName: string;
   TestId: number;
   questions: Question[];
-  answers: Answer[];
+  variants: Variant[];
 };

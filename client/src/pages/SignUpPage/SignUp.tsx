@@ -1,5 +1,5 @@
 import './SignUp.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Input } from '../../components/Input/Input';
 import { UserRegistration } from '../../common/types/user-registration';
 import { apiFetchPost } from '../../api/fetch';
@@ -8,12 +8,13 @@ import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
+import { Auth } from '../../api/auth';
 
 export const SignUpPage = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
-  const [birthDate, setBirthDate] = useState('2021-12-16T06:17:14.099Z');
+  const [birthDate, setBirthDate] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -21,10 +22,6 @@ export const SignUpPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    setBirthDate(birthDate);
-  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -46,6 +43,7 @@ export const SignUpPage = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 204) {
           setSuccess(true);
+          Auth.login();
         } else {
           setError(true);
           setErrorMessage(response[0]?.description);
@@ -78,6 +76,10 @@ export const SignUpPage = () => {
                 <Input
                   label={'Surname'}
                   onChange={(event) => setSurname(event.target.value)}
+                />
+                <Input
+                  label={'Birth date'}
+                  onChange={(event) => setBirthDate(event.target.value)}
                 />
                 <Input
                   label={'E-mail'}

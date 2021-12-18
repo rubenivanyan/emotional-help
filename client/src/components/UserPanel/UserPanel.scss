@@ -1,0 +1,38 @@
+.user-panel {
+  display: flex;
+  align-items: center;
+
+
+  a.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    padding: 10px 10px;
+
+    color: white;
+
+    background-color: #91bdb0;
+    border-radius: 15px;
+    border: none;
+
+    line-height: normal;
+
+    transition: 0.3s;
+
+    &:hover {
+      color: #91bdb0;
+      background-color: white;
+      transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+    }
+  }
+
+  .button.red {
+    min-width: 0;
+
+    padding: 10px 10px;
+
+    font-size: 18px;
+  }
+}

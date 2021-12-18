@@ -16,6 +16,8 @@ import { TrainingComponent } from '../../components/Training/Training';
 import { mockedTrainings } from '../../common/mocks/trainings';
 import { Error } from '../../components/Error/Error';
 import { Success } from '../../components/Success/Success';
+import { Auth } from '../../api/auth';
+import { LocalStorage } from '../../api/local-storage';
 
 const ParentComponent = ({ title, text, children }:
   PropsWithChildren<{ title: string, text: string }>) => {
@@ -37,20 +39,22 @@ export const TrainingPage = () => {
   const [error, setError] = useState(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [counter, setCounter] = useState(0);
 
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
-  const [training, setTraining] = useState<Training | null>(null);
-  const [trainings, setTrainings] = useState<Training[]>(mockedTrainings);
-  const [counter, setCounter] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [trainingId, setTrainingId] = useState(0);
+  const [trainings, setTrainings] = useState<Training[]>([]);
 
   useEffect(() => {
     apiFetchGet('/api/training')
       .then((response) => response.json())
-      .then((result) => result.length ?
-        setTrainings(result) :
-        console.log('res', result))
+      .then((result) => setTrainings(
+        result.length ?
+          result :
+          mockedTrainings,
+      ))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -61,7 +65,7 @@ export const TrainingPage = () => {
       isArchived: false,
       fullName: userName,
       email: email,
-      training: training,
+      trainingId: trainingId,
     };
     apiFetchPost(
       '/api/trainingApplication',
@@ -86,7 +90,7 @@ export const TrainingPage = () => {
     } else {
       setCounter(counter + 1);
     }
-    setTraining(trainings[counter]);
+    setTrainingId(trainings[counter].id);
   };
 
   return (
@@ -106,14 +110,25 @@ export const TrainingPage = () => {
               />
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
-              <Input
-                label={'Name'}
-                onChange={(event) => setUserName(event.target.value)}
-              />
-              <Input
-                label={'E-mail'}
-                onChange={(event) => setEmail(event.target.value)}
-              />
+              {
+                Auth.isLogged() ?
+                  <p>
+                    {`Dear ${LocalStorage.getItem('fullName')},
+                    chose a training, please`}
+                  </p> :
+                  <>
+                    <Input
+                      label={'Name'}
+                      onChange={
+                        (event) => setUserName(event.target.value)
+                      }
+                    />
+                    <Input
+                      label={'E-mail'}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                  </>
+              }
               {
                 isLoading ?
                   <h3>No data. Loading...</h3> :
@@ -149,16 +164,20 @@ export const ConsultingPage = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [convenientDay, setConvenientDay] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
+
     const consultingApplication: ConsultingApplication = {
       isArchived: false,
       fullName: userName,
       email: email,
       convenientDay: convenientDay,
+      message: message,
     };
+
     apiFetchPost(
       '/api/consultingApplication',
       consultingApplication,
@@ -180,7 +199,8 @@ export const ConsultingPage = () => {
     <ParentComponent
       title={BLOCK_TITLES.CONSULTING}
       text={TRAINING_AND_CONSULTING_TEXT.CONSULTING_TEXT}
-    >      {
+    >
+      {
         success ?
           <Success /> :
           error ?
@@ -192,17 +212,32 @@ export const ConsultingPage = () => {
               />
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
-              <Input
-                label={'Name'}
-                onChange={(event) => setUserName(event.target.value)}
-              />
-              <Input
-                label={'E-mail'}
-                onChange={(event) => setEmail(event.target.value)}
-              />
+              {
+                Auth.isLogged() ?
+                  <p>
+                    {`Dear ${LocalStorage.getItem('fullName')},
+                    write a convenient day, please`}
+                  </p> :
+                  <>
+                    <Input
+                      label={'Name'}
+                      onChange={
+                        (event) => setUserName(event.target.value)
+                      }
+                    />
+                    <Input
+                      label={'E-mail'}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                  </>
+              }
               <Input
                 label={'Convenient day'}
                 onChange={(event) => setConvenientDay(event.target.value)}
+              />
+              <Input
+                label={'Message'}
+                onChange={(event) => setMessage(event.target.value)}
               />
               <Button
                 title={'submit'}

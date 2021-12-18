@@ -1,6 +1,7 @@
 export type TestingApplication = {
-  id: number;
+  id?: number;
   isArchived: boolean;
-  message: string;
+  fullName?: string,
+  email?: string,
   testResultsId: number;
 };

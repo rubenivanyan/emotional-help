@@ -7,5 +7,9 @@ export enum BLOCK_TITLES {
   INFORMATION = 'information',
   TESTING = 'testing',
   TRAINING = 'training',
-  CONSULTING = 'consulting'
+  CONSULTING = 'consulting',
+  USERS = 'users',
+  LIBRARY = 'library',
+  TESTS = 'tests',
+  QUESTIONS = 'questions',
 };
