@@ -13,4 +13,6 @@ export enum BLOCK_TITLES {
   TESTS = 'tests',
   QUESTIONS = 'questions',
   PERSONAL_PAGE = 'personal page',
+  EDIT_PROFILE = 'edit profile',
+  HISTORY = 'history',
 };
