@@ -8,5 +8,5 @@ export type TestResultsForUser = {
   userFullName: string;
   TestId: number;
   questions: Question[];
-  answers: Variant[];
+  variants: Variant[];
 };
