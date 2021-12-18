@@ -130,7 +130,7 @@ export const TestingPage: React.FC = () => {
 
   const [counter, setCounter] = useState(0);
   const [isInProgress, setIsInProgress] = useState(false);
-  const [tests, setTests] = useState([]);
+  const [tests, setTests] = useState<TestWithQuestions[]>([]);
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     setIsSubmitting(true);
