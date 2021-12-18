@@ -1,5 +1,3 @@
-import { apiFetchGet } from './fetch';
-
 export class LocalStorage {
   private static localStorage: Storage = window.localStorage;
 
@@ -16,9 +14,10 @@ export class LocalStorage {
     }
   }
 
-  public static writeUser() {
-    apiFetchGet('/api/user/account')
-      .then((response) => LocalStorage.setItemsFromObject(response))
-      .catch((error) => alert('api/user/account:' + error));
-  };
+  public static removeItemsFromObject(object: Object): void {
+    const localStorage = LocalStorage.getLocalStorage();
+    for (const [key] of Object.keys(object)) {
+      localStorage.removeItem(key);
+    }
+  }
 };

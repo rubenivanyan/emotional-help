@@ -4,19 +4,16 @@ import { Logo } from '../Logo/Logo';
 import { Navbar } from '../Navbar/Navbar';
 import { Registration } from '../Registration/Registration';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { LocalStorage } from '../../api/local-storage';
+import { UserPanel } from '../../components/UserPanel/UserPanel';
+import { Auth } from '../../api/auth';
 
 const SearchRegWrapper = () => {
-  const isUserLocal = LocalStorage
-    .getLocalStorage()
-    .getItem('fullName');
-
   return (
     <div className="search-reg-wrapper">
       <SearchBar />
       {
-        isUserLocal ?
-        :
+        Auth.isLogged ?
+          <UserPanel /> :
           <Registration />
       }
     </div>

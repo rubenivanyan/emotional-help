@@ -8,7 +8,7 @@ import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { LocalStorage } from '../../api/local-storage';
+import { Auth } from '../../api/auth';
 
 export const SignUpPage = () => {
   const [name, setName] = useState('');
@@ -43,7 +43,7 @@ export const SignUpPage = () => {
       .then((response) => {
         if (response.status === 200 || response.status === 204) {
           setSuccess(true);
-          LocalStorage.writeUser();
+          Auth.login();
         } else {
           setError(true);
           setErrorMessage(response[0]?.description);
