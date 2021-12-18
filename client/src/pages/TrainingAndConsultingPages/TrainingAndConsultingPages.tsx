@@ -16,6 +16,8 @@ import { TrainingComponent } from '../../components/Training/Training';
 import { mockedTrainings } from '../../common/mocks/trainings';
 import { Error } from '../../components/Error/Error';
 import { Success } from '../../components/Success/Success';
+import { Auth } from '../../api/auth';
+import { LocalStorage } from '../../api/local-storage';
 
 const ParentComponent = ({ title, text, children }:
   PropsWithChildren<{ title: string, text: string }>) => {
@@ -109,14 +111,25 @@ export const TrainingPage = () => {
               />
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
-              <Input
-                label={'Name'}
-                onChange={(event) => setUserName(event.target.value || null)}
-              />
-              <Input
-                label={'E-mail'}
-                onChange={(event) => setEmail(event.target.value || null)}
-              />
+              {
+                Auth.isLogged() ?
+                  <>
+                    <Input
+                      label={'Name'}
+                      onChange={
+                        (event) => setUserName(event.target.value || null)
+                      }
+                    />
+                    <Input
+                      label={'E-mail'}
+                      onChange={(event) => setEmail(event.target.value || null)}
+                    />
+                  </> :
+                  <p>
+                    {`Dear ${LocalStorage.getItem('fullName')},
+                    chose a training, please`}
+                  </p>
+              }
               {
                 isLoading ?
                   <h3>No data. Loading...</h3> :
@@ -199,14 +212,25 @@ export const ConsultingPage = () => {
               />
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
-              <Input
-                label={'Name'}
-                onChange={(event) => setUserName(event.target.value || null)}
-              />
-              <Input
-                label={'E-mail'}
-                onChange={(event) => setEmail(event.target.value || null)}
-              />
+              {
+                Auth.isLogged() ?
+                  <>
+                    <Input
+                      label={'Name'}
+                      onChange={
+                        (event) => setUserName(event.target.value || null)
+                      }
+                    />
+                    <Input
+                      label={'E-mail'}
+                      onChange={(event) => setEmail(event.target.value || null)}
+                    />
+                  </> :
+                  <p>
+                    {`Dear ${LocalStorage.getItem('fullName')},
+                    write a convenient day, please`}
+                  </p>
+              }
               <Input
                 label={'Convenient day'}
                 onChange={(event) => setConvenientDay(event.target.value)}
