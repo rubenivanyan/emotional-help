@@ -43,7 +43,19 @@ namespace PsychologicalAssistance.Web
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireNonAlphanumeric = true;
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            });
             services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+            services.ConfigureExternalCookie(options =>
             {
                 options.LoginPath = "/User/Login";
                 options.Cookie.SameSite = SameSiteMode.None;

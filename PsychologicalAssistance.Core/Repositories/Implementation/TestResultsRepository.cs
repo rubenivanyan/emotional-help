@@ -53,7 +53,8 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 UserFullName = testResults.User.UserName + testResults.User.UserSurname,
                 ResultsDate = testResults.ResultsDate.ToShortDateString(),
                 Answers = _mapper.Map<IEnumerable<Answer>, IEnumerable<AnswerDto>>(testResults.Answers).ToList(),
-                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionDto>>(testResults.Test.Questions).ToList()
+                Questions = _mapper.Map<IEnumerable<Question>, IEnumerable<QuestionDto>>(testResults.Test.Questions).ToList(),
+                QuestionGroupsValues = _mapper.Map<IEnumerable<QuestionGroupsValues>, IEnumerable<QuestionGroupsValuesDto>>(testResults.QuestionGroupsValues).ToList()
             }).FirstOrDefault());
 
             return testResults;

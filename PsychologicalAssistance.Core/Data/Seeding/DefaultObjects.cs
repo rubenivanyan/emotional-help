@@ -119,16 +119,19 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             new Question
             {
                 Formulation = "How are you? Your mood?",
+                QuestionGroup = QuestionGroups.Asthenia,
                 ImageUrl = "dasddsa@fsfdss"
             },
             new Question
             {
                 Formulation = "What is your emotion now?",
+                QuestionGroup = QuestionGroups.SocialAnxiety,
                 ImageUrl = "dasddsa@fsfdss"
             },
             new Question
             {
                 Formulation = "How do you feel now?",
+                QuestionGroup = QuestionGroups.Depression,
                 ImageUrl = "dasddsa@fsfdss"
             }
         };
@@ -136,27 +139,33 @@ namespace PsychologicalAssistance.Core.Data.Seeding
         {
             new Variant
             {
-                Formulation = "Happiness"
+                Formulation = "Happiness",
+                Value = 4
             },
             new Variant
             {
-                Formulation = "Boredom"
+                Formulation = "Boredom",
+                Value = 3
             },
             new Variant
             {
-                Formulation = "Certainty"
+                Formulation = "Certainty",
+                Value = 2
             },
             new Variant
             {
-                Formulation = "Compassion"
+                Formulation = "Compassion",
+                Value = 1
             },
             new Variant
             {
-                Formulation = "Disappointment"
+                Formulation = "Disappointment",
+                Value = 0
             },
             new Variant
             {
-                Formulation = "Embarrassment"
+                Formulation = "Embarrassment",
+                Value = 1
             }
         };
         public static List<Test> TestsObjects { get; set; } = new()

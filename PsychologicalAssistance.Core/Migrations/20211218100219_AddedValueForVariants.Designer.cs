@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PsychologicalAssistance.Core.Data;
 
 namespace PsychologicalAssistance.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211218100219_AddedValueForVariants")]
+    partial class AddedValueForVariants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -365,29 +367,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.QuestionGroupsValues", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("QuestionGroup")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestResultsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TestResultsId");
-
-                    b.ToTable("QuestionGroupsValues");
-                });
-
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.Test", b =>
                 {
                     b.Property<int>("Id")
@@ -715,17 +694,6 @@ namespace PsychologicalAssistance.Core.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.QuestionGroupsValues", b =>
-                {
-                    b.HasOne("PsychologicalAssistance.Core.Data.Entities.TestResults", "TestResults")
-                        .WithMany("QuestionGroupsValues")
-                        .HasForeignKey("TestResultsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TestResults");
-                });
-
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.TestResults", b =>
                 {
                     b.HasOne("PsychologicalAssistance.Core.Data.Entities.Test", "Test")
@@ -804,8 +772,6 @@ namespace PsychologicalAssistance.Core.Migrations
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.TestResults", b =>
                 {
                     b.Navigation("Answers");
-
-                    b.Navigation("QuestionGroupsValues");
                 });
 
             modelBuilder.Entity("PsychologicalAssistance.Core.Data.Entities.User", b =>
