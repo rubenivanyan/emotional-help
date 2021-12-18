@@ -9,6 +9,7 @@ import { Error } from '../../components/Error/Error';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { UserLogin } from '../../common/types/user-login';
+import { LocalStorage } from '../../api/local-storage';
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('');
@@ -38,6 +39,7 @@ export const SignInPage = () => {
     ).then((response) => {
       if (response.ok) {
         setSuccess(true);
+        LocalStorage.writeUser();
       } else {
         setError(true);
         setErrorMessage(response.status === 400 ?
