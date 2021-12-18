@@ -9,6 +9,7 @@ import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
+import { Auth } from '../../api/auth';
 
 export const TestingPage: React.FC = () => {
   const answerOptions = [
@@ -234,8 +235,21 @@ export const TestingPage: React.FC = () => {
                   error ?
                     <Error /> :
                     <form onSubmit={(e) => handleSubmit(e)}>
-                      <Input label={'Name'}></Input>
-                      <Input label={'E-mail'}></Input>
+                      {
+                        Auth.isLogged() ?
+                          <p>
+                            {
+                              `You can send your results to our specialist.
+                              He will analyze that and will send
+                              an answer to your e-mail`
+                            }.
+                          </p> :
+                          <>
+                            <Input label={'Name'}></Input>
+                            <Input label={'E-mail'}></Input>
+                          </>
+                      }
+
                       <Button
                         title={isSubmitting ? 'sending...' : 'send'}
                         type={BUTTON_TYPES.DEFAULT}

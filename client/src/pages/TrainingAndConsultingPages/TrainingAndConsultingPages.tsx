@@ -113,22 +113,22 @@ export const TrainingPage = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
               {
                 Auth.isLogged() ?
+                  <p>
+                    {`Dear ${LocalStorage.getItem('fullName')},
+                    chose a training, please`}
+                  </p> :
                   <>
                     <Input
                       label={'Name'}
                       onChange={
-                        (event) => setUserName(event.target.value || null)
+                        (event) => setUserName(event.target.value)
                       }
                     />
                     <Input
                       label={'E-mail'}
-                      onChange={(event) => setEmail(event.target.value || null)}
+                      onChange={(event) => setEmail(event.target.value)}
                     />
-                  </> :
-                  <p>
-                    {`Dear ${LocalStorage.getItem('fullName')},
-                    chose a training, please`}
-                  </p>
+                  </>
               }
               {
                 isLoading ?
@@ -215,22 +215,22 @@ export const ConsultingPage = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
               {
                 Auth.isLogged() ?
+                  <p>
+                    {`Dear ${LocalStorage.getItem('fullName')},
+                    write a convenient day, please`}
+                  </p> :
                   <>
                     <Input
                       label={'Name'}
                       onChange={
-                        (event) => setUserName(event.target.value || null)
+                        (event) => setUserName(event.target.value)
                       }
                     />
                     <Input
                       label={'E-mail'}
-                      onChange={(event) => setEmail(event.target.value || null)}
+                      onChange={(event) => setEmail(event.target.value)}
                     />
-                  </> :
-                  <p>
-                    {`Dear ${LocalStorage.getItem('fullName')},
-                    write a convenient day, please`}
-                  </p>
+                  </>
               }
               <Input
                 label={'Convenient day'}
