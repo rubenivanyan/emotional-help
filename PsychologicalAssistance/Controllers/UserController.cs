@@ -54,6 +54,14 @@ namespace PsychologicalAssistance.Web.Controllers
             return userInfo is not null ? Ok(userInfo) : NotFound();
         }
 
+        [HttpGet("is-authenticated")]
+        public async Task<ActionResult> IsAuthenticated()
+            => await Task.Run(() => Ok(User.Identity.IsAuthenticated));
+
+        [HttpGet("is-in-role/{role}")]
+        public async Task<ActionResult> IsInRole(string role)
+            => await Task.Run(() => Ok(User.IsInRole(role)));
+
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] UserLoginDto userLoginDto)
         {
