@@ -4,6 +4,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
 {
     public class Variant : BaseQuestion
     {
+        public int Value { get; set; }
         public ICollection<Question> Questions { get; set; }
         public ICollection<Genre> Genres { get; set; }
 

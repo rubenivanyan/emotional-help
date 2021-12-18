@@ -2,9 +2,8 @@
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
-    public class FullQuestionDto : BaseQuestionDto
+    public class FullQuestionDto : QuestionDto
     {
-        public string ImageUrl { get; set; }
         public List<VariantDto> Variants { get; set; }
     }
 }
