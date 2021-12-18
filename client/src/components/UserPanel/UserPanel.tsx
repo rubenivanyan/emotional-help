@@ -6,7 +6,7 @@ import { Auth } from '../../api/auth';
 
 export const UserPanel = () => {
   return (
-    <div>
+    <div className="user-panel">
       <a className="button" href="/profile">PROFILE</a>
       <Button
         title={'logout'}
