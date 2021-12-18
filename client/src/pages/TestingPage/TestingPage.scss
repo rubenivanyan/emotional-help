@@ -38,6 +38,14 @@
   }
 }
 
+.testing-buttons {
+  display: flex;
+
+  &>* {
+    margin-right: 10px;
+  }
+}
+
 .question-container {
   margin-top: 20px;
   background-color: #dadbdd;

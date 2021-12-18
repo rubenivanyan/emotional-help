@@ -1,4 +1,4 @@
 export type Test = {
-  id: number;
+  id?: number;
   title: string;
 };

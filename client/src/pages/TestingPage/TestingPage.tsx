@@ -11,7 +11,7 @@ import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import { Auth } from '../../api/auth';
 import { apiFetchGet } from '../../api/fetch';
-import { Test } from '../../common/types/test';
+import { TestWithQuestions } from '../../common/types/test-with-questions';
 
 export const TestingPage: React.FC = () => {
   const answerOptions = [
@@ -143,10 +143,10 @@ export const TestingPage: React.FC = () => {
   };
 
   useEffect(() => {
-    apiFetchGet('/api/test')
-      .then<Test[]>((response) => response.json())
+    apiFetchGet('/api/Test/all/with-questions')
+      .then<TestWithQuestions[]>((response) => response.json())
       .then((tests) => setTests(tests))
-      .catch((error) => alert('api/test' + error));
+      .catch((error) => alert('/api/Test/all/with-questions' + error));
   }, []);
 
   useEffect(() => {
@@ -225,11 +225,19 @@ export const TestingPage: React.FC = () => {
                     </p>
                     <h2>{`Test: ${tests[counter]?.title}`}</h2>
                     {!isInProgress ?
-                      <Button
-                        title={'next test'}
-                        type={BUTTON_TYPES.DEFAULT}
-                        onClick={() => nextTest()} /> :
-                      <></>
+                      <div className="testing-buttons">
+                        <Button
+                          title={'next'}
+                          type={BUTTON_TYPES.DEFAULT}
+                          onClick={() => nextTest()} />
+                        <Button
+                          title={'start'}
+                          type={BUTTON_TYPES.GREEN}
+                          onClick={() => setIsInProgress(true)} />
+                      </div> :
+                      <p>
+                        The test has been started
+                      </p>
                     }
                   </>
                 )

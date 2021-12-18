@@ -1,4 +1,4 @@
 export type Variant = {
-  id: number;
+  id?: number;
   formulation: string;
 };
