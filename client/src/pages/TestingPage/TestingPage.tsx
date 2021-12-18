@@ -10,6 +10,8 @@ import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import { Auth } from '../../api/auth';
+import { apiFetchGet } from '../../api/fetch';
+import { Test } from '../../common/types/test';
 
 export const TestingPage: React.FC = () => {
   const answerOptions = [
@@ -126,6 +128,10 @@ export const TestingPage: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
+  const [counter, setCounter] = useState(0);
+  const [isInProgress, setIsInProgress] = useState(false);
+  const [tests, setTests] = useState([]);
+
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     setIsSubmitting(true);
     event.preventDefault();
@@ -137,10 +143,19 @@ export const TestingPage: React.FC = () => {
   };
 
   useEffect(() => {
+    apiFetchGet('/api/test')
+      .then<Test[]>((response) => response.json())
+      .then((tests) => setTests(tests))
+      .catch((error) => alert('api/test' + error));
+  }, []);
+
+  useEffect(() => {
     if (error) setTimeout(() => setError(false), 3000);
   }, [error]);
 
   const handleAnswerOptionClick = (value, group) => {
+    if (!isInProgress) setIsInProgress(true);
+
     switch (group) {
       case 'Depression':
         setScoreGroupOne(scoreGroupOne + value);
@@ -162,6 +177,7 @@ export const TestingPage: React.FC = () => {
     }
 
     const nextQuestion = currentQuestion + 1;
+
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
@@ -172,6 +188,15 @@ export const TestingPage: React.FC = () => {
       }, 2000);
     }
   };
+
+  const nextTest = () => {
+    if (counter + 1 < tests.length) {
+      setCounter(counter + 1);
+    } else {
+      setCounter(0);
+    }
+  };
+
   return (
     <section
       className={
@@ -190,7 +215,6 @@ export const TestingPage: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <h2>EMOTIONAL STATE TEST</h2>
                     <p>
                       This test will help you to understand
                       your emotional state.
@@ -199,6 +223,14 @@ export const TestingPage: React.FC = () => {
                       A psychiatrist or clinical psychologist should be
                       consulted to obtain an appropriate assessment.
                     </p>
+                    <h2>{`Test: ${tests[counter]?.title}`}</h2>
+                    {!isInProgress ?
+                      <Button
+                        title={'next test'}
+                        type={BUTTON_TYPES.DEFAULT}
+                        onClick={() => nextTest()} /> :
+                      <></>
+                    }
                   </>
                 )
             }
