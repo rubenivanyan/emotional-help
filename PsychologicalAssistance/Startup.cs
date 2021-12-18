@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,18 +43,12 @@ namespace PsychologicalAssistance.Web
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireNonAlphanumeric = true;
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-            });
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/User/Login";
-                options.Cookie.SameSite = SameSiteMode.None;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/User/Login");
+                    options.Cookie.Domain = "azure.com";
+                });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories

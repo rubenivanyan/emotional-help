@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
@@ -70,19 +68,8 @@ namespace PsychologicalAssistance.Web.Controllers
             var identity = await _userService.LoginUserAsync(userLoginDto.Email, userLoginDto.Password);
             if (identity != null)
             {
-                var inputTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
-                var fromTimeOffset = new TimeSpan(1, 0, 0);
-                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = new DateTimeOffset(inputTime, fromTimeOffset)
-                });
-
-                var user = await _userManager.FindByEmailAsync(userLoginDto.Email);
-                var resp = new System.Net.Http.HttpResponseMessage();
-                var cookie = new CookieHeaderValue(".AspNetCore.Identity.Application", user.Id);
-                resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
-                return Ok(resp);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));                
+                return Ok();
             }
 
             return BadRequest("Invalid UserName or Password");
