@@ -16,7 +16,7 @@ namespace PsychologicalAssistance.Core.Data.DTOs
         public string Email { get; set; }
         
         [Required(ErrorMessage = "Birth date is required")]
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
         
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
