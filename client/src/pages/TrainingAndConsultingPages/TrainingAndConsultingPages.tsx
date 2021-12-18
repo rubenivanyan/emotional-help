@@ -47,7 +47,6 @@ export const TrainingPage = () => {
   const [trainingId, setTrainingId] = useState(0);
   const [trainings, setTrainings] = useState<Training[]>([]);
 
-
   useEffect(() => {
     apiFetchGet('/api/training')
       .then((response) => response.json())
