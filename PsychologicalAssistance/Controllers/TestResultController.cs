@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
@@ -42,8 +41,8 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var user = await _userManager.GetUserAsync(User);
-            var isSuccessfull = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
-            return isSuccessfull ? Ok() : BadRequest();
+            var testResultsId = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
+            return testResultsId != -1 ? Ok(testResultsId) : BadRequest();
         }
 
         [HttpPut]

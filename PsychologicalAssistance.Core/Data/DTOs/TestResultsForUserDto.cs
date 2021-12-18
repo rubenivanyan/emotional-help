@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PsychologicalAssistance.Core.Data.DTOs
 {
@@ -11,5 +10,6 @@ namespace PsychologicalAssistance.Core.Data.DTOs
         public int TestId { get; set; }
         public List<QuestionDto> Questions { get; set; }
         public List<AnswerDto> Answers { get; set; }
+        public List<QuestionGroupsValuesDto> QuestionGroupsValues { get; set; }
     }
 }

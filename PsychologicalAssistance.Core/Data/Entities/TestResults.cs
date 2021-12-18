@@ -17,5 +17,7 @@ namespace PsychologicalAssistance.Core.Data.Entities
         public User User { get; set; }
 
         public List<Answer> Answers { get; set; }
+
+        public List<QuestionGroupsValues> QuestionGroupsValues { get; set; }
     }
 }

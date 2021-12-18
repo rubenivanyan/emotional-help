@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PsychologicalAssistance.Core.Data.DTOs
@@ -16,5 +15,6 @@ namespace PsychologicalAssistance.Core.Data.DTOs
         
         [Required]
         public List<VariantDto> ChosenVariants { get; set; }
+        public List<QuestionDto> Questions { get; set; }
     }
 }
