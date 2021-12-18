@@ -21,7 +21,7 @@ on:
   push:
     branches:
       - dev-fe
-  workflow_dispatch:
+ # workflow_dispatch:
 
 env:
   AZURE_WEBAPP_NAME: reactfront    # set this to your application's name
