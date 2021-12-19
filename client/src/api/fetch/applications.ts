@@ -1,13 +1,21 @@
 import { apiFetchGet, apiFetchPost } from './fetch';
 import React from 'react';
 
-export const getApplications = async (path: string, mockedData: any) => {
-  const applications = await apiFetchGet(`${path}`)
-    .then((response) => response.json());
-  return applications.length ?
-    applications :
-    mockedData;
-};
+export const getApplications =
+  async (path: string, setIsGetting?, setApplications?) => {
+    if (setIsGetting) setIsGetting(true);
+    apiFetchGet(`${path}`)
+      .then((response) => response.json())
+      .then((response) => {
+        return setApplications ?
+          setApplications(response) :
+          response;
+      })
+      .catch((error) => alert(`${path}: ${error}`))
+      .finally(() => {
+        if (setIsGetting) setIsGetting(false);
+      });
+  };
 
 export const sendApplication = (
   path: string,

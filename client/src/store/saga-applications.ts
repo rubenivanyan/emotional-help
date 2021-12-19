@@ -5,14 +5,12 @@ import {
   APPLICATIONS_FETCH_FAILED,
 } from './actions';
 import { getApplications } from '../api/fetch/applications';
-import { mockedTrainings } from '../common/mocks/trainings';
 
 export function* fetchApplications(action) {
   try {
     const episode = yield call(
       getApplications,
       'api/TrainingApplication',
-      mockedTrainings,
     );
     yield put({
       type: APPLICATIONS_FETCH_SUCCEEDED,
