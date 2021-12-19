@@ -55,7 +55,7 @@ namespace PsychologicalAssistance.Web
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";
-                options.Cookie.Domain = "emotionalhelptest.azurewebsites.net";
+                options.Cookie.Domain = "emotionalhelp.azurewebsites.net";
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
