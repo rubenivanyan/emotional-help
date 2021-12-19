@@ -133,7 +133,7 @@ namespace PsychologicalAssistance.Web
             app.UseCors(builder => builder
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowAnyOrigin()
+                .SetIsOriginAllowed(origin => true)
                 .AllowCredentials());
 
             app.UseAuthentication();
