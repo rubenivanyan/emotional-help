@@ -1,7 +1,7 @@
 import {
   mockedConsultingApplications,
-} from '../common/mocks/consulting-applications';
-import { apiFetchGet } from './fetch';
+} from '../../../common/mocks/consulting-applications';
+import { apiFetchGet } from '../fetch';
 
 export const getConsultingApplications = async () => {
   const consultingApplication = await apiFetchGet('/api/consultingApplication')

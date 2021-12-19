@@ -10,7 +10,7 @@ import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import { Auth } from '../../api/auth';
-import { apiFetchGet, apiFetchPost } from '../../api/fetch';
+import { apiFetchGet, apiFetchPost } from '../../api/fetch/fetch';
 import { TestWithQuestions } from '../../common/types/test-with-questions';
 import { Variant } from '../../common/types/variant';
 import { TestResults } from '../../common/types/test-results';

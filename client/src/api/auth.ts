@@ -1,5 +1,5 @@
 import { User } from '../common/types/user';
-import { apiFetchGet } from './fetch';
+import { apiFetchGet } from './fetch/fetch';
 import { LocalStorage } from './local-storage';
 
 export class Auth {

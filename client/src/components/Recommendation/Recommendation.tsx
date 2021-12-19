@@ -1,7 +1,7 @@
-import { getMusics } from '../../api/music';
-import { getFilms } from '../../api/film';
-import { getComputerGames } from '../../api/computer-game';
-import { getBooks } from '../../api/book';
+import { getMusics } from '../../api/fetch/library-item/music';
+import { getFilms } from '../../api/fetch/library-item/film';
+import { getComputerGames } from '../../api/fetch/library-item/computer-game';
+import { getBooks } from '../../api/fetch/library-item/book';
 import React, { useEffect, useState } from 'react';
 import './Recommendation.scss';
 import { Button } from '../../components/Button/Button';

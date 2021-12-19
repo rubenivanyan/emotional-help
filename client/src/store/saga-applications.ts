@@ -4,7 +4,9 @@ import {
   APPLICATIONS_FETCH_SUCCEEDED,
   APPLICATIONS_FETCH_FAILED,
 } from './actions';
-import { getTrainingApplication } from '../api/training-application';
+import {
+  getTrainingApplication,
+} from '../api/fetch/application/training-application';
 
 export function* fetchApplications(action) {
   try {

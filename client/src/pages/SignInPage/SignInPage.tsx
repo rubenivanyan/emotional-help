@@ -2,7 +2,7 @@ import './SignInPage.scss';
 import React, { useEffect, useState } from 'react';
 
 import { Input } from '../../components/Input/Input';
-import { apiFetchPost } from '../../api/fetch';
+import { apiFetchPost } from '../../api/fetch/fetch';
 import { Block } from '../../components/Block/Block';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';

@@ -1,6 +1,5 @@
 import { Auth } from '../../../api/auth';
-import { apiFetchPost } from '../../../api/fetch';
-import { apiFetchGet } from '../../../api/fetch';
+import { apiFetchPost, apiFetchGet } from '../../../api/fetch/fetch';
 import { LocalStorage } from '../../../api/local-storage';
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { BUTTON_TYPES } from '../../../common/enums/button-types';

@@ -8,7 +8,7 @@ import { Input } from '../../components/Input/Input';
 import { INPUT_TYPES } from '../../common/enums/input-types';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { apiFetchPut } from '../../api/fetch';
+import { apiFetchPut } from '../../api/fetch/fetch';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Auth } from '../../api/auth';

@@ -2,7 +2,7 @@ import './SignUp.scss';
 import React, { useState } from 'react';
 import { Input } from '../../components/Input/Input';
 import { UserRegistration } from '../../common/types/user-registration';
-import { apiFetchPost } from '../../api/fetch';
+import { apiFetchPost } from '../../api/fetch/fetch';
 import { Block } from '../../components/Block/Block';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
