@@ -21,12 +21,14 @@ namespace PsychologicalAssistance.Web.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserController(IMapper mapper, IUserService userService, UserManager<User> userManager)
+        public UserController(IMapper mapper, IUserService userService, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userService = userService;
             _mapper = mapper;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -91,12 +93,7 @@ namespace PsychologicalAssistance.Web.Controllers
         [HttpPost("logout")]
         public async Task Logout()
         {
-            var cookies = HttpContext.Request.Cookies.Keys;
-            foreach(var cookie in cookies)
-            {
-                HttpContext.Response.Cookies.Delete(cookie);
-            }
-            await HttpContext.SignOutAsync();
+            await _signInManager.SignOutAsync();
         }
 
         [HttpPut]
