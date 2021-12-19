@@ -1,7 +1,3 @@
-import { getMusics } from '../../api/fetch/library-item/music';
-import { getFilms } from '../../api/fetch/library-item/film';
-import { getComputerGames } from '../../api/fetch/library-item/computer-game';
-import { getBooks } from '../../api/fetch/library-item/book';
 import React, { useEffect, useState } from 'react';
 import './Recommendation.scss';
 import { Button } from '../../components/Button/Button';
@@ -12,6 +8,12 @@ import { FilmComponent } from './FilmComponent/FIlmComponent';
 import {
   ComputerGameComponent,
 } from './ComputerGameComponent/ComputerGameComponent';
+import { mockedBooks } from '../../common/mocks/books';
+import { mockedMusic } from '../../common/mocks/music';
+import { mockedFilms } from '../../common/mocks/films';
+import { mockedComputerGames } from '../../common/mocks/computer-games';
+import { getLibraryItems } from '../../api/fetch/library-items';
+
 
 export const Recommendation = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,10 +25,20 @@ export const Recommendation = () => {
   const [computerGames, setComputerGames] = useState([]);
 
   useEffect(() => {
-    getBooks().then((response) => setBooks(response));
-    getMusics().then((response) => setMusics(response));
-    getFilms().then((response) => setFilms(response));
-    getComputerGames().then((response) => setComputerGames(response));
+    const items = [
+      { path: '/api/Book', mock: mockedBooks, setter: setBooks },
+      { path: '/api/Music', mock: mockedMusic, setter: setMusics },
+      { path: '/api/Film', mock: mockedFilms, setter: setFilms },
+      {
+        path: '/api/ComputerGame',
+        mock: mockedComputerGames,
+        setter: setComputerGames,
+      },
+    ];
+
+    for (const item of items) {
+      item.setter(getLibraryItems(item.path, item.mock) as any);
+    }
   }, []);
 
   useEffect(() => {
