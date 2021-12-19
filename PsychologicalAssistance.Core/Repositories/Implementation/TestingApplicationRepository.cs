@@ -43,7 +43,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                     IsArchived = testingApplication.IsArchived,
                     TestResultsId = testingApplication.TestResultsId,
                     DateOfResults = testingApplication.TestResults.ResultsDate.ToShortDateString(),
-                    UserName = testingApplication.TestResults.User.Id,
+                    UserName = testingApplication.TestResults.User.UserName,
                     Email = testingApplication.TestResults.User.Email
                 }).FirstOrDefault());
 
@@ -61,6 +61,41 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             fullTestingApplicationDtoWithUserInfo.QuestionsFormulations = fullTestingApplicationDtoWithAnswerInfo.QuestionsFormulations;
             return fullTestingApplicationDtoWithUserInfo;
         }
+
+        public async Task<IEnumerable<FullTestingApplicationDto>> GetFullTestingApplicationDtoByUserIdAsync(string UserId)
+        {
+            var fullTestingApplicationDtoWithUserIdInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
+                .ThenInclude(testingResults => testingResults.User)
+                .Where(testingApplication => testingApplication.TestResults.UserId == UserId)
+                .Select(testingApplication => new FullTestingApplicationDto
+                {
+                    Id = testingApplication.Id,
+                    IsArchived = testingApplication.IsArchived,
+                    TestResultsId = testingApplication.TestResultsId,
+                    DateOfResults = testingApplication.TestResults.ResultsDate.ToShortDateString(),
+                    UserName = testingApplication.TestResults.User.UserName,
+                    Email = testingApplication.TestResults.User.Email
+                }).ToList());
+
+            var fullTestingApplicationDtoWithAnswerInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
+                .ThenInclude(testingResults => testingResults.Answers)
+                .ThenInclude(answers => answers.Question)
+                .Where(testingApplication => testingApplication.TestResults.UserId == UserId)
+                .Select(testingApplication => new FullTestingApplicationDto
+                {
+                    AnswersFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Formulation).ToList(),
+                    QuestionsFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Question.Formulation).ToList()
+                }).ToList());
+
+            for (int i = 0; i < fullTestingApplicationDtoWithAnswerInfo.Count; i++)
+            {
+                fullTestingApplicationDtoWithUserIdInfo[i].AnswersFormulations = fullTestingApplicationDtoWithAnswerInfo[i].AnswersFormulations;
+                fullTestingApplicationDtoWithUserIdInfo[i].QuestionsFormulations = fullTestingApplicationDtoWithAnswerInfo[i].QuestionsFormulations;
+            }
+
+            return fullTestingApplicationDtoWithUserIdInfo;
+        }
+
 
         public async Task<TestingApplicationDto> GetTestingApplicationByIdDtoAsync(int id)
         {

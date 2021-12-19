@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -13,11 +14,13 @@ namespace PsychologicalAssistance.Web.Controllers
     {
         private readonly ITestingApplicationService _testingApplicationService;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public TestingApplicationController(ITestingApplicationService testingApplicationService, IMapper mapper)
+        public TestingApplicationController(IMapper mapper, ITestingApplicationService testingApplicationService, UserManager<User> userManager)
         {
             _testingApplicationService = testingApplicationService;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -40,6 +43,15 @@ namespace PsychologicalAssistance.Web.Controllers
             var fullTestingApplication = await _testingApplicationService.GetFullTestingApplicationDtoByIdAsync(id);
             return fullTestingApplication is not null ? Ok(fullTestingApplication) : NotFound();
         }
+
+        [HttpGet("userId")]
+        public async Task<ActionResult> GetFullTestingApplicationByUserId()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var fullTestingApplication = await _testingApplicationService.GetFullTestingApplicationDtoByUserIdAsync(userId);
+            return fullTestingApplication is not null ? Ok(fullTestingApplication) : NotFound();
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> CreateTestingApplication([FromBody] TestingApplicationDto testingApplicationDto)

@@ -9,5 +9,7 @@ namespace PsychologicalAssistance.Services.Interfaces
     {
         Task<FullTrainingApplicationDto> GetTrainingApplicationByIdAsync(int id);
         Task<IEnumerable<FullTrainingApplicationDto>> GetAllTrainingApplicationsAsync();
+
+        Task<IEnumerable<FullTrainingApplicationDto>> GetTrainingApplicationByUserIdAsync(string userId);
     }
 }

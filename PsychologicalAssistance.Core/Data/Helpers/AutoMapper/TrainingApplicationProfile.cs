@@ -10,7 +10,9 @@ namespace PsychologicalAssistance.Core.Data.Helpers.AutoMapper
         {
             CreateMap<TrainingApplication, TrainingApplicationDto>().ReverseMap();
             CreateMap<TrainingApplication, FullTrainingApplicationDto>()
-                .ForMember(i => i.Title, d => d.MapFrom(i => i.Training.Title));
+                .ForMember(i => i.Title, d => d.MapFrom(i => i.Training.Title))
+                .ForMember(i => i.UserFullName, d => d.MapFrom(s => s.User.UserName + " " + s.User.UserSurname))
+                .ForMember(i => i.Email, d => d.MapFrom(s => s.User.Email));
         }
     }
 }
