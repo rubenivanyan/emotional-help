@@ -28,7 +28,8 @@ jobs:
                 do
                   eval sudo $cmd
                 done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-          npm install
+          npm install -g 
+          npm install babel-core
           npm run build --if-present
           npm run test --if-present
       
