@@ -69,7 +69,7 @@ namespace PsychologicalAssistance.Web.Controllers
             var identity = await _userService.LoginUserAsync(userLoginDto.Email, userLoginDto.Password);
             if (identity != null)
             {
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
                 {
                     IsPersistent = true,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)

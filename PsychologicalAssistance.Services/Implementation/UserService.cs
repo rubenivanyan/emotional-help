@@ -60,7 +60,7 @@ namespace PsychologicalAssistance.Services.Implementation
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
+                var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme, ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
                 identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
                 foreach (var role in roles)
