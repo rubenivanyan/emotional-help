@@ -49,12 +49,9 @@ namespace PsychologicalAssistance.Web
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/User/Login");
                     options.Cookie.Domain = "emotionalhelptest.azurewebsites.net";
+                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 });
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.SameSite = SameSiteMode.None;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories

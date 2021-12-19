@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
 
 namespace PsychologicalAssistance.Web.Controllers
 {
@@ -68,7 +69,11 @@ namespace PsychologicalAssistance.Web.Controllers
             var identity = await _userService.LoginUserAsync(userLoginDto.Email, userLoginDto.Password);
             if (identity != null)
             {
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));                
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity), new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
+                });                
                 return Ok();
             }
 
@@ -100,28 +105,5 @@ namespace PsychologicalAssistance.Web.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             await _userService.UpdateUserAsync(userModifyDto, userId);
         }
-
-        /*public String ObtenerCookie(System.Net.Http.HttpResponseMessage resp)
-        {
-
-            String strUserId = "";
-            System.Net.Http.Headers.CookieHeaderValue cookie = Request.HttpContext.GetCookies("cosmohitsuserid").FirstOrDefault();
-            if (cookie != null)
-            {
-                strUserId = cookie["cosmohitsuserid"].Value;
-            }
-            else
-            {
-                strUserId = Guid.NewGuid().ToString();
-                cookie = new CookieHeaderValue("cosmohitsuserid", strUserId);
-                cookie.Domain = Request.RequestUri.Host;
-                cookie.Expires = DateTime.Now.AddYears(1);
-                cookie.Path = "/";
-                resp.Headers.AddCookies(new CookieHeaderValue[] { cookie });
-
-            }
-
-            return strUserId;
-        }*/
     }
 }
