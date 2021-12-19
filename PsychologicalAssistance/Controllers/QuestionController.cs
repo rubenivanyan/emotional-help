@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllQuestions()
         {
             var questions = await _questionService.GetAllQuestionsAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetQuestionById(int id)
         {
             var question = await _questionService.GetQuestionByIdAsync(id);
@@ -35,6 +38,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("all/with-variants")]
+        [Authorize]
         public async Task<ActionResult> GetAllQuestionsWithVariants()
         {
             var questions = await _questionService.GetAllQuestionsAndVariants();
@@ -42,6 +46,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-variants")]
+        [Authorize]
         public async Task<ActionResult> GetQuestionWithVariantsById(int id)
         {
             var question = await _questionService.GetQuestionAndVariantsByIdAsync(id);
@@ -49,6 +54,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> CreateQuestion([FromBody] QuestionDto questionDto)
         {
             var question = _mapper.Map<QuestionDto, Question>(questionDto);
@@ -57,6 +63,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost("{questionId} {testId}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddQuestionToTest(int questionId, int testId)
         {
             await _questionService.AddQuestionToTest(questionId, testId);
@@ -64,6 +71,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateQuestion([FromBody] QuestionDto questionDto)
         {
             var question = _mapper.Map<QuestionDto, Question>(questionDto);
@@ -72,6 +80,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
             await _questionService.DeleteAsync(id);

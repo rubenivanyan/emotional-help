@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 
 namespace PsychologicalAssistance.Web.Controllers
@@ -97,6 +96,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task UpdateInformation(UserModifyDto userModifyDto)
         {
             var userId = _userManager.GetUserId(HttpContext.User);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllTests()
         {
             var tests = await _testService.GetAllTestsAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetTestById(int id)
         {
             var test = await _testService.GetTestByIdAsync(id);
@@ -35,6 +38,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("all/with-questions")]
+        [Authorize]
         public async Task<ActionResult> GetAllTestsWithQuestions()
         {
             var tests = await _testService.GetAllTestsWithQuestion();
@@ -42,6 +46,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-questions")]
+        [Authorize]
         public async Task<ActionResult> GetTestWithQuestionsById(int id)
         {
             var test = await _testService.GetTestWithQuestionsById(id);
@@ -49,15 +54,16 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> CreateTest([FromBody] TestDto testDto)
         {
-            //TODO Check if object already exists
             var test = _mapper.Map<Test>(testDto);
             await _testService.CreateAsync(test);
             return Ok();
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateTest([FromBody] TestDto testDto)
         {
             var test = _mapper.Map<Test>(testDto);
@@ -66,6 +72,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteTest(int id)
         {
             await _testService.DeleteAsync(id);

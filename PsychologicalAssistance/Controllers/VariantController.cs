@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllVariants()
         {
             var variants = await _variantService.GetAllVariantsDtoAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetVariantById(int id)
         {
             var variant = await _variantService.GetVariantByIdDtoAsync(id);
@@ -35,6 +38,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("with-genres")]
+        [Authorize]
         public async Task<ActionResult> GetAllVariantsWithGenres()
         {
             var variants = await _variantService.GetAllVariantsWithGenresAsync();
@@ -42,6 +46,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-genres")]
+        [Authorize]
         public async Task<ActionResult> GetVariantWithGenresById(int id)
         {
             var variant = await _variantService.GetVariantWithGenresByIdAsync(id);
@@ -49,6 +54,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> CreateVariant([FromBody] VariantDto variantDto)
         {
             var variant = _mapper.Map<VariantDto, Variant>(variantDto);
@@ -57,6 +63,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost("{questionId} {variantId}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddVariantToQuestion(int questionId, int variantId)
         {
             await _variantService.AddVariantToQuestion(questionId, variantId);
@@ -64,6 +71,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateVariant([FromBody] VariantDto variantDto)
         {
             var variant = _mapper.Map<VariantDto, Variant>(variantDto);
@@ -72,6 +80,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteVariant(int id)
         {
             await _variantService.DeleteAsync(id);
