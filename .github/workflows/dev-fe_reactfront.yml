@@ -25,6 +25,8 @@ jobs:
         run: |
           cd client
           npm install -g 
+          npm install -g webpack
+          npm install -g typescript
           npm install babel-core
           npm run build --if-present
           npm run test --if-present
