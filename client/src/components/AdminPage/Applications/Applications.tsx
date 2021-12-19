@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import { Info } from '../Info/Info';
-import { appFetchRequest } from '../../../store/actions';
+import { trainAppsFetchRequest } from '../../../store/actions';
 import './Applications.scss';
 import axios from 'axios';
 
@@ -27,7 +27,7 @@ export const Applications = () => {
       });
     console.log(document.cookie);
     setTimeout(() => {
-      dispatch(appFetchRequest());
+      dispatch(trainAppsFetchRequest());
     }, 1000);
   }, []);
 

@@ -1,28 +1,29 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
-  APPLICATIONS_FETCH_REQUESTED,
-  APPLICATIONS_FETCH_SUCCEEDED,
-  APPLICATIONS_FETCH_FAILED,
+  TRAINING_APPS_FETCH_REQUESTED,
+  TRAINING_APPS_FETCH_SUCCEEDED,
+  TRAINING_APPS_FETCH_FAILED,
 } from './actions';
-import { getTrainingApplication } from '../api/training-application';
+// eslint-disable-next-line
+import { getTrainingApplication } from '../components/AdminPage/api/trainingAppsCRUD';
 
 export function* fetchApplications(action) {
   try {
-    const episode = yield call(getTrainingApplication);
+    const trainApps = yield call(getTrainingApplication, action.payload);
     yield put({
-      type: APPLICATIONS_FETCH_SUCCEEDED,
+      type: TRAINING_APPS_FETCH_SUCCEEDED,
       payload: {
-        data: episode,
+        data: trainApps,
       },
     });
   } catch (e) {
     yield put({
-      type: APPLICATIONS_FETCH_FAILED,
+      type: TRAINING_APPS_FETCH_FAILED,
       payload: { message: e.message },
     });
   }
 }
 
 export function* applicationsFetchRequestedWatcherSaga() {
-  yield takeLatest(APPLICATIONS_FETCH_REQUESTED, fetchApplications);
+  yield takeLatest(TRAINING_APPS_FETCH_REQUESTED, fetchApplications);
 }

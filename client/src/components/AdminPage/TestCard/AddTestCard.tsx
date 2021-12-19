@@ -2,11 +2,13 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import './TestCard.scss';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
-import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
+import { testsPutRequest } from '../../../store/actions';
 
 export const AddTestCard = () => {
+  const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [id, setId] = useState('');
@@ -36,18 +38,7 @@ export const AddTestCard = () => {
   const handleSubmitTest = () => {
     handleShowForm();
     console.log('SUBMIT');
-    axios
-      .post('https://emotionalhelptest.azurewebsites.net/api/Test', body)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(body);
-        console.log(error);
-      });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    dispatch(testsPutRequest(body));
   };
 
   return (

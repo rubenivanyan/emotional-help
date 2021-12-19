@@ -1,28 +1,27 @@
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Tests.scss';
 import { TestCard } from '../TestCard/TestCard';
-import axios from 'axios';
 import { AddTestCard } from '../TestCard/AddTestCard';
+import { testsFetchRequest, testsPutRequest } from '../../../store/actions';
+import { RootState } from '../../../store/reducers/rootReducer';
 
 export const Tests = () => {
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const tests = useSelector((state: RootState) => state.tests.tests);
+  console.log('STATE', tests);
+
   useEffect(() => {
-    axios
-      .get('https://emotionalhelptest.azurewebsites.net/api/Test/')
-      .then((response) => {
-        console.log(response.data);
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(testsFetchRequest());
+    dispatch(testsPutRequest({ id: 1 }));
+    console.log('STATE', tests);
   }, []);
   return (
     <Block title={BLOCK_TITLES.TESTS} percentWidth={60}>
       <div className="tests-wrapper">
-        {data.map((test, index) => {
+        {tests.map((test, index) => {
           return <TestCard key={test.id} test={test} />;
         })}
         <AddTestCard />

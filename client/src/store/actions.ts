@@ -1,11 +1,35 @@
-export const APPLICATIONS_FETCH_REQUESTED = 'APPLICATIONS_FETCH_REQUESTED';
-export const APPLICATIONS_FETCH_SUCCEEDED = 'APPLICATIONS_FETCH_SUCCEEDED';
-export const APPLICATIONS_FETCH_FAILED = 'APPLICATIONS_FETCH_FAILED';
-export const APPLICATIONS_FETCH_CANCEL = 'APPLICATIONS_FETCH_CANCEL';
+export const TRAINING_APPS_FETCH_REQUESTED = 'TRAINING_APPS_FETCH_REQUESTED';
+export const TRAINING_APPS_FETCH_SUCCEEDED = 'TRAINING_APPS_FETCH_SUCCEEDED';
+export const TRAINING_APPS_FETCH_FAILED = 'TRAINING_APPS_FETCH_FAILED';
+export const TRAINING_APPS_FETCH_CANCEL = 'TRAINING_APPS_FETCH_CANCEL';
 export const SET_INFO = 'SET_INFO';
 
-export function appFetchRequest() {
-  return { type: APPLICATIONS_FETCH_REQUESTED, payload: {} };
+export const TESTS_FETCH_REQUESTED = 'TESTS_FETCH_REQUESTED';
+export const TESTS_FETCH_SUCCEEDED = 'TESTS_FETCH_SUCCEEDED';
+export const TESTS_FETCH_FAILED = 'TESTS_FETCH_FAILED';
+
+export const TESTS_PUT_REQUESTED = 'TESTS_PUT_REQUESTED';
+export const TESTS_PUT_SUCCEEDED = 'TESTS_PUT_SUCCEEDED';
+
+export const TESTS_DELETE_REQUESTED = 'TESTS_DELETE_REQUESTED';
+export const TESTS_DELETE_SUCCEEDED = 'TESTS_DELETE_SUCCEEDED';
+export const TESTS_DELETE_FAILED = 'TESTS_DELETE_FAILED';
+export const TESTS_DELETE_CANCEL = 'TESTS_DELETE_CANCEL';
+
+export function trainAppsFetchRequest() {
+  return { type: TRAINING_APPS_FETCH_REQUESTED, payload: {} };
+}
+
+export function testsFetchRequest() {
+  return { type: TESTS_FETCH_REQUESTED, payload: {} };
+}
+
+export function testsPutRequest(value) {
+  return { type: TESTS_PUT_REQUESTED, payload: value };
+}
+
+export function testsDeleteRequest(value) {
+  return { type: TESTS_DELETE_REQUESTED, payload: value };
 }
 
 export function setInfo(value) {
