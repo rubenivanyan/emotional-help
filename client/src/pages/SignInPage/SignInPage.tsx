@@ -28,14 +28,14 @@ export const SignInPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
-    const userRegistration: UserLogin = {
+    const userLogin: UserLogin = {
       email: email,
       password: password,
       rememberMe: isRemember,
     };
     apiFetchPost(
       '/api/User/login',
-      userRegistration,
+      userLogin,
     ).then((response) => {
       if (response.ok) {
         setSuccess(true);
