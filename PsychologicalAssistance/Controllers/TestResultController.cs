@@ -15,13 +15,16 @@ namespace PsychologicalAssistance.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ITestResultsService _testResultsService;
+        private readonly IMaterialsRecommendationService _materialsRecommendationService;
         private readonly UserManager<User> _userManager;
 
-        public TestResultController(ITestResultsService testResultsService, IMapper mapper, UserManager<User> userManager)
+        public TestResultController(ITestResultsService testResultsService, IMapper mapper, UserManager<User> userManager,
+            IMaterialsRecommendationService materialsRecommendationService)
         {
             _mapper = mapper;
             _testResultsService = testResultsService;
             _userManager = userManager;
+            _materialsRecommendationService = materialsRecommendationService;
         }
 
         [HttpGet]
@@ -45,8 +48,12 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var user = await _userManager.GetUserAsync(User);
-            var testResultsId = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
-            return testResultsId != -1 ? Ok(testResultsId) : BadRequest();
+            var testResultsForUserDto = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
+            if (user == null)
+            {
+                var materialsRecommendation = await _materialsRecommendationService.GetMaterialsRecommendationsForGuestAsync(testResultsDto.ChosenVariants);
+            }
+            return testResultsForUserDto != -1 ? Ok(testResultsForUserDto) : BadRequest();
         }
 
         [HttpPut]
