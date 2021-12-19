@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import './QuestionCard.scss';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 
 export const AddQuestionCard = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [formulation, setFormulation] = useState('');
   const [url, setUrl] = useState('');
