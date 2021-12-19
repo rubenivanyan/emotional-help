@@ -30,6 +30,55 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Genre = BookGenres.Detective,
                 Language = "EN",
                 Author = "Michael Connelly"
+            },
+            new Book
+            {
+                Title = "The Lord Of The Rings",
+                Genre = BookGenres.Adventure,
+                Language = "EN",
+                Author = "J.R.R. Tolkien"
+            },
+            new Book
+            {
+                Title = "Harry Potter",
+                Genre = BookGenres.Fantasy,
+                Language = "EN",
+                Author = "J.K. Rowling"
+            },
+            new Book
+            {
+                Title = "A Study In Scarlet",
+                Genre = BookGenres.Detective,
+                Language = "EN",
+                Author = "Arthur Conan Doyle"
+            },
+            new Book
+            {
+                Title = "Digital Fortress",
+                Genre = BookGenres.TechnoThriller,
+                Language = "EN",
+                Author = "Dan Brown"
+            },
+            new Book
+            {
+                Title = "Origin",
+                Genre = BookGenres.Thriller,
+                Language = "EN",
+                Author = "Dan Brown"
+            },
+            new Book
+            {
+                Title = "The Hobbit, or There and Back Again",
+                Genre = BookGenres.JuvenileFantasy,
+                Language = "EN",
+                Author = "J.R.R. Tolkien"
+            },
+            new Book
+            {
+                Title = "King Solomon's Mines",
+                Genre = BookGenres.LostWorld,
+                Language = "EN",
+                Author = "H. Rider Haggard"
             }
         };
         public static List<Film> FilmsObjects { get; set; } = new()
@@ -39,7 +88,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "The Godfather",
                 Genre = FilmGenres.Drama,
                 Country = "USA",
-                Year = new DateTime(1972),
+                Year = new DateTime(1972, 1, 1),
                 Language = "EN",
                 VideoUrl = "google.com"
             },
@@ -48,7 +97,7 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "The Shawshank Redemption",
                 Genre = FilmGenres.Drama,
                 Country = "USA",
-                Year = new DateTime(1994),
+                Year = new DateTime(1994, 1, 1),
                 Language = "EN",
                 VideoUrl = "www.facebook.com"
             },
@@ -57,9 +106,18 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "The Dark Knight",
                 Genre = FilmGenres.Action,
                 Country = "USA",
-                Year = new DateTime(2008),
+                Year = new DateTime(2008, 1, 1),
                 Language = "EN",
                 VideoUrl = "www.twitter.com"
+            },
+            new Film
+            {
+                Title = "Raiders of the Lost Ark",
+                Genre = FilmGenres.Adventure,
+                Country = "USA",
+                Year = new DateTime(1981, 1, 1),
+                Language = "EN",
+                VideoUrl = "www.lucasfilm.com"
             }
         };
         public static List<Music> MusicObjects { get; set; } = new()
@@ -69,6 +127,27 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Title = "A Jolly Christmas from Frank Sinatra",
                 Executor = "Frank Sinatra",
                 Genre = MusicGenres.Jazz,
+                Language = "EN"
+            },
+            new Music
+            {
+                Title = "Piano Concerto No. 24",
+                Executor = "Wolfgang Amadeus Mozart",
+                Genre = MusicGenres.Classical,
+                Language = ""
+            },
+            new Music
+            {
+                Title = "Triple Concerto",
+                Executor = "Ludwig van Beethoven",
+                Genre = MusicGenres.Classical,
+                Language = ""
+            },
+            new Music
+            {
+                Title = "Beyond the sea",
+                Executor = "Bobby Darin",
+                Genre = MusicGenres.Pop,
                 Language = "EN"
             }
         };
@@ -89,21 +168,29 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Genre = ComputerGameGenres.ActionAdventure,
                 Language = "EN",
                 Review = "97/100"
+            },
+            new ComputerGame
+            {
+                Company = "Guerrila",
+                Title = "Horizon Zero Dawn",
+                Genre = ComputerGameGenres.ActionRolePlaying,
+                Language = "EN",
+                Review = "89/100"
+            },
+            new ComputerGame
+            {
+                Company = "Kojima Productions",
+                Title = "Death Stranding",
+                Genre = ComputerGameGenres.Action,
+                Language = "EN",
+                Review = "86/100"
             }
         };
         public static List<Genre> GenresObjects { get; set; } = new()
-        {
+        {            
             new Genre
             {
-                Title = "ActionRolePlaying"
-            },
-            new Genre
-            {
-                Title = "ActionAdventure"
-            },
-            new Genre
-            {
-                Title = "Action"
+                Title = "Detective"
             },
             new Genre
             {
@@ -111,28 +198,128 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             },
             new Genre
             {
+                Title = "Horror"
+            },
+            new Genre
+            {
+                Title = "ScienceFiction"
+            },
+            new Genre
+            {
+                Title = "Poetry"
+            },
+            new Genre
+            {
+                Title = "Novel"
+            },
+            new Genre
+            {
+                Title = "Adventure"
+            },
+            new Genre
+            {
+                Title = "TechnoThriller"
+            },
+            new Genre
+            {
+                Title = "Thriller"
+            },
+            new Genre
+            {
+                Title = "JuvenileFantasy"
+            },
+            new Genre
+            {
+                Title = "LostWorld"
+            },
+            new Genre
+            {
+                Title = "Shooter"
+            },
+            new Genre
+            {
+                Title = "Survival"
+            },
+            new Genre
+            {
+                Title = "Puzzle"
+            },
+            new Genre
+            {
+                Title = "ActionAdventure"
+            },
+            new Genre
+            {
+                Title = "ActionRolePlaying"
+            },
+            new Genre
+            {
+                Title = "Comedy"
+            },
+            new Genre
+            {
+                Title = "Drama"
+            },
+            new Genre
+            {
+                Title = "Action"
+            },
+            new Genre
+            {
+                Title = "Rock"
+            },
+            new Genre
+            {
                 Title = "Jazz"
+            },
+            new Genre
+            {
+                Title = "Classical"
+            },
+            new Genre
+            {
+                Title = "Pop"
+            },
+            new Genre
+            {
+                Title = "Electronic"
+            },
+            new Genre
+            {
+                Title = "Folk"
             }
         };
         public static List<Question> QuestionsObjects { get; set; } = new()
         {
             new Question
             {
-                Formulation = "How are you? Your mood?",
+                Formulation = "What was your emotion in the morning?",
                 QuestionGroup = QuestionGroups.Asthenia,
-                ImageUrl = "dasddsa@fsfdss"
+                ImageUrl = "---"
             },
             new Question
             {
                 Formulation = "What is your emotion now?",
                 QuestionGroup = QuestionGroups.SocialAnxiety,
-                ImageUrl = "dasddsa@fsfdss"
+                ImageUrl = "---"
             },
             new Question
             {
-                Formulation = "How do you feel now?",
+                Formulation = "What was your main emotion yesterday?",
                 QuestionGroup = QuestionGroups.Depression,
-                ImageUrl = "dasddsa@fsfdss"
+                ImageUrl = "---"
+            },
+            new Question
+            {
+                Formulation = "What do you feel when you have meeting with your coworkers?",
+                QuestionGroup = QuestionGroups.SocialAnxiety,
+                ImageUrl = "---"
+            },
+            new Question
+            {
+                Formulation = "What do you feel when you have problems at work?",
+                QuestionGroup = QuestionGroups.Neurosis,
+                ImageUrl = "---"
             }
         };
         public static List<Variant> VariantsObjects { get; set; } = new()
@@ -140,17 +327,17 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             new Variant
             {
                 Formulation = "Happiness",
-                Value = 4
+                Value = 0
             },
             new Variant
             {
                 Formulation = "Boredom",
-                Value = 3
+                Value = 2
             },
             new Variant
             {
                 Formulation = "Certainty",
-                Value = 2
+                Value = 0
             },
             new Variant
             {
@@ -160,11 +347,21 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             new Variant
             {
                 Formulation = "Disappointment",
-                Value = 0
+                Value = 3
             },
             new Variant
             {
                 Formulation = "Embarrassment",
+                Value = 1
+            },
+            new Variant
+            {
+                Formulation = "Fear",
+                Value = 4
+            },
+            new Variant
+            {
+                Formulation = "indifference",
                 Value = 1
             }
         };
