@@ -50,6 +50,7 @@ namespace PsychologicalAssistance.Web
             {
                 options.LoginPath = "/User/Login";
                 options.Cookie.Domain = "emotional-help.vercel.app";
+                options.Cookie.Path = "/";
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
@@ -132,7 +133,7 @@ namespace PsychologicalAssistance.Web
             app.UseCors(builder => builder
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true)
+                .AllowAnyOrigin()
                 .AllowCredentials());
 
             app.UseAuthentication();
