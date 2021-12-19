@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
@@ -24,6 +25,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetAllConsultingApplications()
         {
             var consultingApplications = await _consultingApplicationService.GetAllConsultingApplicationsAsync();
@@ -31,6 +33,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetConsultingApplicationById(int id)
         {
             var consultingApplication = await _consultingApplicationService.GetConsultingApplicationByIdAsync(id);
@@ -38,6 +41,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetAllConsultingApplicationsWithUserInfo()
         {
             var consultingApplications = await _consultingApplicationService.GetAllConsultingApplicationsWithUserInfoAsync();
@@ -45,6 +49,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/all")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetConsultingApplicationWithUserInfoById(int id)
         {
             var consultingApplication = await _consultingApplicationService.GetConsultingApplicationWithUserInfoByIdAsync(id);
@@ -52,6 +57,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("userId")]
+        [Authorize]
         public async Task<ActionResult> GetConsultingApplicationWithUserInfoByUserId()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
@@ -60,6 +66,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> CreateConsultingApplication([FromBody] ConsultingApplicationDto consultingApplicationDto)
         {
             var consultingApplication = _mapper.Map<ConsultingApplicationDto, ConsultingApplication>(consultingApplicationDto);
@@ -70,6 +77,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult> UpdateConsultingApplication([FromBody] ConsultingApplicationDto consultingApplicationDto)
         {
             var consultingApplication = _mapper.Map<ConsultingApplicationDto, ConsultingApplication>(consultingApplicationDto);
@@ -80,6 +88,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteConsultingApplication(int id)
         {
             await _consultingApplicationService.DeleteAsync(id);

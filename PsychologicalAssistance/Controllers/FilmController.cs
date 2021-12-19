@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllFilms()
         {
             var films = await _filmService.GetAllFilmsAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetFilmById(int id)
         {
             var film = await _filmService.GetFilmByIdAsync(id);
@@ -35,6 +38,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> CreateFilm([FromBody] FilmDto filmDto)
         {
             var film = _mapper.Map<FilmDto, Film>(filmDto);
@@ -43,6 +47,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateFilm([FromBody] FilmDto filmDto)
         {
             var film = _mapper.Map<FilmDto, Film>(filmDto);
@@ -51,6 +56,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteFilm(int id)
         {
             await _filmService.DeleteAsync(id);

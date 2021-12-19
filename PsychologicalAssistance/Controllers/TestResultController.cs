@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
@@ -24,6 +25,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllTestResults()
         {
             var testsResults = await _testResultsService.GetAllTestsResultsAsync();
@@ -31,6 +33,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetTestResultsById(int id)
         {
             var testResults = await _testResultsService.GetTestResultsForUserByIdAsync(id);
@@ -38,6 +41,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -46,6 +50,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var testResults = _mapper.Map<TestResultsDto, TestResults>(testResultsDto);
@@ -54,6 +59,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteTestResults(int id)
         {
             await _testResultsService.DeleteAsync(id);

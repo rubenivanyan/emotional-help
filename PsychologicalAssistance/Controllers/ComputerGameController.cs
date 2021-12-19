@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllComputerGames()
         {
             var games = await _computerGameService.GetAllComputerGamesAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetComputerGameById(int id)
         {
             var game = await _computerGameService.GetComputerGameByIdAsync(id);
@@ -35,6 +38,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> CreateComputerGame([FromBody] ComputerGameDto gameDto)
         {
             var game = _mapper.Map<ComputerGame>(gameDto);
@@ -43,6 +47,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateComputerGame([FromBody] ComputerGameDto gameDto)
         {
             var game = _mapper.Map<ComputerGame>(gameDto);
@@ -51,6 +56,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteComputerGame(int id)
         {
             await _computerGameService.DeleteAsync(id);

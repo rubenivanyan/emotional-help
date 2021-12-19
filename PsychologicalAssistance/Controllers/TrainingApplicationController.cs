@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
@@ -25,6 +26,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetAllTrainingApplications()
         {
             var trainingApplications = await _trainingApplicationService.GetAllTrainingApplicationsAsync();
@@ -32,6 +34,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetTrainingApplicationById(int id)
         {
             var trainingApplication = await _trainingApplicationService.GetTrainingApplicationByIdAsync(id);
@@ -39,6 +42,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("userId")]
+        [Authorize]
         public async Task<ActionResult> GetTrainingApplicationByUserId()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
@@ -48,6 +52,7 @@ namespace PsychologicalAssistance.Web.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> CreateTrainingApplication([FromBody] TrainingApplicationDto trainingApplicationDto)
         {
             var trainingApplication = _mapper.Map<TrainingApplication>(trainingApplicationDto);
@@ -58,6 +63,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteTrainingApplication(int id)
         {
             await _trainingApplicationService.DeleteAsync(id);

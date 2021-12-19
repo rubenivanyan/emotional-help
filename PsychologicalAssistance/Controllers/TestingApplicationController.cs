@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
@@ -24,6 +25,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetAllTestingApplications()
         {
             var testingApplications = await _testingApplicationService.GetAllTestingApplicationsAsync();
@@ -31,6 +33,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetTestingApplicationById(int id)
         {
             var testingApplication = await _testingApplicationService.GetTestingApplicationByIdAsync(id);
@@ -38,6 +41,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/full")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetFullTestingApplicationById(int id)
         {
             var fullTestingApplication = await _testingApplicationService.GetFullTestingApplicationDtoByIdAsync(id);
@@ -45,6 +49,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("userId")]
+        [Authorize]
         public async Task<ActionResult> GetFullTestingApplicationByUserId()
         {
             var userId = _userManager.GetUserId(HttpContext.User);
@@ -54,6 +59,7 @@ namespace PsychologicalAssistance.Web.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> CreateTestingApplication([FromBody] TestingApplicationDto testingApplicationDto)
         {
             var testingApplication = _mapper.Map<TestingApplication>(testingApplicationDto);
@@ -62,6 +68,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult> UpdateTestingApplication([FromBody] TestingApplicationDto testingApplicationDto)
         {
             var testingApplication = _mapper.Map<TestingApplication>(testingApplicationDto);
@@ -70,6 +77,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteTestingApplication(int id)
         {
             await _testingApplicationService.DeleteAsync(id);

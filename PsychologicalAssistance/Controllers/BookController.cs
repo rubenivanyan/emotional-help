@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +22,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllBooks()
         {
             var books = await _bookService.GetAllBooksAsync();
@@ -28,6 +30,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetBookById(int id)
         {
             var book = await _bookService.GetBookByIdAsync(id);
@@ -35,6 +38,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> CreateBook([FromBody] BookDto bookDto)
         {
             var book = _mapper.Map<Book>(bookDto);
@@ -43,6 +47,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateBook([FromBody] BookDto bookDto)
         {
             var book = _mapper.Map<Book>(bookDto);
@@ -51,6 +56,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteBook(int id)
         {
             await _bookService.DeleteAsync(id);

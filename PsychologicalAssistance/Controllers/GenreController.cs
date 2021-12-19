@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Web.Controllers
@@ -19,6 +17,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAllGenres()
         {
             var genres = await _genreService.GetAllGenresAsync();
@@ -26,6 +25,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult> GetGenreById(int id)
         {
             var genre = await _genreService.GetGenreByIdAsync(id);
@@ -33,6 +33,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost("{variantId} {genreId}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> AddGenreToVariant(int variantId, int genreId)
         {
             await _genreService.AddGenreToVariant(variantId, genreId);

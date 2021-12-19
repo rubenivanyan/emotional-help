@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,21 +36,16 @@ namespace PsychologicalAssistance.Web
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddIdentity<User, IdentityRole>(opts => {
                 opts.Password.RequiredLength = 6;
                 opts.Password.RequireDigit = true;
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireLowercase = true;
                 opts.Password.RequireNonAlphanumeric = true;
+                opts.User.RequireUniqueEmail = true;
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-            /*services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/User/Login");
-                    //options.Cookie.Domain = "emotionalhelptest.azurewebsites.net";
-                    options.Cookie.SameSite = SameSiteMode.None;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                });*/
+            
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";
@@ -59,6 +53,7 @@ namespace PsychologicalAssistance.Web
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
+            
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Repositories

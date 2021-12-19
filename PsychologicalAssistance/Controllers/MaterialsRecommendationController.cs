@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PsychologicalAssistance.Core.Data.Entities;
@@ -21,6 +21,7 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{testResultsId}")]
+        [Authorize]
         public async Task<ActionResult> GetRecommendationsByTestResultsId(int testResultsId)
         {
             var user = await _userManager.GetUserAsync(User);
