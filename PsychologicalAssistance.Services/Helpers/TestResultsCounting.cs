@@ -4,7 +4,7 @@ using PsychologicalAssistance.Core.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace PsychologicalAssistance.Core.Repositories.Helpers
+namespace PsychologicalAssistance.Services.Helpers
 {
     public static class TestResultsCounting
     {
