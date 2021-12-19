@@ -30,6 +30,55 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Genre = BookGenres.Detective,
                 Language = "EN",
                 Author = "Michael Connelly"
+            },
+            new Book
+            {
+                Title = "The Lord Of The Rings",
+                Genre = BookGenres.Adventure,
+                Language = "EN",
+                Author = "J.R.R. Tolkien"
+            },
+            new Book
+            {
+                Title = "Harry Potter",
+                Genre = BookGenres.Fantasy,
+                Language = "EN",
+                Author = "J.K. Rowling"
+            },
+            new Book
+            {
+                Title = "A Study In Scarlet",
+                Genre = BookGenres.Detective,
+                Language = "EN",
+                Author = "Arthur Conan Doyle"
+            },
+            new Book
+            {
+                Title = "Digital Fortress",
+                Genre = BookGenres.TechnoThriller,
+                Language = "EN",
+                Author = "Dan Brown"
+            },
+            new Book
+            {
+                Title = "Origin",
+                Genre = BookGenres.Thriller,
+                Language = "EN",
+                Author = "Dan Brown"
+            },
+            new Book
+            {
+                Title = "The Hobbit, or There and Back Again",
+                Genre = BookGenres.JuvenileFantasy,
+                Language = "EN",
+                Author = "J.R.R. Tolkien"
+            },
+            new Book
+            {
+                Title = "King Solomon's Mines",
+                Genre = BookGenres.LostWorld,
+                Language = "EN",
+                Author = "H. Rider Haggard"
             }
         };
         public static List<Film> FilmsObjects { get; set; } = new()
@@ -70,6 +119,23 @@ namespace PsychologicalAssistance.Core.Data.Seeding
                 Executor = "Frank Sinatra",
                 Genre = MusicGenres.Jazz,
                 Language = "EN"
+            },
+            new Music
+            {
+                Title = "Piano Concerto No. 24",
+                Executor = "Wolfgang Amadeus Mozart",
+                Genre = MusicGenres.Classical,
+                Language = ""
+            },
+            new Music
+            {
+                Title = "Triple Concerto",
+                Executor = "Ludwig van Beethoven",
+                Genre = MusicGenres.Classical,
+                Language = ""
+            },
+            new Music
+            { 
             }
         };
         public static List<ComputerGame> ComputerGamesObjects { get; set; } = new()
@@ -92,18 +158,10 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             }
         };
         public static List<Genre> GenresObjects { get; set; } = new()
-        {
+        {            
             new Genre
             {
-                Title = "ActionRolePlaying"
-            },
-            new Genre
-            {
-                Title = "ActionAdventure"
-            },
-            new Genre
-            {
-                Title = "Action"
+                Title = "Detective"
             },
             new Genre
             {
@@ -111,7 +169,95 @@ namespace PsychologicalAssistance.Core.Data.Seeding
             },
             new Genre
             {
+                Title = "Horror"
+            },
+            new Genre
+            {
+                Title = "ScienceFiction"
+            },
+            new Genre
+            {
+                Title = "Poetry"
+            },
+            new Genre
+            {
+                Title = "Novel"
+            },
+            new Genre
+            {
+                Title = "Adventure"
+            },
+            new Genre
+            {
+                Title = "TechnoThriller"
+            },
+            new Genre
+            {
+                Title = "Thriller"
+            },
+            new Genre
+            {
+                Title = "JuvenileFantasy"
+            },
+            new Genre
+            {
+                Title = "LostWorld"
+            },
+            new Genre
+            {
+                Title = "Shooter"
+            },
+            new Genre
+            {
+                Title = "Survival"
+            },
+            new Genre
+            {
+                Title = "Puzzle"
+            },
+            new Genre
+            {
+                Title = "ActionAdventure"
+            },
+            new Genre
+            {
+                Title = "ActionRolePlaying"
+            },
+            new Genre
+            {
+                Title = "Comedy"
+            },
+            new Genre
+            {
+                Title = "Drama"
+            },
+            new Genre
+            {
+                Title = "Action"
+            },
+            new Genre
+            {
+                Title = "Rock"
+            },
+            new Genre
+            {
                 Title = "Jazz"
+            },
+            new Genre
+            {
+                Title = "Classical"
+            },
+            new Genre
+            {
+                Title = "Pop"
+            },
+            new Genre
+            {
+                Title = "Electronic"
+            },
+            new Genre
+            {
+                Title = "Folk"
             }
         };
         public static List<Question> QuestionsObjects { get; set; } = new()
