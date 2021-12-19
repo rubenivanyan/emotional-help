@@ -8,7 +8,7 @@ export const Books = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get('https://emotionalhelptest.azurewebsites.net/api/Book')
+      .get('https://emotionalhelp.azurewebsites.net/api/Book')
       .then((response) => {
         console.log(response.data);
         setData(response.data);

@@ -55,7 +55,7 @@ export const GameCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/ComputerGame', body)
+      .put('https://emotionalhelp.azurewebsites.net/api/ComputerGame', body)
       .then((response) => {
         console.log(response);
       })
@@ -70,9 +70,7 @@ export const GameCard = (props) => {
 
   const handleDelete = () => {
     axios
-      .delete(
-        `https://emotionalhelptest.azurewebsites.net/api/ComputerGame/${id}`,
-      )
+      .delete(`https://emotionalhelp.azurewebsites.net/api/ComputerGame/${id}`)
       .then((response) => {
         console.log(response);
       })

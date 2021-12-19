@@ -55,7 +55,7 @@ export const FilmCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/Film', body)
+      .put('https://emotionalhelp.azurewebsites.net/api/Film', body)
       .then((response) => {
         console.log(response);
       })
@@ -70,7 +70,7 @@ export const FilmCard = (props) => {
 
   const handleDelete = () => {
     axios
-      .delete(`https://emotionalhelptest.azurewebsites.net/api/Film/${id}`)
+      .delete(`https://emotionalhelp.azurewebsites.net/api/Film/${id}`)
       .then((response) => {
         console.log(response);
       })

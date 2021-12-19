@@ -18,7 +18,7 @@ export const Applications = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .post('https://emotionalhelptest.azurewebsites.net/api/User/login', body)
+      .post('https://emotionalhelp.azurewebsites.net/api/User/login', body)
       .then((response) => {
         console.log(response);
       })

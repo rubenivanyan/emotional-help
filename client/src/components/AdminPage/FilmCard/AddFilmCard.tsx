@@ -52,7 +52,7 @@ export const AddFilmCard = () => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/Music', body)
+      .put('https://emotionalhelp.azurewebsites.net/api/Music', body)
       .then((response) => {
         console.log(response);
       })

@@ -1,4 +1,4 @@
-const PATH = 'https://emotionalhelptest.azurewebsites.net';
+const PATH = 'https://emotionalhelp.azurewebsites.net';
 
 export const apiFetchLibraryItems = (path: string) => {
   return fetch(`${PATH}${path}`)

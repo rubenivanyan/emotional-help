@@ -50,7 +50,7 @@ export const MusicCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/Music', body)
+      .put('https://emotionalhelp.azurewebsites.net/api/Music', body)
       .then((response) => {
         console.log(response);
       })
@@ -65,7 +65,7 @@ export const MusicCard = (props) => {
 
   const handleDelete = () => {
     axios
-      .delete(`https://emotionalhelptest.azurewebsites.net/api/Test/${id}`)
+      .delete(`https://emotionalhelp.azurewebsites.net/api/Test/${id}`)
       .then((response) => {
         console.log(response);
       })
