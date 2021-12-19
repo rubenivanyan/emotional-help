@@ -49,7 +49,7 @@ namespace PsychologicalAssistance.Web
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";
-                options.Cookie.Domain = "51.124.221.201:8080";
+                options.Cookie.Domain = "emotional-help.vercel.app";
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
