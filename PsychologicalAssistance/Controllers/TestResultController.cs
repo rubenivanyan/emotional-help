@@ -25,7 +25,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllTestResults()
         {
             var testsResults = await _testResultsService.GetAllTestsResultsAsync();
@@ -33,7 +32,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetTestResultsById(int id)
         {
             var testResults = await _testResultsService.GetTestResultsForUserByIdAsync(id);
@@ -41,7 +39,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var user = await _userManager.GetUserAsync(User);

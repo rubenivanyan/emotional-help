@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllTests()
         {
             var tests = await _testService.GetAllTestsAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetTestById(int id)
         {
             var test = await _testService.GetTestByIdAsync(id);
@@ -38,7 +36,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("all/with-questions")]
-        [Authorize]
         public async Task<ActionResult> GetAllTestsWithQuestions()
         {
             var tests = await _testService.GetAllTestsWithQuestion();
@@ -46,7 +43,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-questions")]
-        [Authorize]
         public async Task<ActionResult> GetTestWithQuestionsById(int id)
         {
             var test = await _testService.GetTestWithQuestionsById(id);
