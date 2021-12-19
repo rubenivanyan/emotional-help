@@ -23,7 +23,7 @@ jobs:
           node-version: '12.13.0'
       - name: npm install, build, and test
         run: |
-          working-directory: client
+          cd client
           npm install -g 
           npm install babel-core
           npm run build --if-present
