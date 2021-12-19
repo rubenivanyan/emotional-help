@@ -1,5 +1,5 @@
 import { Auth } from '../../../api/auth';
-import { apiFetchPost, apiFetchGet } from '../../../api/fetch/fetch';
+import { apiFetchGet } from '../../../api/fetch/fetch';
 import { LocalStorage } from '../../../api/local-storage';
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { BUTTON_TYPES } from '../../../common/enums/button-types';
@@ -16,6 +16,7 @@ import { Error } from '../../../components/Error/Error';
 import { TrainingComponent } from '../../../components/Training/Training';
 import React, { useEffect, useState } from 'react';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
+import { sendApplication } from '../../../api/fetch/applications';
 
 export const TrainingPage = () => {
   const [success, setSuccess] = useState(false);
@@ -44,27 +45,21 @@ export const TrainingPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
+
     const trainingApplication: TrainingApplication = {
       isArchived: false,
       fullName: userName,
       email: email,
       trainingId: trainingId,
     };
-    apiFetchPost(
-      '/api/trainingApplication',
+
+    sendApplication(
+      '/api/TrainingApplication',
       trainingApplication,
-    ).then((response) => {
-      if (response.ok) {
-        setSuccess(true);
-      } else {
-        setError(true);
-      }
-    })
-      .catch((error) => {
-        console.log('Fetch Post', error);
-        setError(true);
-      })
-      .finally(() => setIsSubmitting(false));
+      setSuccess,
+      setError,
+      setIsSubmitting,
+    );
   };
 
   const nextTraining = () => {

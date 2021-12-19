@@ -4,7 +4,6 @@ import { TRAINING_AND_CONSULTING_TEXT } from '../../../common/enums/texts';
 import { Button } from '../../../components/Button/Button';
 import { BUTTON_TYPES } from '../../../common/enums/button-types';
 import { Input } from '../../../components/Input/Input';
-import { apiFetchPost } from '../../../api/fetch/fetch';
 import {
   ConsultingApplication,
 } from '../../../common/types/consulting-application';
@@ -13,6 +12,7 @@ import { Success } from '../../../components/Success/Success';
 import { Auth } from '../../../api/auth';
 import { LocalStorage } from '../../../api/local-storage';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
+import { sendApplication } from '../../../api/fetch/applications';
 
 export const ConsultingPage = () => {
   const [success, setSuccess] = useState(false);
@@ -37,20 +37,12 @@ export const ConsultingPage = () => {
       message: message,
     };
 
-    apiFetchPost(
-      '/api/consultingApplication',
+    sendApplication(
+      '/api/ConsultingApplication',
       consultingApplication,
-    ).then((response) => {
-      if (response.ok) {
-        setSuccess(true);
-      } else {
-        setError(true);
-      }
-    })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => setIsSubmitting(false));
+      setSuccess,
+      setError,
+      setIsSubmitting);
   };
 
 
