@@ -5,6 +5,7 @@
         Action = 1,
         Thriller = 2,
         Comedy = 3,
-        Drama = 4
+        Drama = 4,
+        Adventure = 5
     }
 }

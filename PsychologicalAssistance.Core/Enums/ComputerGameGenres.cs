@@ -8,6 +8,7 @@
         Adventure = 3,
         Puzzle = 4,
         ActionAdventure = 5,
-        ActionRolePlaying = 6
+        ActionRolePlaying = 6,
+        Action = 7
     }
 }
