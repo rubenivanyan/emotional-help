@@ -1,6 +1,5 @@
 ﻿using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Enums;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
 using PsychologicalAssistance.Services.Helpers;
@@ -15,12 +14,15 @@ namespace PsychologicalAssistance.Services.Implementation
     {
         private readonly ITestResultsRepository _testResultsRepository;
         private readonly ITestRepository _testRepository;
+        private readonly IMaterialsRecommendationService _materialsRecommendationService;
 
-        public TestResultsService(IDataRepository<TestResults> dataRepository, IUnitOfWork unitOfWork, ITestResultsRepository testResultsRepository, ITestRepository testRepository)
+        public TestResultsService(IDataRepository<TestResults> dataRepository, IUnitOfWork unitOfWork, ITestResultsRepository testResultsRepository,
+                ITestRepository testRepository, IMaterialsRecommendationService materialsRecommendationService)
             : base(dataRepository, unitOfWork)
         {
             _testResultsRepository = testResultsRepository;
             _testRepository = testRepository;
+            _materialsRecommendationService = materialsRecommendationService;
         }
 
         public async Task<int> CreateTestResultsAsync(TestResultsDto testResultsDto, User user)
