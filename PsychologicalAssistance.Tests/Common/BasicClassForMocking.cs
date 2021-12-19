@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
@@ -17,6 +18,16 @@ namespace PsychologicalAssistance.Tests.Common
                 where TRepository : class, IDataRepository<TEntity>
                 where TEntity : BaseEntity
             => new Mock<TRepository>();
+
+        public static Mock<UserManager<TUser>> CreateUserManagerMock<TUser>()
+                where TUser : class
+        {
+            var store = new Mock<IUserStore<TUser>>();
+            var manager = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+            manager.Object.UserValidators.Add(new UserValidator<TUser>());
+            manager.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+            return manager;
+        }
 
         public static Mock<T> CreateMock<T>()
                 where T : class

@@ -10,13 +10,13 @@ using Xunit;
 
 namespace PsychologicalAssistance.Tests.RepositoriesTests
 {
-    public class ApplicationRepositoryTests : InMemoryDatabaseCreation
+    public class TestingApplicationRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
-        public ApplicationRepositoryTests()
+        public TestingApplicationRepositoryTests()
         {
             Setup();
-            _mapper = BasicClassForMocking.ConfigMapper(new ApplicationProfile());
+            _mapper = BasicClassForMocking.ConfigMapper(new TestingApplicationProfile());
         }
 
         [Fact]
@@ -25,14 +25,14 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
             //arrange
             using (var dbContext = new ApplicationDbContext(dbContextOptions))
             {
-                var repository = new ApplicationRepository(dbContext, _mapper);
+                var repository = new TestingApplicationRepository(dbContext, _mapper);
 
                 //act
-                var result = await repository.GetAllApplicationsDtoAsync();
+                var result = await repository.GetAllTestingApplicationsDtoAsync();
 
                 //assert
                 Assert.NotNull(result);
-                Assert.IsType<List<ApplicationDto>>(result);
+                Assert.IsType<List<TestingApplicationDto>>(result);
             }
         }
     }
