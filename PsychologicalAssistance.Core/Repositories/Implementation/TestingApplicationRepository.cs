@@ -43,7 +43,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                     IsArchived = testingApplication.IsArchived,
                     TestResultsId = testingApplication.TestResultsId,
                     DateOfResults = testingApplication.TestResults.ResultsDate.ToShortDateString(),
-                    UserName = testingApplication.TestResults.User.Id,
+                    UserName = testingApplication.TestResults.User.UserName,
                     Email = testingApplication.TestResults.User.Email
                 }).FirstOrDefault());
 
@@ -62,7 +62,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return fullTestingApplicationDtoWithUserInfo;
         }
 
-        public async Task<FullTestingApplicationDto> GetFullTestingApplicationDtoByUserIdAsync(string UserId)
+        public async Task<IEnumerable<FullTestingApplicationDto>> GetFullTestingApplicationDtoByUserIdAsync(string UserId)
         {
             var fullTestingApplicationDtoWithUserIdInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
                 .ThenInclude(testingResults => testingResults.User)
@@ -73,9 +73,9 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                     IsArchived = testingApplication.IsArchived,
                     TestResultsId = testingApplication.TestResultsId,
                     DateOfResults = testingApplication.TestResults.ResultsDate.ToShortDateString(),
-                    UserName = testingApplication.TestResults.User.Id,
+                    UserName = testingApplication.TestResults.User.UserName,
                     Email = testingApplication.TestResults.User.Email
-                }).FirstOrDefault());
+                }).ToList());
 
             var fullTestingApplicationDtoWithAnswerInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
                 .ThenInclude(testingResults => testingResults.Answers)
@@ -85,10 +85,14 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                 {
                     AnswersFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Formulation).ToList(),
                     QuestionsFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Question.Formulation).ToList()
-                }).FirstOrDefault());
+                }).ToList());
 
-            fullTestingApplicationDtoWithUserIdInfo.AnswersFormulations = fullTestingApplicationDtoWithAnswerInfo.AnswersFormulations;
-            fullTestingApplicationDtoWithUserIdInfo.QuestionsFormulations = fullTestingApplicationDtoWithAnswerInfo.QuestionsFormulations;
+            for (int i = 0; i < fullTestingApplicationDtoWithAnswerInfo.Count; i++)
+            {
+                fullTestingApplicationDtoWithUserIdInfo[i].AnswersFormulations = fullTestingApplicationDtoWithAnswerInfo[i].AnswersFormulations;
+                fullTestingApplicationDtoWithUserIdInfo[i].QuestionsFormulations = fullTestingApplicationDtoWithAnswerInfo[i].QuestionsFormulations;
+            }
+
             return fullTestingApplicationDtoWithUserIdInfo;
         }
 

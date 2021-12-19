@@ -23,7 +23,7 @@ namespace PsychologicalAssistance.Services.Implementation
         public async Task<FullTrainingApplicationDto> GetTrainingApplicationByIdAsync(int id)
             => await _trainingApplicationRepository.GetTrainingApplicationDtoByIdAsync(id);
 
-        public async Task<FullTrainingApplicationDto> GetTrainingApplicationByUserIdAsync(string userId)
+        public async Task<IEnumerable<FullTrainingApplicationDto>> GetTrainingApplicationByUserIdAsync(string userId)
            => await _trainingApplicationRepository.GetTrainingApplicationDtoByUserIdAsync(userId);
 
     }

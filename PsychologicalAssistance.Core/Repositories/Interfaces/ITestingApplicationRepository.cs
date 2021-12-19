@@ -10,6 +10,6 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
         Task<IEnumerable<TestingApplicationDto>> GetAllTestingApplicationsDtoAsync();
         Task<TestingApplicationDto> GetTestingApplicationByIdDtoAsync(int id);
         Task<FullTestingApplicationDto> GetFullTestingApplicationDtoByIdAsync(int id);
-        Task<FullTestingApplicationDto> GetFullTestingApplicationDtoByUserIdAsync(string UserId);
+        Task<IEnumerable<FullTestingApplicationDto>> GetFullTestingApplicationDtoByUserIdAsync(string UserId);
     }
 }

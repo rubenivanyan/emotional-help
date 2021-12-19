@@ -31,7 +31,7 @@ namespace PsychologicalAssistance.Services.Implementation
         public async Task<FullConsultingApplicationDto> GetConsultingApplicationWithUserInfoByIdAsync(int id)
             => await _consultingApplicationRepository.GetFullConsultingApplicationWithUserInfoByIdDtoAsync(id);
         
-        public async Task<FullConsultingApplicationDto> GetConsultingApplicationWithUserInfoByUserIdAsync(string userId)
+        public async Task<IEnumerable<FullConsultingApplicationDto>> GetConsultingApplicationWithUserInfoByUserIdAsync(string userId)
           => await _consultingApplicationRepository.GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(userId);
     }
 }

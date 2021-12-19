@@ -77,7 +77,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return consultingApplication;
         }
 
-        public async Task<FullConsultingApplicationDto> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string UserId)
+        public async Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string UserId)
         {
             var consultingApplication = await Task.Run(() => DbSet
                 .Where(consultingApplication => consultingApplication.UserId == UserId)
@@ -89,7 +89,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                     UserId = consultingApplication.UserId,
                     UserFullName = consultingApplication.User.UserName + " " + consultingApplication.User.UserSurname,
                     Email = consultingApplication.User.Email
-                }).FirstOrDefault());
+                }).ToList());
 
             return consultingApplication;
         }

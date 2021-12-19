@@ -27,7 +27,7 @@ namespace PsychologicalAssistance.Services.Implementation
         public async Task<FullTestingApplicationDto> GetFullTestingApplicationDtoByIdAsync(int id)
             => await _testingApplicationRepository.GetFullTestingApplicationDtoByIdAsync(id);
 
-        public async Task<FullTestingApplicationDto> GetFullTestingApplicationDtoByUserIdAsync(string id)
+        public async Task<IEnumerable<FullTestingApplicationDto>> GetFullTestingApplicationDtoByUserIdAsync(string id)
            => await _testingApplicationRepository.GetFullTestingApplicationDtoByUserIdAsync(id);
        
     }

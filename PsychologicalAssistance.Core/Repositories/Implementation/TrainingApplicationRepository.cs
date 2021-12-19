@@ -52,19 +52,19 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return trainingApplicationDto;
         }
 
-        public async Task<FullTrainingApplicationDto> GetTrainingApplicationDtoByUserIdAsync(string userId)
+        public async Task<IEnumerable<FullTrainingApplicationDto>> GetTrainingApplicationDtoByUserIdAsync(string userId)
         {
             var trainingApplication = await Task.Run(() => DbSet
                    .Where(i => i.UserId == userId)
                    .Include(i => i.User).Include(i => i.Training)
-                   .FirstOrDefault()
+                   .ToList()
                );
 
             if (trainingApplication == null)
             {
                 return null;
             }
-            var trainingApplicationDto = _mapper.Map<TrainingApplication, FullTrainingApplicationDto>(trainingApplication);
+            var trainingApplicationDto = _mapper.Map<IEnumerable<TrainingApplication>, IEnumerable<FullTrainingApplicationDto>>(trainingApplication);
             return trainingApplicationDto;
         }
     }
