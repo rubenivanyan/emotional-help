@@ -1,8 +1,14 @@
 import axios from 'axios';
 
 export const getTests = async (app) => {
-  const response = await axios.get(
-    'https://emotionalhelptest.azurewebsites.net/api/Test/',
+  const body = {
+    email: 'admin@email.com',
+    password: 'Admin1!',
+    rememberMe: true,
+  };
+  const response = await axios.post(
+    'https://emotionalhelp.azurewebsites.net/api/Login',
+    body,
   );
   console.log('GET', response.data);
   return await response.data;

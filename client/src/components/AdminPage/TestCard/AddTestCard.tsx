@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import './TestCard.scss';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';

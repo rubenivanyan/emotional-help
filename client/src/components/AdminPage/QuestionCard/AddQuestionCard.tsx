@@ -1,12 +1,13 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import './QuestionCard.scss';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 
 export const AddQuestionCard = () => {
+  const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
   const [formulation, setFormulation] = useState('');
   const [url, setUrl] = useState('');
@@ -18,6 +19,11 @@ export const AddQuestionCard = () => {
     id: Number.parseInt(id),
   };
 
+  const handleShowForm = () => {
+    setShowForm(!showForm);
+    console.log(showForm);
+  };
+
   const handleChangeFormulation = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -26,14 +32,8 @@ export const AddQuestionCard = () => {
   const handleChangeId = (event: React.ChangeEvent<HTMLInputElement>) => {
     setId(event.target.value);
   };
-
   const handleChangeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
-  };
-
-  const handleShowForm = () => {
-    setShowForm(!showForm);
-    console.log(showForm);
   };
 
   const handleSubmitTest = () => {
