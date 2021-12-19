@@ -1,9 +1,9 @@
-const PATH = 'https://emotionalhelptest.azurewebsites.net';
+const PATH = 'https://emotionalhelp.azurewebsites.net';
 
 export const apiFetchLibraryItems = (path: string) => {
   return fetch(`${PATH}${path}`)
     .then((response) => response.json())
-    .catch((error) => alert('Something went wrong: ' + error));
+    .catch((error) => alert('apiFetchLibraryItems: ' + error));
 };
 
 export const apiFetchPost = (path: string, item: any) => {
