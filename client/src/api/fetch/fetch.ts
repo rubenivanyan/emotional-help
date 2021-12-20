@@ -1,4 +1,4 @@
-const PATH = 'https://emotionalhelp.azurewebsites.net';
+const PATH = 'https://localhost:44390';
 
 export const apiFetchPost = (path: string, item: any) => {
   const requestOptions: RequestInit = {
