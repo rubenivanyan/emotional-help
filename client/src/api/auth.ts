@@ -3,7 +3,6 @@ import { User } from '../common/types/user';
 import { apiFetchGet, apiFetchPost } from './fetch/fetch';
 import { LocalStorage } from './local-storage';
 import { UserLogin } from '../common/types/user-login';
-import { authFetchRequest } from '../store/actions';
 
 export class Auth {
   private static user: User | null = null;
@@ -16,7 +15,6 @@ export class Auth {
     setError,
     setErrorMessage,
     setIsSubmitting,
-    useDispatch,
   ): void {
     setIsSubmitting(true);
 
@@ -27,7 +25,7 @@ export class Auth {
       .then((response) => {
         if (response.status === 200) {
           setSuccess(true);
-          Auth.login(useDispatch);
+          Auth.login();
         } else {
           setError(true);
           setErrorMessage(response.statusText);
@@ -43,7 +41,6 @@ export class Auth {
     setError,
     setErrorMessage,
     setIsSubmitting,
-    useDispatch,
   ): void {
     setIsSubmitting(true);
 
@@ -53,7 +50,7 @@ export class Auth {
     ).then((response) => {
       if (response.status === 200) {
         setSuccess(true);
-        Auth.login(useDispatch);
+        Auth.login();
       } else {
         setError(true);
         setErrorMessage(
@@ -66,13 +63,12 @@ export class Auth {
       .finally(() => setIsSubmitting(false));
   };
 
-  public static login(useDispatch): void {
+  public static login(): void {
     apiFetchGet('/api/User/account')
       .then<User>((response) => {
         return response.json();
       })
       .then((user) => {
-        useDispatch(authFetchRequest);
         Auth.user = user;
         LocalStorage.setItemsFromObject(Auth.user);
       })

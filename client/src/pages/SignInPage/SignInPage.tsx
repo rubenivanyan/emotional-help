@@ -10,6 +10,7 @@ import { UserLogin } from '../../common/types/user-login';
 import { Auth } from '../../api/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers/rootReducer';
+import { authFetchRequest } from '../../store/actions';
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('');
@@ -22,10 +23,16 @@ export const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     setIsRemember(isRemember);
   }, []);
+
+  useEffect(() => {
+    if (success) {
+      dispatch(authFetchRequest());
+    }
+  }, [success]);
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -42,7 +49,6 @@ export const SignInPage = () => {
       setError,
       setErrorMessage,
       setIsSubmitting,
-      useDispatch,
     );
   };
 
