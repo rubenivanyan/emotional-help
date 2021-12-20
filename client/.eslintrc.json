@@ -12,7 +12,11 @@
     "ecmaVersion": 13,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "ignoreDuringBuilds": "true",
   "rules": {
     "linebreak-style": ["off", "unix"],
     "semi": ["error", "always"],
