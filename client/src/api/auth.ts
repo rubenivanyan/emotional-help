@@ -69,7 +69,9 @@ export class Auth {
         return response.json();
       })
       .then((user) => {
+        console.log('then user ' + user);
         Auth.user = user;
+        console.log('then user auth user ' + Auth.user);
         LocalStorage.setItemsFromObject(Auth.user);
       })
       .catch((error) => alert('api/User/account:' + error));
