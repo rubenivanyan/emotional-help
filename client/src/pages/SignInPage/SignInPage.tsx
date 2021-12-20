@@ -23,7 +23,9 @@ export const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
+  const test = useSelector((state: RootState) => state.user);
   console.log('isLogged' + isLogged);
+  console.log('test' + test);
   const dispatch = useDispatch();
 
   useEffect(() => {
