@@ -7,25 +7,33 @@ on:
   push:
     branches:
       - dev-fe
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          persist-credentials: false
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
-
+          node-version: '12.13.0'
       - name: npm install, build, and test
         run: |
-          npm install
+          cd client
+          npm install ts-node
+          npm install ts-node/register
+          npm install -g typescript
+          npm install -g webpack
+          npm install -g 
+          npm install babel-core
           npm run build --if-present
-          npm run test --if-present
+          npm run test --if-present         
 
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -46,10 +54,10 @@ jobs:
           name: node-app
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
         with:
           app-name: 'reactfront'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_98A3F0352A3D4349B171B3CE42923946 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_97148363109246B3AC187C1B6A21B6B5 }}
           package: .

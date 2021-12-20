@@ -15,6 +15,8 @@ import {
   testsDeleteRequestedWatcherSaga,
 } from './saga-tests';
 
+import { authFetchRequestedWatcherSaga } from './saga-auth';
+
 export function* rootSaga() {
   yield all([
     applicationsFetchRequestedWatcherSaga(),
@@ -26,5 +28,6 @@ export function* rootSaga() {
     questionsFetchRequestedWatcherSaga(),
     questionsPutRequestedWatcherSaga(),
     questionsDeleteRequestedWatcherSaga(),
+    authFetchRequestedWatcherSaga(),
   ]);
 }

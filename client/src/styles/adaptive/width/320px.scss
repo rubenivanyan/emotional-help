@@ -1,0 +1,17 @@
+@media (max-width: 320px) {
+
+  footer,
+  header,
+  .main-wrapper {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  button.button.default {
+    width: 100%;
+  }
+
+  header .menu-opener {
+    border-radius: 15px;
+  }
+}

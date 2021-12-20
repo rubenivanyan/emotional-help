@@ -1,4 +1,8 @@
 .logo {
   font-weight: 700;
   color: white;
+
+  &-small {
+    display: none;
+  }
 }
