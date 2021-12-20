@@ -2,7 +2,6 @@ import './SignUp.scss';
 import React, { useState } from 'react';
 import { Input } from '../../components/Input/Input';
 import { UserRegistration } from '../../common/types/user-registration';
-import { apiFetchPost } from '../../api/fetch/fetch';
 import { Block } from '../../components/Block/Block';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
@@ -25,8 +24,6 @@ export const SignUpPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
-
-    setIsSubmitting(true);
     const userRegistration: UserRegistration = {
       name: name,
       surname: surname,
@@ -36,23 +33,12 @@ export const SignUpPage = () => {
       confirmationPassword: confirmPassword,
     };
 
-    apiFetchPost(
-      '/api/User/register',
+    Auth.signUp(
       userRegistration,
-    )
-      .then((response) => {
-        if (response.status === 200 || response.status === 204) {
-          setSuccess(true);
-          Auth.login();
-        } else {
-          setError(true);
-          setErrorMessage(response[0]?.description);
-        }
-      })
-      .catch((error) => {
-        console.log('Fetch Post', error);
-      })
-      .finally(() => setIsSubmitting(false));
+      setSuccess,
+      setError,
+      setErrorMessage,
+      setIsSubmitting);
   };
 
   return (

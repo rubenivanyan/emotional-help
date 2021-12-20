@@ -56,7 +56,6 @@ export const PersonalPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
 
     apiFetchPut('/api/User', changedUser)
       .then((response) => {
