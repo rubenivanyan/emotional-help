@@ -23,7 +23,9 @@ export const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
+  console.log('isLogged' + isLogged);
   const dispatch = useDispatch();
+
   useEffect(() => {
     setIsRemember(isRemember);
   }, []);
@@ -31,6 +33,7 @@ export const SignInPage = () => {
   useEffect(() => {
     if (success) {
       dispatch(authFetchRequest());
+      console.log('isLogged 2' + isLogged);
     }
   }, [success]);
 

@@ -9,13 +9,14 @@ import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
-import { Auth } from '../../api/auth';
 import { apiFetchGet, apiFetchPost } from '../../api/fetch/fetch';
 import { TestWithQuestions } from '../../common/types/test-with-questions';
 import { Variant } from '../../common/types/variant';
 import { TestResults } from '../../common/types/test-results';
 import { TestingApplication } from '../../common/types/testing-application';
 import { sendApplication } from '../../api/fetch/applications';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers/rootReducer';
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -37,6 +38,7 @@ export const TestingPage: React.FC = () => {
 
   const [testResultId, setTestResultId] = useState<number | null>(null);
 
+  const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
   const testResults: TestResults = {
     testId: tests[currentTest]?.id,
@@ -185,7 +187,7 @@ export const TestingPage: React.FC = () => {
                     <Error /> :
                     <form onSubmit={(e) => handleSubmit(e)}>
                       {
-                        Auth.isLogged() ?
+                        isLogged ?
                           <p>
                             {
                               `You can send your results to our specialist.

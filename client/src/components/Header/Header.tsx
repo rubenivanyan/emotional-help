@@ -5,14 +5,17 @@ import { Navbar } from '../Navbar/Navbar';
 import { Registration } from '../Registration/Registration';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { UserPanel } from '../../components/UserPanel/UserPanel';
-import { Auth } from '../../api/auth';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers/rootReducer';
 
 const SearchRegWrapper = () => {
+  const isLogged = useSelector((state: RootState) => state.user.isLogged);
+
   return (
     <div className="search-reg-wrapper">
       <SearchBar />
       {
-        Auth.isLogged() ?
+        isLogged ?
           <UserPanel /> :
           <Registration />
       }

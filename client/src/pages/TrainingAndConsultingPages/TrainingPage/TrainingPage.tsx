@@ -1,4 +1,3 @@
-import { Auth } from '../../../api/auth';
 import { apiFetchGet } from '../../../api/fetch/fetch';
 import { LocalStorage } from '../../../api/local-storage';
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
@@ -17,6 +16,8 @@ import { TrainingComponent } from '../../../components/Training/Training';
 import React, { useEffect, useState } from 'react';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
 import { sendApplication } from '../../../api/fetch/applications';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/reducers/rootReducer';
 
 export const TrainingPage = () => {
   const [success, setSuccess] = useState(false);
@@ -30,6 +31,8 @@ export const TrainingPage = () => {
   const [email, setEmail] = useState('');
   const [trainingId, setTrainingId] = useState(0);
   const [trainings, setTrainings] = useState<Training[]>([]);
+
+  const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
   useEffect(() => {
     apiFetchGet('/api/training')
@@ -89,7 +92,7 @@ export const TrainingPage = () => {
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
               {
-                Auth.isLogged() ?
+                isLogged ?
                   <p>
                     {`Dear ${LocalStorage.getItem('fullName')},
                     chose a training, please`}
