@@ -6,9 +6,10 @@ import { AddMusicCard } from '../MusicCard/AddMusicCard';
 
 export const Music = () => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     axios
-      .get('https://emotionalhelptest.azurewebsites.net/api/Music')
+      .get('https://emotional-help-api.azurewebsites.net/api/Music')
       .then((response) => {
         console.log(response.data);
         setData(response.data);

@@ -4,30 +4,28 @@ import { useDispatch } from 'react-redux';
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
 import { Info } from '../Info/Info';
-import { appFetchRequest } from '../../../store/actions';
+import { trainAppsFetchRequest } from '../../../store/actions';
 import './Applications.scss';
 import axios from 'axios';
-
-const body = {
-  email: 'admin@email.com',
-  password: 'Admin1!',
-  rememberMe: true,
-};
 
 export const Applications = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    const body = {
+      email: 'admin@email.com',
+      password: 'Admin1!',
+      rememberMe: true,
+    };
     axios
-      .post('https://emotionalhelptest.azurewebsites.net/api/User/login', body)
+      .post('https://emotional-help-api.azurewebsites.net/api/User/login', body)
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(document.cookie);
     setTimeout(() => {
-      dispatch(appFetchRequest());
+      dispatch(trainAppsFetchRequest());
     }, 1000);
   }, []);
 

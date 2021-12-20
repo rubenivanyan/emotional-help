@@ -1,14 +1,14 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import './TestCard.scss';
-import { useState } from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { testsPutRequest, testsDeleteRequest } from '../../../store/actions';
 
 export const TestCard = (props) => {
   const navigate = useNavigate();
@@ -17,10 +17,12 @@ export const TestCard = (props) => {
   const [id, setId] = useState(props.test.id);
   const [type, setType] = useState(props.test.typeOfTest);
 
+  const dispatch = useDispatch();
+
   const body = {
-    id: id,
+    id: Number.parseInt(id),
     title: title,
-    typeOfTest: type,
+    typeOfTest: Number.parseInt(type),
   };
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,35 +43,14 @@ export const TestCard = (props) => {
   const handleSubmitTest = () => {
     handleShowForm();
     console.log('SUBMIT');
-    axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/Test', body)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(body);
-        console.log(error);
-      });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    dispatch(testsPutRequest(body));
   };
 
   const handleViewQuestions = () => {
     navigate(`/admin/questions/${id}`);
   };
   const handleDelete = () => {
-    axios
-      .delete(`https://emotionalhelptest.azurewebsites.net/api/Test/${id}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    dispatch(testsDeleteRequest(body));
   };
 
   return (
@@ -111,7 +92,7 @@ export const TestCard = (props) => {
           {' '}
           <CardContent>
             <div className="card-info">
-              <Typography variant="body2">TITLE: {title}</Typography>
+              <Typography variant="body2">Title: {title}</Typography>
               <Typography variant="body2">ID: {id}</Typography>
               <Typography variant="body2">Type of test: {type}</Typography>
             </div>
