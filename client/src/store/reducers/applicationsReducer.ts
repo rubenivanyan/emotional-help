@@ -1,16 +1,13 @@
-import { APPLICATIONS_FETCH_SUCCEEDED, SET_INFO } from '../actions';
+import { TRAINING_APPS_FETCH_SUCCEEDED, SET_INFO } from '../actions';
 
 const initState = {
-  id: null,
-  name: '',
-  email: '',
-  message: '',
-  applicationInfo: '',
+  trains: [],
+  applicationInfo: {},
 };
 
 export const applicationsReducer = (state = initState, action) => {
   switch (action.type) {
-    case APPLICATIONS_FETCH_SUCCEEDED: {
+    case TRAINING_APPS_FETCH_SUCCEEDED: {
       const applications = action.payload.data;
       return {
         ...state,

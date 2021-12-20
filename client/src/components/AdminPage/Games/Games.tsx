@@ -8,7 +8,7 @@ export const Games = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get('https://emotionalhelptest.azurewebsites.net/api/ComputerGame')
+      .get('https://emotional-help-api.azurewebsites.net/api/ComputerGame')
       .then((response) => {
         console.log(response.data);
         setData(response.data);

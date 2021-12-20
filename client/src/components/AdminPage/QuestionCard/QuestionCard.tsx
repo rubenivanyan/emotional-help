@@ -1,13 +1,16 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import './QuestionCard.scss';
-import { useState } from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import {
+  questionsDeleteRequest,
+  questionsPutRequest,
+} from '../../../store/actions';
 
 export const QuestionCard = (props) => {
   const [showForm, setShowForm] = useState(false);
@@ -15,10 +18,12 @@ export const QuestionCard = (props) => {
   const [url, setUrl] = useState(props.question.imageUrl);
   const [id, setId] = useState(props.question.id);
 
+  const dispatch = useDispatch();
+
   const body = {
     imageUrl: url,
     formulation: formulation,
-    id: id,
+    id: Number.parseInt(id),
   };
 
   const handleChangeFormulation = (
@@ -39,35 +44,14 @@ export const QuestionCard = (props) => {
     console.log(showForm);
   };
 
-  const handleSubmitTest = () => {
+  const handleSubmitQuestion = () => {
     handleShowForm();
     console.log('SUBMIT');
-    axios
-      .put('https://emotionalhelptest.azurewebsites.net/api/Question', body)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(body);
-        console.log(error);
-      });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    dispatch(questionsPutRequest(body));
   };
 
   const handleDelete = () => {
-    axios
-      .delete(`https://emotionalhelptest.azurewebsites.net/api/Question/${id}`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    dispatch(questionsDeleteRequest(body));
   };
 
   return (
@@ -102,7 +86,7 @@ export const QuestionCard = (props) => {
             margin="dense"
           />
 
-          <button onClick={handleSubmitTest}>Submit</button>
+          <button onClick={handleSubmitQuestion}>Submit</button>
         </>
       ) : (
         <>

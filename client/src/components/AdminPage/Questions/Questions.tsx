@@ -1,31 +1,30 @@
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { Block } from '../../Block/Block';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Questions.scss';
 import { useParams } from 'react-router-dom';
 import { QuestionCard } from '../QuestionCard/QuestionCard';
-import axios from 'axios';
 import { AddQuestionCard } from '../QuestionCard/AddQuestionCard';
+import { RootState } from '../../../store/reducers/rootReducer';
+import { questionsFetchRequest } from '../../../store/actions';
 
 export const Questions = () => {
   const { id } = useParams();
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const questions = useSelector(
+    (state: RootState) => state.questions.questions,
+  );
+  console.log('STATE', questions);
+
   useEffect(() => {
-    axios
-      .get(
-        `https://emotionalhelptest.azurewebsites.net/api/Test/${id}/with-questions`,
-      )
-      .then((response) => {
-        setData(response.data.questions);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(questionsFetchRequest(id));
+    console.log('STATE', questions);
   }, []);
   return (
     <Block title={BLOCK_TITLES.QUESTIONS} percentWidth={60}>
       <div className="questions-wrapper">
-        {data.map((question, index) => {
+        {questions.map((question, index) => {
           return <QuestionCard key={question.id} question={question} />;
         })}
         <AddQuestionCard />
