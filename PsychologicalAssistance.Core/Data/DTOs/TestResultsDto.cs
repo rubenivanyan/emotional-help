@@ -10,6 +10,6 @@ namespace PsychologicalAssistance.Core.Data.DTOs
         
         [Required]
         public List<VariantDto> ChosenVariants { get; set; }
-        public List<string> QuestionsGroups { get; set; }
+        public List<QuestionGroupAndFormulation> Questions { get; set; }
     }
 }

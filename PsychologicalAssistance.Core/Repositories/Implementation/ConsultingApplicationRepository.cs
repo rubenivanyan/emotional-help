@@ -77,10 +77,10 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return consultingApplication;
         }
 
-        public async Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string UserId)
+        public async Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string id)
         {
             var consultingApplication = await Task.Run(() => DbSet
-                .Where(consultingApplication => consultingApplication.UserId == UserId)
+                .Where(consultingApplication => consultingApplication.UserId == id)
                 .Include(consultingApplication => consultingApplication.User)
                 .Select(consultingApplication => new FullConsultingApplicationDto
                 {

@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllBooks()
         {
             var books = await _bookService.GetAllBooksAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetBookById(int id)
         {
             var book = await _bookService.GetBookByIdAsync(id);
@@ -59,8 +57,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteBook(int id)
         {
-            await _bookService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _bookService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

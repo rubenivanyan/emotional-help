@@ -52,10 +52,10 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return trainingApplicationDto;
         }
 
-        public async Task<IEnumerable<FullTrainingApplicationDto>> GetTrainingApplicationDtoByUserIdAsync(string userId)
+        public async Task<IEnumerable<FullTrainingApplicationDto>> GetTrainingApplicationDtoByUserIdAsync(string id)
         {
             var trainingApplication = await Task.Run(() => DbSet
-                   .Where(i => i.UserId == userId)
+                   .Where(i => i.UserId == id)
                    .Include(i => i.User).Include(i => i.Training)
                    .ToList()
                );

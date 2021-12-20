@@ -11,6 +11,6 @@ namespace PsychologicalAssistance.Core.Repositories.Interfaces
         Task<ConsultingApplicationDto> GetConsultingApplicationByIdDtoAsync(int id);
         Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationsWithUserInfoDtoAsync();
         Task<FullConsultingApplicationDto> GetFullConsultingApplicationWithUserInfoByIdDtoAsync(int id);
-        Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string UserId);
+        Task<IEnumerable<FullConsultingApplicationDto>> GetFullConsultingApplicationWithUserInfoByUserIdDtoAsync(string id);
     }
 }

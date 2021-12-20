@@ -12,7 +12,8 @@ namespace PsychologicalAssistance.Services.Implementation
     {
         private readonly ITrainingApplicationRepository _trainingApplicationRepository;
 
-        public TrainingApplicationService(IDataRepository<TrainingApplication> dataRepository, ITrainingApplicationRepository trainingApplicationRepository, IUnitOfWork unitOfWork) : base(dataRepository, unitOfWork)
+        public TrainingApplicationService(IDataRepository<TrainingApplication> dataRepository, ITrainingApplicationRepository trainingApplicationRepository,
+            IUnitOfWork unitOfWork) : base(dataRepository, unitOfWork)
         {
             _trainingApplicationRepository = trainingApplicationRepository;
         }

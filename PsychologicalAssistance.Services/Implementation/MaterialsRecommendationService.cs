@@ -1,6 +1,7 @@
 ﻿using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
+using PsychologicalAssistance.Services.Helpers;
 using PsychologicalAssistance.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,35 +34,17 @@ namespace PsychologicalAssistance.Services.Implementation
         {
             var userId = user.Id;
             var answers = await _testResultsRepository.GetAnswersByUserIdAsync(testResultsId, userId);
-            var countEmotions = new Dictionary<string, int>();
-            for (int i = 0; i < answers.Count; i++)
-            {
-                AnswerDto answer = answers[i];
-                if (!countEmotions.ContainsKey(answer.Formulation))
-                {
-                    countEmotions.Add(answer.Formulation, 1);
-                }
-                else if (countEmotions.ContainsKey(answer.Formulation))
-                {
-                    countEmotions[answer.Formulation]++;
-                }
-            }
+            var basicEmotion = TestResultsCounting.FindBasicEmotion<AnswerDto>(answers);
+            var recommendations = await TestResultsCounting
+                .CreateMaterialsRecommendationDto(_filmRepository, _bookRepository, _musicRepository, _computerGamesRepository, _variantRepository, basicEmotion);
+            return recommendations;
+        }
 
-            var basicEmotion = countEmotions.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
-            var genresTitles = await _variantRepository.GetGenresTitlesByVariantTitleAsync(basicEmotion);
-            var films = await _filmRepository.GetFilmsByGenreDtoAsync(genresTitles);
-            var music = await _musicRepository.GetMusicByGenreDtoAsync(genresTitles);
-            var books = await _bookRepository.GetBooksByGenreDtoAsync(genresTitles);
-            var computerGames = await _computerGamesRepository.GetComputerGamesByGenreDtoAsync(genresTitles);
-
-            var recommendations = new MaterialsRecommendationsDto
-            {
-                Films = films.ToList(),
-                Books = books.ToList(),
-                Music = music.ToList(),
-                ComputerGames = computerGames.ToList()
-            };
-
+        public async Task<MaterialsRecommendationsDto> GetMaterialsRecommendationsForGuestAsync(List<VariantDto> chosenVariants)
+        {
+            var basicEmotion = TestResultsCounting.FindBasicEmotion<VariantDto>(chosenVariants);
+            var recommendations = await TestResultsCounting
+                .CreateMaterialsRecommendationDto(_filmRepository, _bookRepository, _musicRepository, _computerGamesRepository, _variantRepository, basicEmotion);
             return recommendations;
         }
     }

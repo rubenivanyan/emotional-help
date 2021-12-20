@@ -66,8 +66,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize]
         public async Task<ActionResult> DeleteTrainingApplication(int id)
         {
-            await _trainingApplicationService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _trainingApplicationService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

@@ -47,6 +47,11 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                     Email = testingApplication.TestResults.User.Email
                 }).FirstOrDefault());
 
+            if (fullTestingApplicationDtoWithUserInfo == null)
+            {
+                return null;
+            }
+
             var fullTestingApplicationDtoWithAnswerInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
                 .ThenInclude(testingResults => testingResults.Answers)
                 .ThenInclude(answers => answers.Question)
@@ -62,11 +67,11 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             return fullTestingApplicationDtoWithUserInfo;
         }
 
-        public async Task<IEnumerable<FullTestingApplicationDto>> GetFullTestingApplicationDtoByUserIdAsync(string UserId)
+        public async Task<IEnumerable<FullTestingApplicationDto>> GetFullTestingApplicationDtoByUserIdAsync(string id)
         {
             var fullTestingApplicationDtoWithUserIdInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
                 .ThenInclude(testingResults => testingResults.User)
-                .Where(testingApplication => testingApplication.TestResults.UserId == UserId)
+                .Where(testingApplication => testingApplication.TestResults.UserId == id)
                 .Select(testingApplication => new FullTestingApplicationDto
                 {
                     Id = testingApplication.Id,
@@ -80,7 +85,7 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
             var fullTestingApplicationDtoWithAnswerInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
                 .ThenInclude(testingResults => testingResults.Answers)
                 .ThenInclude(answers => answers.Question)
-                .Where(testingApplication => testingApplication.TestResults.UserId == UserId)
+                .Where(testingApplication => testingApplication.TestResults.UserId == id)
                 .Select(testingApplication => new FullTestingApplicationDto
                 {
                     AnswersFormulations = testingApplication.TestResults.Answers.Select(answer => answer.Formulation).ToList(),

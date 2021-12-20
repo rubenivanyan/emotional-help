@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllFilms()
         {
             var films = await _filmService.GetAllFilmsAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetFilmById(int id)
         {
             var film = await _filmService.GetFilmByIdAsync(id);
@@ -59,8 +57,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteFilm(int id)
         {
-            await _filmService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _filmService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

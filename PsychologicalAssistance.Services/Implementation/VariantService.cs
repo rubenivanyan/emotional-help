@@ -13,7 +13,8 @@ namespace PsychologicalAssistance.Services.Implementation
         private readonly IVariantRepository _variantRepository;
         private readonly IQuestionRepository _questionRepository;
 
-        public VariantService(IDataRepository<Variant> dataRepository, IUnitOfWork unitOfWork, IVariantRepository variantRepository, IQuestionRepository questionRepository)
+        public VariantService(IDataRepository<Variant> dataRepository, IUnitOfWork unitOfWork, IVariantRepository variantRepository,
+            IQuestionRepository questionRepository)
             : base(dataRepository, unitOfWork)
         {
             _variantRepository = variantRepository;

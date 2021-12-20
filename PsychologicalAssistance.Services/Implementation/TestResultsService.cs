@@ -1,11 +1,13 @@
-﻿using PsychologicalAssistance.Core.Data.DTOs;
+﻿using AutoMapper;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
-using PsychologicalAssistance.Core.Enums;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
+using PsychologicalAssistance.Services.Helpers;
 using PsychologicalAssistance.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
@@ -14,12 +16,15 @@ namespace PsychologicalAssistance.Services.Implementation
     {
         private readonly ITestResultsRepository _testResultsRepository;
         private readonly ITestRepository _testRepository;
+        private readonly IMapper _mapper;
 
-        public TestResultsService(IDataRepository<TestResults> dataRepository, IUnitOfWork unitOfWork, ITestResultsRepository testResultsRepository, ITestRepository testRepository)
+        public TestResultsService(IDataRepository<TestResults> dataRepository, IUnitOfWork unitOfWork, ITestResultsRepository testResultsRepository,
+                ITestRepository testRepository, IMapper mapper)
             : base(dataRepository, unitOfWork)
         {
             _testResultsRepository = testResultsRepository;
             _testRepository = testRepository;
+            _mapper = mapper;
         }
 
         public async Task<int> CreateTestResultsAsync(TestResultsDto testResultsDto, User user)
@@ -46,41 +51,29 @@ namespace PsychologicalAssistance.Services.Implementation
                 });
             }
 
-            var questionGroupsValues = new List<QuestionGroupsValues>();
-            questionGroupsValues.Add(new QuestionGroupsValues
-            {
-                QuestionGroup = Enum.Parse<QuestionGroups>(testResultsDto.QuestionsGroups[0]),
-                Value = testResultsDto.ChosenVariants[0].Value
-            });
-            for (int i = 1; i < testResultsDto.ChosenVariants.Count; i++)
-            {
-                var group = Enum.Parse<QuestionGroups>(testResultsDto.QuestionsGroups[i]);
-                var isGroupAdded = false;
-                for (int j = 0; j < questionGroupsValues.Count; j++)
-                {
-                    if (questionGroupsValues[j].QuestionGroup == group)
-                    {
-                        questionGroupsValues[j].Value += testResultsDto.ChosenVariants[i].Value;
-                        isGroupAdded = true;
-                    }
-                }
-
-                if (!isGroupAdded)
-                {
-                    questionGroupsValues.Add(new QuestionGroupsValues
-                    {
-                        QuestionGroup = group,
-                        Value = testResultsDto.ChosenVariants[i].Value
-                    });
-                }
-            }
-
+            var questionGroupsValues = TestResultsCounting.CountQuestionGroupsValues(testResultsDto);
             testResults.QuestionGroupsValues = questionGroupsValues;
             testResults.Answers = answers;
             await _testResultsRepository.CreateAsync(testResults);
             await _unitOfWork.CommitAsync();
             var testResultsId = testResults.Id;
             return testResultsId;
+        }
+
+        public async Task<TestResultsForGuestWithRecommendationsDto> CreateTestResultsForGuestAsync(TestResultsDto testResultsDto)
+        {
+            var questionGroupsValues = await Task.Run(() => TestResultsCounting.CountQuestionGroupsValues(testResultsDto));
+            var questionGroupsValuesDto = _mapper.Map<IEnumerable<QuestionGroupsValues>, IEnumerable<QuestionGroupsValuesDto>>(questionGroupsValues).ToList();
+            var questions = testResultsDto.Questions.Select(question => question.Formulation).ToList();
+            var answers = testResultsDto.ChosenVariants.Select(answer => answer.Formulation).ToList();
+            var testResultsForGuest = new TestResultsForGuestWithRecommendationsDto
+            {
+                Answers = answers,
+                Questions = questions,
+                QuestionGroupsValues = questionGroupsValuesDto
+            };
+
+            return testResultsForGuest;
         }
 
         public async Task<IEnumerable<TestResultsDto>> GetAllTestsResultsAsync()

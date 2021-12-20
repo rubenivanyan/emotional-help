@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllMusics()
         {
             var musics = await _musicService.GetAllMusicsAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetMusicById(int id)
         {
             var music = await _musicService.GetMusicByIdAsync(id);
@@ -59,8 +57,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteMusic(int id)
         {
-            await _musicService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _musicService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

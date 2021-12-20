@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllQuestions()
         {
             var questions = await _questionService.GetAllQuestionsAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetQuestionById(int id)
         {
             var question = await _questionService.GetQuestionByIdAsync(id);
@@ -38,7 +36,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("all/with-variants")]
-        [Authorize]
         public async Task<ActionResult> GetAllQuestionsWithVariants()
         {
             var questions = await _questionService.GetAllQuestionsAndVariants();
@@ -46,7 +43,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-variants")]
-        [Authorize]
         public async Task<ActionResult> GetQuestionWithVariantsById(int id)
         {
             var question = await _questionService.GetQuestionAndVariantsByIdAsync(id);
@@ -83,8 +79,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            await _questionService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _questionService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }
