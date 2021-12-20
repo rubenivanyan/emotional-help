@@ -33,7 +33,7 @@ namespace PsychologicalAssistance.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(c => c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()));
             services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
@@ -49,7 +49,7 @@ namespace PsychologicalAssistance.Web
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/User/Login";
-                options.Cookie.Domain = "emotional-help.vercel.app";
+                options.Cookie.Domain = Configuration.GetSection("Domain").Value;
                 options.Cookie.Path = "/";
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -130,11 +130,7 @@ namespace PsychologicalAssistance.Web
 
             app.UseRouting();
 
-            app.UseCors(builder => builder
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true)
-                .AllowCredentials());
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthentication();
 
