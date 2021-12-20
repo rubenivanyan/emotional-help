@@ -52,7 +52,10 @@ export const AddGameCard = () => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelp.azurewebsites.net/api/ComputerGame', body)
+      .put(
+        'https://emotional-help-api.azurewebsites.net/api/ComputerGame',
+        body,
+      )
       .then((response) => {
         console.log(response);
       })

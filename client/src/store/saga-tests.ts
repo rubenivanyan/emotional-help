@@ -35,7 +35,7 @@ export function* testsFetchRequestedWatcherSaga() {
 }
 
 export function* putTest(action) {
-  yield call(putTests, action.payload.data);
+  yield call(putTests, action.payload);
 }
 
 export function* testsPutRequestedWatcherSaga() {
@@ -43,7 +43,7 @@ export function* testsPutRequestedWatcherSaga() {
 }
 
 export function* deleteTest(action) {
-  yield call(deleteTests, action.payload.data);
+  yield call(deleteTests, action.payload);
 }
 
 export function* testsDeleteRequestedWatcherSaga() {

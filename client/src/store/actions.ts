@@ -2,6 +2,8 @@ export const TRAINING_APPS_FETCH_REQUESTED = 'TRAINING_APPS_FETCH_REQUESTED';
 export const TRAINING_APPS_FETCH_SUCCEEDED = 'TRAINING_APPS_FETCH_SUCCEEDED';
 export const TRAINING_APPS_FETCH_FAILED = 'TRAINING_APPS_FETCH_FAILED';
 export const TRAINING_APPS_FETCH_CANCEL = 'TRAINING_APPS_FETCH_CANCEL';
+export const TRAINING_APPS_PUT_REQUESTED = 'TRAINING_APPS_PUT_REQUESTED';
+export const TRAINING_APPS_DELETE_REQUESTED = 'TRAINING_APPS_DELETE_REQUESTED';
 export const SET_INFO = 'SET_INFO';
 
 export const QUESTIONS_FETCH_REQUESTED = 'QUESTIONS_FETCH_REQUESTED';
@@ -30,14 +32,15 @@ export function testsDeleteRequest(value) {
   return { type: TESTS_DELETE_REQUESTED, payload: value };
 }
 
-export function questionsFetchRequest() {
-  return { type: TESTS_FETCH_REQUESTED, payload: {} };
+export function questionsFetchRequest(value) {
+  console.log(value);
+  return { type: QUESTIONS_FETCH_REQUESTED, payload: value };
 }
 export function questionsPutRequest(value) {
-  return { type: TESTS_PUT_REQUESTED, payload: value };
+  return { type: QUESTIONS_PUT_REQUESTED, payload: value };
 }
 export function questionsDeleteRequest(value) {
-  return { type: TESTS_DELETE_REQUESTED, payload: value };
+  return { type: QUESTIONS_DELETE_REQUESTED, payload: value };
 }
 
 export function setInfo(value) {

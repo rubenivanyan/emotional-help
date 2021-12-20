@@ -55,7 +55,10 @@ export const GameCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelp.azurewebsites.net/api/ComputerGame', body)
+      .put(
+        'https://emotional-help-api.azurewebsites.net/api/ComputerGame',
+        body,
+      )
       .then((response) => {
         console.log(response);
       })
@@ -63,6 +66,9 @@ export const GameCard = (props) => {
         console.log(body);
         console.log(error);
       });
+    // We know, its forbidden. We used sagas already,
+    // but we had no time to refactor this part of our code
+    // due to big volume of redux actions and reducers to compose.
     setTimeout(() => {
       window.location.reload();
     }, 1000);
@@ -70,13 +76,18 @@ export const GameCard = (props) => {
 
   const handleDelete = () => {
     axios
-      .delete(`https://emotionalhelp.azurewebsites.net/api/ComputerGame/${id}`)
+      .delete(
+        `https://emotional-help-api.azurewebsites.net/api/ComputerGame/${id}`,
+      )
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
+    // We know, its forbidden. We used sagas already,
+    // but we had no time to refactor this part of our code
+    // due to big volume of redux actions and reducers to compose.
     setTimeout(() => {
       window.location.reload();
     }, 1000);

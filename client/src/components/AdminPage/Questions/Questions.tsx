@@ -7,10 +7,7 @@ import { useParams } from 'react-router-dom';
 import { QuestionCard } from '../QuestionCard/QuestionCard';
 import { AddQuestionCard } from '../QuestionCard/AddQuestionCard';
 import { RootState } from '../../../store/reducers/rootReducer';
-import {
-  questionsFetchRequest,
-  questionsPutRequest,
-} from '../../../store/actions';
+import { questionsFetchRequest } from '../../../store/actions';
 
 export const Questions = () => {
   const { id } = useParams();
@@ -21,8 +18,7 @@ export const Questions = () => {
   console.log('STATE', questions);
 
   useEffect(() => {
-    dispatch(questionsFetchRequest());
-    dispatch(questionsPutRequest({ id: id }));
+    dispatch(questionsFetchRequest(id));
     console.log('STATE', questions);
   }, []);
   return (

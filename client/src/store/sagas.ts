@@ -1,5 +1,9 @@
 import { all } from 'redux-saga/effects';
-import { applicationsFetchRequestedWatcherSaga } from './saga-applications';
+import {
+  applicationsDeleteRequestedWatcherSaga,
+  applicationsFetchRequestedWatcherSaga,
+  applicationsPutRequestedWatcherSaga,
+} from './saga-applications';
 import {
   questionsDeleteRequestedWatcherSaga,
   questionsFetchRequestedWatcherSaga,
@@ -14,6 +18,8 @@ import {
 export function* rootSaga() {
   yield all([
     applicationsFetchRequestedWatcherSaga(),
+    applicationsPutRequestedWatcherSaga(),
+    applicationsDeleteRequestedWatcherSaga(),
     testsFetchRequestedWatcherSaga(),
     testsPutRequestedWatcherSaga(),
     testsDeleteRequestedWatcherSaga(),

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Tests.scss';
 import { TestCard } from '../TestCard/TestCard';
 import { AddTestCard } from '../TestCard/AddTestCard';
-import { testsFetchRequest, testsPutRequest } from '../../../store/actions';
+import { testsFetchRequest } from '../../../store/actions';
 import { RootState } from '../../../store/reducers/rootReducer';
 
 export const Tests = () => {
@@ -15,7 +15,6 @@ export const Tests = () => {
 
   useEffect(() => {
     dispatch(testsFetchRequest());
-    dispatch(testsPutRequest({ id: 1 }));
     console.log('STATE', tests);
   }, []);
   return (

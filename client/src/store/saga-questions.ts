@@ -14,12 +14,11 @@ import {
 
 export function* fetchQuestion(action) {
   try {
-    const questions = yield call(getQuestions, action.payload.data);
-    console.log('payload', questions);
+    const questions = yield call(getQuestions, action.payload);
     yield put({
       type: QUESTIONS_FETCH_SUCCEEDED,
       payload: {
-        data: questions,
+        data: questions.questions,
       },
     });
   } catch (e) {
@@ -35,7 +34,8 @@ export function* questionsFetchRequestedWatcherSaga() {
 }
 
 export function* putQuestion(action) {
-  yield call(putQuestions, action.payload.data);
+  console.log(action.payload);
+  yield call(putQuestions, action.payload);
 }
 
 export function* questionsPutRequestedWatcherSaga() {
@@ -43,7 +43,7 @@ export function* questionsPutRequestedWatcherSaga() {
 }
 
 export function* deleteQuestion(action) {
-  yield call(deleteQuestions, action.payload.data);
+  yield call(deleteQuestions, action.payload);
 }
 
 export function* questionsDeleteRequestedWatcherSaga() {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -12,37 +12,38 @@ import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EmailIcon from '@mui/icons-material/Email';
 import CheckIcon from '@mui/icons-material/Check';
+import InfoIcon from '@mui/icons-material/Info';
 import { AdminPagination } from '../../Pagination/Pagination';
 import { setInfo } from '../../../store/actions';
 import { useDispatch } from 'react-redux';
-// import { RootState } from '../../../store/reducers/rootReducer';
+import { RootState } from '../../../store/reducers/rootReducer';
 
-const applicationsArray = [
-  {
-    id: 1,
-    isArchived: true,
-    message: 'I think, I need help. Please, contact me as soon as possible!',
-    email: 'alexpushkin99@gmail.com',
-    userName: 'Alex Pushkin',
-    testResultsId: 7,
-  },
-  {
-    id: 2,
-    isArchived: true,
-    message: 'I think, I need help. Please, contact me as soon as possible!',
-    email: 'aryastark287@gmail.com',
-    userName: 'Arya Stark',
-    testResultsId: 7,
-  },
-  {
-    id: 3,
-    isArchived: true,
-    message: 'I think, I need help. Please, contact me as soon as possible!',
-    email: 'greenday1986@gmail.com',
-    userName: 'Billie J. Armstrong',
-    testResultsId: 7,
-  },
-];
+// const applicationsArray = [
+//   {
+//     id: 1,
+//     isArchived: true,
+//     message: 'I think, I need help. Please, contact me as soon as possible!',
+//     email: 'alexpushkin99@gmail.com',
+//     userName: 'Alex Pushkin',
+//     testResultsId: 7,
+//   },
+//   {
+//     id: 2,
+//     isArchived: true,
+//     message: 'I think, I need help. Please, contact me as soon as possible!',
+//     email: 'aryastark287@gmail.com',
+//     userName: 'Arya Stark',
+//     testResultsId: 7,
+//   },
+//   {
+//     id: 3,
+//     isArchived: true,
+//     message: 'I think, I need help. Please, contact me as soon as possible!',
+//     email: 'greenday1986@gmail.com',
+//     userName: 'Billie J. Armstrong',
+//     testResultsId: 7,
+//   },
+// ];
 
 const ListContainer = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -50,22 +51,27 @@ const ListContainer = styled('div')(({ theme }) => ({
 
 export const RequestsList = () => {
   const dispatch = useDispatch();
-  // const applicationsState = useSelector(
-  //   (state: RootState) => state.applications,
-  // );
+  const trainApps = useSelector(
+    (state: RootState) => state.applications.trains,
+  );
 
   return (
     <Box sx={{ flexGrow: 1, width: '100%' }}>
       <Grid item md={12}>
         <ListContainer>
           <List dense={false}>
-            {applicationsArray.map((application, index) => {
+            {trainApps.map((application, index) => {
               return (
                 <ListItem
-                  onClick={() => dispatch(setInfo(application))}
                   key={application.id}
                   secondaryAction={
                     <>
+                      <IconButton
+                        onClick={() => dispatch(setInfo(application))}
+                        edge="end"
+                        aria-label="delete">
+                        <InfoIcon />
+                      </IconButton>
                       <IconButton edge="end" aria-label="delete">
                         <CheckIcon />
                       </IconButton>

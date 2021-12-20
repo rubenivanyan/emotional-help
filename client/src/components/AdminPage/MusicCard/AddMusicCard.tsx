@@ -47,7 +47,7 @@ export const AddMusicCard = () => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotionalhelp.azurewebsites.net/api/Music', body)
+      .put('https://emotional-help-api.azurewebsites.net/api/Music', body)
       .then((response) => {
         console.log(response);
       })
@@ -55,6 +55,9 @@ export const AddMusicCard = () => {
         console.log(body);
         console.log(error);
       });
+    // We know, its forbidden. We used sagas already,
+    // but we had no time to refactor this part of our code
+    // due to big volume of redux actions and reducers to compose.
     setTimeout(() => {
       window.location.reload();
     }, 1000);
