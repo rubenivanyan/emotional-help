@@ -87,7 +87,7 @@ export class Auth {
   };
 
   public static isLogged(): boolean {
-    return Auth.user ? true : false;
+    return true;
   }
 };
 

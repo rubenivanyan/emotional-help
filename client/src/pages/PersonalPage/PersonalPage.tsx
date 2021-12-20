@@ -19,6 +19,7 @@ export const PersonalPage = () => {
     LocalStorage.setItemsFromObject(
       { fullName: 'name!', email: 'email!@asd.com', birthDate: '2021-10-21' });
   }
+
   const { id, fullName, email, birthDate }: User = LocalStorage.getObject(
     [
       'id',
