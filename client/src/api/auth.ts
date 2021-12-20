@@ -86,11 +86,15 @@ export class Auth {
       .catch((error) => alert('api/User/logout:' + error));
   };
 
-  public static async isLogged() {
-    const isLogged = await apiFetchGet('/api/User/is-authenticated')
-      .then((response) => response.json());
-    console.log('auth.ts isLogged(): ' + isLogged);
-    return isLogged;
+  // public static async isLogged() {
+  //   const isLogged = await apiFetchGet('/api/User/is-authenticated')
+  //     .then((response) => response.json());
+  //   console.log('auth.ts isLogged(): ' + isLogged);
+  //   return isLogged;
+  // }
+
+  public static isLogged() {
+    return LocalStorage.getItem('id') ? true : false;
   }
 };
 

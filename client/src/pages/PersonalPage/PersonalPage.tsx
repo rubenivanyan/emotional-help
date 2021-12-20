@@ -12,13 +12,14 @@ import { apiFetchPut } from '../../api/fetch/fetch';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { getApplications } from '../../api/fetch/applications';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers/rootReducer';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '../../store/reducers/rootReducer';
+import { Auth } from '../../api/auth';
 
 export const PersonalPage = () => {
-  const isLogged = useSelector((state: RootState) => state.user.isLogged);
+  // const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
-  if (!isLogged) {
+  if (!Auth.isLogged()) {
     LocalStorage.setItemsFromObject(
       { fullName: 'name!', email: 'email!@asd.com', birthDate: '2021-10-21' });
   }
