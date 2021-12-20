@@ -8,18 +8,20 @@ import { Input } from '../../components/Input/Input';
 import { INPUT_TYPES } from '../../common/enums/input-types';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { apiFetchPut } from '../../api/fetch';
+import { apiFetchPut } from '../../api/fetch/fetch';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Auth } from '../../api/auth';
+import { getApplications } from '../../api/fetch/applications';
 
 export const PersonalPage = () => {
   if (!Auth.isLogged()) {
     LocalStorage.setItemsFromObject(
       { fullName: 'name!', email: 'email!@asd.com', birthDate: '2021-10-21' });
   }
-  const { fullName, email, birthDate }: User = LocalStorage.getObject(
+  const { id, fullName, email, birthDate }: User = LocalStorage.getObject(
     [
+      'id',
       'fullName',
       'email',
       'birthDate',
@@ -35,6 +37,13 @@ export const PersonalPage = () => {
   const [isError, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [testingApplications, setTestingApplications] =
+    useState<any | null>(null);
+  const [trainingApplications, setTrainingApplications] =
+    useState<any | null>(null);
+  const [consultingApplications, setConsultingApplications] =
+    useState<any | null>(null);
+
   useEffect(() => {
     if (isError) setTimeout(() => setError(false), 3000);
   }, [isError]);
@@ -47,7 +56,6 @@ export const PersonalPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
 
     apiFetchPut('/api/User', changedUser)
       .then((response) => {
@@ -63,8 +71,21 @@ export const PersonalPage = () => {
   };
 
   const getHistory = () => {
-    setIsGetting(true);
-    // TO DO: need a BE endpoint
+    getApplications(
+      `/api/TestingApplication/${id}`,
+      setIsGetting,
+      setTestingApplications,
+    );
+    getApplications(
+      `/api/TrainingApplication/${id}`,
+      setIsGetting,
+      setTrainingApplications,
+    );
+    getApplications(
+      `/api/ConsultingApplication/${id}`,
+      setIsGetting,
+      setConsultingApplications,
+    );
   };
 
   return (
@@ -101,12 +122,20 @@ export const PersonalPage = () => {
         }
       </Block>
       <Block title={BLOCK_TITLES.HISTORY} percentWidth={60}>
-        <Button
-          title={isGetting ? 'getting...' : 'get history'}
-          type={BUTTON_TYPES.DEFAULT}
-          onClick={() => getHistory()}
-          submitting={isGetting}
-        />
+        {testingApplications || trainingApplications || consultingApplications ?
+          <p>
+            {testingApplications}
+            {trainingApplications}
+            {consultingApplications}
+          </p> :
+          <Button
+            title={isGetting ? 'getting...' : 'get history'}
+            type={BUTTON_TYPES.DEFAULT}
+            onClick={() => getHistory()}
+            submitting={isGetting}
+          />
+          // TO DO: Style and check if null
+        }
       </Block>
     </section>
   );

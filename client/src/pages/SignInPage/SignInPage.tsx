@@ -1,8 +1,6 @@
 import './SignInPage.scss';
 import React, { useEffect, useState } from 'react';
-
 import { Input } from '../../components/Input/Input';
-import { apiFetchPost } from '../../api/fetch';
 import { Block } from '../../components/Block/Block';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
@@ -27,31 +25,20 @@ export const SignInPage = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
-    setIsSubmitting(true);
-    const userRegistration: UserLogin = {
+
+    const userLogin: UserLogin = {
       email: email,
       password: password,
       rememberMe: isRemember,
     };
-    apiFetchPost(
-      '/api/User/login',
-      userRegistration,
-    ).then((response) => {
-      if (response.ok) {
-        setSuccess(true);
-        Auth.login();
-      } else {
-        setError(true);
-        setErrorMessage(response.status === 400 ?
-          'Invalid e-mail/password' :
-          '');
-      }
-    })
-      .catch((error) => {
-        console.log('Fetch Post', error);
-        setError(true);
-      })
-      .finally(() => setIsSubmitting(false));
+
+    Auth.signIn(
+      userLogin,
+      setSuccess,
+      setError,
+      setErrorMessage,
+      setIsSubmitting,
+    );
   };
 
   return (

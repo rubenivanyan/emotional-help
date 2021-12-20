@@ -1,4 +1,4 @@
-const PATH = 'https://emotionalhelp.azurewebsites.net';
+const PATH = 'https://emotional-help-api.azurewebsites.net';
 
 export const apiFetchPost = (path: string, item: any) => {
   const requestOptions: RequestInit = {
@@ -13,7 +13,6 @@ export const apiFetchPut = (path: string, item: any) => {
   const requestOptions: RequestInit = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
     body: JSON.stringify(item),
   };
   return fetch(PATH + path, requestOptions);

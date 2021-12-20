@@ -10,11 +10,12 @@ import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { Recommendation } from '../../components/Recommendation/Recommendation';
 import { Auth } from '../../api/auth';
-import { apiFetchGet, apiFetchPost } from '../../api/fetch';
+import { apiFetchGet, apiFetchPost } from '../../api/fetch/fetch';
 import { TestWithQuestions } from '../../common/types/test-with-questions';
 import { Variant } from '../../common/types/variant';
 import { TestResults } from '../../common/types/test-results';
 import { TestingApplication } from '../../common/types/testing-application';
+import { sendApplication } from '../../api/fetch/applications';
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -53,16 +54,13 @@ export const TestingPage: React.FC = () => {
     event.preventDefault();
     setIsSubmitting(true);
 
-    apiFetchPost('/api/TestingApplication', testingApplication)
-      .then((response) => {
-        if (response.status === 200) {
-          setSuccess(true);
-        } else {
-          setError(true);
-        }
-      })
-      .catch((error) => alert('/api/TestingApplication' + error))
-      .finally(() => setIsSubmitting(false));
+    sendApplication(
+      '/api/TestingApplication',
+      testingApplication,
+      setSuccess,
+      setError,
+      setIsSubmitting,
+    );
   };
 
   useEffect(() => {

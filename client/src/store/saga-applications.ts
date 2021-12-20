@@ -4,11 +4,14 @@ import {
   APPLICATIONS_FETCH_SUCCEEDED,
   APPLICATIONS_FETCH_FAILED,
 } from './actions';
-import { getTrainingApplication } from '../api/training-application';
+import { getApplications } from '../api/fetch/applications';
 
 export function* fetchApplications(action) {
   try {
-    const episode = yield call(getTrainingApplication);
+    const episode = yield call(
+      getApplications,
+      'api/TrainingApplication',
+    );
     yield put({
       type: APPLICATIONS_FETCH_SUCCEEDED,
       payload: {

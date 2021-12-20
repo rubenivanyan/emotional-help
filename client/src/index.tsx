@@ -18,9 +18,11 @@ import { Questions } from './components/AdminPage/Questions/Questions';
 import { TestingPage } from './pages/TestingPage/TestingPage';
 import { MainPage } from './pages/MainPage/MainPage';
 import {
-  TrainingPage,
   ConsultingPage,
-} from './pages/TrainingAndConsultingPages/TrainingAndConsultingPages';
+} from './pages/TrainingAndConsultingPages/ConsultingPage/ConsultingPage';
+import {
+  TrainingPage,
+} from './pages/TrainingAndConsultingPages/TrainingPage/TrainingPage';
 import { SignUpPage } from './pages/SignUpPage/SignUp';
 import { SignInPage } from './pages/SignInPage/SignInPage';
 import { PersonalPage } from './pages/PersonalPage/PersonalPage';
