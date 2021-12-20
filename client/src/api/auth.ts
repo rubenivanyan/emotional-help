@@ -3,6 +3,7 @@ import { User } from '../common/types/user';
 import { apiFetchGet, apiFetchPost } from './fetch/fetch';
 import { LocalStorage } from './local-storage';
 import { UserLogin } from '../common/types/user-login';
+import { authFetchRequest } from '../store/actions';
 
 export class Auth {
   private static user: User | null = null;
@@ -15,6 +16,7 @@ export class Auth {
     setError,
     setErrorMessage,
     setIsSubmitting,
+    useDispatch,
   ): void {
     setIsSubmitting(true);
 
@@ -25,7 +27,7 @@ export class Auth {
       .then((response) => {
         if (response.status === 200) {
           setSuccess(true);
-          Auth.login();
+          Auth.login(useDispatch);
         } else {
           setError(true);
           setErrorMessage(response.statusText);
@@ -41,6 +43,7 @@ export class Auth {
     setError,
     setErrorMessage,
     setIsSubmitting,
+    useDispatch,
   ): void {
     setIsSubmitting(true);
 
@@ -50,7 +53,7 @@ export class Auth {
     ).then((response) => {
       if (response.status === 200) {
         setSuccess(true);
-        Auth.login();
+        Auth.login(useDispatch);
       } else {
         setError(true);
         setErrorMessage(
@@ -63,12 +66,13 @@ export class Auth {
       .finally(() => setIsSubmitting(false));
   };
 
-  public static login(): void {
+  public static login(useDispatch): void {
     apiFetchGet('/api/User/account')
       .then<User>((response) => {
         return response.json();
       })
       .then((user) => {
+        useDispatch(authFetchRequest);
         Auth.user = user;
         LocalStorage.setItemsFromObject(Auth.user);
       })
@@ -86,18 +90,10 @@ export class Auth {
       .catch((error) => alert('api/User/logout:' + error));
   };
 
-  public static isLogged(): boolean {
-    let isAuthenticated: boolean;
-    apiFetchGet('/api/User/is-authenticated')
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((response) => {
-        console.log(response);
-        isAuthenticated = response;
-      });
-    return isAuthenticated;
+  public static async isLogged() {
+    const isLogged = await apiFetchGet('/api/User/is-authenticated')
+      .then((response) => response.json());
+    return isLogged;
   }
 };
 

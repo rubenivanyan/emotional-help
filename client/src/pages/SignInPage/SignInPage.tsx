@@ -8,6 +8,8 @@ import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { UserLogin } from '../../common/types/user-login';
 import { Auth } from '../../api/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers/rootReducer';
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +20,8 @@ export const SignInPage = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
   useEffect(() => {
     setIsRemember(isRemember);
@@ -38,13 +42,15 @@ export const SignInPage = () => {
       setError,
       setErrorMessage,
       setIsSubmitting,
+      useDispatch,
     );
   };
 
   return (
     <section className="sign-in-container">
       <Block title={'sign in'} percentWidth={50}>
-        {
+        {isLogged ?
+          <h2>You are logged already</h2> :
           success ?
             <Success /> :
             error ?

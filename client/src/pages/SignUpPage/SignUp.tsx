@@ -8,6 +8,7 @@ import { Error } from '../../components/Error/Error';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { Auth } from '../../api/auth';
+import { useDispatch } from 'react-redux';
 
 export const SignUpPage = () => {
   const [name, setName] = useState('');
@@ -38,7 +39,9 @@ export const SignUpPage = () => {
       setSuccess,
       setError,
       setErrorMessage,
-      setIsSubmitting);
+      setIsSubmitting,
+      useDispatch,
+    );
   };
 
   return (
