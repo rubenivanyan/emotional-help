@@ -1,0 +1,14 @@
+.list-wrapper {
+  width: 100%;
+
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+
+  .active>li {
+    background-color: #91bdb0;
+
+    color: white;
+  }
+}
