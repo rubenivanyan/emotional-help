@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllFilms()
         {
             var films = await _filmService.GetAllFilmsAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetFilmById(int id)
         {
             var film = await _filmService.GetFilmByIdAsync(id);

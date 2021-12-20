@@ -1,4 +1,5 @@
-﻿using PsychologicalAssistance.Core.Data.DTOs;
+﻿using AutoMapper;
+using PsychologicalAssistance.Core.Data.DTOs;
 using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Repositories.Interfaces;
 using PsychologicalAssistance.Services.Abstract;
@@ -6,6 +7,7 @@ using PsychologicalAssistance.Services.Helpers;
 using PsychologicalAssistance.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PsychologicalAssistance.Services.Implementation
@@ -15,14 +17,16 @@ namespace PsychologicalAssistance.Services.Implementation
         private readonly ITestResultsRepository _testResultsRepository;
         private readonly ITestRepository _testRepository;
         private readonly IMaterialsRecommendationService _materialsRecommendationService;
+        private readonly IMapper _mapper;
 
         public TestResultsService(IDataRepository<TestResults> dataRepository, IUnitOfWork unitOfWork, ITestResultsRepository testResultsRepository,
-                ITestRepository testRepository, IMaterialsRecommendationService materialsRecommendationService)
+                ITestRepository testRepository, IMaterialsRecommendationService materialsRecommendationService, IMapper mapper)
             : base(dataRepository, unitOfWork)
         {
             _testResultsRepository = testResultsRepository;
             _testRepository = testRepository;
             _materialsRecommendationService = materialsRecommendationService;
+            _mapper = mapper;
         }
 
         public async Task<int> CreateTestResultsAsync(TestResultsDto testResultsDto, User user)
@@ -56,6 +60,22 @@ namespace PsychologicalAssistance.Services.Implementation
             await _unitOfWork.CommitAsync();
             var testResultsId = testResults.Id;
             return testResultsId;
+        }
+
+        public async Task<TestResultsForGuestWithRecommendationsDto> CreateTestResultsForGuestAsync(TestResultsDto testResultsDto)
+        {
+            var questionGroupsValues = await Task.Run(() => TestResultsCounting.CountQuestionGroupsValues(testResultsDto));
+            var questionGroupsValuesDto = _mapper.Map<IEnumerable<QuestionGroupsValues>, IEnumerable<QuestionGroupsValuesDto>>(questionGroupsValues).ToList();
+            var questions = testResultsDto.Questions.Select(question => question.Formulation).ToList();
+            var answers = testResultsDto.ChosenVariants.Select(answer => answer.Formulation).ToList();
+            var testResultsForGuest = new TestResultsForGuestWithRecommendationsDto
+            {
+                Answers = answers,
+                Questions = questions,
+                QuestionGroupsValues = questionGroupsValuesDto
+            };
+
+            return testResultsForGuest;
         }
 
         public async Task<IEnumerable<TestResultsDto>> GetAllTestsResultsAsync()

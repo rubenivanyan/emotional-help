@@ -17,7 +17,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllGenres()
         {
             var genres = await _genreService.GetAllGenresAsync();
@@ -25,7 +24,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetGenreById(int id)
         {
             var genre = await _genreService.GetGenreByIdAsync(id);

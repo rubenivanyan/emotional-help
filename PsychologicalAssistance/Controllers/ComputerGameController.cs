@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllComputerGames()
         {
             var games = await _computerGameService.GetAllComputerGamesAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetComputerGameById(int id)
         {
             var game = await _computerGameService.GetComputerGameByIdAsync(id);

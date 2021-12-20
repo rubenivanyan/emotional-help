@@ -52,6 +52,15 @@ namespace PsychologicalAssistance.Web.Controllers
             return testResultsId != -1 ? Ok(testResultsId) : BadRequest();
         }
 
+        [HttpPost("unauthorized")]
+        public async Task<ActionResult> CreateTestResultsForGuest([FromBody] TestResultsDto testResultsDto)
+        {
+            var testResults = await _testResultsService.CreateTestResultsForGuestAsync(testResultsDto);
+            var materialsRecommendations = await _materialsRecommendationService.GetMaterialsRecommendationsForGuestAsync(testResultsDto.ChosenVariants);
+            testResults.MaterialsRecommendations = materialsRecommendations;
+            return Ok(testResults);
+        }
+
         [HttpPut]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateTestResults([FromBody] TestResultsDto testResultsDto)

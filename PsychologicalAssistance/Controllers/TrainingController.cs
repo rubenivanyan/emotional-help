@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllTrainings()
         {
             var trainings = await _trainingService.GetAllTrainingsAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetTrainingById(int id)
         {
             var training = await _trainingService.GetTrainingByIdAsync(id);

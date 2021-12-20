@@ -22,7 +22,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult> GetAllVariants()
         {
             var variants = await _variantService.GetAllVariantsDtoAsync();
@@ -30,7 +29,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult> GetVariantById(int id)
         {
             var variant = await _variantService.GetVariantByIdDtoAsync(id);
@@ -38,7 +36,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("with-genres")]
-        [Authorize]
         public async Task<ActionResult> GetAllVariantsWithGenres()
         {
             var variants = await _variantService.GetAllVariantsWithGenresAsync();
@@ -46,7 +43,6 @@ namespace PsychologicalAssistance.Web.Controllers
         }
 
         [HttpGet("{id}/with-genres")]
-        [Authorize]
         public async Task<ActionResult> GetVariantWithGenresById(int id)
         {
             var variant = await _variantService.GetVariantWithGenresByIdAsync(id);
