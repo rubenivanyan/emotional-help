@@ -11,7 +11,7 @@ export function* fetchAuth(action) {
       Auth.isLogged,
     );
     console.log('saga :' + isLogged);
-    yield put({ type: AUTH_FETCH_SUCCEEDED, payload: { data: isLogged } });
+    yield put({ type: AUTH_FETCH_SUCCEEDED, payload: isLogged });
   } catch (e) {
     alert('/api/User/is-authenticated: ' + e);
   }

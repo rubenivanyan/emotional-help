@@ -34,7 +34,7 @@ export const SignInPage = () => {
 
   useEffect(() => {
     if (success) {
-      dispatch(authFetchRequest(true));
+      dispatch(authFetchRequest());
       console.log('isLogged 2' + isLogged);
     }
   }, [success]);

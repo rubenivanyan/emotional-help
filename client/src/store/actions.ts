@@ -10,8 +10,8 @@ export function appFetchRequest() {
   return { type: APPLICATIONS_FETCH_REQUESTED, payload: {} };
 }
 
-export function authFetchRequest(value) {
-  return { type: AUTH_FETCH_REQUESTED, payload: value };
+export function authFetchRequest() {
+  return { type: AUTH_FETCH_REQUESTED, payload: {} };
 }
 
 export function setInfo(value) {
