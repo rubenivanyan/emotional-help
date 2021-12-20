@@ -7,7 +7,7 @@ import { Auth } from '../../api/auth';
 export const UserPanel = () => {
   return (
     <div className="user-panel">
-      <a className="button" href="/profile">PROFILE</a>
+      <a className="button" href="/personal-page">PROFILE</a>
       <Button
         title={'logout'}
         type={BUTTON_TYPES.RED}
