@@ -47,6 +47,11 @@ namespace PsychologicalAssistance.Core.Repositories.Implementation
                     Email = testingApplication.TestResults.User.Email
                 }).FirstOrDefault());
 
+            if (fullTestingApplicationDtoWithUserInfo == null)
+            {
+                return null;
+            }
+
             var fullTestingApplicationDtoWithAnswerInfo = await Task.Run(() => DbSet.Include(testingApplication => testingApplication.TestResults)
                 .ThenInclude(testingResults => testingResults.Answers)
                 .ThenInclude(answers => answers.Question)
