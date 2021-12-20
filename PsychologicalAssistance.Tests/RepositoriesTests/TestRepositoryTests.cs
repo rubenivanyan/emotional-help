@@ -15,6 +15,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class TestRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public TestRepositoryTests()
         {
             Setup();
@@ -34,9 +35,8 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
 
                 //assert
                 Assert.NotNull(tests.ToList());
-                Assert.Equal(1, tests.ToList().Count);
+                Assert.Single(tests.ToList());
                 Assert.Equal("Check you emotions", tests.Select(b => b.Title).First());
-
             }
         }
 
@@ -57,7 +57,6 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 Assert.NotNull(test);
                 Assert.Equal("Check you emotions", test.Title);
                 Assert.Equal(TypeOfTests.Easy, test.TypeOfTest);
-              
             }
         }
 
@@ -77,14 +76,17 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 var expected = ExpectedTests.FirstOrDefault(x => x.Id == id);
                 Assert.Equal(expected.Id, test.Id);
                 Assert.NotNull(test);
-
             }
         }
 
         private static IEnumerable<Test> ExpectedTests =>
            new[]
            {
-                  new Test {Id=1, Title = "Check you emotions" }
+               new Test 
+               {
+                   Id=1,
+                   Title = "Check you emotions"
+               }
            };
     }
 }

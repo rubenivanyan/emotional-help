@@ -15,6 +15,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class BookRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public BookRepositoryTests()
         {
             Setup();
@@ -36,12 +37,10 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 Assert.NotNull(books.ToList());
                 Assert.Equal(10, books.ToList().Count);
                 Assert.Equal("How Beautiful We Were", books.Select(b => b.Title).First());
-                 
             }
         }
 
         [Fact]
-
         public async Task BookRepository_GetBookById_ReturnValueById()
         {
             using (var context = new ApplicationDbContext(dbContextOptions))
@@ -78,7 +77,6 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 var expected = ExpectedBooks.FirstOrDefault(x => x.Id == id);
                 Assert.Equal(expected.Id, book.Id);
                 Assert.NotNull(book);
-
             }
         }
 

@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using PsychologicalAssistance.Core.Data;
-using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Data.Helpers.AutoMapper;
-using PsychologicalAssistance.Core.Enums;
 using PsychologicalAssistance.Core.Repositories.Implementation;
 using PsychologicalAssistance.Tests.Common;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -15,6 +12,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class ComputerGameRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public ComputerGameRepositoryTests()
         {
             Setup();
@@ -35,13 +33,10 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 //assert
                 Assert.NotNull(computerGames.ToList());
                 Assert.Equal(4, computerGames.ToList().Count);
-            
-
             }
         }
        
         [Fact]
-
         public async Task ComputerGameRepository_GetComputerGameById_ReturnValueById()
         {
             using (var context = new ApplicationDbContext(dbContextOptions))
@@ -61,7 +56,5 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 Assert.Equal("97/100", computerGame.Review);
             }
         }
-
-
     }
 }

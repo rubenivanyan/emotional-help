@@ -15,6 +15,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class QuestionRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public QuestionRepositoryTests()
         {
             Setup();
@@ -36,12 +37,10 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 Assert.NotNull(questions.ToList());
                 Assert.Equal(5, questions.ToList().Count);
                 Assert.Equal(5, questions.Select(b => b.Id).First());
-                 
             }
         }
 
         [Fact]
-
         public async Task QuestionRepository_GetQuestionById_ReturnValueById()
         {
             using (var context = new ApplicationDbContext(dbContextOptions))
@@ -77,7 +76,6 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 var expected = ExpectedQuestions.FirstOrDefault(x => x.Id == id);
                 Assert.Equal(expected.Id, question.Id);
                 Assert.NotNull(question);
-
             }
         }
 

@@ -13,6 +13,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class TestingApplicationRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public TestingApplicationRepositoryTests()
         {
             Setup();

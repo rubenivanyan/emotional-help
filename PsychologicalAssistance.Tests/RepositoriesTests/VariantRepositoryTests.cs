@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using PsychologicalAssistance.Core.Data;
-using PsychologicalAssistance.Core.Data.Entities;
 using PsychologicalAssistance.Core.Data.Helpers.AutoMapper;
-using PsychologicalAssistance.Core.Enums;
 using PsychologicalAssistance.Core.Repositories.Implementation;
 using PsychologicalAssistance.Tests.Common;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -15,6 +12,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class VariantRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public VariantRepositoryTests()
         {
             Setup();
@@ -36,7 +34,6 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 Assert.NotNull(variants.ToList());
                 Assert.Equal(8, variants.ToList().Count);
                 Assert.Equal("indifference", variants.Select(b => b.Formulation).First());
-
             }
         }
     }
