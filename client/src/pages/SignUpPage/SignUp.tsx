@@ -46,46 +46,48 @@ export const SignUpPage = () => {
     <section className="sign-up-container">
       <Block title={'sign up'} percentWidth={50}>
         {
-          success ?
-            <Success /> :
-            error ?
-              <>
-                <Error error={errorMessage} />
-                <Button title={'retry'}
-                  type={BUTTON_TYPES.DEFAULT}
-                  onClick={() => setError(false)} />
-              </> :
-              <form onSubmit={(event) => handleSubmit(event)}>
-                <Input
-                  label={'Name'}
-                  onChange={(event) => setName(event.target.value)}
-                />
-                <Input
-                  label={'Surname'}
-                  onChange={(event) => setSurname(event.target.value)}
-                />
-                <Input
-                  label={'Birth date'}
-                  onChange={(event) => setBirthDate(event.target.value)}
-                />
-                <Input
-                  label={'E-mail'}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-                <Input
-                  label={'Password'}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <Input
-                  label={'Confirm password'}
-                  onChange={(event) => setConfirmPassword(event.target.value)}
-                />
-                <Button
-                  title={'sign up'}
-                  type={BUTTON_TYPES.DEFAULT}
-                  submitting={isSubmitting}
-                />
-              </form>
+          Auth.isLogged ?
+            <h2>You are logged in already</h2> :
+            success ?
+              <Success /> :
+              error ?
+                <>
+                  <Error error={errorMessage} />
+                  <Button title={'retry'}
+                    type={BUTTON_TYPES.DEFAULT}
+                    onClick={() => setError(false)} />
+                </> :
+                <form onSubmit={(event) => handleSubmit(event)}>
+                  <Input
+                    label={'Name'}
+                    onChange={(event) => setName(event.target.value)}
+                  />
+                  <Input
+                    label={'Surname'}
+                    onChange={(event) => setSurname(event.target.value)}
+                  />
+                  <Input
+                    label={'Birth date'}
+                    onChange={(event) => setBirthDate(event.target.value)}
+                  />
+                  <Input
+                    label={'E-mail'}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                  <Input
+                    label={'Password'}
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                  <Input
+                    label={'Confirm password'}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                  />
+                  <Button
+                    title={'sign up'}
+                    type={BUTTON_TYPES.DEFAULT}
+                    submitting={isSubmitting}
+                  />
+                </form>
         }
       </Block>
     </section>

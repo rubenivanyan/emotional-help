@@ -12,21 +12,10 @@ import { apiFetchPut } from '../../api/fetch/fetch';
 import { Success } from '../../components/Success/Success';
 import { Error } from '../../components/Error/Error';
 import { getApplications } from '../../api/fetch/applications';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '../../store/reducers/rootReducer';
-import { Auth } from '../../api/auth';
 
 export const PersonalPage = () => {
-  // const isLogged = useSelector((state: RootState) => state.user.isLogged);
-
-  if (!Auth.isLogged()) {
-    LocalStorage.setItemsFromObject(
-      { fullName: 'name!', email: 'email!@asd.com', birthDate: '2021-10-21' });
-  }
-
-  const { id, fullName, email, birthDate }: User = LocalStorage.getObject(
+  const { fullName, email, birthDate }: User = LocalStorage.getObject(
     [
-      'id',
       'fullName',
       'email',
       'birthDate',
@@ -77,17 +66,17 @@ export const PersonalPage = () => {
 
   const getHistory = () => {
     getApplications(
-      `/api/TestingApplication/${id}`,
+      '/api/TrainingApplication/userId',
       setIsGetting,
       setTestingApplications,
     );
     getApplications(
-      `/api/TrainingApplication/${id}`,
+      '/api/TrainingApplication/userId',
       setIsGetting,
       setTrainingApplications,
     );
     getApplications(
-      `/api/ConsultingApplication/${id}`,
+      '/api/TrainingApplication/userId',
       setIsGetting,
       setConsultingApplications,
     );

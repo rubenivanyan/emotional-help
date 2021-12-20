@@ -12,8 +12,7 @@ import { Success } from '../../../components/Success/Success';
 import { LocalStorage } from '../../../api/local-storage';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
 import { sendApplication } from '../../../api/fetch/applications';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/reducers/rootReducer';
+import { Auth } from '../../../api/auth';
 
 export const ConsultingPage = () => {
   const [success, setSuccess] = useState(false);
@@ -25,8 +24,6 @@ export const ConsultingPage = () => {
   const [email, setEmail] = useState('');
   const [convenientDay, setConvenientDay] = useState('');
   const [message, setMessage] = useState('');
-
-  const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -67,7 +64,7 @@ export const ConsultingPage = () => {
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
               {
-                isLogged ?
+                Auth.isLogged() ?
                   <p>
                     {`Dear ${LocalStorage.getItem('fullName')},
                     write a convenient day, please`}

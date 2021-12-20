@@ -3,7 +3,6 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './TestingPage.scss';
 import { Block } from '../../components/Block/Block';
 import { BLOCK_TITLES } from '../../common/enums/block-titles';
-import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { BUTTON_TYPES } from '../../common/enums/button-types';
 import { Success } from '../../components/Success/Success';
@@ -15,8 +14,7 @@ import { Variant } from '../../common/types/variant';
 import { TestResults } from '../../common/types/test-results';
 import { TestingApplication } from '../../common/types/testing-application';
 import { sendApplication } from '../../api/fetch/applications';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers/rootReducer';
+import { Auth } from '../../api/auth';
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -33,12 +31,7 @@ export const TestingPage: React.FC = () => {
   const [tests, setTests] = useState<TestWithQuestions[]>([]);
   const [chosenVariants, setChosenVariants] = useState<Variant[]>([]);
 
-  const [fullName, setFullName] = useState<string | null>(null);
-  const [email, setEmail] = useState<string | null>(null);
-
   const [testResultId, setTestResultId] = useState<number | null>(null);
-
-  const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
   const testResults: TestResults = {
     testId: tests[currentTest]?.id,
@@ -47,8 +40,6 @@ export const TestingPage: React.FC = () => {
 
   const testingApplication: TestingApplication = {
     isArchived: false,
-    fullName: fullName,
-    email: email,
     testResultsId: testResultId,
   };
 
@@ -187,35 +178,31 @@ export const TestingPage: React.FC = () => {
                     <Error /> :
                     <form onSubmit={(e) => handleSubmit(e)}>
                       {
-                        isLogged ?
-                          <p>
-                            {
-                              `You can send your results to our specialist.
+                        Auth.isLogged ?
+                          <>
+                            <p>
+                              {
+                                `You can send your results to our specialist.
                               He will analyze that and will send
                               an answer to your e-mail`
-                            }.
-                          </p> :
+                              }.
+                            </p>
+                            <Button
+                              title={isSubmitting ? 'sending...' : 'send'}
+                              type={BUTTON_TYPES.DEFAULT}
+                              submitting={isSubmitting}
+                            />
+                          </> :
                           <>
-                            <Input
-                              label={'Name'}
-                              onChange={
-                                (event) => setFullName(event.target.value)
+                            <p>
+                              {
+                                `Only authenticated users
+                                can send result to ours specialist`
                               }
-                            />
-                            <Input
-                              label={'E-mail'}
-                              onChange={
-                                (event) => setEmail(event.target.value)
-                              }
-                            />
+                            </p>
+                            <a className="button" href="/sign-up">SIGN UP</a>
                           </>
                       }
-
-                      <Button
-                        title={isSubmitting ? 'sending...' : 'send'}
-                        type={BUTTON_TYPES.DEFAULT}
-                        submitting={isSubmitting}
-                      />
                     </form>
                 }
               </div>
