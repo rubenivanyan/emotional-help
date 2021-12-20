@@ -89,8 +89,14 @@ export class Auth {
   public static isLogged(): boolean {
     let isAuthenticated: boolean;
     apiFetchGet('/api/User/is-authenticated')
-      .then((response) => response.json())
-      .then((response) => isAuthenticated = response);
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        isAuthenticated = response;
+      });
     return isAuthenticated;
   }
 };
