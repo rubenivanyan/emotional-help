@@ -48,12 +48,8 @@ namespace PsychologicalAssistance.Web.Controllers
         public async Task<ActionResult> CreateTestResults([FromBody] TestResultsDto testResultsDto)
         {
             var user = await _userManager.GetUserAsync(User);
-            var testResultsForUserDto = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
-            if (user == null)
-            {
-                var materialsRecommendation = await _materialsRecommendationService.GetMaterialsRecommendationsForGuestAsync(testResultsDto.ChosenVariants);
-            }
-            return testResultsForUserDto != -1 ? Ok(testResultsForUserDto) : BadRequest();
+            var testResultsId = await _testResultsService.CreateTestResultsAsync(testResultsDto, user);
+            return testResultsId != -1 ? Ok(testResultsId) : BadRequest();
         }
 
         [HttpPut]
