@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -16,34 +16,34 @@ import InfoIcon from '@mui/icons-material/Info';
 import { AdminPagination } from '../../Pagination/Pagination';
 import { setInfo } from '../../../store/actions';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../../../store/reducers/rootReducer';
+// import { RootState } from '../../../store/reducers/rootReducer';
 
-// const applicationsArray = [
-//   {
-//     id: 1,
-//     isArchived: true,
-//     message: 'I think, I need help. Please, contact me as soon as possible!',
-//     email: 'alexpushkin99@gmail.com',
-//     userName: 'Alex Pushkin',
-//     testResultsId: 7,
-//   },
-//   {
-//     id: 2,
-//     isArchived: true,
-//     message: 'I think, I need help. Please, contact me as soon as possible!',
-//     email: 'aryastark287@gmail.com',
-//     userName: 'Arya Stark',
-//     testResultsId: 7,
-//   },
-//   {
-//     id: 3,
-//     isArchived: true,
-//     message: 'I think, I need help. Please, contact me as soon as possible!',
-//     email: 'greenday1986@gmail.com',
-//     userName: 'Billie J. Armstrong',
-//     testResultsId: 7,
-//   },
-// ];
+const applicationsArray = [
+  {
+    id: 1,
+    isArchived: true,
+    message: 'I think, I need help. Please, contact me as soon as possible!',
+    email: 'fgnhfgxvcb@gmail.com',
+    userName: 'Alex Pushkin',
+    testResultsId: 7,
+  },
+  {
+    id: 2,
+    isArchived: true,
+    message: 'I think, I need help. Please, contact me as soon as possible!',
+    email: 'hjklnm287@gmail.com',
+    userName: 'Ivan Petrov',
+    testResultsId: 7,
+  },
+  {
+    id: 3,
+    isArchived: true,
+    message: 'I think, I need help. Please, contact me as soon as possible!',
+    email: 'gnbpok6@gmail.com',
+    userName: 'Nick Armstrong',
+    testResultsId: 7,
+  },
+];
 
 const ListContainer = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -51,16 +51,16 @@ const ListContainer = styled('div')(({ theme }) => ({
 
 export const RequestsList = () => {
   const dispatch = useDispatch();
-  const trainApps = useSelector(
-    (state: RootState) => state.applications.trains,
-  );
+  // const trainApps = useSelector(
+  //   (state: RootState) => state.applications.trains,
+  // );
 
   return (
     <Box sx={{ flexGrow: 1, width: '100%' }}>
       <Grid item md={12}>
         <ListContainer>
           <List dense={false}>
-            {trainApps.map((application, index) => {
+            {applicationsArray.map((application, index) => {
               return (
                 <ListItem
                   key={application.id}
