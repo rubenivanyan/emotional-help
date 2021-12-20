@@ -57,8 +57,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteBook(int id)
         {
-            await _bookService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _bookService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

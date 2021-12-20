@@ -57,8 +57,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteComputerGame(int id)
         {
-            await _computerGameService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _computerGameService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

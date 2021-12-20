@@ -71,8 +71,8 @@ namespace PsychologicalAssistance.Web.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> DeleteTest(int id)
         {
-            await _testService.DeleteAsync(id);
-            return NoContent();
+            var isSucceed = await _testService.DeleteAsync(id);
+            return isSucceed ? NoContent() : NotFound("Id does not exist");
         }
     }
 }

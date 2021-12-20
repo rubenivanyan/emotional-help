@@ -16,16 +16,14 @@ namespace PsychologicalAssistance.Services.Implementation
     {
         private readonly ITestResultsRepository _testResultsRepository;
         private readonly ITestRepository _testRepository;
-        private readonly IMaterialsRecommendationService _materialsRecommendationService;
         private readonly IMapper _mapper;
 
         public TestResultsService(IDataRepository<TestResults> dataRepository, IUnitOfWork unitOfWork, ITestResultsRepository testResultsRepository,
-                ITestRepository testRepository, IMaterialsRecommendationService materialsRecommendationService, IMapper mapper)
+                ITestRepository testRepository, IMapper mapper)
             : base(dataRepository, unitOfWork)
         {
             _testResultsRepository = testResultsRepository;
             _testRepository = testRepository;
-            _materialsRecommendationService = materialsRecommendationService;
             _mapper = mapper;
         }
 

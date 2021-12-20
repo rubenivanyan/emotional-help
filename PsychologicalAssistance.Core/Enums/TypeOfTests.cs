@@ -2,8 +2,8 @@
 {
     public enum TypeOfTests
     {
-        Easy = 0,
-        Middle = 1,
-        Hard = 2,
+        DiscoverEmotions = 0,
+        DiscoverNeurosis = 1,
+        DiscoverSocialAnxiety = 2,
     }
 }
