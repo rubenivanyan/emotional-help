@@ -3,16 +3,19 @@
     display: none;
   }
 
-  .main-wrapper .testing-container,
-  .main-wrapper .training-page-container,
-  .main-wrapper .consulting-page-container {
-    position: relative;
-    top: 0;
-    left: 0;
+  .main-wrapper {
 
-    padding: 0;
+    .testing-container,
+    .training-page-container,
+    .consulting-page-container {
+      position: relative;
+      top: 0;
+      left: 0;
 
-    transform: translate(0, 0);
+      padding: 0;
+
+      transform: translate(0, 0);
+    }
   }
 
   .admin-page-container {
@@ -46,10 +49,8 @@
   }
 
   .personal-page-container .block-wrapper {
-
     &:last-child {
       flex-grow: 2;
     }
-
   }
 }

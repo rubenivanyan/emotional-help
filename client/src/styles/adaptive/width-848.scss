@@ -1,9 +1,11 @@
 @media (max-width: 848px) {
-  .personal-page-container .block-wrapper:first-child {
-    width: 100% !important;
-  }
+  .personal-page-container .block-wrapper {
+    &:first-child {
+      width: 100% !important;
+    }
 
-  .personal-page-container .block-wrapper:nth-last-child(1) {
-    width: 100% !important;
+    &:nth-last-child(1) {
+      width: 100% !important;
+    }
   }
 }
