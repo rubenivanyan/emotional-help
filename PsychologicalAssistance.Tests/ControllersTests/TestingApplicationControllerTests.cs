@@ -44,7 +44,7 @@ namespace PsychologicalAssistance.Tests.ControllersTests
         }
 
         [Fact]
-        public async Task GetAllApplications_ReturnsNotFoundObjectResult_WithNullValue()
+        public async Task GetAllApplications_ReturnsNotFoundResult_WithNullValue()
         {
             //arrange
             _testingApplicationServiceMock.Setup(x => x.GetAllTestingApplicationsAsync()).ReturnsAsync(() => null);
