@@ -17,6 +17,7 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
     public class FilmRepositoryTests : InMemoryDatabaseCreation
     {
         private readonly IMapper _mapper;
+
         public FilmRepositoryTests()
         {
             Setup();
@@ -38,12 +39,10 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 Assert.NotNull(films.ToList());
                 Assert.Equal(4, films.ToList().Count);
                 Assert.Equal("Raiders of the Lost Ark", films.Select(b => b.Title).First());
-
             }
         }
 
         [Fact]
-
         public async Task FilmRepository_GetFilmById_ReturnValueById()
         {
             using (var context = new ApplicationDbContext(dbContextOptions))
@@ -80,33 +79,32 @@ namespace PsychologicalAssistance.Tests.RepositoriesTests
                 var expected = ExpectedFilms.FirstOrDefault(x => x.Id == id);
                 Assert.Equal(expected.Id, film.Id);
                 Assert.NotNull(film);
-
             }
         }
 
         private static IEnumerable<Film> ExpectedFilms =>
-           new[]
-           {
-               new Film
-            {
+		   new[]
+		   {
+			   new Film
+               {
                    Id=1,
-                Title = "The Godfather",
-                Genre = FilmGenres.Drama,
-                Country = "USA",
-                Year = new DateTime(1972, 1, 1),
-                Language = "EN",
-                VideoUrl = "google.com"
-            },
-            new Film
-            {
-                Id=2,
-                Title = "The Shawshank Redemption",
-                Genre = FilmGenres.Drama,
-                Country = "USA",
-                Year = new DateTime(1994, 1, 1),
-                Language = "EN",
-                VideoUrl = "www.facebook.com"
-            },
-           };
+                   Title = "The Godfather",
+                   Genre = FilmGenres.Drama,
+                   Country = "USA",
+                   Year = new DateTime(1972, 1, 1),
+                   Language = "EN",
+                   VideoUrl = "google.com"
+               },
+               new Film
+               {
+                   Id=2,
+                   Title = "The Shawshank Redemption",
+                   Genre = FilmGenres.Drama,
+                   Country = "USA",
+                   Year = new DateTime(1994, 1, 1),
+                   Language = "EN",
+                   VideoUrl = "www.facebook.com"
+               }
+		   };
     }
 }

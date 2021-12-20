@@ -44,7 +44,7 @@ namespace PsychologicalAssistance.Tests.ControllersTests
         }
 
         [Fact]
-        public async Task GetAllApplications_ReturnsNotFoundObjectResult_WithNullValue()
+        public async Task GetAllApplications_ReturnsNotFoundResult_WithNullValue()
         {
             //arrange
             _testingApplicationServiceMock.Setup(x => x.GetAllTestingApplicationsAsync()).ReturnsAsync(() => null);
@@ -58,7 +58,5 @@ namespace PsychologicalAssistance.Tests.ControllersTests
             Assert.IsType<NotFoundResult>(result);
             Assert.Equal(404, result.StatusCode);
         }
-
-
     }
 }
