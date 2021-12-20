@@ -69,9 +69,7 @@ export class Auth {
         return response.json();
       })
       .then((user) => {
-        console.log('then user ' + user);
         Auth.user = user;
-        console.log('then user auth user ' + Auth.user);
         LocalStorage.setItemsFromObject(Auth.user);
       })
       .catch((error) => alert('api/User/account:' + error));
@@ -89,8 +87,11 @@ export class Auth {
   };
 
   public static isLogged(): boolean {
-    console.log('auth user: ' + Auth.user);
-    return Auth.user ? true : false;
+    let isAuthenticated: boolean;
+    apiFetchGet('/api/User/is-authenticated')
+      .then((response) => response.json())
+      .then((response) => isAuthenticated = response);
+    return isAuthenticated;
   }
 };
 
