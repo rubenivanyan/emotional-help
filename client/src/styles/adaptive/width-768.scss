@@ -1,0 +1,98 @@
+@media (max-width: 768px) {
+  header {
+    z-index: 200;
+  }
+
+  input {
+    height: 70px !important;
+    font-size: 24px !important;
+  }
+
+  p,
+  li {
+    font-size: 20px;
+  }
+
+  .training-page-container .training-page-inner {
+
+    .next-training {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 70px;
+      width: 100%;
+
+      background-color: #91bdb0;
+      border-radius: 15px;
+
+      color: white;
+      font-size: 26px;
+      text-decoration: none;
+    }
+  }
+
+  .header .navbar .link {
+    &:first-child {
+      display: none;
+    }
+  }
+
+  .sign-in-container .block-wrapper,
+  .sign-up-container .block-wrapper {
+    width: 100% !important;
+
+    margin: 0 20px;
+  }
+
+  .admin-page-container .block-wrapper {
+    width: 100% !important;
+  }
+
+  .testing-buttons {
+    justify-content: space-between;
+
+    .button {
+      height: 75px;
+    }
+  }
+
+  .answer-section {
+    .answer-button {
+      align-items: center;
+      justify-content: center;
+
+      height: 75px;
+
+      margin-bottom: 25px;
+    }
+  }
+
+  header .navigation-wrapper {
+    display: none;
+
+    transition: transform 500s ease-in-out;
+
+    &.opened {
+      box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.25);
+      transform: translateY(0px);
+
+      animation: translate 500ms ease-in-out;
+
+      .link {
+        height: 80px;
+
+        padding: 0 25px;
+        margin-right: 10px;
+
+        border-radius: 20px;
+      }
+    }
+  }
+
+  header .menu-opener {
+    display: flex;
+  }
+
+
+}

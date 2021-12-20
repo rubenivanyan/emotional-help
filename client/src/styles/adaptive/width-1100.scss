@@ -1,0 +1,55 @@
+@media (max-width: 1100px) {
+  header .search-reg-wrapper>form {
+    display: none;
+  }
+
+  .main-wrapper .testing-container,
+  .main-wrapper .training-page-container,
+  .main-wrapper .consulting-page-container {
+    position: relative;
+    top: 0;
+    left: 0;
+
+    padding: 0;
+
+    transform: translate(0, 0);
+  }
+
+  .admin-page-container {
+    flex-wrap: wrap;
+
+    .block-wrapper {
+      margin-top: 10px;
+
+      &:nth-child(1) {
+        width: 100% !important;
+
+        margin: 0;
+
+        .list-wrapper {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-around;
+
+          .list-item {
+            border-radius: 10px;
+          }
+        }
+      }
+
+      &:nth-last-child(1) {
+        flex-grow: 2;
+      }
+    }
+  }
+
+  .personal-page-container .block-wrapper {
+
+    &:last-child {
+      flex-grow: 2;
+    }
+
+  }
+}
