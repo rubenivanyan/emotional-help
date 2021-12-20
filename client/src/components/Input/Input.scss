@@ -1,0 +1,20 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  input {
+    height: 40px;
+    width: 100%;
+
+    padding: 0 15px;
+
+    background-color: lightgray;
+    border: none;
+    border-radius: 20px;
+
+    color: black;
+    font-weight: 600;
+  }
+}

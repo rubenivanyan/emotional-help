@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const columns: GridColDef[] = [
@@ -125,9 +124,6 @@ const rows = [
 export const UsersGrid = () => {
   return (
     <div style={{ height: 600, width: '100%' }}>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        USERS
-      </Typography>
       <DataGrid
         rows={rows}
         columns={columns}

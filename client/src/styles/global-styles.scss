@@ -19,8 +19,11 @@ sans-serif;
 
 BODY {
   position: relative;
+
   min-height: 100vh;
+
   margin: 0;
+
   background-color: $body-background;
   font-family: $body-font;
   -webkit-font-smoothing: antialiased;
@@ -29,4 +32,20 @@ BODY {
 
 A {
   text-decoration: none;
+}
+
+@keyframes translate {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

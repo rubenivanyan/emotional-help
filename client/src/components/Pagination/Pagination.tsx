@@ -2,7 +2,7 @@ import * as React from 'react';
 import TablePagination from '@mui/material/TablePagination';
 
 export const AdminPagination = () => {
-  const [page, setPage] = React.useState(2);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (
@@ -23,7 +23,7 @@ export const AdminPagination = () => {
     <TablePagination
       className="pagination"
       component="div"
-      count={100}
+      count={10}
       page={page}
       onPageChange={handleChangePage}
       rowsPerPage={rowsPerPage}
