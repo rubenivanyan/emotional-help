@@ -87,7 +87,8 @@ export class Auth {
   };
 
   public static isLogged(): boolean {
-    return true;
+    console.log('auth user: ' + Auth.user);
+    return Auth.user ? true : false;
   }
 };
 
