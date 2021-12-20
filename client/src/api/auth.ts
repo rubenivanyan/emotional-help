@@ -89,6 +89,7 @@ export class Auth {
   public static async isLogged() {
     const isLogged = await apiFetchGet('/api/User/is-authenticated')
       .then((response) => response.json());
+    console.log('auth.ts isLogged(): ' + isLogged);
     return isLogged;
   }
 };
