@@ -16,9 +16,8 @@
     "react",
     "@typescript-eslint"
   ],
-  "ignoreDuringBuilds": "true",
   "rules": {
-    "linebreak-style": ["off", "unix"],
+    "linebreak-style": ["error", "windows"],
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
     "indent": [

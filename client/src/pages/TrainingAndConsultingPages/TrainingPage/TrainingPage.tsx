@@ -3,7 +3,6 @@ import { LocalStorage } from '../../../api/local-storage';
 import { BLOCK_TITLES } from '../../../common/enums/block-titles';
 import { BUTTON_TYPES } from '../../../common/enums/button-types';
 import { TRAINING_AND_CONSULTING_TEXT } from '../../../common/enums/texts';
-import { mockedTrainings } from '../../../common/mocks/trainings';
 import { Training } from '../../../common/types/training';
 import {
   TrainingApplication,
@@ -34,11 +33,8 @@ export const TrainingPage = () => {
   useEffect(() => {
     apiFetchGet('/api/training')
       .then((response) => response.json())
-      .then((result) => setTrainings(
-        result.length ?
-          result :
-          mockedTrainings,
-      ))
+      .then((result) => setTrainings(result))
+      .catch((error) => alert('/api/training: ' + error))
       .finally(() => setIsLoading(false));
   }, []);
 
