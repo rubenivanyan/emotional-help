@@ -20,21 +20,14 @@ export const ConsultingPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
   const [convenientDay, setConvenientDay] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
 
     const consultingApplication: ConsultingApplication = {
-      isArchived: false,
-      fullName: userName,
-      email: email,
       convenientDay: convenientDay,
-      message: message,
     };
 
     sendApplication(
@@ -65,36 +58,32 @@ export const ConsultingPage = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
               {
                 Auth.isLogged() ?
-                  <p>
-                    {`Dear ${LocalStorage.getItem('fullName')},
-                    write a convenient day, please`}
-                  </p> :
                   <>
+                    <p>
+                      {`Dear ${LocalStorage.getItem('fullName')},
+                    write a convenient day, please`}
+                    </p>
                     <Input
-                      label={'Name'}
-                      onChange={
-                        (event) => setUserName(event.target.value)
+                      label={'Convenient day'}
+                      onChange={(event) => setConvenientDay(event.target.value)}
+                    />
+                    <Button
+                      title={'submit'}
+                      type={BUTTON_TYPES.DEFAULT}
+                      submitting={isSubmitting}
+                    />
+                  </> :
+                  <>
+                    <p>
+                      {
+                        `Only authenticated users
+                      can send application to ours specialist`
                       }
-                    />
-                    <Input
-                      label={'E-mail'}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
+                    </p>
+                    <a className="button" href="/sign-in">SIGN IN</a>
+                    <a className="button" href="/sign-up">SIGN UP</a>
                   </>
               }
-              <Input
-                label={'Convenient day'}
-                onChange={(event) => setConvenientDay(event.target.value)}
-              />
-              <Input
-                label={'Message'}
-                onChange={(event) => setMessage(event.target.value)}
-              />
-              <Button
-                title={'submit'}
-                type={BUTTON_TYPES.DEFAULT}
-                submitting={isSubmitting}
-              />
             </form>
       }
     </ParentComponent>
