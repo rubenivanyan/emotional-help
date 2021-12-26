@@ -1,4 +1,4 @@
-import { Music } from '../../common/types/music';
+import { Music } from 'types';
 
 export const mockedMusic: Music[] = [
   {

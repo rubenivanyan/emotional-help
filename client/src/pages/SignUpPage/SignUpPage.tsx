@@ -1,13 +1,10 @@
-import './SignUp.scss';
 import React, { useState } from 'react';
-import { Input } from '../../components/Input/Input';
-import { UserRegistration } from '../../common/types/user-registration';
-import { Block } from '../../components/Block/Block';
-import { Success } from '../../components/Success/Success';
-import { Error } from '../../components/Error/Error';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { Auth } from '../../api/auth';
+import './SignUpPage.scss';
+import { Auth } from 'api';
+import { BUTTON_TYPES } from 'enums';
+import { UserRegistration } from 'types';
+import { Block, Success, Error, Button, Input } from 'components';
+
 
 export const SignUpPage = () => {
   const [name, setName] = useState('');

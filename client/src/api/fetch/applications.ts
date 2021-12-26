@@ -1,5 +1,5 @@
-import { apiFetchGet, apiFetchPost } from './fetch';
 import React from 'react';
+import { apiFetchGet, apiFetchPost } from 'api';
 
 export const getApplications =
   async (path: string, setIsGetting?, setApplications?) => {

@@ -1,4 +1,4 @@
-import { apiFetchGet } from './fetch';
+import { apiFetchGet } from 'api';
 
 export const getLibraryItems = async (path: string, mockedData: any) => {
   const items = await apiFetchGet(path)

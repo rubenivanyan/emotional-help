@@ -23,7 +23,7 @@ import {
 import {
   TrainingPage,
 } from './pages/TrainingAndConsultingPages/TrainingPage/TrainingPage';
-import { SignUpPage } from './pages/SignUpPage/SignUp';
+import { SignUpPage } from './pages/SignUpPage/SignUpPage';
 import { SignInPage } from './pages/SignInPage/SignInPage';
 import { PersonalPage } from './pages/PersonalPage/PersonalPage';
 import { NotFound } from './components/NotFound/NotFound';

@@ -1,17 +1,9 @@
-import './PersonalPage.scss';
 import React, { useEffect, useState } from 'react';
-import { Block } from '../../components/Block/Block';
-import { BLOCK_TITLES } from '../../common/enums/block-titles';
-import { LocalStorage } from '../../api/local-storage';
-import { User } from '../../common/types/user';
-import { Input } from '../../components/Input/Input';
-import { INPUT_TYPES } from '../../common/enums/input-types';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { apiFetchPut } from '../../api/fetch/fetch';
-import { Success } from '../../components/Success/Success';
-import { Error } from '../../components/Error/Error';
-import { getApplications } from '../../api/fetch/applications';
+import './PersonalPage.scss';
+import { LocalStorage, apiFetchPut, getApplications } from 'api';
+import { BLOCK_TITLES, INPUT_TYPES, BUTTON_TYPES } from 'enums';
+import { User } from 'types';
+import { Block, Success, Error, Input, Button } from 'components';
 
 export const PersonalPage = () => {
   const { fullName, email, birthDate }: User = LocalStorage.getObject(

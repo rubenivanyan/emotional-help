@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import { BLOCK_TITLES } from '../../../common/enums/block-titles';
-import { TRAINING_AND_CONSULTING_TEXT } from '../../../common/enums/texts';
-import { Button } from '../../../components/Button/Button';
-import { BUTTON_TYPES } from '../../../common/enums/button-types';
-import { Input } from '../../../components/Input/Input';
+import { sendApplication, Auth, LocalStorage } from 'api';
 import {
-  ConsultingApplication,
-} from '../../../common/types/consulting-application';
-import { Error } from '../../../components/Error/Error';
-import { Success } from '../../../components/Success/Success';
-import { LocalStorage } from '../../../api/local-storage';
+  BLOCK_TITLES,
+  TRAINING_AND_CONSULTING_TEXT,
+  BUTTON_TYPES,
+} from 'enums';
+import { ConsultingApplication } from 'types';
+import { Success, Error, Button, Input } from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
-import { sendApplication } from '../../../api/fetch/applications';
-import { Auth } from '../../../api/auth';
 
 export const ConsultingPage = () => {
   const [success, setSuccess] = useState(false);
@@ -20,21 +15,14 @@ export const ConsultingPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
   const [convenientDay, setConvenientDay] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
 
     const consultingApplication: ConsultingApplication = {
-      isArchived: false,
-      fullName: userName,
-      email: email,
       convenientDay: convenientDay,
-      message: message,
     };
 
     sendApplication(
@@ -65,36 +53,32 @@ export const ConsultingPage = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
               {
                 Auth.isLogged() ?
-                  <p>
-                    {`Dear ${LocalStorage.getItem('fullName')},
-                    write a convenient day, please`}
-                  </p> :
                   <>
+                    <p>
+                      {`Dear ${LocalStorage.getItem('fullName')},
+                    write a convenient day, please`}
+                    </p>
                     <Input
-                      label={'Name'}
-                      onChange={
-                        (event) => setUserName(event.target.value)
+                      label={'Convenient day'}
+                      onChange={(event) => setConvenientDay(event.target.value)}
+                    />
+                    <Button
+                      title={'submit'}
+                      type={BUTTON_TYPES.DEFAULT}
+                      submitting={isSubmitting}
+                    />
+                  </> :
+                  <>
+                    <p>
+                      {
+                        `Only authenticated users
+                      can send application to ours specialist`
                       }
-                    />
-                    <Input
-                      label={'E-mail'}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
+                    </p>
+                    <a className="button" href="/sign-in">SIGN IN</a>
+                    <a className="button" href="/sign-up">SIGN UP</a>
                   </>
               }
-              <Input
-                label={'Convenient day'}
-                onChange={(event) => setConvenientDay(event.target.value)}
-              />
-              <Input
-                label={'Message'}
-                onChange={(event) => setMessage(event.target.value)}
-              />
-              <Button
-                title={'submit'}
-                type={BUTTON_TYPES.DEFAULT}
-                submitting={isSubmitting}
-              />
             </form>
       }
     </ParentComponent>

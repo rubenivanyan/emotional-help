@@ -1,4 +1,4 @@
-import { Training } from '../../common/types/training';
+import { Training } from 'types';
 
 export const mockedTrainings = (): Training[] => {
   return ([
