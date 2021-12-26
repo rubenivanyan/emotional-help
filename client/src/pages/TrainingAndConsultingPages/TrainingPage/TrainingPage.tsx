@@ -8,7 +8,6 @@ import {
   TrainingApplication,
 } from '../../../common/types/training-application';
 import { Button } from '../../../components/Button/Button';
-import { Input } from '../../../components/Input/Input';
 import { Success } from '../../../components/Success/Success';
 import { Error } from '../../../components/Error/Error';
 import { TrainingComponent } from '../../../components/Training/Training';
@@ -25,8 +24,6 @@ export const TrainingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
 
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
   const [trainingId, setTrainingId] = useState(0);
   const [trainings, setTrainings] = useState<Training[]>([]);
 
@@ -44,8 +41,6 @@ export const TrainingPage = () => {
 
     const trainingApplication: TrainingApplication = {
       isArchived: false,
-      fullName: userName,
-      email: email,
       trainingId: trainingId,
     };
 
@@ -91,20 +86,18 @@ export const TrainingPage = () => {
                     chose a training, please`}
                   </p> :
                   <>
-                    <Input
-                      label={'Name'}
-                      onChange={
-                        (event) => setUserName(event.target.value)
+                    <p>
+                      {
+                        `Only authenticated users
+                        can send application to ours specialist`
                       }
-                    />
-                    <Input
-                      label={'E-mail'}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
+                    </p>
+                    <a className="button" href="/sign-in">SIGN IN</a>
+                    <a className="button" href="/sign-up">SIGN UP</a>
                   </>
               }
               {
-                isLoading ?
+                Auth.isLogged() ? isLoading ?
                   <h3>No data. Loading...</h3> :
                   <>
                     <TrainingComponent training={trainings[counter]} />
@@ -114,14 +107,15 @@ export const TrainingPage = () => {
                     >
                       Next training
                     </p>
-                  </>
-              }
 
-              <Button
-                title={'submit'}
-                type={BUTTON_TYPES.DEFAULT}
-                submitting={isSubmitting}
-              />
+                    <Button
+                      title={'submit'}
+                      type={BUTTON_TYPES.DEFAULT}
+                      submitting={isSubmitting}
+                    />
+                  </> :
+                  <></>
+              }
             </form>
       }
 
