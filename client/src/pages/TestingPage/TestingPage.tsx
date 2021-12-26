@@ -18,6 +18,7 @@ import { Auth } from '../../api/auth';
 import {
   QuestionWithVariants,
 } from '../../common/types/question-with-variants';
+import { TestResultsValues } from '../../common/types/test-results-values';
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -38,6 +39,7 @@ export const TestingPage: React.FC = () => {
     setAnsweredQuestions,
   ] = useState<QuestionWithVariants[]>([]);
   const [recommendations, setRecommendations] = useState({});
+  const [results, setResults] = useState<TestResultsValues>();
 
   const [testResultId, setTestResultId] = useState<number | null>(null);
 
@@ -74,17 +76,28 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (isTestFinished) {
-      apiFetchPost('/api/TestResult/unauthorized', testResults)
+      const path = Auth.isLogged() ?
+        '/api/TestResult' :
+        '/api/TestResult/unauthorized';
+
+      apiFetchPost(path, testResults)
         .then<TestResults>((response) => response.json())
         .then((response) => {
+          console.log(response);
           setRecommendations({
             books: response.materialsRecommendations.books,
             computerGames: response.materialsRecommendations.computerGames,
             films: response.materialsRecommendations.films,
             music: response.materialsRecommendations.music,
           });
+          setResults({
+            neurosis: response.questionGroupsValues[0].value,
+            socialAnxiety: response.questionGroupsValues[1].value,
+            depression: response.questionGroupsValues[2].value,
+            asthenia: response.questionGroupsValues[3].value,
+          });
         })
-        .catch((error) => alert('/api/TestResult/unauthorized' + error));
+        .catch((error) => alert(path + error));
     }
   }, [isTestFinished]);
 
@@ -174,25 +187,28 @@ export const TestingPage: React.FC = () => {
             <div className="score-section">
               <ul className="score-list">
                 Your results:
-                <li>
-                  Sadness and/or a loss of
-                  interest in activities: { }
-                </li>
-                <li>
-                  Disorders of sense and motion: { }
-                </li>
-                <li>
-                  Intense, persistent fear of being watched
-                  and judged by others: { }
-                </li>
-                <li>
-                  Generalized weakness and
-                  usually involving mental
-                  and physical fatigue: { }
-                </li>
-                <li>
-                  Sleep disorder: { }
-                </li>
+                {
+                  results ?
+                    <>
+                      <li>
+                        Sadness and/or a loss of
+                        interest in activities: {results.depression}
+                      </li>
+                      <li>
+                        Disorders of sense and motion: {results.neurosis}
+                      </li>
+                      <li>
+                        Intense, persistent fear of being watched
+                        and judged by others: {results.socialAnxiety}
+                      </li>
+                      <li>
+                        Generalized weakness and
+                        usually involving mental
+                        and physical fatigue: {results.asthenia}
+                      </li>
+                    </> :
+                    <h3>Loading results...</h3>
+                }
               </ul>
               <div className="sending-container">
                 {success ?
@@ -201,7 +217,7 @@ export const TestingPage: React.FC = () => {
                     <Error /> :
                     <form onSubmit={(e) => handleSubmit(e)}>
                       {
-                        Auth.isLogged ?
+                        Auth.isLogged() ?
                           <>
                             <p>
                               {
@@ -223,6 +239,7 @@ export const TestingPage: React.FC = () => {
                                 can send result to ours specialist`
                               }
                             </p>
+                            <a className="button" href="/sign-in">SIGN IN</a>
                             <a className="button" href="/sign-up">SIGN UP</a>
                           </>
                       }

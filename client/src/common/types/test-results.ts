@@ -2,6 +2,7 @@ import { Book } from './book';
 import { ComputerGame } from './computer-game';
 import { Film } from './film';
 import { Music } from './music';
+import { QuestionGroup } from './question-group';
 import { QuestionWithVariants } from './question-with-variants';
 import { Variant } from './variant';
 
@@ -12,6 +13,7 @@ export type TestResults = {
   testId: number;
   chosenVariants: Variant[];
   questions?: QuestionWithVariants[];
+  questionGroupsValues?: QuestionGroup[];
   materialsRecommendations?: {
     books: Book[],
     computerGames: ComputerGame[],
