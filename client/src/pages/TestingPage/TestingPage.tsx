@@ -96,6 +96,7 @@ export const TestingPage: React.FC = () => {
             depression: response.questionGroupsValues[2].value,
             asthenia: response.questionGroupsValues[3].value,
           });
+          setTestResultId(response.id);
         })
         .catch((error) => alert(path + error));
     }
