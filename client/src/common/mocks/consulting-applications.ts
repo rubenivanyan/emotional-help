@@ -1,6 +1,6 @@
 import {
   ConsultingApplication,
-} from '../types/consulting-application';
+} from 'types';
 
 export const mockedConsultingApplications: ConsultingApplication[] = [
   {

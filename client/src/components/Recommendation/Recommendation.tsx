@@ -1,18 +1,13 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import './Recommendation.scss';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
+import { BUTTON_TYPES } from 'enums';
+import { Button } from 'components';
 import { BookComponent } from './BookComponent/BookComponent';
-import { MusicComponent } from './MusicComponent/MusicComponent';
-import { FilmComponent } from './FilmComponent/FIlmComponent';
 import {
   ComputerGameComponent,
 } from './ComputerGameComponent/ComputerGameComponent';
-// import { Book } from '../../common/types/book';
-// import { ComputerGame } from '../../common/types/computer-game';
-// import { Film } from '../../common/types/film';
-// import { Music } from '../../common/types/Music';
-
+import { FilmComponent } from './FilmComponent/FIlmComponent';
+import { MusicComponent } from './MusicComponent/MusicComponent';
 
 export const Recommendation = ({
   books,

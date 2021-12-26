@@ -1,5 +1,5 @@
-import { Book } from '../../../common/types/book';
 import React from 'react';
+import { Book } from 'types';
 
 export const BookComponent = ({ book }: { book?: Book }) => {
   return (

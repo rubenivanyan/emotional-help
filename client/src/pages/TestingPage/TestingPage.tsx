@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './TestingPage.scss';
-import { Block } from '../../components/Block/Block';
-import { BLOCK_TITLES } from '../../common/enums/block-titles';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { Success } from '../../components/Success/Success';
-import { Error } from '../../components/Error/Error';
-import { Recommendation } from '../../components/Recommendation/Recommendation';
-import { apiFetchGet, apiFetchPost } from '../../api/fetch/fetch';
-import { TestWithQuestions } from '../../common/types/test-with-questions';
-import { Variant } from '../../common/types/variant';
-import { TestResults } from '../../common/types/test-results';
-import { TestingApplication } from '../../common/types/testing-application';
-import { sendApplication } from '../../api/fetch/applications';
-import { Auth } from '../../api/auth';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { sendApplication, apiFetchGet, Auth, apiFetchPost } from 'api';
+import { BLOCK_TITLES, BUTTON_TYPES } from 'enums';
 import {
+  TestWithQuestions,
+  Variant,
   QuestionWithVariants,
-} from '../../common/types/question-with-variants';
-import { TestResultsValues } from '../../common/types/test-results-values';
+  TestingApplication,
+  TestingResultsValues,
+  TestingResults,
+} from 'types';
+import { Block, Recommendation, Button, Success, Error } from 'components';
+
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -39,11 +33,11 @@ export const TestingPage: React.FC = () => {
     setAnsweredQuestions,
   ] = useState<QuestionWithVariants[]>([]);
   const [recommendations, setRecommendations] = useState({});
-  const [results, setResults] = useState<TestResultsValues>();
+  const [results, setResults] = useState<TestingResultsValues>();
 
   const [testResultId, setTestResultId] = useState<number | null>(null);
 
-  const testResults: TestResults = {
+  const testResults: TestingResults = {
     testId: tests[currentTest]?.id,
     chosenVariants: chosenVariants,
     questions: answeredQuestions,
@@ -81,7 +75,7 @@ export const TestingPage: React.FC = () => {
         '/api/TestResult/unauthorized';
 
       apiFetchPost(path, testResults)
-        .then<TestResults>((response) => response.json())
+        .then<TestingResults>((response) => response.json())
         .then((response) => {
           console.log(response);
           setRecommendations({

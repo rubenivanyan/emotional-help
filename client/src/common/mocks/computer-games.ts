@@ -1,4 +1,4 @@
-import { ComputerGame } from '../../common/types/computer-game';
+import { ComputerGame } from 'types';
 
 export const mockedComputerGames: ComputerGame[] = [
   {

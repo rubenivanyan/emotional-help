@@ -1,5 +1,5 @@
-import { Film } from '../../../common/types/film';
 import React from 'react';
+import { Film } from 'types';
 
 export const FilmComponent = ({ film }: { film?: Film }) => {
   return (

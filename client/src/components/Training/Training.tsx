@@ -1,6 +1,6 @@
 import './Training.scss';
 import React from 'react';
-import { Training } from '../../common/types/training';
+import { Training } from 'types';
 
 export const TrainingComponent = ({ training }: { training?: Training }) => {
   return (

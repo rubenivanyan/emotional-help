@@ -1,5 +1,5 @@
-import { ComputerGame } from '../../../common/types/computer-game';
 import React from 'react';
+import { ComputerGame } from 'types';
 
 export const ComputerGameComponent = ({ computerGame }:
   { computerGame?: ComputerGame }) => {

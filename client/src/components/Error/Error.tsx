@@ -1,6 +1,6 @@
 import React from 'react';
-import { SVG_ERROR } from '../../common/enums/svg';
 import './Error.scss';
+import { SVG_ERROR } from 'enums';
 
 export const Error = ({ error }: { error?: string }) => {
   return (

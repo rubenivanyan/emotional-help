@@ -1,6 +1,7 @@
-import { SVG_LOGO_FULL, SVG_LOGO_SMALL } from '../../common/enums/svg';
+
 import React from 'react';
 import './Logo.scss';
+import { SVG_LOGO_FULL, SVG_LOGO_SMALL } from 'enums';
 
 export const Logo: React.FC = () => {
   return (

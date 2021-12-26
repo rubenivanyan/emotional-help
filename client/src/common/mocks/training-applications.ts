@@ -1,6 +1,6 @@
 import {
   TrainingApplication,
-} from '../types/training-application';
+} from 'types';
 
 export const mockedTrainingApplications: TrainingApplication[] = [
   {

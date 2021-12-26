@@ -1,20 +1,13 @@
-import { apiFetchGet } from '../../../api/fetch/fetch';
-import { LocalStorage } from '../../../api/local-storage';
-import { BLOCK_TITLES } from '../../../common/enums/block-titles';
-import { BUTTON_TYPES } from '../../../common/enums/button-types';
-import { TRAINING_AND_CONSULTING_TEXT } from '../../../common/enums/texts';
-import { Training } from '../../../common/types/training';
-import {
-  TrainingApplication,
-} from '../../../common/types/training-application';
-import { Button } from '../../../components/Button/Button';
-import { Success } from '../../../components/Success/Success';
-import { Error } from '../../../components/Error/Error';
-import { TrainingComponent } from '../../../components/Training/Training';
 import React, { useEffect, useState } from 'react';
+import { apiFetchGet, sendApplication, Auth, LocalStorage } from 'api';
+import {
+  BLOCK_TITLES,
+  TRAINING_AND_CONSULTING_TEXT,
+  BUTTON_TYPES,
+} from 'enums';
+import { Training, TrainingApplication } from 'types';
+import { Success, Error, Button, TrainingComponent } from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
-import { sendApplication } from '../../../api/fetch/applications';
-import { Auth } from '../../../api/auth';
 
 export const TrainingPage = () => {
   const [success, setSuccess] = useState(false);

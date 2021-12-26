@@ -1,11 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react';
 import './Header.scss';
-import { Logo } from '../Logo/Logo';
-import { Navbar } from '../Navbar/Navbar';
-import { Registration } from '../Registration/Registration';
-import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { UserPanel } from '../../components/UserPanel/UserPanel';
-import { Auth } from '../../api/auth';
+import { Auth } from 'api';
+import { SearchBar, UserPanel, Registration, Logo, Navbar } from 'components';
 
 const SearchRegWrapper = () => {
   return (

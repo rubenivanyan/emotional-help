@@ -1,13 +1,9 @@
-import './SignInPage.scss';
 import React, { useEffect, useState } from 'react';
-import { Input } from '../../components/Input/Input';
-import { Block } from '../../components/Block/Block';
-import { Success } from '../../components/Success/Success';
-import { Error } from '../../components/Error/Error';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { UserLogin } from '../../common/types/user-login';
-import { Auth } from '../../api/auth';
+import './SignInPage.scss';
+import { Auth } from 'api';
+import { BUTTON_TYPES } from 'enums';
+import { UserLogin } from 'types';
+import { Block, Success, Error, Button, Input } from 'components';
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('');

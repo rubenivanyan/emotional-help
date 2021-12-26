@@ -1,9 +1,5 @@
-import { UserRegistration } from '../common/types/user-registration';
-import { User } from '../common/types/user';
-import { apiFetchGet, apiFetchPost } from './fetch/fetch';
-import { LocalStorage } from './local-storage';
-import { UserLogin } from '../common/types/user-login';
-
+import { apiFetchPost, apiFetchGet, LocalStorage } from 'api';
+import { User, UserRegistration, UserLogin } from 'types';
 export class Auth {
   private static user: User | null = null;
 

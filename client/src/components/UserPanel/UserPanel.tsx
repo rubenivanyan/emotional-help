@@ -1,8 +1,9 @@
-import './UserPanel.scss';
 import React from 'react';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { Auth } from '../../api/auth';
+import './UserPanel.scss';
+import { Auth } from 'api';
+import { BUTTON_TYPES } from 'enums';
+import { Button } from 'components';
+
 
 export const UserPanel = () => {
   return (

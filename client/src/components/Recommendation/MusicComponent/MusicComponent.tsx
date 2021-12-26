@@ -1,5 +1,5 @@
-import { Music } from '../../../common/types/music';
 import React from 'react';
+import { Music } from 'types';
 
 export const MusicComponent = ({ music }: { music?: Music }) => {
   return (
