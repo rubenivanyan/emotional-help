@@ -1,5 +1,5 @@
-import { Book, ComputerGame, Film, Genre, Music } from '.';
-import { QUESTION_GROUPS } from '../enums';
+import { Book, ComputerGame, Film, Genre, Music } from 'types';
+import { QUESTION_GROUPS } from 'enums';
 
 export type Test = {
   id?: number;
