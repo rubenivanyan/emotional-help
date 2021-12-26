@@ -15,6 +15,9 @@ import { TestResults } from '../../common/types/test-results';
 import { TestingApplication } from '../../common/types/testing-application';
 import { sendApplication } from '../../api/fetch/applications';
 import { Auth } from '../../api/auth';
+import {
+  QuestionWithVariants,
+} from '../../common/types/question-with-variants';
 
 export const TestingPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -30,12 +33,18 @@ export const TestingPage: React.FC = () => {
   const [isTestFinished, setIsTestFinished] = useState(false);
   const [tests, setTests] = useState<TestWithQuestions[]>([]);
   const [chosenVariants, setChosenVariants] = useState<Variant[]>([]);
+  const [
+    answeredQuestions,
+    setAnsweredQuestions,
+  ] = useState<QuestionWithVariants[]>([]);
+  const [recommendations, setRecommendations] = useState({});
 
   const [testResultId, setTestResultId] = useState<number | null>(null);
 
   const testResults: TestResults = {
     testId: tests[currentTest]?.id,
     chosenVariants: chosenVariants,
+    questions: answeredQuestions,
   };
 
   const testingApplication: TestingApplication = {
@@ -65,11 +74,17 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (isTestFinished) {
-      console.log(testResults);
-      apiFetchPost('/api/TestResult', testResults)
+      apiFetchPost('/api/TestResult/unauthorized', testResults)
         .then<TestResults>((response) => response.json())
-        .then((testResult) => setTestResultId(testResult.id))
-        .catch((error) => alert('/api/TestResult' + error));
+        .then((response) => {
+          setRecommendations({
+            books: response.materialsRecommendations.books,
+            computerGames: response.materialsRecommendations.computerGames,
+            films: response.materialsRecommendations.films,
+            music: response.materialsRecommendations.music,
+          });
+        })
+        .catch((error) => alert('/api/TestResult/unauthorized' + error));
     }
   }, [isTestFinished]);
 
@@ -88,6 +103,14 @@ export const TestingPage: React.FC = () => {
   const handleVariantClick = (variant: Variant) => {
     const questions = tests[currentTest]?.questions;
     const nextQuestion = currentQuestion + 1;
+
+    setAnsweredQuestions([
+      ...answeredQuestions,
+      {
+        formulation: questions[currentQuestion].formulation,
+        questionGroup: questions[currentQuestion].questionGroup,
+      },
+    ]);
 
     if (!isInProgress) setIsInProgress(true);
     setChosenVariants([...chosenVariants, variant]);
@@ -116,7 +139,7 @@ export const TestingPage: React.FC = () => {
           <div className="quiz-info-text">
             {
               showScore ?
-                <Recommendation /> :
+                <Recommendation {...recommendations} /> :
                 <>
                   <p>
                     This test will help you to understand

@@ -45,7 +45,7 @@ export const SignInPage = () => {
     <section className="sign-in-container">
       <Block title={'sign in'} percentWidth={50}>
         {
-          Auth.isLogged ?
+          Auth.isLogged() ?
             <h2>You are logged in already</h2> :
             success ?
               <Success /> :

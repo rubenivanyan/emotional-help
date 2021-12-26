@@ -1,14 +1,13 @@
-const PATH = 'https://localhost:5001';
+const PATH = 'http://localhost:5000';
 
-export const apiFetchPost = (path: string, item: any) => {
+export const apiFetchPost = async (path: string, item: any) => {
   const requestOptions: RequestInit = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    mode: 'no-cors',
+    // credentials: 'include',
     body: JSON.stringify(item),
   };
-  return fetch(PATH + path, requestOptions);
+  return await fetch(PATH + path, requestOptions);
 };
 
 export const apiFetchPut = (path: string, item: any) => {
