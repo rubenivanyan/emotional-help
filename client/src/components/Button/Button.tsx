@@ -1,6 +1,6 @@
-import { BUTTON_TYPES } from '../../common/enums/button-types';
 import React from 'react';
 import './Button.scss';
+import { BUTTON_TYPES } from 'enums';
 
 export const Button = ({ title, type, submitting, onClick }:
   { title: string, type: BUTTON_TYPES, submitting?: boolean, onClick?}) => {

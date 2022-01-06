@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import './SignInPage.scss';
+import React, { useState } from 'react';
+import './SignUpPage.scss';
 import { Auth } from 'api';
 import { BUTTON_TYPES } from 'enums';
-import { UserLogin } from 'types';
+import { UserRegistration } from 'types';
 import { Block, Success, Error, Button, Input } from 'components';
 
-export const SignInPage = () => {
+
+export const SignUpPage = () => {
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [password, setPassword] = useState('');
-  const [isRemember, setIsRemember] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
-    setIsRemember(isRemember);
-  }, []);
-
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
-
-    const userLogin: UserLogin = {
+    const userRegistration: UserRegistration = {
+      name: name,
+      surname: surname,
       email: email,
+      birthDate: birthDate,
       password: password,
-      rememberMe: isRemember,
+      confirmationPassword: confirmPassword,
     };
 
-    Auth.signIn(
-      userLogin,
+    Auth.signUp(
+      userRegistration,
       setSuccess,
       setError,
       setErrorMessage,
@@ -38,10 +40,10 @@ export const SignInPage = () => {
   };
 
   return (
-    <section className="sign-in-container">
-      <Block title={'sign in'} percentWidth={50}>
+    <section className="sign-up-container">
+      <Block title={'sign up'} percentWidth={50}>
         {
-          Auth.isLogged() ?
+          Auth.isLogged ?
             <h2>You are logged in already</h2> :
             success ?
               <Success /> :
@@ -54,6 +56,18 @@ export const SignInPage = () => {
                 </> :
                 <form onSubmit={(event) => handleSubmit(event)}>
                   <Input
+                    label={'Name'}
+                    onChange={(event) => setName(event.target.value)}
+                  />
+                  <Input
+                    label={'Surname'}
+                    onChange={(event) => setSurname(event.target.value)}
+                  />
+                  <Input
+                    label={'Birth date'}
+                    onChange={(event) => setBirthDate(event.target.value)}
+                  />
+                  <Input
                     label={'E-mail'}
                     onChange={(event) => setEmail(event.target.value)}
                   />
@@ -61,8 +75,12 @@ export const SignInPage = () => {
                     label={'Password'}
                     onChange={(event) => setPassword(event.target.value)}
                   />
+                  <Input
+                    label={'Confirm password'}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                  />
                   <Button
-                    title={'sign in'}
+                    title={'sign up'}
                     type={BUTTON_TYPES.DEFAULT}
                     submitting={isSubmitting}
                   />
