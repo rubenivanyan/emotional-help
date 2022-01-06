@@ -15,4 +15,6 @@ COPY /package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+EXPOSE 80
+CMD ["serve", "-s", "build", "-l", "80"]
