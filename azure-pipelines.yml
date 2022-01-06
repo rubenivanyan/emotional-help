@@ -11,6 +11,8 @@ resources:
 - repo: self
 
 variables:
+  azureSubscription: 'Azure subscription 1'
+  appName: 'psychological-help-web'
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '205e952d-48af-44d6-9e8b-a74aaf539df9'
   imageRepository: 'psychologicalhelpweb'
