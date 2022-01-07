@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /src
 COPY ["PsychologicalAssistance/PsychologicalAssistance.Web.csproj", "PsychologicalAssistance/"]
 RUN dotnet restore "PsychologicalAssistance/PsychologicalAssistance.Web.csproj"
 COPY . .
