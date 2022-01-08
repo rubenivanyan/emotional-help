@@ -16,7 +16,7 @@ variables:
   imageRepository: 'pslpapiimage'
   containerRegistry: 'pslpapicontainer.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: 'dev'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
