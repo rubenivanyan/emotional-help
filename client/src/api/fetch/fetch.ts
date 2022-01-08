@@ -1,4 +1,4 @@
-const PATH = 'http://localhost:5000';
+const PATH = 'https://pslp-api.azurewebsites.net';
 
 export const apiFetchPost = async (path: string, item: any) => {
   const requestOptions: RequestInit = {
