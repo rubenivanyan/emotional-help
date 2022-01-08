@@ -22,6 +22,6 @@ export const apiFetchPut = (path: string, item: any) => {
 
 export const apiFetchGet = async (path: string) => {
   return await fetch(PATH + path, {
-    credentials: 'include',
+    // credentials: 'include',
   });
 };
