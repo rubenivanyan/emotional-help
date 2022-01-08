@@ -12,7 +12,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '2a53599f-fab8-4269-ace0-cb528ec8f460'
+  dockerRegistryServiceConnection: 'a319e4b6-17a9-495a-b837-2aabb9244bf1'
   imageRepository: 'pslpapiimage'
   containerRegistry: 'pslpapicontainer.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
