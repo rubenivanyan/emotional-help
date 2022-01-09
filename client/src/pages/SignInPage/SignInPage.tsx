@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
 
 export const SignInPage = () => {
-  const isLogged = useSelector((state: RootState) => state.auth);
+  const auth = useSelector((state: RootState) => state.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,7 +45,7 @@ export const SignInPage = () => {
     <section className="sign-in-container">
       <Block title={'sign in'} percentWidth={50}>
         {
-          isLogged ?
+          auth.isLogged ?
             <h2>You are logged in already</h2> :
             success ?
               <Success /> :
