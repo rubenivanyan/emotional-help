@@ -4,12 +4,8 @@ import { Auth } from 'api';
 import { BUTTON_TYPES } from 'enums';
 import { UserLogin } from 'types';
 import { Block, Success, Error, Button, Input } from 'components';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/reducers/rootReducer';
 
 export const SignInPage = () => {
-  const auth = useSelector((state: RootState) => state.auth);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
@@ -45,32 +41,30 @@ export const SignInPage = () => {
     <section className="sign-in-container">
       <Block title={'sign in'} percentWidth={50}>
         {
-          auth.isLogged ?
-            <h2>You are logged in already</h2> :
-            success ?
-              <Success /> :
-              error ?
-                <>
-                  <Error error={errorMessage} />
-                  <Button title={'retry'}
-                    type={BUTTON_TYPES.DEFAULT}
-                    onClick={() => setError(false)} />
-                </> :
-                <form onSubmit={(event) => handleSubmit(event)}>
-                  <Input
-                    label={'E-mail'}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                  <Input
-                    label={'Password'}
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                  <Button
-                    title={'sign in'}
-                    type={BUTTON_TYPES.DEFAULT}
-                    submitting={isSubmitting}
-                  />
-                </form>
+          success ?
+            <Success /> :
+            error ?
+              <>
+                <Error error={errorMessage} />
+                <Button title={'retry'}
+                  type={BUTTON_TYPES.DEFAULT}
+                  onClick={() => setError(false)} />
+              </> :
+              <form onSubmit={(event) => handleSubmit(event)}>
+                <Input
+                  label={'E-mail'}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <Input
+                  label={'Password'}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <Button
+                  title={'sign in'}
+                  type={BUTTON_TYPES.DEFAULT}
+                  submitting={isSubmitting}
+                />
+              </form>
         }
       </Block>
     </section>
