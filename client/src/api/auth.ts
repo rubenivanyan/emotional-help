@@ -82,8 +82,17 @@ export class Auth {
       .catch((error) => alert('api/User/logout:' + error));
   };
 
-  public static isLogged() {
-    return LocalStorage.getItem('id') ? true : false;
+  public static async isLogged() {
+    let isLogged;
+    await apiFetchGet('/api/User/is-authenticated')
+      .then<boolean>((response) => response.json())
+      .then((response) => isLogged = response)
+      .catch((error) => alert('/api/User/is-authenticated' + error));
+    console.log('isLogged() ', isLogged);
+
+    if (!isLogged) LocalStorage.getLocalStorage().clear();
+
+    return isLogged;
   }
 };
 

@@ -5,11 +5,9 @@ import {
 } from './actions';
 import { Auth } from '../api/auth';
 
-export function* fetchAuth(action) {
+export function* fetchAuth() {
   try {
-    const isLogged = yield call(
-      Auth.isLogged,
-    );
+    const isLogged = yield call(Auth.isLogged);
     console.log('saga :' + isLogged);
     yield put({ type: AUTH_FETCH_SUCCEEDED, payload: isLogged });
   } catch (e) {
