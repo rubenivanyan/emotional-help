@@ -4,8 +4,12 @@ import { Auth } from 'api';
 import { BUTTON_TYPES } from 'enums';
 import { UserLogin } from 'types';
 import { Block, Success, Error, Button, Input } from 'components';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers/rootReducer';
 
 export const SignInPage = () => {
+  const isLogged = useSelector((state: RootState) => state.auth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
@@ -41,7 +45,7 @@ export const SignInPage = () => {
     <section className="sign-in-container">
       <Block title={'sign in'} percentWidth={50}>
         {
-          Auth.isLogged() ?
+          isLogged ?
             <h2>You are logged in already</h2> :
             success ?
               <Success /> :
