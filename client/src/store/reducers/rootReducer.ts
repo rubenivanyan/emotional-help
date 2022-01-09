@@ -9,7 +9,7 @@ export const rootReducer = combineReducers({
   applicationInfo: applicationsReducer,
   tests: testsReducer,
   questions: questionsReducer,
-  user: authReducer,
+  auth: authReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

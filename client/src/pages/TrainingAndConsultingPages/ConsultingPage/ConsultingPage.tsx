@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { sendApplication, Auth, LocalStorage } from 'api';
+import { sendApplication, LocalStorage } from 'api';
 import {
   BLOCK_TITLES,
   TRAINING_AND_CONSULTING_TEXT,
@@ -8,8 +8,12 @@ import {
 import { ConsultingApplication } from 'types';
 import { Success, Error, Button, Input } from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers/rootReducer';
 
 export const ConsultingPage = () => {
+  const isLogged = useSelector((state: RootState) => state.auth);
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -52,7 +56,7 @@ export const ConsultingPage = () => {
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
               {
-                Auth.isLogged() ?
+                isLogged ?
                   <>
                     <p>
                       {`Dear ${LocalStorage.getItem('fullName')},
