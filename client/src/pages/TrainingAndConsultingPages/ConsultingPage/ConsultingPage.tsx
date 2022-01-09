@@ -12,7 +12,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
 
 export const ConsultingPage = () => {
-  const isLogged = useSelector((state: RootState) => state.auth);
+  const auth = useSelector((state: RootState) => state.auth);
+  console.log('auth.isLogged: ', auth.isLogged);
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -56,7 +57,7 @@ export const ConsultingPage = () => {
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
               {
-                isLogged ?
+                auth.isLogged ?
                   <>
                     <p>
                       {`Dear ${LocalStorage.getItem('fullName')},
