@@ -75,7 +75,7 @@ export class Auth {
     apiFetchPost('/api/User/logout', '')
       .then((response) => {
         if (response.status === 200) {
-          LocalStorage.removeItemsFromObject(Auth.user);
+          LocalStorage.getLocalStorage().clear();
           Auth.user = null;
         }
       })
