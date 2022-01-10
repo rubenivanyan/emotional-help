@@ -1,7 +1,7 @@
 import { AUTH_FETCH_SUCCEEDED } from '../actions';
 
 const initState = {
-  isLogged: 'danone',
+  isLogged: false,
 };
 
 export const authReducer = (state = initState, action) => {
