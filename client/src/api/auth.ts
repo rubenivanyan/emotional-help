@@ -21,7 +21,7 @@ export class Auth {
       .then((response) => {
         if (response.status === 200) {
           setSuccess(true);
-          Auth.login();
+          Auth.getAccount();
         } else {
           setError(true);
           setErrorMessage(response.statusText);
@@ -46,7 +46,7 @@ export class Auth {
     ).then((response) => {
       if (response.status === 200) {
         setSuccess(true);
-        Auth.login();
+        Auth.getAccount();
       } else {
         setError(true);
         setErrorMessage(
@@ -59,7 +59,7 @@ export class Auth {
       .finally(() => setIsSubmitting(false));
   };
 
-  public static login(): void {
+  public static getAccount(): void {
     apiFetchGet('/api/User/account')
       .then<User>((response) => {
         return response.json();
@@ -72,7 +72,7 @@ export class Auth {
   };
 
   public static logout(): void {
-    apiFetchGet('/api/User/logout')
+    apiFetchPost('/api/User/logout', '')
       .then((response) => {
         if (response.status === 200) {
           LocalStorage.removeItemsFromObject(Auth.user);
