@@ -4,8 +4,12 @@ import { Auth } from 'api';
 import { BUTTON_TYPES } from 'enums';
 import { UserLogin } from 'types';
 import { Block, Success, Error, Button, Input } from 'components';
+import { useDispatch } from 'react-redux';
+import { authFetchRequest } from 'store/actions';
 
 export const SignInPage = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
@@ -18,6 +22,10 @@ export const SignInPage = () => {
   useEffect(() => {
     setIsRemember(isRemember);
   }, []);
+
+  useEffect(() => {
+    if (!isSubmitting) dispatch(authFetchRequest());
+  }, [isSubmitting]);
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
