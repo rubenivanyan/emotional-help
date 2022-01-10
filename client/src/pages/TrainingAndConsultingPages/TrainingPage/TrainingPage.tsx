@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { apiFetchGet, sendApplication, Auth, LocalStorage } from 'api';
+import { apiFetchGet, sendApplication, LocalStorage } from 'api';
 import {
   BLOCK_TITLES,
   TRAINING_AND_CONSULTING_TEXT,
@@ -8,8 +8,12 @@ import {
 import { Training, TrainingApplication } from 'types';
 import { Success, Error, Button, TrainingComponent } from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers/rootReducer';
 
 export const TrainingPage = () => {
+  const auth = useSelector((state: RootState) => state.auth);
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -73,7 +77,7 @@ export const TrainingPage = () => {
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
               {
-                Auth.isLogged() ?
+                auth.isLogged ?
                   <p>
                     {`Dear ${LocalStorage.getItem('fullName')},
                     chose a training, please`}
@@ -90,23 +94,24 @@ export const TrainingPage = () => {
                   </>
               }
               {
-                Auth.isLogged() ? isLoading ?
-                  <h3>No data. Loading...</h3> :
-                  <>
-                    <TrainingComponent training={trainings[counter]} />
-                    <p
-                      onClick={() => nextTraining()}
-                      className="next-training"
-                    >
-                      Next training
-                    </p>
+                auth.isLogged ?
+                  isLoading ?
+                    <h3>No data. Loading...</h3> :
+                    <>
+                      <TrainingComponent training={trainings[counter]} />
+                      <p
+                        onClick={() => nextTraining()}
+                        className="next-training"
+                      >
+                        Next training
+                      </p>
 
-                    <Button
-                      title={'submit'}
-                      type={BUTTON_TYPES.DEFAULT}
-                      submitting={isSubmitting}
-                    />
-                  </> :
+                      <Button
+                        title={'submit'}
+                        type={BUTTON_TYPES.DEFAULT}
+                        submitting={isSubmitting}
+                      />
+                    </> :
                   <></>
               }
             </form>

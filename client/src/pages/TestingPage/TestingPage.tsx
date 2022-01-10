@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './TestingPage.scss';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { sendApplication, apiFetchGet, Auth, apiFetchPost } from 'api';
+import { sendApplication, apiFetchGet, apiFetchPost } from 'api';
 import { BLOCK_TITLES, BUTTON_TYPES } from 'enums';
 import {
   TestWithQuestions,
@@ -12,9 +12,13 @@ import {
   TestingResults,
 } from 'types';
 import { Block, Recommendation, Button, Success, Error } from 'components';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers/rootReducer';
 
 
 export const TestingPage: React.FC = () => {
+  const auth = useSelector((state: RootState) => state.auth);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentTest, setCurrentTest] = useState(0);
 
@@ -70,7 +74,7 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (isTestFinished) {
-      const path = Auth.isLogged() ?
+      const path = auth.isLogged ?
         '/api/TestResult' :
         '/api/TestResult/unauthorized';
 
@@ -212,7 +216,7 @@ export const TestingPage: React.FC = () => {
                     <Error /> :
                     <form onSubmit={(e) => handleSubmit(e)}>
                       {
-                        Auth.isLogged() ?
+                        auth.isLogged ?
                           <>
                             <p>
                               {
