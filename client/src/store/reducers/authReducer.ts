@@ -1,7 +1,8 @@
+import { LocalStorage } from 'api';
 import { AUTH_FETCH_SUCCEEDED } from '../actions';
 
 const initState = {
-  isLogged: false,
+  isLogged: LocalStorage.getItem('id') ? true : false,
 };
 
 export const authReducer = (state = initState, action) => {
