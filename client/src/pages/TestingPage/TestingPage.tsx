@@ -10,6 +10,8 @@ import {
   TestingApplication,
   TestingResultsValues,
   TestingResults,
+  QuestionGroup,
+  MaterialsRecommendations,
 } from 'types';
 import { Block, Recommendation, Button, Success, Error } from 'components';
 import { useSelector } from 'react-redux';
@@ -84,7 +86,10 @@ export const TestingPage: React.FC = () => {
           .then<TestingResults>((response) => response.json())
           .then((response) => {
             console.log(response);
-            handleTestingResultsResponse(response);
+            handleTestingResultsResponse(
+              response.questionGroupsValues,
+              response.materialsRecommendations,
+            );
           })
           .catch((error) => alert('/api/TestResult/unauthorized ' + error));
       }
@@ -93,13 +98,31 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (testResultId) {
+      let questionGroupsValues;
+      let materialsRecommendations;
+
       apiFetchGet(`/api/TestResult/${testResultId}`)
         .then<TestingResults>((response) => response.json())
         .then((response) => {
           console.log(response);
-          handleTestingResultsResponse(response);
+          questionGroupsValues = response.questionGroupsValues;
         })
         .catch((error) => alert(`/api/TestResult/${testResultId}: ` + error));
+
+      apiFetchGet(`/api/MaterialsRecommendation/${testResultId}`)
+        .then<MaterialsRecommendations>((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          materialsRecommendations = response;
+        })
+        .catch((error) => alert(
+          `/api/MaterialsRecommendation/${testResultId}: ` + error),
+        );
+
+      handleTestingResultsResponse(
+        questionGroupsValues,
+        materialsRecommendations,
+      );
     }
   }, [testResultId]);
 
@@ -115,18 +138,21 @@ export const TestingPage: React.FC = () => {
     }
   };
 
-  const handleTestingResultsResponse = (response: TestingResults) => {
+  const handleTestingResultsResponse = (
+    questionGroupsValues: QuestionGroup[],
+    materialsRecommendations?: MaterialsRecommendations,
+  ) => {
     setRecommendations({
-      books: response.materialsRecommendations.books,
-      computerGames: response.materialsRecommendations.computerGames,
-      films: response.materialsRecommendations.films,
-      music: response.materialsRecommendations.music,
+      books: materialsRecommendations.books,
+      computerGames: materialsRecommendations.computerGames,
+      films: materialsRecommendations.films,
+      music: materialsRecommendations.music,
     });
     setResults({
-      neurosis: response.questionGroupsValues[0].value,
-      socialAnxiety: response.questionGroupsValues[1].value,
-      depression: response.questionGroupsValues[2].value,
-      asthenia: response.questionGroupsValues[3].value,
+      neurosis: questionGroupsValues[0].value,
+      socialAnxiety: questionGroupsValues[1].value,
+      depression: questionGroupsValues[2].value,
+      asthenia: questionGroupsValues[3].value,
     });
   };
 
