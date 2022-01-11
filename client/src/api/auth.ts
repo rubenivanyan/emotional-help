@@ -83,8 +83,8 @@ export class Auth {
   };
 
   public static async isLogged() {
-    let isLogged;
-    let isAdmin;
+    let isLogged: boolean;
+    let isAdmin = false;
 
     await apiFetchGet('/api/User/is-authenticated')
       .then<boolean>((response) => response.json())
@@ -92,13 +92,16 @@ export class Auth {
       .catch((error) => alert('/api/User/is-authenticated' + error));
     console.log('isLogged() ', isLogged);
 
-    await apiFetchGet('/api/User/is-in-role/Administrator')
-      .then<boolean>((response) => response.json())
-      .then((response) => isAdmin = response)
-      .catch((error) => alert('/api/User/is-in-role/ ' + error));
-    console.log('isLogged() isAdmin ', isAdmin);
+    if (isLogged) {
+      await apiFetchGet('/api/User/is-in-role/Administrator')
+        .then<boolean>((response) => response.json())
+        .then((response) => isAdmin = response)
+        .catch((error) => alert('/api/User/is-in-role/ ' + error));
+      console.log('isLogged() isAdmin ', isAdmin);
+    } else {
+      LocalStorage.getLocalStorage().clear();
+    }
 
-    if (!isLogged) LocalStorage.getLocalStorage().clear();
     if (isAdmin) {
       LocalStorage
         .getLocalStorage()
