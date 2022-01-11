@@ -11,8 +11,9 @@ export type FullApplication = {
 
 export type ConsultingApplication = {
   id?: number;
+  userId?: number;
   isArchived?: boolean;
-  fullName?: string;
+  userFullName?: string;
   email?: string;
   convenientDay: string;
   message?: string;
@@ -22,15 +23,20 @@ export type TestingApplication = {
   id?: number;
   isArchived: boolean;
   fullName?: string,
+  userName?: string,
   email?: string,
-  testResultsId: number;
+  testResultsId?: number;
+  questionsFormulations?: string[];
+  answersFormulations?: string[];
+  dateOfResults?: string;
 };
 
 export type TrainingApplication = {
   id?: number;
   isArchived: boolean;
   userId?: string;
-  fullName?: string;
+  userFullName?: string;
   email?: string;
-  trainingId: number
+  title?: string;
+  trainingId?: number;
 };

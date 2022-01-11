@@ -4,7 +4,7 @@ export const mockedConsultingApplications: ConsultingApplication[] = [
   {
     id: 0,
     isArchived: false,
-    fullName: 'Example 1',
+    userFullName: 'Example 1',
     email: 'example1@mail.com',
     convenientDay: '22.10.2021',
     message: 'I have some example troubles 1',
@@ -12,7 +12,7 @@ export const mockedConsultingApplications: ConsultingApplication[] = [
   {
     id: 1,
     isArchived: false,
-    fullName: 'Example 2',
+    userFullName: 'Example 2',
     email: 'example2@mail.com',
     convenientDay: '22.02.2022',
     message: 'I have some example troubles 2',
@@ -20,7 +20,7 @@ export const mockedConsultingApplications: ConsultingApplication[] = [
   {
     id: 2,
     isArchived: true,
-    fullName: 'Example 3',
+    userFullName: 'Example 3',
     email: 'example3@mail.com',
     convenientDay: '22.10.2021',
     message: 'Archived example',
@@ -31,21 +31,21 @@ export const mockedTrainingApplications: TrainingApplication[] = [
   {
     id: 0,
     isArchived: false,
-    fullName: 'Example 1',
+    userFullName: 'Example 1',
     email: 'example1@mail.com',
     trainingId: 0,
   },
   {
     id: 1,
     isArchived: false,
-    fullName: 'Example 2',
+    userFullName: 'Example 2',
     email: 'example1@mail.com',
     trainingId: 1,
   },
   {
     id: 2,
     isArchived: true,
-    fullName: 'Example 3 Archived',
+    userFullName: 'Example 3 Archived',
     email: 'example3@mail.com',
     trainingId: 2,
   },

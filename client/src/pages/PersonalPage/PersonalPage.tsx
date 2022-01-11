@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './PersonalPage.scss';
 import { LocalStorage, apiFetchPut, getApplications } from 'api';
 import { BLOCK_TITLES, INPUT_TYPES, BUTTON_TYPES } from 'enums';
-import { User, UserEdit } from 'types';
+import {
+  ConsultingApplication,
+  TestingApplication,
+  TrainingApplication,
+  User,
+  UserEdit,
+} from 'types';
 import { Block, Success, Error, Input, Button } from 'components';
 
 export const PersonalPage = () => {
@@ -26,11 +32,11 @@ export const PersonalPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [testingApplications, setTestingApplications] =
-    useState<any | null>(null);
+    useState<TestingApplication[] | null>(null);
   const [trainingApplications, setTrainingApplications] =
-    useState<any | null>(null);
+    useState<TrainingApplication[] | null>(null);
   const [consultingApplications, setConsultingApplications] =
-    useState<any | null>(null);
+    useState<ConsultingApplication[] | null>(null);
 
   useEffect(() => {
     if (isError) setTimeout(() => setError(false), 3000);
@@ -61,7 +67,7 @@ export const PersonalPage = () => {
 
   const getHistory = () => {
     getApplications(
-      '/api/TrainingApplication/userId',
+      '/api/TestingApplication/userId',
       setIsGetting,
       setTestingApplications,
     );
@@ -71,7 +77,7 @@ export const PersonalPage = () => {
       setTrainingApplications,
     );
     getApplications(
-      '/api/TrainingApplication/userId',
+      '/api/ConsultingApplication/userId',
       setIsGetting,
       setConsultingApplications,
     );
@@ -111,18 +117,29 @@ export const PersonalPage = () => {
       </Block>
       <Block title={BLOCK_TITLES.HISTORY} percentWidth={60}>
         {testingApplications || trainingApplications || consultingApplications ?
-          <p>
-            {testingApplications}
-            {trainingApplications}
-            {consultingApplications}
-          </p> :
+          <ul className="">
+            {testingApplications?.map((teA, index) => {
+              <li key={index}>
+                <p>Testing: {teA.dateOfResults}</p>
+              </li>;
+            })}
+            {trainingApplications?.map((trA, index) => {
+              <li key={index}>
+                <p>Training: {trA.title}</p>
+              </li>;
+            })}
+            {consultingApplications?.map((cA, index) => {
+              <li key={index}>
+                <p>Consulting: {cA.convenientDay}</p>
+              </li>;
+            })}
+          </ul> :
           <Button
             title={isGetting ? 'getting...' : 'get history'}
             type={BUTTON_TYPES.DEFAULT}
             onClick={() => getHistory()}
             submitting={isGetting}
           />
-          // TO DO: Style and check if null
         }
       </Block>
     </section>
