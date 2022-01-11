@@ -10,6 +10,7 @@ import { Success, Error, Button, Input } from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
+import { AuthComponent } from '../AuthComponent/AuthComponent';
 
 export const ConsultingPage = () => {
   const auth = useSelector((state: RootState) => state.auth);
@@ -73,16 +74,7 @@ export const ConsultingPage = () => {
                       submitting={isSubmitting}
                     />
                   </> :
-                  <>
-                    <p>
-                      {
-                        `Only authenticated users
-                      can send application to ours specialist`
-                      }
-                    </p>
-                    <a className="button" href="/sign-in">SIGN IN</a>
-                    <a className="button" href="/sign-up">SIGN UP</a>
-                  </>
+                  <AuthComponent />
               }
             </form>
       }
