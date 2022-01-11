@@ -10,7 +10,6 @@ export const SignUpPage = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
-  const [birthDate, setBirthDate] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -25,7 +24,7 @@ export const SignUpPage = () => {
       name: name,
       surname: surname,
       email: email,
-      birthDate: birthDate,
+      birthDate: '01.01.0001',
       password: password,
       confirmationPassword: confirmPassword,
     };
@@ -60,10 +59,6 @@ export const SignUpPage = () => {
                 <Input
                   label={'Surname'}
                   onChange={(event) => setSurname(event.target.value)}
-                />
-                <Input
-                  label={'Birth date'}
-                  onChange={(event) => setBirthDate(event.target.value)}
                 />
                 <Input
                   label={'E-mail'}
