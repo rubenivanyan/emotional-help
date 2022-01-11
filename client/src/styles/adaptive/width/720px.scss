@@ -66,4 +66,14 @@
       transform: translate(0, 0);
     }
   }
+
+  .question-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .question-section,
+    .answer-section {
+      width: 100%;
+    }
+  }
 }
