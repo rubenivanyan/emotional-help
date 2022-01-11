@@ -37,8 +37,8 @@ export const PersonalPage = () => {
   }, [isError]);
 
   const changedUser: UserEdit = {
-    name: nameState,
-    surname: surnameState,
+    userName: nameState,
+    userSurname: surnameState,
     email: emailState,
     birthDate: '01.01.0001',
   };

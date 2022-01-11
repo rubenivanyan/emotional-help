@@ -20,5 +20,9 @@ export type UserLogin = {
   rememberMe: boolean;
 };
 
-export type UserEdit =
-  Omit<UserRegistration, 'password' | 'confirmationPassword'>;
+export type UserEdit = {
+  userName: string;
+  userSurname: string;
+  email: string;
+  birthDate: string;
+}
