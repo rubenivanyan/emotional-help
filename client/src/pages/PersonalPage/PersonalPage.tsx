@@ -124,7 +124,7 @@ export const PersonalPage = () => {
       </Block>
       <Block title={BLOCK_TITLES.HISTORY} percentWidth={60}>
         {testingApplications || trainingApplications || consultingApplications ?
-          <ul className="">
+          <ul className="applications-list">
             {
               testingApplications &&
               <TestingApplicationList
@@ -132,12 +132,15 @@ export const PersonalPage = () => {
               />
             }
             {
-              (trainingApplications || consultingApplications) &&
+              trainingApplications &&
               <ApplicationList
-                arraysOfApplications={[
-                  trainingApplications,
-                  consultingApplications,
-                ]}
+                applications={trainingApplications}
+              />
+            }
+            {
+              consultingApplications &&
+              <ApplicationList
+                applications={consultingApplications}
               />
             }
           </ul> :

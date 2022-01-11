@@ -1,4 +1,4 @@
-import { TestingApplication } from 'common/types';
+import { TestingApplication } from 'types';
 import React from 'react';
 
 export const TestingApplicationList =
@@ -7,7 +7,7 @@ export const TestingApplicationList =
       <>{
         applications.map((ta, index) => {
           return (
-            <li key={index} className="testing-item">
+            <li key={index} className="application-testing-item">
               <p>Date: {ta.dateOfResults}</p>
               <p>Results:</p>
               <table>
