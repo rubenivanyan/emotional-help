@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react';
 import './Header.scss';
-import { SearchBar, UserPanel, Registration, Logo, Navbar } from 'components';
+import { UserPanel, Registration, Logo, Navbar } from 'components';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
 
@@ -8,7 +8,6 @@ const SearchRegWrapper = () => {
   const auth = useSelector((state: RootState) => state.auth);
   return (
     <div className="search-reg-wrapper">
-      <SearchBar />
       {
         auth.isLogged ?
           <UserPanel /> :
