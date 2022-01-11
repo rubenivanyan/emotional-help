@@ -18,3 +18,4 @@ export * from './SearchBar/SearchBar';
 export * from './Success/Success';
 export * from './Training/Training';
 export * from './UserPanel/UserPanel';
+export * from './AuthComponent/AuthComponent';
