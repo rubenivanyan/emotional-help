@@ -56,6 +56,9 @@ export const PersonalPage = () => {
       .then((response) => {
         if (response.status === 200) {
           setSuccess(true);
+          LocalStorage
+            .getLocalStorage()
+            .setItem('fullName', `${nameState} ${surnameState}`);
         } else {
           setError(true);
           setErrorMessage(response.statusText);
