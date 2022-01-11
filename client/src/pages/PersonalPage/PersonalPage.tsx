@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PersonalPage.scss';
 import { LocalStorage, apiFetchPut, getApplications } from 'api';
 import { BLOCK_TITLES, INPUT_TYPES, BUTTON_TYPES } from 'enums';
-import { User } from 'types';
+import { User, UserEdit } from 'types';
 import { Block, Success, Error, Input, Button } from 'components';
 
 export const PersonalPage = () => {
@@ -13,7 +13,10 @@ export const PersonalPage = () => {
       'birthDate',
     ]) as User;
 
-  const [fullNameState, setFullName] = useState(fullName);
+  const [name, surname] = fullName.split(' ');
+
+  const [nameState, setName] = useState(name);
+  const [surnameState, setSurname] = useState(surname);
   const [emailState, setEmail] = useState(email);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,8 +36,9 @@ export const PersonalPage = () => {
     if (isError) setTimeout(() => setError(false), 3000);
   }, [isError]);
 
-  const changedUser: User = {
-    fullName: fullNameState,
+  const changedUser: UserEdit = {
+    name: nameState,
+    surname: surnameState,
     email: emailState,
     birthDate: '01.01.0001',
   };
@@ -82,8 +86,13 @@ export const PersonalPage = () => {
             <Error error={errorMessage} /> :
             <form onSubmit={(e) => handleSubmit(e)}>
               <Input label={'Name'}
-                onChange={(e) => setFullName(e.target.value)}
-                value={fullNameState}
+                onChange={(e) => setName(e.target.value)}
+                value={nameState}
+                isRequired={true}
+              />
+              <Input label={'Surname'}
+                onChange={(e) => setSurname(e.target.value)}
+                value={surnameState}
                 isRequired={true}
               />
               <Input label={'E-mail'}

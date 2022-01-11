@@ -19,3 +19,6 @@ export type UserLogin = {
   password: string;
   rememberMe: boolean;
 };
+
+export type UserEdit =
+  Omit<UserRegistration, 'password' | 'confirmationPassword'>;
