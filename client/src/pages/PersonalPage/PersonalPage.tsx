@@ -127,24 +127,12 @@ export const PersonalPage = () => {
           trainingApplications.length ||
           consultingApplications.length ?
           <ul className="applications-list">
-            {
-              testingApplications.length &&
-              <TestingApplicationList
-                applications={testingApplications}
-              />
-            }
-            {
-              trainingApplications.length &&
-              <ApplicationList
-                applications={trainingApplications}
-              />
-            }
-            {
-              consultingApplications.length &&
-              <ApplicationList
-                applications={consultingApplications}
-              />
-            }
+            <TestingApplicationList
+              applications={testingApplications} />
+            <ApplicationList
+              applications={trainingApplications} />
+            <ApplicationList
+              applications={consultingApplications} />
           </ul> :
           <Button
             title={isGetting ? 'getting...' : 'get history'}
