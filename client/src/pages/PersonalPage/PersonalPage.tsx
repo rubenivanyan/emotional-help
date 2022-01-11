@@ -36,11 +36,11 @@ export const PersonalPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [testingApplications, setTestingApplications] =
-    useState<TestingApplication[] | null>(null);
+    useState<TestingApplication[]>([]);
   const [trainingApplications, setTrainingApplications] =
-    useState<TrainingApplication[] | null>(null);
+    useState<TrainingApplication[]>([]);
   const [consultingApplications, setConsultingApplications] =
-    useState<ConsultingApplication[] | null>(null);
+    useState<ConsultingApplication[]>([]);
 
   useEffect(() => {
     if (isError) setTimeout(() => setError(false), 3000);
@@ -123,22 +123,24 @@ export const PersonalPage = () => {
         }
       </Block>
       <Block title={BLOCK_TITLES.HISTORY} percentWidth={60}>
-        {testingApplications || trainingApplications || consultingApplications ?
+        {testingApplications.length ||
+          trainingApplications.length ||
+          consultingApplications.length ?
           <ul className="applications-list">
             {
-              testingApplications &&
+              testingApplications.length &&
               <TestingApplicationList
                 applications={testingApplications}
               />
             }
             {
-              trainingApplications &&
+              trainingApplications.length &&
               <ApplicationList
                 applications={trainingApplications}
               />
             }
             {
-              consultingApplications &&
+              consultingApplications.length &&
               <ApplicationList
                 applications={consultingApplications}
               />
