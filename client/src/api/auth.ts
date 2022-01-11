@@ -23,7 +23,11 @@ export class Auth {
           setSuccess(true);
         } else {
           setError(true);
-          setErrorMessage(response.statusText);
+          const messages =
+          response.json() as unknown as {code: string, description: string}[];
+          setErrorMessage(
+            messages.map((m) => m.description).join(', '),
+          );
         }
       })
       .catch((error) => alert(`/api/User/register: ${error}`))
@@ -60,9 +64,7 @@ export class Auth {
 
   public static getAccount(): void {
     apiFetchGet('/api/User/account')
-      .then<User>((response) => {
-        return response.json();
-      })
+      .then<User>((response) => response.json())
       .then((user) => {
         Auth.user = user;
         LocalStorage.setItemsFromObject(Auth.user);
