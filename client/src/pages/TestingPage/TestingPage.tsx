@@ -74,31 +74,34 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (isTestFinished) {
-      const path = auth.isLogged ?
-        '/api/TestResult' :
-        '/api/TestResult/unauthorized';
+      if (auth.isLogged) {
+        apiFetchPost('/api/TestResult', testResults)
+          .then((response) => response.json())
+          .then((testResultId) => setTestResultId(testResultId))
+          .catch((error) => alert('/api/TestResult ' + error));
+      } else {
+        apiFetchPost('/api/TestResult/unauthorized', testResults)
+          .then<TestingResults>((response) => response.json())
+          .then((response) => {
+            console.log(response);
+            handleTestingResultsResponse(response);
+          })
+          .catch((error) => alert('/api/TestResult/unauthorized ' + error));
+      }
+    }
+  }, [isTestFinished]);
 
-      apiFetchPost(path, testResults)
+  useEffect(() => {
+    if (testResultId) {
+      apiFetchGet(`/api/TestResult/${testResultId}`)
         .then<TestingResults>((response) => response.json())
         .then((response) => {
           console.log(response);
-          setRecommendations({
-            books: response.materialsRecommendations.books,
-            computerGames: response.materialsRecommendations.computerGames,
-            films: response.materialsRecommendations.films,
-            music: response.materialsRecommendations.music,
-          });
-          setResults({
-            neurosis: response.questionGroupsValues[0].value,
-            socialAnxiety: response.questionGroupsValues[1].value,
-            depression: response.questionGroupsValues[2].value,
-            asthenia: response.questionGroupsValues[3].value,
-          });
-          setTestResultId(response.id);
+          handleTestingResultsResponse(response);
         })
-        .catch((error) => alert(path + error));
+        .catch((error) => alert(`/api/TestResult/${testResultId}: ` + error));
     }
-  }, [isTestFinished]);
+  }, [testResultId]);
 
   useEffect(() => {
     if (error) setTimeout(() => setError(false), 3000);
@@ -110,6 +113,21 @@ export const TestingPage: React.FC = () => {
     } else {
       setCurrentTest(0);
     }
+  };
+
+  const handleTestingResultsResponse = (response: TestingResults) => {
+    setRecommendations({
+      books: response.materialsRecommendations.books,
+      computerGames: response.materialsRecommendations.computerGames,
+      films: response.materialsRecommendations.films,
+      music: response.materialsRecommendations.music,
+    });
+    setResults({
+      neurosis: response.questionGroupsValues[0].value,
+      socialAnxiety: response.questionGroupsValues[1].value,
+      depression: response.questionGroupsValues[2].value,
+      asthenia: response.questionGroupsValues[3].value,
+    });
   };
 
   const handleVariantClick = (variant: Variant) => {
