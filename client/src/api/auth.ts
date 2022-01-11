@@ -84,15 +84,28 @@ export class Auth {
 
   public static async isLogged() {
     let isLogged;
+    let isAdmin;
+
     await apiFetchGet('/api/User/is-authenticated')
       .then<boolean>((response) => response.json())
       .then((response) => isLogged = response)
       .catch((error) => alert('/api/User/is-authenticated' + error));
     console.log('isLogged() ', isLogged);
 
-    if (!isLogged) LocalStorage.getLocalStorage().clear();
+    await apiFetchGet('/api/User/is-in-role/Administrator')
+      .then<boolean>((response) => response.json())
+      .then((response) => isAdmin = response)
+      .catch((error) => alert('/api/User/is-in-role/ ' + error));
+    console.log('isLogged() isAdmin ', isAdmin);
 
-    return isLogged;
+    if (!isLogged) LocalStorage.getLocalStorage().clear();
+    if (isAdmin) {
+      LocalStorage
+        .getLocalStorage()
+        .setItem('isAdmin', `${isAdmin}`);
+    }
+
+    return { isLogged, isAdmin };
   }
 };
 

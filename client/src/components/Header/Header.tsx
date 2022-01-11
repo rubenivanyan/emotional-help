@@ -10,7 +10,7 @@ const SearchRegWrapper = () => {
     <div className="search-reg-wrapper">
       {
         auth.isLogged ?
-          <UserPanel /> :
+          <UserPanel isAdmin={auth.isAdmin} /> :
           <Registration />
       }
     </div>

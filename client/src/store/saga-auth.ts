@@ -7,12 +7,13 @@ import { Auth } from 'api';
 
 export function* fetchAuth() {
   try {
-    const isLogged = yield call(Auth.isLogged);
+    const { isLogged, isAdmin } = yield call(Auth.isLogged);
     console.log('saga :' + isLogged);
     yield put({
       type: AUTH_FETCH_SUCCEEDED,
       payload: {
-        data: isLogged,
+        isLogged: isLogged,
+        isAdmin: isAdmin,
       },
     });
   } catch (e) {

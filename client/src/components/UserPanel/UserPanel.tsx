@@ -5,9 +5,10 @@ import { BUTTON_TYPES } from 'enums';
 import { Button } from 'components';
 
 
-export const UserPanel = () => {
+export const UserPanel = ({ isAdmin }: { isAdmin: boolean }) => {
   return (
     <div className="user-panel">
+      {isAdmin && <a className="button" href="/admin">ADMIN</a>}
       <a className="button" href="/personal-page">PROFILE</a>
       <Button
         title={'logout'}
