@@ -50,9 +50,9 @@ export class Auth {
       } else {
         setError(true);
         setErrorMessage(
-          response.status !== 200 ?
+          response.status === 400 ?
             'Invalid e-mail/password' :
-            '');
+            'Something went wrong');
       }
     })
       .catch((error) => alert(`/api/User/login: ${error}`))
