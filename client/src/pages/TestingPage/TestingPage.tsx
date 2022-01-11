@@ -43,6 +43,15 @@ export const TestingPage: React.FC = () => {
 
   const [testResultId, setTestResultId] = useState<number | null>(null);
 
+  const [
+    questionGroupsValues,
+    setQuestionGroupsValues,
+  ] = useState<QuestionGroup[]>([]);
+  const [
+    materialsRecommendations,
+    setMaterialsRecommendations,
+  ] = useState<MaterialsRecommendations>();
+
   const testResults: TestingResults = {
     testId: tests[currentTest]?.id,
     chosenVariants: chosenVariants,
@@ -98,14 +107,11 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (testResultId) {
-      let questionGroupsValues;
-      let materialsRecommendations;
-
       apiFetchGet(`/api/TestResult/${testResultId}`)
         .then<TestingResults>((response) => response.json())
         .then((response) => {
           console.log(response);
-          questionGroupsValues = response.questionGroupsValues;
+          setQuestionGroupsValues(response.questionGroupsValues);
         })
         .catch((error) => alert(`/api/TestResult/${testResultId}: ` + error));
 
@@ -113,18 +119,22 @@ export const TestingPage: React.FC = () => {
         .then<MaterialsRecommendations>((response) => response.json())
         .then((response) => {
           console.log(response);
-          materialsRecommendations = response;
+          setMaterialsRecommendations(response);
         })
         .catch((error) => alert(
           `/api/MaterialsRecommendation/${testResultId}: ` + error),
         );
+    }
+  }, [testResultId]);
 
+  useEffect(() => {
+    if (questionGroupsValues && materialsRecommendations) {
       handleTestingResultsResponse(
         questionGroupsValues,
         materialsRecommendations,
       );
     }
-  }, [testResultId]);
+  }, [questionGroupsValues, materialsRecommendations]);
 
   useEffect(() => {
     if (error) setTimeout(() => setError(false), 3000);
