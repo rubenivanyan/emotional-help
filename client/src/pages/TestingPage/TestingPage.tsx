@@ -11,7 +11,14 @@ import {
   TestingResultsValues,
   TestingResults,
 } from 'types';
-import { Block, Recommendation, Button, Success, Error } from 'components';
+import {
+  Block,
+  Recommendation,
+  Button,
+  Success,
+  Error,
+  AuthComponent,
+} from 'components';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
 
@@ -231,16 +238,7 @@ export const TestingPage: React.FC = () => {
                               submitting={isSubmitting}
                             />
                           </> :
-                          <>
-                            <p>
-                              {
-                                `Only authenticated users
-                                can send result to ours specialist`
-                              }
-                            </p>
-                            <a className="button" href="/sign-in">SIGN IN</a>
-                            <a className="button" href="/sign-up">SIGN UP</a>
-                          </>
+                          <AuthComponent />
                       }
                     </form>
                 }

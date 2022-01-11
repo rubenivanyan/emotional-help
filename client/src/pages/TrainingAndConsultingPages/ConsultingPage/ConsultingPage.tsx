@@ -6,11 +6,10 @@ import {
   BUTTON_TYPES,
 } from 'enums';
 import { ConsultingApplication } from 'types';
-import { Success, Error, Button, Input } from 'components';
+import { Success, Error, Button, Input, AuthComponent } from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
-import { AuthComponent } from '../AuthComponent/AuthComponent';
 
 export const ConsultingPage = () => {
   const auth = useSelector((state: RootState) => state.auth);

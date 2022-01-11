@@ -6,11 +6,16 @@ import {
   BUTTON_TYPES,
 } from 'enums';
 import { Training, TrainingApplication } from 'types';
-import { Success, Error, Button, TrainingComponent } from 'components';
+import {
+  Success,
+  Error,
+  Button,
+  TrainingComponent,
+  AuthComponent,
+} from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/reducers/rootReducer';
-import { AuthComponent } from '../AuthComponent/AuthComponent';
 
 export const TrainingPage = () => {
   const auth = useSelector((state: RootState) => state.auth);
