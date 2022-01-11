@@ -6,7 +6,7 @@ import { User } from 'types';
 import { Block, Success, Error, Input, Button } from 'components';
 
 export const PersonalPage = () => {
-  const { fullName, email, birthDate }: User = LocalStorage.getObject(
+  const { fullName, email }: User = LocalStorage.getObject(
     [
       'fullName',
       'email',
@@ -15,7 +15,6 @@ export const PersonalPage = () => {
 
   const [fullNameState, setFullName] = useState(fullName);
   const [emailState, setEmail] = useState(email);
-  const [birthDateState, setBirthDate] = useState(birthDate);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGetting, setIsGetting] = useState(false);
@@ -37,7 +36,7 @@ export const PersonalPage = () => {
   const changedUser: User = {
     fullName: fullNameState,
     email: emailState,
-    birthDate: birthDateState,
+    birthDate: '01.01.0001',
   };
 
   const handleSubmit = (event) => {
@@ -91,12 +90,6 @@ export const PersonalPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={emailState}
                 type={INPUT_TYPES.EMAIL}
-                isRequired={true}
-              />
-              <Input label={'Birthday'}
-                onChange={(e) => setBirthDate(e.target.value)}
-                value={birthDateState}
-                type={INPUT_TYPES.DATE}
                 isRequired={true}
               />
               <Button
