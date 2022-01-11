@@ -10,6 +10,7 @@ import {
   UserEdit,
 } from 'types';
 import { Block, Success, Error, Input, Button } from 'components';
+import { ApplicationList } from './ApplicationList/ApplicationList';
 
 export const PersonalPage = () => {
   const { fullName, email }: User = LocalStorage.getObject(
@@ -120,6 +121,7 @@ export const PersonalPage = () => {
       </Block>
       <Block title={BLOCK_TITLES.HISTORY} percentWidth={60}>
         {testingApplications || trainingApplications || consultingApplications ?
+          // TO DO: Refactor
           <ul className="">
             {testingApplications?.map((teA, index) => {
               return (
@@ -128,20 +130,12 @@ export const PersonalPage = () => {
                 </li>
               );
             })}
-            {trainingApplications?.map((trA, index) => {
-              return (
-                <li key={index}>
-                  <p>Training: {trA.title}</p>
-                </li>
-              );
-            })}
-            {consultingApplications?.map((cA, index) => {
-              return (
-                <li key={index}>
-                  <p>Consulting: {cA.convenientDay}</p>
-                </li>
-              );
-            })}
+            <ApplicationList
+              arraysOfApplications={[
+                trainingApplications,
+                consultingApplications,
+              ]}
+            />
           </ul> :
           <Button
             title={isGetting ? 'getting...' : 'get history'}
