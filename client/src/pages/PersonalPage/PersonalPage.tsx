@@ -122,19 +122,25 @@ export const PersonalPage = () => {
         {testingApplications || trainingApplications || consultingApplications ?
           <ul className="">
             {testingApplications?.map((teA, index) => {
-              <li key={index}>
-                <p>Testing: {teA.dateOfResults}</p>
-              </li>;
+              return (
+                <li key={index}>
+                  <p>Testing: {teA.dateOfResults}</p>
+                </li>
+              );
             })}
             {trainingApplications?.map((trA, index) => {
-              <li key={index}>
-                <p>Training: {trA.title}</p>
-              </li>;
+              return (
+                <li key={index}>
+                  <p>Training: {trA.title}</p>
+                </li>
+              );
             })}
             {consultingApplications?.map((cA, index) => {
-              <li key={index}>
-                <p>Consulting: {cA.convenientDay}</p>
-              </li>;
+              return (
+                <li key={index}>
+                  <p>Consulting: {cA.convenientDay}</p>
+                </li>
+              );
             })}
           </ul> :
           <Button
