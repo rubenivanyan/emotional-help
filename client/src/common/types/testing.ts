@@ -54,12 +54,7 @@ export type TestingResults = {
   chosenVariants: Variant[];
   questions?: QuestionWithVariants[];
   questionGroupsValues?: QuestionGroup[];
-  materialsRecommendations?: {
-    books: Book[],
-    computerGames: ComputerGame[],
-    films: Film[],
-    music: Music[],
-  }
+  materialsRecommendations?: MaterialsRecommendations;
 };
 
 export type TestingResultsValues = {
