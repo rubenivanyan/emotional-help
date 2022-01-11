@@ -1,0 +1,15 @@
+.auth {
+  &-message {
+    text-align: center;
+  }
+
+  &-buttons-group {
+    display: flex;
+
+    .button {
+      padding: 10px 10px;
+
+      line-height: normal;
+    }
+  }
+}
