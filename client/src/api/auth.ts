@@ -14,6 +14,13 @@ export class Auth {
   ): void {
     setIsSubmitting(true);
 
+    const { email, password } = userRegistration;
+    const userLogin: UserLogin = {
+      email: email,
+      password: password,
+      rememberMe: false,
+    };
+
     apiFetchPost(
       '/api/User/register',
       userRegistration,
@@ -21,7 +28,7 @@ export class Auth {
       .then((response) => {
         if (response.status === 200) {
           setSuccess(true);
-          Auth.getAccount();
+          Auth.signIn(userLogin);
         } else {
           setError(true);
           setErrorMessage(response.statusText);
@@ -33,10 +40,10 @@ export class Auth {
 
   public static signIn(
     userLogin: UserLogin,
-    setSuccess,
-    setError,
-    setErrorMessage,
-    setIsSubmitting,
+    setSuccess?,
+    setError?,
+    setErrorMessage?,
+    setIsSubmitting?,
   ): void {
     setIsSubmitting(true);
 
