@@ -23,11 +23,7 @@ export class Auth {
           setSuccess(true);
         } else {
           setError(true);
-          const messages =
-          response.json() as unknown as {code: string, description: string}[];
-          setErrorMessage(
-            messages.map((m) => m.description).join(', '),
-          );
+          setErrorMessage(response.statusText);
         }
       })
       .catch((error) => alert(`/api/User/register: ${error}`))
