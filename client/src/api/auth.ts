@@ -76,7 +76,7 @@ export class Auth {
       .then((response) => {
         if (response.status === 200) {
           LocalStorage.getLocalStorage().clear();
-          Auth.user = null;
+          window.location.reload();
         }
       })
       .catch((error) => alert('api/User/logout:' + error));
