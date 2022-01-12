@@ -40,7 +40,7 @@ export const AddQuestionCard = () => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotional-help-api.azurewebsites.net/api/Question', body)
+      .put('https://pslp-api.azurewebsites.net/api/Question', body)
       .then((response) => {
         console.log(response);
       })

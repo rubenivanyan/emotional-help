@@ -47,7 +47,7 @@ export const AddMusicCard = () => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotional-help-api.azurewebsites.net/api/Music', body)
+      .put('https://pslp-api.azurewebsites.net/api/Music', body)
       .then((response) => {
         console.log(response);
       })

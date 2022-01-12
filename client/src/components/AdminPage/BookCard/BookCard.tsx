@@ -50,7 +50,7 @@ export const BookCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotional-help-api.azurewebsites.net/api/Film', body)
+      .put('https://pslp-api.azurewebsites.net/api/Film', body)
       .then((response) => {
         console.log(response);
       })
@@ -68,7 +68,7 @@ export const BookCard = (props) => {
 
   const handleDelete = () => {
     axios
-      .delete(`https://emotional-help-api.azurewebsites.net/api/Book/${id}`)
+      .delete(`https://pslp-api.azurewebsites.net/api/Book/${id}`)
       .then((response) => {
         console.log(response);
       })

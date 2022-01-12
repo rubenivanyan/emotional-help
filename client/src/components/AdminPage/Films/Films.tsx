@@ -8,7 +8,7 @@ export const Films = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get('https://emotional-help-api.azurewebsites.net/api/Film')
+      .get('https://pslp-api.azurewebsites.net/api/Film')
       .then((response) => {
         console.log(response.data);
         setData(response.data);

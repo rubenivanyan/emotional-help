@@ -17,7 +17,7 @@ export const Applications = () => {
       rememberMe: true,
     };
     axios
-      .post('https://emotional-help-api.azurewebsites.net/api/User/login', body)
+      .post('https://pslp-api.azurewebsites.net/api/User/login', body)
       .then((response) => {
         console.log(response);
       })
