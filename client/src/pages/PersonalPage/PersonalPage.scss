@@ -51,6 +51,14 @@
       padding: 0;
 
       list-style: none;
+
+      &>* {
+        margin-bottom: 10px;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
 
     &-item,
@@ -71,16 +79,9 @@
     &-testing-item {
       & table {
         width: 100%;
+        height: auto;
 
         border-color: white;
-      }
-    }
-
-    &>* {
-      margin-bottom: 10px;
-
-      &:last-child {
-        margin-bottom: 0;
       }
     }
   }
