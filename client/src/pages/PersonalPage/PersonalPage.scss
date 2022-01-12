@@ -42,4 +42,38 @@
       }
     }
   }
+
+  & .application {
+    &-list {
+      width: 100%;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+    }
+
+    &-item,
+    &-training-item {
+      display: flex;
+      align-items: center;
+      
+      height: 50px;
+      padding: 10px;
+      background: lightgray;
+      border-radius: 10px;
+
+      & p {
+        margin: 0;
+      }
+    }
+
+    &-training-item {
+      & table {
+        width: 100%;
+
+        border-color: white;
+      }
+    }
+  }
 }

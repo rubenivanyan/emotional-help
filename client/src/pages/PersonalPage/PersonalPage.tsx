@@ -126,7 +126,7 @@ export const PersonalPage = () => {
         {testingApplications.length ||
           trainingApplications.length ||
           consultingApplications.length ?
-          <ul className="applications-list">
+          <ul className="application-list">
             <TestingApplicationList
               applications={testingApplications} />
             <ApplicationList
