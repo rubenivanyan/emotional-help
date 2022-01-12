@@ -22,7 +22,7 @@ export const TestingApplicationList =
                     {ta.questionsFormulations.map((qf, index) => {
                       return (
                         <tr key={index}>
-                          <td>{qf[index]}</td>
+                          <td>{qf}</td>
                           <td>{ta.answersFormulations[index]}</td>
                         </tr>
                       );
