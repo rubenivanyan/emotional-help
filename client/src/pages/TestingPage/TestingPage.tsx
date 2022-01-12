@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import './TestingPage.scss';
-import { Block } from '../../components/Block/Block';
-import { BLOCK_TITLES } from '../../common/enums/block-titles';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { Success } from '../../components/Success/Success';
-import { Error } from '../../components/Error/Error';
-import { Recommendation } from '../../components/Recommendation/Recommendation';
-import { apiFetchGet, apiFetchPost } from '../../api/fetch/fetch';
-import { TestWithQuestions } from '../../common/types/test-with-questions';
-import { Variant } from '../../common/types/variant';
-import { TestResults } from '../../common/types/test-results';
-import { TestingApplication } from '../../common/types/testing-application';
-import { sendApplication } from '../../api/fetch/applications';
-import { Auth } from '../../api/auth';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { sendApplication, apiFetchGet, apiFetchPost } from 'api';
+import { BLOCK_TITLES, BUTTON_TYPES } from 'enums';
+import {
+  TestWithQuestions,
+  Variant,
+  QuestionWithVariants,
+  TestingApplication,
+  TestingResultsValues,
+  TestingResults,
+  QuestionGroup,
+  MaterialsRecommendations,
+} from 'types';
+import {
+  Block,
+  Recommendation,
+  Button,
+  Success,
+  Error,
+  AuthComponent,
+} from 'components';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers/rootReducer';
+
 
 export const TestingPage: React.FC = () => {
+  const auth = useSelector((state: RootState) => state.auth);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentTest, setCurrentTest] = useState(0);
 
@@ -30,12 +41,28 @@ export const TestingPage: React.FC = () => {
   const [isTestFinished, setIsTestFinished] = useState(false);
   const [tests, setTests] = useState<TestWithQuestions[]>([]);
   const [chosenVariants, setChosenVariants] = useState<Variant[]>([]);
+  const [
+    answeredQuestions,
+    setAnsweredQuestions,
+  ] = useState<QuestionWithVariants[]>([]);
+  const [recommendations, setRecommendations] = useState({});
+  const [results, setResults] = useState<TestingResultsValues>();
 
   const [testResultId, setTestResultId] = useState<number | null>(null);
 
-  const testResults: TestResults = {
+  const [
+    questionGroupsValues,
+    setQuestionGroupsValues,
+  ] = useState<QuestionGroup[]>([]);
+  const [
+    materialsRecommendations,
+    setMaterialsRecommendations,
+  ] = useState<MaterialsRecommendations>();
+
+  const testResults: TestingResults = {
     testId: tests[currentTest]?.id,
     chosenVariants: chosenVariants,
+    questions: answeredQuestions,
   };
 
   const testingApplication: TestingApplication = {
@@ -65,13 +92,56 @@ export const TestingPage: React.FC = () => {
 
   useEffect(() => {
     if (isTestFinished) {
-      console.log(testResults);
-      apiFetchPost('/api/TestResult', testResults)
-        .then<TestResults>((response) => response.json())
-        .then((testResult) => setTestResultId(testResult.id))
-        .catch((error) => alert('/api/TestResult' + error));
+      if (auth.isLogged) {
+        apiFetchPost('/api/TestResult', testResults)
+          .then((response) => response.json())
+          .then((testResultId) => setTestResultId(testResultId))
+          .catch((error) => alert('/api/TestResult ' + error));
+      } else {
+        apiFetchPost('/api/TestResult/unauthorized', testResults)
+          .then<TestingResults>((response) => response.json())
+          .then((response) => {
+            console.log(response);
+            handleTestingResultsResponse(
+              response.questionGroupsValues,
+              response.materialsRecommendations,
+            );
+          })
+          .catch((error) => alert('/api/TestResult/unauthorized ' + error));
+      }
     }
   }, [isTestFinished]);
+
+  useEffect(() => {
+    if (testResultId) {
+      apiFetchGet(`/api/TestResult/${testResultId}`)
+        .then<TestingResults>((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          setQuestionGroupsValues(response.questionGroupsValues);
+        })
+        .catch((error) => alert(`/api/TestResult/${testResultId}: ` + error));
+
+      apiFetchGet(`/api/MaterialsRecommendation/${testResultId}`)
+        .then<MaterialsRecommendations>((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          setMaterialsRecommendations(response);
+        })
+        .catch((error) => alert(
+          `/api/MaterialsRecommendation/${testResultId}: ` + error),
+        );
+    }
+  }, [testResultId]);
+
+  useEffect(() => {
+    if (questionGroupsValues && materialsRecommendations) {
+      handleTestingResultsResponse(
+        questionGroupsValues,
+        materialsRecommendations,
+      );
+    }
+  }, [questionGroupsValues, materialsRecommendations]);
 
   useEffect(() => {
     if (error) setTimeout(() => setError(false), 3000);
@@ -85,9 +155,35 @@ export const TestingPage: React.FC = () => {
     }
   };
 
+  const handleTestingResultsResponse = (
+    questionGroupsValues: QuestionGroup[],
+    materialsRecommendations?: MaterialsRecommendations,
+  ) => {
+    setRecommendations({
+      books: materialsRecommendations.books,
+      computerGames: materialsRecommendations.computerGames,
+      films: materialsRecommendations.films,
+      music: materialsRecommendations.music,
+    });
+    setResults({
+      neurosis: questionGroupsValues[0].value,
+      socialAnxiety: questionGroupsValues[1].value,
+      depression: questionGroupsValues[2].value,
+      asthenia: questionGroupsValues[3].value,
+    });
+  };
+
   const handleVariantClick = (variant: Variant) => {
     const questions = tests[currentTest]?.questions;
     const nextQuestion = currentQuestion + 1;
+
+    setAnsweredQuestions([
+      ...answeredQuestions,
+      {
+        formulation: questions[currentQuestion].formulation,
+        questionGroup: questions[currentQuestion].questionGroup,
+      },
+    ]);
 
     if (!isInProgress) setIsInProgress(true);
     setChosenVariants([...chosenVariants, variant]);
@@ -116,7 +212,7 @@ export const TestingPage: React.FC = () => {
           <div className="quiz-info-text">
             {
               showScore ?
-                <Recommendation /> :
+                <Recommendation {...recommendations} /> :
                 <>
                   <p>
                     This test will help you to understand
@@ -151,25 +247,28 @@ export const TestingPage: React.FC = () => {
             <div className="score-section">
               <ul className="score-list">
                 Your results:
-                <li>
-                  Sadness and/or a loss of
-                  interest in activities: { }
-                </li>
-                <li>
-                  Disorders of sense and motion: { }
-                </li>
-                <li>
-                  Intense, persistent fear of being watched
-                  and judged by others: { }
-                </li>
-                <li>
-                  Generalized weakness and
-                  usually involving mental
-                  and physical fatigue: { }
-                </li>
-                <li>
-                  Sleep disorder: { }
-                </li>
+                {
+                  results ?
+                    <>
+                      <li>
+                        Sadness and/or a loss of
+                        interest in activities: {results.depression}
+                      </li>
+                      <li>
+                        Disorders of sense and motion: {results.neurosis}
+                      </li>
+                      <li>
+                        Intense, persistent fear of being watched
+                        and judged by others: {results.socialAnxiety}
+                      </li>
+                      <li>
+                        Generalized weakness and
+                        usually involving mental
+                        and physical fatigue: {results.asthenia}
+                      </li>
+                    </> :
+                    <h3>Loading results...</h3>
+                }
               </ul>
               <div className="sending-container">
                 {success ?
@@ -178,7 +277,7 @@ export const TestingPage: React.FC = () => {
                     <Error /> :
                     <form onSubmit={(e) => handleSubmit(e)}>
                       {
-                        Auth.isLogged ?
+                        auth.isLogged ?
                           <>
                             <p>
                               {
@@ -193,15 +292,7 @@ export const TestingPage: React.FC = () => {
                               submitting={isSubmitting}
                             />
                           </> :
-                          <>
-                            <p>
-                              {
-                                `Only authenticated users
-                                can send result to ours specialist`
-                              }
-                            </p>
-                            <a className="button" href="/sign-up">SIGN UP</a>
-                          </>
+                          <AuthComponent />
                       }
                     </form>
                 }

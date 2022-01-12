@@ -53,7 +53,7 @@ export const AddGameCard = () => {
     console.log('SUBMIT');
     axios
       .put(
-        'https://emotional-help-api.azurewebsites.net/api/ComputerGame',
+        'https://pslp-api.azurewebsites.net/api/ComputerGame',
         body,
       )
       .then((response) => {

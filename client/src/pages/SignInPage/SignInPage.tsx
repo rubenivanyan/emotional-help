@@ -1,15 +1,15 @@
-import './SignInPage.scss';
 import React, { useEffect, useState } from 'react';
-import { Input } from '../../components/Input/Input';
-import { Block } from '../../components/Block/Block';
-import { Success } from '../../components/Success/Success';
-import { Error } from '../../components/Error/Error';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { UserLogin } from '../../common/types/user-login';
-import { Auth } from '../../api/auth';
+import './SignInPage.scss';
+import { Auth } from 'api';
+import { BUTTON_TYPES } from 'enums';
+import { UserLogin } from 'types';
+import { Block, Success, Error, Button, Input } from 'components';
+import { useDispatch } from 'react-redux';
+import { authFetchRequest } from 'store/actions';
 
 export const SignInPage = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRemember, setIsRemember] = useState(true);
@@ -22,6 +22,10 @@ export const SignInPage = () => {
   useEffect(() => {
     setIsRemember(isRemember);
   }, []);
+
+  useEffect(() => {
+    if (!isSubmitting) dispatch(authFetchRequest());
+  }, [isSubmitting]);
 
   const handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -45,32 +49,30 @@ export const SignInPage = () => {
     <section className="sign-in-container">
       <Block title={'sign in'} percentWidth={50}>
         {
-          Auth.isLogged ?
-            <h2>You are logged in already</h2> :
-            success ?
-              <Success /> :
-              error ?
-                <>
-                  <Error error={errorMessage} />
-                  <Button title={'retry'}
-                    type={BUTTON_TYPES.DEFAULT}
-                    onClick={() => setError(false)} />
-                </> :
-                <form onSubmit={(event) => handleSubmit(event)}>
-                  <Input
-                    label={'E-mail'}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                  <Input
-                    label={'Password'}
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                  <Button
-                    title={'sign in'}
-                    type={BUTTON_TYPES.DEFAULT}
-                    submitting={isSubmitting}
-                  />
-                </form>
+          success ?
+            <Success /> :
+            error ?
+              <>
+                <Error error={errorMessage} />
+                <Button title={'retry'}
+                  type={BUTTON_TYPES.DEFAULT}
+                  onClick={() => setError(false)} />
+              </> :
+              <form onSubmit={(event) => handleSubmit(event)}>
+                <Input
+                  label={'E-mail'}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <Input
+                  label={'Password'}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <Button
+                  title={'sign in'}
+                  type={BUTTON_TYPES.DEFAULT}
+                  submitting={isSubmitting}
+                />
+              </form>
         }
       </Block>
     </section>

@@ -7,12 +7,17 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "allowJs": true,
-    "baseUrl": "src",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "downlevelIteration": true,
+    "baseUrl": "./",
     "paths": {
-      "*": ["src/*"]
+      "*": ["src/*"],
+      "components": ["src/components/"],
+      "pages": ["src/pages/"],
+      "api": ["src/api/"],
+      "enums": ["src/common/enums/"],
+      "types": ["src/common/types/"],
     },
     "lib": [
       "esnext",

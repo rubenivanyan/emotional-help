@@ -4,3 +4,25 @@ export type User = {
   email: string;
   birthDate: string;
 };
+
+export type UserRegistration = {
+  name: string;
+  surname: string;
+  email: string;
+  birthDate: string;
+  password: string;
+  confirmationPassword: string;
+};
+
+export type UserLogin = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+};
+
+export type UserEdit = {
+  userName: string;
+  userSurname: string;
+  email: string;
+  birthDate: string;
+}

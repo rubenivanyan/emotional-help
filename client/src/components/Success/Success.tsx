@@ -1,6 +1,6 @@
 import React from 'react';
-import { SVG_SUCCESS } from '../../common/enums/svg';
 import './Success.scss';
+import { SVG_SUCCESS } from 'enums';
 
 export const Success = ({ message }: { message?: string }) => {
   return (

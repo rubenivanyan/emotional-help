@@ -1,6 +1,7 @@
 .personal-page-container {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
 
   .block-wrapper {
@@ -38,6 +39,52 @@
 
       &:nth-last-child(1) {
         margin-bottom: 0;
+      }
+    }
+  }
+
+  & .application {
+    &-list {
+      width: 100%;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+
+      &>* {
+        margin-bottom: 10px;
+  
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &-item,
+    &-testing-item {
+      display: flex;
+      align-items: center;
+      
+      height: 50px;
+      padding: 15px;
+      background: lightgray;
+      border-radius: 10px;
+
+      & p {
+        margin: 0;
+
+        text-align: center;
+      }
+    }
+
+    &-testing-item {
+      display: block;
+
+      height: auto;
+
+      & table {
+        width: 100%;
       }
     }
   }

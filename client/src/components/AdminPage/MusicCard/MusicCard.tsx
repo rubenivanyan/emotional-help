@@ -50,7 +50,7 @@ export const MusicCard = (props) => {
     handleShowForm();
     console.log('SUBMIT');
     axios
-      .put('https://emotional-help-api.azurewebsites.net/api/Music', body)
+      .put('https://pslp-api.azurewebsites.net/api/Music', body)
       .then((response) => {
         console.log(response);
       })
@@ -68,7 +68,7 @@ export const MusicCard = (props) => {
 
   const handleDelete = () => {
     axios
-      .delete(`https://emotional-help-api.azurewebsites.net/api/Music/${id}`)
+      .delete(`https://pslp-api.azurewebsites.net/api/Music/${id}`)
       .then((response) => {
         console.log(response);
       })

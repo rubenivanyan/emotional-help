@@ -56,7 +56,7 @@ export const GameCard = (props) => {
     console.log('SUBMIT');
     axios
       .put(
-        'https://emotional-help-api.azurewebsites.net/api/ComputerGame',
+        'https://pslp-api.azurewebsites.net/api/ComputerGame',
         body,
       )
       .then((response) => {
@@ -77,7 +77,7 @@ export const GameCard = (props) => {
   const handleDelete = () => {
     axios
       .delete(
-        `https://emotional-help-api.azurewebsites.net/api/ComputerGame/${id}`,
+        `https://pslp-api.azurewebsites.net/api/ComputerGame/${id}`,
       )
       .then((response) => {
         console.log(response);

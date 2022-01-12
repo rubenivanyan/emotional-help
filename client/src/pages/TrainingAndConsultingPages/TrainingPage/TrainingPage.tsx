@@ -1,24 +1,25 @@
-import { apiFetchGet } from '../../../api/fetch/fetch';
-import { LocalStorage } from '../../../api/local-storage';
-import { BLOCK_TITLES } from '../../../common/enums/block-titles';
-import { BUTTON_TYPES } from '../../../common/enums/button-types';
-import { TRAINING_AND_CONSULTING_TEXT } from '../../../common/enums/texts';
-import { mockedTrainings } from '../../../common/mocks/trainings';
-import { Training } from '../../../common/types/training';
-import {
-  TrainingApplication,
-} from '../../../common/types/training-application';
-import { Button } from '../../../components/Button/Button';
-import { Input } from '../../../components/Input/Input';
-import { Success } from '../../../components/Success/Success';
-import { Error } from '../../../components/Error/Error';
-import { TrainingComponent } from '../../../components/Training/Training';
 import React, { useEffect, useState } from 'react';
+import { apiFetchGet, sendApplication, LocalStorage } from 'api';
+import {
+  BLOCK_TITLES,
+  TRAINING_AND_CONSULTING_TEXT,
+  BUTTON_TYPES,
+} from 'enums';
+import { Training, TrainingApplication } from 'types';
+import {
+  Success,
+  Error,
+  Button,
+  TrainingComponent,
+  AuthComponent,
+} from 'components';
 import { ParentComponent } from '../ParentComponent/ParentComponent';
-import { sendApplication } from '../../../api/fetch/applications';
-import { Auth } from '../../../api/auth';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/reducers/rootReducer';
 
 export const TrainingPage = () => {
+  const auth = useSelector((state: RootState) => state.auth);
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -26,19 +27,14 @@ export const TrainingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
 
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
   const [trainingId, setTrainingId] = useState(0);
   const [trainings, setTrainings] = useState<Training[]>([]);
 
   useEffect(() => {
     apiFetchGet('/api/training')
       .then((response) => response.json())
-      .then((result) => setTrainings(
-        result.length ?
-          result :
-          mockedTrainings,
-      ))
+      .then((result) => setTrainings(result))
+      .catch((error) => alert('/api/training: ' + error))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -48,8 +44,6 @@ export const TrainingPage = () => {
 
     const trainingApplication: TrainingApplication = {
       isArchived: false,
-      fullName: userName,
-      email: email,
       trainingId: trainingId,
     };
 
@@ -89,43 +83,34 @@ export const TrainingPage = () => {
             </> :
             <form onSubmit={(e) => handleSubmit(e)}>
               {
-                Auth.isLogged() ?
+                auth.isLogged ?
                   <p>
                     {`Dear ${LocalStorage.getItem('fullName')},
                     chose a training, please`}
                   </p> :
-                  <>
-                    <Input
-                      label={'Name'}
-                      onChange={
-                        (event) => setUserName(event.target.value)
-                      }
-                    />
-                    <Input
-                      label={'E-mail'}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                  </>
+                  <AuthComponent />
               }
               {
-                isLoading ?
-                  <h3>No data. Loading...</h3> :
-                  <>
-                    <TrainingComponent training={trainings[counter]} />
-                    <p
-                      onClick={() => nextTraining()}
-                      className="next-training"
-                    >
-                      Next training
-                    </p>
-                  </>
-              }
+                auth.isLogged ?
+                  isLoading ?
+                    <h3>No data. Loading...</h3> :
+                    <>
+                      <TrainingComponent training={trainings[counter]} />
+                      <p
+                        onClick={() => nextTraining()}
+                        className="next-training"
+                      >
+                        Next training
+                      </p>
 
-              <Button
-                title={'submit'}
-                type={BUTTON_TYPES.DEFAULT}
-                submitting={isSubmitting}
-              />
+                      <Button
+                        title={'submit'}
+                        type={BUTTON_TYPES.DEFAULT}
+                        submitting={isSubmitting}
+                      />
+                    </> :
+                  <></>
+              }
             </form>
       }
 

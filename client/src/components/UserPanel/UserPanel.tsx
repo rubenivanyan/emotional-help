@@ -1,12 +1,14 @@
-import './UserPanel.scss';
 import React from 'react';
-import { Button } from '../../components/Button/Button';
-import { BUTTON_TYPES } from '../../common/enums/button-types';
-import { Auth } from '../../api/auth';
+import './UserPanel.scss';
+import { Auth } from 'api';
+import { BUTTON_TYPES } from 'enums';
+import { Button } from 'components';
 
-export const UserPanel = () => {
+
+export const UserPanel = ({ isAdmin }: { isAdmin: boolean }) => {
   return (
     <div className="user-panel">
+      {isAdmin && <a className="button" href="/admin">ADMIN</a>}
       <a className="button" href="/personal-page">PROFILE</a>
       <Button
         title={'logout'}

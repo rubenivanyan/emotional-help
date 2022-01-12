@@ -1,7 +1,7 @@
-import { INPUT_TYPES } from '../../common/enums/input-types';
 import React from 'react';
 import './Input.scss';
-import { InputComponent } from '../../common/types/input-component';
+import { INPUT_TYPES } from 'enums';
+import { InputComponent } from 'types';
 
 export const Input = ({
   label,

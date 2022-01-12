@@ -9,7 +9,7 @@ export const Music = () => {
 
   useEffect(() => {
     axios
-      .get('https://emotional-help-api.azurewebsites.net/api/Music')
+      .get('https://pslp-api.azurewebsites.net/api/Music')
       .then((response) => {
         console.log(response.data);
         setData(response.data);

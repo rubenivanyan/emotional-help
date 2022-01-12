@@ -36,8 +36,7 @@
     font-size: 26px;
   }
 
-  .training-page-container .training-page-inner,
-  .consulting-page-container .consulting-page-inner {
+  .training-page-container .training-page-inner {
 
     .next-training {
       display: flex;
@@ -65,6 +64,16 @@
       left: 0;
 
       transform: translate(0, 0);
+    }
+  }
+
+  .question-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .question-section,
+    .answer-section {
+      width: 100%;
     }
   }
 }

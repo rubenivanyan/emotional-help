@@ -1,4 +1,4 @@
-import { INPUT_TYPES } from '../../common/enums/input-types';
+import { INPUT_TYPES } from 'enums';
 
 export type InputComponent = {
   label: string,
