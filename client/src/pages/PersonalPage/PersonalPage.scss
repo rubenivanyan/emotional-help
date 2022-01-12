@@ -67,7 +67,7 @@
       align-items: center;
       
       height: 50px;
-      padding: 10px;
+      padding: 15px;
       background: lightgray;
       border-radius: 10px;
 
@@ -77,11 +77,12 @@
     }
 
     &-testing-item {
+      display: block;
+
+      height: auto;
+
       & table {
         width: 100%;
-        height: auto;
-
-        border-color: white;
       }
     }
   }
