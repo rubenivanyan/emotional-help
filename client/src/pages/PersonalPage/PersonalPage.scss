@@ -1,6 +1,7 @@
 .personal-page-container {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
 
   .block-wrapper {
