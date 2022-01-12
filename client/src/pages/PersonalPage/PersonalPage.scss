@@ -54,7 +54,7 @@
     }
 
     &-item,
-    &-training-item {
+    &-testing-item {
       display: flex;
       align-items: center;
       
@@ -68,11 +68,19 @@
       }
     }
 
-    &-training-item {
+    &-testing-item {
       & table {
         width: 100%;
 
         border-color: white;
+      }
+    }
+
+    &>* {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
