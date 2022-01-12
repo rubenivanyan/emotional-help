@@ -11,10 +11,10 @@ export const ApplicationList = ({ applications }:
             <p>
               {
                 (application.title && 'Training: ') ||
-                (application.dateOfResults && 'Consulting: ')
+                (application.convenientDay && 'Consulting: ')
               }
               {
-                application.title || application.dateOfResults
+                application.title || application.convenientDay
               }
             </p>
           </li>
