@@ -1,4 +1,3 @@
-# emotional-help<br/>
 
 <h1>Branches naming</h1>
 
